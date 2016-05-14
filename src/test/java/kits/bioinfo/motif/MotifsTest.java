@@ -38,7 +38,7 @@ public class MotifsTest {
 											  new Sequence("TCCACGTG"));
 		
 		Assert.assertEquals(new Sequence("TCCAGGTG"), Motifs.consensusString(motifs));
-		Assert.assertEquals(11, Motifs.score(motifs));
+		Assert.assertEquals(9, Motifs.score(motifs));
 	}
 	
 }

@@ -7,10 +7,11 @@ import java.util.Set;
 
 public enum Nucleotid {
 
-	A, C, T, G;
+	A, C, T, G, N;
 	
 	public static Set<Nucleotid> others(Nucleotid base) {
 		Set<Nucleotid> bases = new HashSet<>(Arrays.asList(values()));
+		bases.remove(N);
 		bases.remove(base);
 		return Collections.unmodifiableSet(bases);
 	}
@@ -21,6 +22,7 @@ public enum Nucleotid {
 			case T: return A;
 			case C: return G;
 			case G: return C;
+			case N: return N;
 			default: throw new RuntimeException();
 		}
 	}
@@ -31,6 +33,7 @@ public enum Nucleotid {
 			case 'T': return T;
 			case 'C': return C;
 			case 'G': return G;
+			case 'N': return N;
 			default: throw new IllegalArgumentException("Can not create nucleotid from character " + c);
 		}
 	}
