@@ -51,7 +51,6 @@ public class BMSubSequenceMatcher implements Matcher {
 		outer:
 		for(int index=0;index<sequence.length()-pattern.length()+1;index++) {
 			alignments++;
-			System.out.println(index);
 			for(int j=pattern.length()-1;j>=0;j--){
 				comparisons++;
 				if(sequence.position(index + j) != pattern.position(j)) {

@@ -7,6 +7,7 @@ import kits.bioinfo.base.Sequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 import kits.bioinfo.matcher.ApproximateSubSequenceMatcher;
 import kits.bioinfo.matcher.BMSubSequenceMatcher;
+import kits.bioinfo.matcher.IndexBasedApproximateSubSequenceMatcher;
 import kits.bioinfo.matcher.NaiveSubSequenceMatcher;
 
 public class Assignment2 {
@@ -17,7 +18,7 @@ public class Assignment2 {
 		question1And2(humanAluSequence);
 		question3(humanAluSequence);
 		question4(humanAluSequence);
-		//question5(lambdaGenome);
+		question5(humanAluSequence);
 		//question6(lambdaGenome);
 		//question7();
 	}
@@ -48,7 +49,7 @@ public class Assignment2 {
 	
 	private static void question5(Sequence humanAluSequence) {
 		Sequence pattern = new Sequence("GGCGCGGTGGCTCACGCCTGTAAT");
-		int count = new ApproximateSubSequenceMatcher(pattern, 2).matchCount(humanAluSequence);
+		int count = new IndexBasedApproximateSubSequenceMatcher(humanAluSequence, 8, 2).matchCount(pattern);
 		System.out.println("5: " + count);
 	}
 	

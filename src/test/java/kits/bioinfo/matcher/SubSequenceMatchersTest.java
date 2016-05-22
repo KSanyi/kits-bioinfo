@@ -29,7 +29,7 @@ public class SubSequenceMatchersTest {
 	}
 	
 	@Test
-	public void testIndexBasedMoore() {
+	public void testIndexBased() {
 		RandomSequenceGenerator generator = new RandomSequenceGenerator();
 		
 		for(int i=0;i<TEST_RUNS;i++){

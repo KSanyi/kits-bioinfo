@@ -19,6 +19,10 @@ public class IndexBasedSubSequenceMatcher {
 	public IndexBasedSubSequenceMatcher(Sequence text, int k) {
 		this.text = text;
 		this.k = k;
+		index = buildIndex();
+	}
+	
+	private Map<Sequence, List<Integer>> buildIndex() {
 		Map<Sequence, List<Integer>> kmers = new HashMap<>();
 		for(int i=0;i<text.length()-k+1;i++){
 			Sequence subSequence = text.subSequence(i, k);
@@ -26,7 +30,7 @@ public class IndexBasedSubSequenceMatcher {
 			offsets.add(i);
 			kmers.put(subSequence, offsets);
 		}
-		index = Collections.unmodifiableMap(kmers);
+		return Collections.unmodifiableMap(kmers);
 	}
 	
 	public boolean matches(Sequence pattern){
