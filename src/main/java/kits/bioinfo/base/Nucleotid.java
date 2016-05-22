@@ -9,6 +9,10 @@ public enum Nucleotid {
 
 	A, C, T, G, N;
 	
+	public static Nucleotid[] bases() {
+		return new Nucleotid[]{A, C, T, G};
+	}
+	
 	public static Set<Nucleotid> others(Nucleotid base) {
 		Set<Nucleotid> bases = new HashSet<>(Arrays.asList(values()));
 		bases.remove(N);
