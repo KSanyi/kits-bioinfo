@@ -34,11 +34,13 @@ public class NaiveSubSequenceMatcher implements Matcher {
 
 	@Override
 	public List<Integer> matchStartIndexes(Sequence sequence) {
+		int alignments = 0;
 		int comparisons = 0;
 		
 		List<Integer> matchStartIndexes = new LinkedList<>();
 		outer:
 		for(int index=0;index<sequence.length()-pattern.length()+1;index++) {
+			alignments ++;
 			for(int j=0;j<pattern.length();j++){
 				comparisons++;
 				if(sequence.position(index + j) != pattern.position(j)) {
@@ -47,6 +49,7 @@ public class NaiveSubSequenceMatcher implements Matcher {
 			}
 			matchStartIndexes.add(index);
 		}
+		System.out.println("Alignments: " + alignments);
 		System.out.println("Comparisons: " + comparisons);
 		return Collections.unmodifiableList(matchStartIndexes);
 	}

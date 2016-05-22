@@ -23,7 +23,7 @@ public class SequenceReader {
 	
 	public static Sequence readFromFastaFile(String path) throws IOException{
 		List<String> lines = Files.readAllLines(Paths.get(path));
-		List<String> linesWithoutHeaderLine = lines.subList(1, lines.size()-1);
+		List<String> linesWithoutHeaderLine = lines.subList(1, lines.size());
 		return new Sequence(String.join("", linesWithoutHeaderLine));
 	}
 	

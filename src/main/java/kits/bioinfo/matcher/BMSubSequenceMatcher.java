@@ -44,11 +44,14 @@ public class BMSubSequenceMatcher implements Matcher {
 
 	@Override
 	public List<Integer> matchStartIndexes(Sequence sequence) {
+		int alignments = 0;
 		int comparisons = 0;
 		
 		List<Integer> matchStartIndexes = new LinkedList<>();
 		outer:
 		for(int index=0;index<sequence.length()-pattern.length()+1;index++) {
+			alignments++;
+			System.out.println(index);
 			for(int j=pattern.length()-1;j>=0;j--){
 				comparisons++;
 				if(sequence.position(index + j) != pattern.position(j)) {
@@ -59,7 +62,9 @@ public class BMSubSequenceMatcher implements Matcher {
 				}
 			}
 			matchStartIndexes.add(index);
+			index += goodSuffixRuleTable.skipAfterMatch;
 		}
+		System.out.println("Alignments: " + alignments);
 		System.out.println("Comparisons: " + comparisons);
 		return Collections.unmodifiableList(matchStartIndexes);
 	}
@@ -80,8 +85,8 @@ class BadCharacterRuleTable {
 	final int[][] table;
 	
 	BadCharacterRuleTable(Sequence pattern) {
-		table = new int[4][pattern.length()];
-		for(Nucleotid base : Nucleotid.bases()) {
+		table = new int[5][pattern.length()];
+		for(Nucleotid base : Nucleotid.values()) {
 			for(int index=0;index<pattern.length();index++){
 				table[base.ordinal()][index] = calculateSkipLength(pattern, base, index);
 			}
@@ -108,11 +113,26 @@ class GoodSuffixRuleTable {
 	
 	final int[] table;
 	
+	final int skipAfterMatch;
+	
 	GoodSuffixRuleTable(Sequence pattern) {
+		if(pattern.length() == 0) throw new IllegalArgumentException("Empty pattern");
 		table = new int[pattern.length()];
 		for(int index=0;index<pattern.length();index++){
 			table[index] = calculateSkipLength(pattern, index);
 		}
+		skipAfterMatch = calculateSkipAfterMatch(pattern);
+	}
+	
+	private int calculateSkipAfterMatch(Sequence pattern) {
+		for(int k=pattern.length()-1;k>=1;k--) {
+			Sequence suffix = pattern.subSequence(pattern.length()-k, k);
+			Sequence postfix = pattern.subSequence(0, k);
+			if(suffix.equals(postfix)){
+				return pattern.length() - k - 1;
+			}
+		}
+		return pattern.length()-1;
 	}
 	
 	private int calculateSkipLength(Sequence pattern, int position) {

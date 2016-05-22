@@ -1,4 +1,4 @@
-package kits.bioinfo.johnshopkinscourse;
+package kits.bioinfo.johnshopkins;
 
 import java.util.Random;
 
@@ -7,7 +7,7 @@ import kits.bioinfo.base.generator.RandomSequenceGenerator;
 import kits.bioinfo.matcher.BMSubSequenceMatcher;
 import kits.bioinfo.matcher.NaiveSubSequenceMatcher;
 
-public class Test2 {
+public class Test {
 
 	public static void main(String[] args) {
 		Random random = new Random();

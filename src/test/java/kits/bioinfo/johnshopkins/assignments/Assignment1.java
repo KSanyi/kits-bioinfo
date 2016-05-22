@@ -1,4 +1,4 @@
-package kits.bioinfo.johnshopkins.week1;
+package kits.bioinfo.johnshopkins.assignments;
 
 import java.io.IOException;
 import java.util.LinkedList;
