@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import kits.bioinfo.base.Sequence;
 
@@ -22,6 +23,8 @@ public class IndexBasedApproximateSubSequenceMatcher {
 	private final int d;
 	
 	public IndexBasedApproximateSubSequenceMatcher(Sequence text, int k, int d) {
+		if(k <= 0) throw new IllegalArgumentException("k must be > 0");
+		if(d < 0) throw new IllegalArgumentException("d must be >= 0");
 		this.text = text;
 		this.k = k;
 		this.d = d;
@@ -40,10 +43,12 @@ public class IndexBasedApproximateSubSequenceMatcher {
 	}
 	
 	public List<Integer> matchStartIndexes(Sequence pattern) {
+		
+		if(pattern.length() != k * (d+1)) throw new IllegalArgumentException("Pattern length must be = " + (k*(d+1)));
+		
 		Set<Integer> result = new HashSet<>();
 		
 		List<Sequence> parts = splitPattern(pattern);
-		
 		for(int i=0;i<parts.size();i++){
 			List<Integer> hits = index.getOrDefault(parts.get(i), Collections.emptyList());
 			for(Integer hitIndex : hits){
@@ -53,11 +58,13 @@ public class IndexBasedApproximateSubSequenceMatcher {
 				}
 			}
 		}
-		return new LinkedList<>(result);
+		List<Integer> sortedResult = new LinkedList<>(result);
+		Collections.sort(sortedResult);
+		return new LinkedList<>(sortedResult);
 	}
 	
 	private Optional<Integer> extendHit(Sequence pattern, int hitIndexInText, int hitIndexInPattern) {
-		if(hitIndexInPattern > hitIndexInText || hitIndexInText > pattern.length() - 999) {
+		if(hitIndexInPattern > hitIndexInText || pattern.length() - hitIndexInPattern > text.length() - hitIndexInText) {
 			return Optional.empty();
 		}
 		
@@ -73,7 +80,7 @@ public class IndexBasedApproximateSubSequenceMatcher {
 		}
 		// extend after
 		for(int i=hitIndexInPattern+k;i<pattern.length();i++){
-			if(pattern.position(i) != text.position(hitIndexInText+k+i)){
+			if(pattern.position(i) != text.position(hitIndexInText-hitIndexInPattern+i)){
 				mismatchCounter++;
 				if(mismatchCounter > d){
 					return Optional.empty();
@@ -85,9 +92,16 @@ public class IndexBasedApproximateSubSequenceMatcher {
 	
 	private List<Sequence> splitPattern(Sequence pattern) {
 		List<Sequence> parts = new LinkedList<>();
-		for(int i=0;i<pattern.length()-k;i+=k){
+		int i = 0;
+		for(;i<=pattern.length()-k;i+=k){
 			parts.add(pattern.subSequence(i, k));
 		}
+		if(i<pattern.length()) {
+			parts.add(pattern.subSequence(i, pattern.length()-i));
+		}
+		// check
+		assert pattern.equals(new Sequence(parts.stream().map(s -> s.toString()).collect(Collectors.joining())));
+		
 		return Collections.unmodifiableList(parts);
 	}
 	

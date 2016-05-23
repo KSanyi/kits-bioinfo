@@ -19,12 +19,11 @@ public class ApproximateSubSequenceMatchersTest {
 		RandomSequenceGenerator generator = new RandomSequenceGenerator();
 		
 		for(int i=0;i<TEST_RUNS;i++){
-			int patternLength = random.nextInt(50) + 1;
-			int d = random.nextInt(5);
+			int d = random.nextInt(5) + 1;
+			int k = random.nextInt(5) + 2;
+			int patternLength = k * (d + 1);
 			Sequence pattern = generator.generateRandomSequence(patternLength);
 			Sequence text = generator.generateRandomSequence(1000);
-			System.out.println("pattern:" + pattern);
-			int k = patternLength / 2;
 			Assert.assertEquals(new ApproximateSubSequenceMatcher(pattern, d).matchStartIndexes(text),
 					            new IndexBasedApproximateSubSequenceMatcher(text, k, d).matchStartIndexes(pattern));
 		}
