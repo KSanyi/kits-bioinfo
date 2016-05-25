@@ -1,4 +1,4 @@
-package kits.bioinfo.course1;
+package kits.bioinfo.ucsandiego.course1;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -18,7 +18,7 @@ public class Challenge6 {
 	 * 
 	 */
 	public static void main(String[] args) throws IOException {
-		Set<Sequence> sequences = new HashSet<>(SequenceReader.readFromLines("input/dataset_158_9.txt"));
+		Set<Sequence> sequences = new HashSet<>(SequenceReader.readPerLine("input/dataset_158_9.txt"));
 		Set<Sequence> medianStrings = new MedianStringFinder().findMedianStrings(sequences, 6);
 		System.out.println(medianStrings);
 	}

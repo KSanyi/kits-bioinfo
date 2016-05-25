@@ -13,12 +13,23 @@ public class SequenceReader {
 
 	public static Sequence readFromFile(String path) throws IOException{
 		List<String> lines = Files.readAllLines(Paths.get(path));
-		return new Sequence(lines.get(0));
+		try {
+			return new Sequence(lines.get(0));
+		} catch(IllegalArgumentException e) {
+			// the first line contained some meta info
+			return new Sequence(lines.get(1));
+		}
 	}
 	
-	public static List<Sequence> readFromLines(String path) throws IOException{
+	public static List<Sequence> readPerLine(String path) throws IOException{
 		List<String> lines = Files.readAllLines(Paths.get(path));
-		return lines.stream().map(l -> new Sequence(l)).collect(Collectors.toList());
+		try {
+			return lines.stream().map(line -> new Sequence(line)).collect(Collectors.toList());
+		} catch(IllegalArgumentException e) {
+			// the first line contained some meta info
+			lines = lines.subList(1, lines.size());
+			return lines.stream().map(line -> new Sequence(line)).collect(Collectors.toList());
+		}
 	}
 	
 	public static Sequence readFromFastaFile(String path) throws IOException{

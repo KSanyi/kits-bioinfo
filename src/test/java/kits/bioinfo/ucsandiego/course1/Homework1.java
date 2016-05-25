@@ -1,4 +1,4 @@
-package kits.bioinfo.course1;
+package kits.bioinfo.ucsandiego.course1;
 
 import kits.bioinfo.base.Sequence;
 import kits.bioinfo.kmer.FrequentKMerFinder;

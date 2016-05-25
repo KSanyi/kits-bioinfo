@@ -1,4 +1,4 @@
-package kits.bioinfo.course1;
+package kits.bioinfo.ucsandiego.course1;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,7 +18,7 @@ public class Challenge10 {
 	 */
 	public static void main(String[] args) throws IOException {
 		long start = System.currentTimeMillis();
-		List<Sequence> sequences = SequenceReader.readFromLines("input/dataset_163_4.txt");
+		List<Sequence> sequences = SequenceReader.readPerLine("input/dataset_163_4.txt");
 		
 		List<Sequence> motifs = new GibbsSampler(50).findMotifs(sequences, 15, 2000);
 		

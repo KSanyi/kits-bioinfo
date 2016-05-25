@@ -1,4 +1,4 @@
-package kits.bioinfo.course1;
+package kits.bioinfo.ucsandiego.course1;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +17,7 @@ public class Challenge8 {
      use the one occurring first.
 	 */
 	public static void main(String[] args) throws IOException {
-		List<Sequence> sequences = SequenceReader.readFromLines("input/dataset_160_9.txt");
+		List<Sequence> sequences = SequenceReader.readPerLine("input/dataset_160_9.txt");
 		List<Sequence> motifs = new GreedyMotifFinder().findMotifs(sequences, 12);
 		System.out.println(motifs);
 	}

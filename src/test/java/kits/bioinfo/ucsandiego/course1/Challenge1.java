@@ -1,4 +1,4 @@
-package kits.bioinfo.course1;
+package kits.bioinfo.ucsandiego.course1;
 
 import java.io.IOException;
 import java.util.Set;
@@ -16,12 +16,6 @@ public class Challenge1 {
 		     Input: A string Genome, and integers k, L, and t.
 		     Output: All distinct k-mers forming (L, t)-clumps in Genome.
 		
-		Sample Input:
-		     CGGACTCGACAGATGTGAAGAACGACAATGTGAAGACTCGACACGACAGAGTGAAGAGAAGAGGAAACATTGTAA
-		     5 50 4
-		
-		Sample Output:
-		     CGACA GAAGA
 	 * 
 	 */
 	public static void main(String[] args) throws IOException {
