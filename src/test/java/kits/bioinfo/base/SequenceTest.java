@@ -45,6 +45,20 @@ public class SequenceTest {
 	}
 	
 	@Test
+	public void prefix() {
+		Assert.assertEquals(new Sequence("ACT"), new Sequence("ACTGCTGAC").prefix(3));
+		Assert.assertEquals(new Sequence(""), new Sequence("ACTGCTGAC").prefix(0));
+		Assert.assertEquals(new Sequence("ACTGCTGAC"), new Sequence("ACTGCTGAC").prefix(9));
+	}
+	
+	@Test
+	public void suffix() {
+		Assert.assertEquals(new Sequence("GAC"), new Sequence("ACTGCTGAC").suffix(3));
+		Assert.assertEquals(new Sequence(""), new Sequence("ACTGCTGAC").suffix(0));
+		Assert.assertEquals(new Sequence("ACTGCTGAC"), new Sequence("ACTGCTGAC").suffix(9));
+	}
+	
+	@Test
 	public void distance() {
 		Assert.assertEquals(0, new Sequence("A").distance(new Sequence("A")));
 		Assert.assertEquals(0, new Sequence("ACTG").distance(new Sequence("ACTG")));

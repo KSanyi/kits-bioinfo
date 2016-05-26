@@ -31,6 +31,22 @@ public class Sequence implements Comparable<Sequence>{
 		return new Sequence(text.subList(start, start+k));
 	}
 	
+	public Sequence prefix(int k){
+		return subSequence(0, k);
+	}
+	
+	public Sequence prefix(){
+		return prefix(1);
+	}
+	
+	public Sequence suffix(int k){
+		return subSequence(length()-k, k);
+	}
+	
+	public Sequence suffix(){
+		return suffix(1);
+	}
+	
 	public List<Sequence> allSubSequences(int k) {
 		List<Sequence> subSequences = new ArrayList<>();
 		for(int i=0;i<length()-k+1;i++) {
