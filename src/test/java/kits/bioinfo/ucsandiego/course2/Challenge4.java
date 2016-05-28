@@ -6,11 +6,12 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
+import kits.bioinfo.assembly.KmerCompositioner;
 import kits.bioinfo.assembly.KmerGraph;
 import kits.bioinfo.base.Sequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 
-public class Challenge3 {
+public class Challenge4 {
 
 	/**
 	 * CODE CHALLENGE: Solve the Overlap Graph Problem (restated below).
@@ -18,9 +19,11 @@ public class Challenge3 {
      * Output: The overlap graph Overlap(Patterns), in the form of an adjacency list. (You may return the edges in any order.)
 	 */
 	public static void main(String[] args) throws IOException {
-		List<Sequence> kmers = SequenceReader.readPerLine("input/dataset_198_9.txt");
-		KmerGraph graph = KmerGraph.buildFromKmerNodesList(kmers, 24);
-		Files.write(Paths.get("./output/output_198_9.txt"), Collections.singletonList(graph.printEdges()));
+		Sequence sequence = SequenceReader.readFromFile("input/dataset_199_6.txt");
+		int k = 12;
+		List<Sequence> kmers = new KmerCompositioner().generateCompositions(sequence, k);
+		KmerGraph graph = KmerGraph.buildDeBrujinGraph(kmers);
+		Files.write(Paths.get("./output/output_199_6.txt"), Collections.singletonList(graph.print()));
 	}
 
 }

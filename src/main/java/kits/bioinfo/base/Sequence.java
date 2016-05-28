@@ -36,7 +36,7 @@ public class Sequence implements Comparable<Sequence>{
 	}
 	
 	public Sequence prefix(){
-		return prefix(1);
+		return prefix(length()-1);
 	}
 	
 	public Sequence suffix(int k){
@@ -44,7 +44,7 @@ public class Sequence implements Comparable<Sequence>{
 	}
 	
 	public Sequence suffix(){
-		return suffix(1);
+		return suffix(length()-1);
 	}
 	
 	public List<Sequence> allSubSequences(int k) {
