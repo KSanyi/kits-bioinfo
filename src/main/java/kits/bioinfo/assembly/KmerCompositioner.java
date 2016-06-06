@@ -8,13 +8,13 @@ import kits.bioinfo.base.Sequence;
 
 public class KmerCompositioner {
 
-	public List<Sequence> generateCompositions(Sequence sequence, int k) {
+	public static List<Sequence> generateCompositions(Sequence sequence, int k) {
 		if(sequence.length() < k) throw new IllegalArgumentException("Sequence length must be >= k");
 		
 		return range(0, sequence.length()-k+1).mapToObj(i -> sequence.subSequence(i, k)).collect(toList());
 	}
 	
-	public Sequence readSequenceFromComposition(List<Sequence> composition) {
+	public static Sequence readSequenceFromComposition(List<Sequence> composition) {
 		if(composition.isEmpty()) throw new IllegalArgumentException("Composition can not be empty");
 		
 		Sequence baseSequence = composition.get(0);

@@ -17,7 +17,7 @@ public class Challenge2 {
 	 */
 	public static void main(String[] args) throws IOException {
 		List<Sequence> composition = SequenceReader.readPerLine("input/dataset_198_3.txt");
-		Sequence sequence = new KmerCompositioner().readSequenceFromComposition(composition);
+		Sequence sequence = KmerCompositioner.readSequenceFromComposition(composition);
 		Files.write(Paths.get("./output/output_198_3.txt"), Collections.singletonList(sequence.toString()));
 	}
 

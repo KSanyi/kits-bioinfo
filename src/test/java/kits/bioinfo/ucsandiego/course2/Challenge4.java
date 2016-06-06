@@ -21,7 +21,7 @@ public class Challenge4 {
 	public static void main(String[] args) throws IOException {
 		Sequence sequence = SequenceReader.readFromFile("input/dataset_199_6.txt");
 		int k = 12;
-		List<Sequence> kmers = new KmerCompositioner().generateCompositions(sequence, k);
+		List<Sequence> kmers = KmerCompositioner.generateCompositions(sequence, k);
 		KmerGraph graph = KmerGraph.buildDeBrujinGraph(kmers);
 		Files.write(Paths.get("./output/output_199_6.txt"), Collections.singletonList(graph.print()));
 	}

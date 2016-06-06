@@ -22,7 +22,7 @@ public class KmerGraphTest {
 	@Test
 	public void buildGraphFromEdges() {
 		Sequence sequence = new Sequence("AAGATTCTCTAAGA");
-		KmerGraph graph = KmerGraph.buildDeBrujinGraph(new KmerCompositioner().generateCompositions(sequence, 3));
+		KmerGraph graph = KmerGraph.buildDeBrujinGraph(KmerCompositioner.generateCompositions(sequence, 3));
 		System.out.println(graph.print());
 	}
 	

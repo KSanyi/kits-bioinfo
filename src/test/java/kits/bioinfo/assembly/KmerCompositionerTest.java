@@ -12,7 +12,7 @@ public class KmerCompositionerTest {
 
 	@Test
 	public void compositionGeneration() {
-		List<Sequence> composition = new KmerCompositioner().generateCompositions(new Sequence("CAATCCAAC"), 5);
+		List<Sequence> composition = KmerCompositioner.generateCompositions(new Sequence("CAATCCAAC"), 5);
 		Assert.assertEquals(Arrays.asList(
 				new Sequence("CAATC"),
 				new Sequence("AATCC"),
@@ -31,7 +31,7 @@ public class KmerCompositionerTest {
 				new Sequence("TCCAA"),
 				new Sequence("CCAAC"));
 		
-		Sequence sequence = new KmerCompositioner().readSequenceFromComposition(composition);
+		Sequence sequence = KmerCompositioner.readSequenceFromComposition(composition);
 		Assert.assertEquals(new Sequence("CAATCCAAC"), sequence);
 	}
 	
