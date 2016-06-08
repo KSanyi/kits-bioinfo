@@ -7,42 +7,42 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class SequenceReader {
 
-	public static Sequence readFromFile(String path) throws IOException{
+	public static DnaSequence readFromFile(String path) throws IOException{
 		List<String> lines = Files.readAllLines(Paths.get(path));
 		try {
-			return new Sequence(lines.get(0));
+			return new DnaSequence(lines.get(0));
 		} catch(IllegalArgumentException e) {
 			// the first line contained some meta info
-			return new Sequence(lines.get(1));
+			return new DnaSequence(lines.get(1));
 		}
 	}
 	
-	public static List<Sequence> readPerLine(String path) throws IOException{
+	public static List<DnaSequence> readPerLine(String path) throws IOException{
 		List<String> lines = Files.readAllLines(Paths.get(path));
 		try {
-			return lines.stream().map(line -> new Sequence(line)).collect(Collectors.toList());
+			return lines.stream().map(line -> new DnaSequence(line)).collect(Collectors.toList());
 		} catch(IllegalArgumentException e) {
 			// the first line contained some meta info
 			lines = lines.subList(1, lines.size());
-			return lines.stream().map(line -> new Sequence(line)).collect(Collectors.toList());
+			return lines.stream().map(line -> new DnaSequence(line)).collect(Collectors.toList());
 		}
 	}
 	
-	public static Sequence readFromFastaFile(String path) throws IOException{
+	public static DnaSequence readFromFastaFile(String path) throws IOException{
 		List<String> lines = Files.readAllLines(Paths.get(path));
 		List<String> linesWithoutHeaderLine = lines.subList(1, lines.size());
-		return new Sequence(String.join("", linesWithoutHeaderLine));
+		return new DnaSequence(String.join("", linesWithoutHeaderLine));
 	}
 	
-	public static List<Sequence> readFromFastaQFile(String path) throws IOException{
+	public static List<DnaSequence> readFromFastaQFile(String path) throws IOException{
 		List<String> allLines = Files.readAllLines(Paths.get(path));
-		List<Sequence> sequences = new LinkedList<>(); 
+		List<DnaSequence> sequences = new LinkedList<>(); 
 		for(int i=0;i<allLines.size();i++) {
-			if(i % 4 == 1) sequences.add(new Sequence(allLines.get(i)));
+			if(i % 4 == 1) sequences.add(new DnaSequence(allLines.get(i)));
 		}
 		return sequences;
 	}

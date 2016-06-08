@@ -9,7 +9,7 @@ import java.util.List;
 import kits.bioinfo.assembly.KmerCompositioner;
 import kits.bioinfo.assembly.KmerGraph;
 import kits.bioinfo.assembly.graph.EulerianPathFinder;
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 
 public class Challenge8 {
@@ -22,8 +22,8 @@ public class Challenge8 {
 	 */
 	public static void main(String[] args) throws IOException {
 		KmerGraph graph = KmerGraph.buildDeBrujinGraph(SequenceReader.readPerLine("input/dataset_203_6.txt"));
-		List<Sequence> path = EulerianPathFinder.findEulerianPath(graph);
-		Sequence sequence = KmerCompositioner.readSequenceFromComposition(path);
+		List<DnaSequence> path = EulerianPathFinder.findEulerianPath(graph);
+		DnaSequence sequence = KmerCompositioner.readSequenceFromComposition(path);
 		Files.write(Paths.get("./output/output_203_6.txt"), Collections.singletonList(sequence.toString()));
 	}
 

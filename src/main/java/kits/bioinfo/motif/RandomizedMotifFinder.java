@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class RandomizedMotifFinder {
 
@@ -17,11 +17,11 @@ public class RandomizedMotifFinder {
 		this.runs = runs;
 	}
 	
-	public List<Sequence> findMotifs(List<Sequence> sequences, int k) {
-		List<Sequence> bestMotifs = Collections.emptyList();
+	public List<DnaSequence> findMotifs(List<DnaSequence> sequences, int k) {
+		List<DnaSequence> bestMotifs = Collections.emptyList();
 		int bestScore = Integer.MAX_VALUE;
 		for(int i=0;i<runs;i++) {
-			List<Sequence> motifs = runFindMotifsOnce(sequences, k);
+			List<DnaSequence> motifs = runFindMotifsOnce(sequences, k);
 			int score = Motifs.score(motifs);
 			if(score < bestScore) {
 				bestScore = score;
@@ -31,18 +31,18 @@ public class RandomizedMotifFinder {
 		return bestMotifs;
 	}
 	
-	private List<Sequence> runFindMotifsOnce(List<Sequence> sequences, int k) {
+	private List<DnaSequence> runFindMotifsOnce(List<DnaSequence> sequences, int k) {
 		
 		if(sequences.isEmpty()) {
 			throw new IllegalArgumentException("Can not run without sequences");
 		}
 		
-		List<Sequence> bestMotifs = randomKmers(sequences, k);
+		List<DnaSequence> bestMotifs = randomKmers(sequences, k);
 		int bestScore = Motifs.score(bestMotifs);
 		
 		while(true) {
 			ProfileMatrix profileMatrix = ProfileMatrix.buildWithPseudoCounts(bestMotifs);
-			List<Sequence> motifs = sequences.stream().map(sequence -> profileMatrix.findMostProbableKmer(sequence)).collect(Collectors.toList());
+			List<DnaSequence> motifs = sequences.stream().map(sequence -> profileMatrix.findMostProbableKmer(sequence)).collect(Collectors.toList());
 			
 			int score = Motifs.score(motifs);
 			if(score < bestScore) {
@@ -54,11 +54,11 @@ public class RandomizedMotifFinder {
 		}
 	}
 	
-	private List<Sequence> randomKmers(List<Sequence> sequences, int k) {
+	private List<DnaSequence> randomKmers(List<DnaSequence> sequences, int k) {
 		return sequences.stream().map(sequence -> randomKmer(sequence, k)).collect(Collectors.toList());
 	}
 	
-	private Sequence randomKmer(Sequence sequence, int k) {
+	private DnaSequence randomKmer(DnaSequence sequence, int k) {
 		return sequence.subSequence(random.nextInt(sequence.length()-k+1), k);
 	}
 	

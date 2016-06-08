@@ -4,22 +4,22 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class NaiveSubSequenceMatcher implements Matcher {
 
-	protected final Sequence pattern;
+	protected final DnaSequence pattern;
 	
-	public NaiveSubSequenceMatcher(Sequence pattern) {
+	public NaiveSubSequenceMatcher(DnaSequence pattern) {
 		this.pattern = pattern;
 	}
 	
 	public NaiveSubSequenceMatcher(String patternString) {
-		this.pattern = new Sequence(patternString);
+		this.pattern = new DnaSequence(patternString);
 	}
 
 	@Override
-	public boolean matches(Sequence sequence) {
+	public boolean matches(DnaSequence sequence) {
 		outer:
 		for(int index=0;index<sequence.length()-pattern.length()+1;index++) {
 			for(int j=0;j<pattern.length();j++){
@@ -33,7 +33,7 @@ public class NaiveSubSequenceMatcher implements Matcher {
 	}
 
 	@Override
-	public List<Integer> matchStartIndexes(Sequence sequence) {
+	public List<Integer> matchStartIndexes(DnaSequence sequence) {
 		int alignments = 0;
 		int comparisons = 0;
 		
@@ -54,12 +54,12 @@ public class NaiveSubSequenceMatcher implements Matcher {
 		return Collections.unmodifiableList(matchStartIndexes);
 	}
 
-	protected boolean matchesSubSequence(Sequence subSequence) {
+	protected boolean matchesSubSequence(DnaSequence subSequence) {
 		return pattern.equals(subSequence);
 	}
 	
 	@Override
-	public int matchCount(Sequence sequence) {
+	public int matchCount(DnaSequence sequence) {
 		return matchStartIndexes(sequence).size();
 	}
 	

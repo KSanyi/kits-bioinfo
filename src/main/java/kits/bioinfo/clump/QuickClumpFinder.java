@@ -3,20 +3,20 @@ package kits.bioinfo.clump;
 import java.util.HashSet;
 import java.util.Set;
 
-import kits.bioinfo.core.Nucleotid;
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaBase;
+import kits.bioinfo.core.DnaSequence;
 
 public class QuickClumpFinder implements ClumpFinder {
 
-	public Set<Sequence> findKmersFormingClumps(Sequence sequence, int L, int k, int t) {
+	public Set<DnaSequence> findKmersFormingClumps(DnaSequence sequence, int L, int k, int t) {
 		
 		boolean printProgress = sequence.length() > 1_000_000;
 		
-		Set<Sequence> kMersFormingClumps = new HashSet<>();
+		Set<DnaSequence> kMersFormingClumps = new HashSet<>();
 		KmerFrequencyMap frequencyMap = new KmerFrequencyMap();
 		
 		for(int index=0;index<L-k+1;index++) {
-			Sequence kmer = sequence.subSequence(index, k);
+			DnaSequence kmer = sequence.subSequence(index, k);
 			frequencyMap.put(kmer);
 		}
 		
@@ -25,12 +25,12 @@ public class QuickClumpFinder implements ClumpFinder {
 		int processed = 0;
 		int lastProcessed = 0;
 		for(int index=1;index<sequence.length()-L+1;index++) {
-			Nucleotid n = sequence.position(index-1);
-			Sequence sequenceLost = sequence.subSequence(index, k-1).prepend(n);
+			DnaBase n = sequence.position(index-1);
+			DnaSequence sequenceLost = sequence.subSequence(index, k-1).prepend(n);
 			frequencyMap.remove(sequenceLost);
 			
-			Nucleotid n2 = sequence.position(index+L-1);
-			Sequence sequenceAdded = sequence.subSequence(index+L-k, k-1).append(n2);
+			DnaBase n2 = sequence.position(index+L-1);
+			DnaSequence sequenceAdded = sequence.subSequence(index+L-k, k-1).append(n2);
 			frequencyMap.put(sequenceAdded);
 			
 			if(frequencyMap.frequency(sequenceAdded) >= t){

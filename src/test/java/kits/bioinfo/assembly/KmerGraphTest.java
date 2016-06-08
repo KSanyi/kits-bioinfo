@@ -4,24 +4,24 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class KmerGraphTest {
 
 	@Test
 	public void buildGraphFromNodes() {
 		KmerGraph graph = KmerGraph.buildFromKmerNodesList(Arrays.asList(
-				new Sequence("ATGCG"),
-				new Sequence("GCATG"),
-				new Sequence("CATGC"),
-				new Sequence("AGGCA"),
-				new Sequence("GGCAT")));
+				new DnaSequence("ATGCG"),
+				new DnaSequence("GCATG"),
+				new DnaSequence("CATGC"),
+				new DnaSequence("AGGCA"),
+				new DnaSequence("GGCAT")));
 		System.out.println(graph.printEdges());
 	}
 	
 	@Test
 	public void buildGraphFromEdges() {
-		Sequence sequence = new Sequence("AAGATTCTCTAAGA");
+		DnaSequence sequence = new DnaSequence("AAGATTCTCTAAGA");
 		KmerGraph graph = KmerGraph.buildDeBrujinGraph(KmerCompositioner.generateCompositions(sequence, 3));
 		System.out.println(graph.toString());
 	}

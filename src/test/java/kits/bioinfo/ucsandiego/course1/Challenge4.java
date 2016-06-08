@@ -3,7 +3,7 @@ package kits.bioinfo.ucsandiego.course1;
 import java.io.IOException;
 import java.util.List;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 import kits.bioinfo.matcher.ApproximateSubSequenceMatcher;
 
@@ -16,7 +16,7 @@ public class Challenge4 {
 	 * 
 	 */
 	public static void main(String[] args) throws IOException {
-		Sequence sequence = SequenceReader.readFromFile("input/dataset_9_4.txt");
+		DnaSequence sequence = SequenceReader.readFromFile("input/dataset_9_4.txt");
 		List<Integer> startIndexes = new ApproximateSubSequenceMatcher("AGCAGAGTC", 4).matchStartIndexes(sequence);
 		System.out.println(startIndexes);
 	}

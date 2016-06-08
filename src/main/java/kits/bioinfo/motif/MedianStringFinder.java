@@ -4,16 +4,16 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.util.AllPossibleSequenceGenerator;
 
 public class MedianStringFinder {
 
-	public Set<Sequence> findMedianStrings(Collection<Sequence> sequences, int k) {
-		Set<Sequence> candidateKmers = new AllPossibleSequenceGenerator().generateAllPossibleSequences(k);
+	public Set<DnaSequence> findMedianStrings(Collection<DnaSequence> sequences, int k) {
+		Set<DnaSequence> candidateKmers = new AllPossibleSequenceGenerator().generateAllPossibleSequences(k);
 		int minDistance = Integer.MAX_VALUE;
-		final Set<Sequence> medianStrings = new HashSet<>();
-		for(Sequence candidate : candidateKmers) {
+		final Set<DnaSequence> medianStrings = new HashSet<>();
+		for(DnaSequence candidate : candidateKmers) {
 			int distance = Motifs.distance(sequences, candidate);
 			if(distance < minDistance) {
 				minDistance = distance;

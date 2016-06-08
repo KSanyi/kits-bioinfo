@@ -2,13 +2,13 @@ package kits.bioinfo.motif;
 
 import java.util.Collection;
 
-import kits.bioinfo.core.Nucleotid;
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaBase;
+import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.util.FrequencyMap;
 
 public class Motifs {
 
-	public static Sequence consensusString(Collection<Sequence> motifs) {
+	public static DnaSequence consensusString(Collection<DnaSequence> motifs) {
 		if (motifs.size() == 0)
 			throw new IllegalArgumentException("Can not build profile matrix without any kmer");
 
@@ -16,12 +16,12 @@ public class Motifs {
 		if (!motifs.stream().allMatch(kmer -> kmer.length() == k))
 			throw new IllegalArgumentException("All kmers must have the same length");
 
-		Sequence consensus = new Sequence("");
+		DnaSequence consensus = new DnaSequence("");
 
 		for (int index = 0; index < k; index++) {
-			FrequencyMap<Nucleotid> frequencyMap = new FrequencyMap<>();
-			for (Sequence sequence : motifs) {
-				Nucleotid base = sequence.position(index);
+			FrequencyMap<DnaBase> frequencyMap = new FrequencyMap<>();
+			for (DnaSequence sequence : motifs) {
+				DnaBase base = sequence.position(index);
 				frequencyMap.put(base);
 			}
 			consensus = consensus.append(frequencyMap.getMostFrequent());
@@ -30,15 +30,15 @@ public class Motifs {
 		return consensus;
 	}
 	
-	public static int score(Collection<Sequence> motifs) {
+	public static int score(Collection<DnaSequence> motifs) {
 		return distance(motifs, consensusString(motifs));
 	}
 	
-	public static int distance(Collection<Sequence> sequences, Sequence motif) {
+	public static int distance(Collection<DnaSequence> sequences, DnaSequence motif) {
 		return sequences.stream().map(sequence -> distance(sequence, motif)).mapToInt(Integer::intValue).sum();
 	}
 	
-	public static int distance(Sequence sequence, Sequence kmer) {
+	public static int distance(DnaSequence sequence, DnaSequence kmer) {
 		int k = kmer.length();
 		if(sequence.length() < k) {
 			throw new IllegalArgumentException("Sequence can not be shorter than the kmer");

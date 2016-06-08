@@ -8,30 +8,30 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class ProfileMatrixTest {
 
 	@Test
 	public void probability() {
-		Set<Sequence> kmers = new HashSet<>(Arrays.asList(
-				new Sequence("ATTT"),
-				new Sequence("CGTA")));
+		Set<DnaSequence> kmers = new HashSet<>(Arrays.asList(
+				new DnaSequence("ATTT"),
+				new DnaSequence("CGTA")));
 		
 		ProfileMatrix profileMatrix = ProfileMatrix.build(kmers);
 		
-		Assert.assertEquals(new BigDecimal("0.125"), profileMatrix.calculateProbability(new Sequence("ATTA")));
+		Assert.assertEquals(new BigDecimal("0.125"), profileMatrix.calculateProbability(new DnaSequence("ATTA")));
 	}
 	
 	@Test
 	public void mostProbableSequenceFound() {
-		Set<Sequence> kmers = new HashSet<>(Arrays.asList(
-				new Sequence("ATTT"),
-				new Sequence("CGTA")));
+		Set<DnaSequence> kmers = new HashSet<>(Arrays.asList(
+				new DnaSequence("ATTT"),
+				new DnaSequence("CGTA")));
 		
 		ProfileMatrix profileMatrix = ProfileMatrix.build(kmers);
 		
-		Assert.assertEquals(new Sequence("ATTA"), profileMatrix.findMostProbableKmer(new Sequence("GCATTACCCG")));
+		Assert.assertEquals(new DnaSequence("ATTA"), profileMatrix.findMostProbableKmer(new DnaSequence("GCATTACCCG")));
 	}
 	
 }

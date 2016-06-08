@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import kits.bioinfo.core.Nucleotid;
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaBase;
+import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 import kits.bioinfo.matcher.ApproximateSubSequenceMatcher;
 import kits.bioinfo.matcher.SubSequenceMatcher;
@@ -14,7 +14,7 @@ import kits.bioinfo.util.FrequencyMap;
 public class Assignment1 {
 
 	public static void main(String[] args) throws IOException {
-		Sequence lambdaGenome = SequenceReader.readFromFastaFile("input/lambda_virus.fa");
+		DnaSequence lambdaGenome = SequenceReader.readFromFastaFile("input/lambda_virus.fa");
 		
 		question1(lambdaGenome);
 		question2(lambdaGenome);
@@ -25,21 +25,21 @@ public class Assignment1 {
 		question7();
 	}
 	
-	private static void question1(Sequence lambdaGenome) {
-		Sequence pattern = new Sequence("AGGT");
+	private static void question1(DnaSequence lambdaGenome) {
+		DnaSequence pattern = new DnaSequence("AGGT");
 		int count = new SubSequenceMatcher(pattern).matchCount(lambdaGenome);
 		int reverseComplementCount = new SubSequenceMatcher(pattern.reverseComplement()).matchCount(lambdaGenome);
 		System.out.println("1: " + (count + reverseComplementCount));
 	}
 	
-	private static void question2(Sequence lambdaGenome) {
-		Sequence pattern = new Sequence("TTAA");
+	private static void question2(DnaSequence lambdaGenome) {
+		DnaSequence pattern = new DnaSequence("TTAA");
 		int count = new SubSequenceMatcher(pattern).matchCount(lambdaGenome);
 		System.out.println("2: " + count);
 	}
 	
-	private static void question3(Sequence lambdaGenome) {
-		Sequence pattern = new Sequence("ACTAAGT");
+	private static void question3(DnaSequence lambdaGenome) {
+		DnaSequence pattern = new DnaSequence("ACTAAGT");
 		List<Integer> indexes = new SubSequenceMatcher(pattern).matchStartIndexes(lambdaGenome);
 		List<Integer> reverseComplementIndexes = new SubSequenceMatcher(pattern.reverseComplement()).matchStartIndexes(lambdaGenome);
 		
@@ -50,8 +50,8 @@ public class Assignment1 {
 		System.out.println("3: " + allIndexes.stream().mapToInt(i -> i).min());
 	}
 	
-	private static void question4(Sequence lambdaGenome) {
-		Sequence pattern = new Sequence("AGTCGA");
+	private static void question4(DnaSequence lambdaGenome) {
+		DnaSequence pattern = new DnaSequence("AGTCGA");
 		List<Integer> indexes = new SubSequenceMatcher(pattern).matchStartIndexes(lambdaGenome);
 		List<Integer> reverseComplementIndexes = new SubSequenceMatcher(pattern.reverseComplement()).matchStartIndexes(lambdaGenome);
 		
@@ -62,26 +62,26 @@ public class Assignment1 {
 		System.out.println("4: " + allIndexes.stream().mapToInt(i -> i).min());
 	}
 	
-	private static void question5(Sequence lambdaGenome) {
-		Sequence pattern = new Sequence("TTCAAGCC");
+	private static void question5(DnaSequence lambdaGenome) {
+		DnaSequence pattern = new DnaSequence("TTCAAGCC");
 		int count = new ApproximateSubSequenceMatcher(pattern, 2).matchCount(lambdaGenome);
 		System.out.println("5: " + count);
 	}
 	
-	private static void question6(Sequence lambdaGenome) {
-		Sequence pattern = new Sequence("AGGAGGTT");
+	private static void question6(DnaSequence lambdaGenome) {
+		DnaSequence pattern = new DnaSequence("AGGAGGTT");
 		List<Integer> indexes = new ApproximateSubSequenceMatcher(pattern, 2).matchStartIndexes(lambdaGenome);
 		System.out.println("5: " + indexes.stream().mapToInt(i -> i).min());
 	}
 	
 	private static void question7() throws IOException {
-		List<Sequence> sequences = SequenceReader.readFromFastaQFile("input/ERR037900_1.first1000.fastq");
+		List<DnaSequence> sequences = SequenceReader.readFromFastaQFile("input/ERR037900_1.first1000.fastq");
 		
 		int length = sequences.get(0).length();
 		
 		for(int index=0;index<length;index++) {
-			FrequencyMap<Nucleotid> freqs = new FrequencyMap<>();
-			for(Sequence sequence : sequences) {
+			FrequencyMap<DnaBase> freqs = new FrequencyMap<>();
+			for(DnaSequence sequence : sequences) {
 				freqs.put(sequence.position(index));
 			}
 			System.out.println(index + ": " + freqs);

@@ -4,23 +4,23 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.matcher.ApproximateSubSequenceMatcher;
 import kits.bioinfo.matcher.Matcher;
 
 public class MotifFinder {
 
-	public Set<Sequence> findMotifs(Collection<Sequence> sequences, int k, int d) {
+	public Set<DnaSequence> findMotifs(Collection<DnaSequence> sequences, int k, int d) {
 		
 		if(sequences.isEmpty()) {
 			throw new IllegalArgumentException("Empty sequence list");
 		}
 		
-		Sequence firstSequence = sequences.iterator().next();
-		Set<Sequence> candidateMotifs = generateCandidateMotifs(firstSequence, k);
+		DnaSequence firstSequence = sequences.iterator().next();
+		Set<DnaSequence> candidateMotifs = generateCandidateMotifs(firstSequence, k);
 		
-		Set<Sequence> motifs = new HashSet<>();
-		for(Sequence motif : candidateMotifs) {
+		Set<DnaSequence> motifs = new HashSet<>();
+		for(DnaSequence motif : candidateMotifs) {
 			Matcher matcher = new ApproximateSubSequenceMatcher(motif, d);
 			if(sequences.stream().allMatch(s -> matcher.matches(s))) {
 				motifs.add(motif);
@@ -30,11 +30,11 @@ public class MotifFinder {
 		return motifs;
 	}
 	
-	private Set<Sequence> generateCandidateMotifs(Sequence firstSequence, int k) {
-		Set<Sequence> candidateMotifs = new HashSet<>();
+	private Set<DnaSequence> generateCandidateMotifs(DnaSequence firstSequence, int k) {
+		Set<DnaSequence> candidateMotifs = new HashSet<>();
 		
 		for(int index=0;index<firstSequence.length()-k+1;index++) {
-			Sequence kmer = firstSequence.subSequence(index, k);
+			DnaSequence kmer = firstSequence.subSequence(index, k);
 			candidateMotifs.addAll(kmer.neighbours(k));
 		}
 		

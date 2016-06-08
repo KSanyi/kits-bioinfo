@@ -1,17 +1,17 @@
 package kits.bioinfo.util;
 
-import static kits.bioinfo.core.Nucleotid.*;
+import static kits.bioinfo.core.DnaBase.*;
 
 import java.util.Random;
 
-import kits.bioinfo.core.Nucleotid;
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaBase;
+import kits.bioinfo.core.DnaSequence;
 
 public class RandomSequenceGenerator {
 
 	private final Random random;
 	
-	private Nucleotid[] bases = new Nucleotid[]{A, C, T, G};
+	private DnaBase[] bases = new DnaBase[]{A, C, T, G};
 	
 	public RandomSequenceGenerator(long seed) {
 		random = new Random(seed);
@@ -21,12 +21,12 @@ public class RandomSequenceGenerator {
 		random = new Random();
 	}
 	
-	public Sequence generateRandomSequence(int length) {
+	public DnaSequence generateRandomSequence(int length) {
 		StringBuilder sb = new StringBuilder();
 		for(int i=0;i<length;i++) {
 			sb.append(bases[random.nextInt(4)]);
 		}
-		return new Sequence(sb.toString());
+		return new DnaSequence(sb.toString());
 	}
 	
 }

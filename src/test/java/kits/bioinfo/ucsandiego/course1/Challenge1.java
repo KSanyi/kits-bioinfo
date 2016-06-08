@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Set;
 
 import kits.bioinfo.clump.FastClumpFinder;
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 
 public class Challenge1 {
@@ -19,8 +19,8 @@ public class Challenge1 {
 	 * 
 	 */
 	public static void main(String[] args) throws IOException {
-		Sequence sequence = SequenceReader.readFromFile("input/dataset_4_5.txt");
-		Set<Sequence> kmersFormingClump = new FastClumpFinder().findKmersFormingClumps(sequence, 557, 10, 20);
+		DnaSequence sequence = SequenceReader.readFromFile("input/dataset_4_5.txt");
+		Set<DnaSequence> kmersFormingClump = new FastClumpFinder().findKmersFormingClumps(sequence, 557, 10, 20);
 		//Expected: ACTATGACTT, AGCCCGACAC, CAAAGATCGG, CACAAAATTC, CAGATATCCA, CTCGGCCTTT, GTACTGCGAA, TACAAACGCC, TTCATCTGAA, TTGGCAAACC
 		System.out.println(kmersFormingClump);
 	}

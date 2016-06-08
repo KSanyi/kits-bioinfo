@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 
 import kits.bioinfo.assembly.graph.EulerianPathFinder;
 import kits.bioinfo.assembly.graph.Graph;
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class ReadPairAssembler {
 
-	public static Optional<Sequence> assembleSequence(List<ReadPair> readPairs) {
+	public static Optional<DnaSequence> assembleSequence(List<ReadPair> readPairs) {
 		
 		checkReadPairs(readPairs);
 		int distance = readPairs.get(0).distance;
@@ -19,8 +19,8 @@ public class ReadPairAssembler {
 		Graph<ReadPair> graph = KmerGraph.buildReadPairDeBrujinGraph(readPairs);
 		for(int i=0;i<10000;i++){
 			List<ReadPair> path = EulerianPathFinder.findEulerianPath(graph);
-			Sequence sequence1 = KmerCompositioner.readSequenceFromComposition(path.stream().map(readPair -> readPair.read1).collect(Collectors.toList()));
-			Sequence sequence2 = KmerCompositioner.readSequenceFromComposition(path.stream().map(readPair -> readPair.read2).collect(Collectors.toList()));
+			DnaSequence sequence1 = KmerCompositioner.readSequenceFromComposition(path.stream().map(readPair -> readPair.read1).collect(Collectors.toList()));
+			DnaSequence sequence2 = KmerCompositioner.readSequenceFromComposition(path.stream().map(readPair -> readPair.read2).collect(Collectors.toList()));
 			if(areValidReadPairSequences(sequence1, sequence2, distance, k-1)){
 				return Optional.of(readSequenceFromReadPairComposition(path));
 			}
@@ -28,15 +28,15 @@ public class ReadPairAssembler {
 		return Optional.empty();
 	}
 	
-	private static boolean areValidReadPairSequences(Sequence sequence1, Sequence sequence2, int distance, int k) {
+	private static boolean areValidReadPairSequences(DnaSequence sequence1, DnaSequence sequence2, int distance, int k) {
 		return sequence1.suffix(sequence1.length()-k-distance-1).equals(sequence2.prefix(sequence1.length()-k-distance-1));
 	}
 	
-	private static Sequence readSequenceFromReadPairComposition(List<ReadPair> composition) {
+	private static DnaSequence readSequenceFromReadPairComposition(List<ReadPair> composition) {
 		int distance = composition.get(0).distance;
 		int k = composition.get(0).read1.length();
-		Sequence sequence1 = KmerCompositioner.readSequenceFromComposition(composition.stream().map(readPair -> readPair.read1).collect(Collectors.toList()));
-		Sequence sequence2 = KmerCompositioner.readSequenceFromComposition(composition.stream().map(readPair -> readPair.read2).collect(Collectors.toList()));
+		DnaSequence sequence1 = KmerCompositioner.readSequenceFromComposition(composition.stream().map(readPair -> readPair.read1).collect(Collectors.toList()));
+		DnaSequence sequence2 = KmerCompositioner.readSequenceFromComposition(composition.stream().map(readPair -> readPair.read2).collect(Collectors.toList()));
 		return sequence1.append(sequence2.suffix(distance+k+1));
 	}
 	

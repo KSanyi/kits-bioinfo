@@ -4,22 +4,22 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class SubSequenceMatcher implements Matcher {
 
-	protected final Sequence pattern;
+	protected final DnaSequence pattern;
 	
-	public SubSequenceMatcher(Sequence pattern) {
+	public SubSequenceMatcher(DnaSequence pattern) {
 		this.pattern = pattern;
 	}
 	
 	public SubSequenceMatcher(String patternString) {
-		this.pattern = new Sequence(patternString);
+		this.pattern = new DnaSequence(patternString);
 	}
 
 	@Override
-	public boolean matches(Sequence sequence) {
+	public boolean matches(DnaSequence sequence) {
 		for(int index=0;index<sequence.length()-pattern.length()+1;index++) {
 			if(matchesSubSequence(sequence.subSequence(index, pattern.length()))) return true;
 		}
@@ -27,7 +27,7 @@ public class SubSequenceMatcher implements Matcher {
 	}
 
 	@Override
-	public List<Integer> matchStartIndexes(Sequence sequence) {
+	public List<Integer> matchStartIndexes(DnaSequence sequence) {
 		List<Integer> matchStartIndexes = new LinkedList<>();
 		for(int index=0;index<sequence.length()-pattern.length()+1;index++) {
 			if(matchesSubSequence(sequence.subSequence(index, pattern.length()))) matchStartIndexes.add(index);
@@ -35,12 +35,12 @@ public class SubSequenceMatcher implements Matcher {
 		return Collections.unmodifiableList(matchStartIndexes);
 	}
 
-	protected boolean matchesSubSequence(Sequence subSequence) {
+	protected boolean matchesSubSequence(DnaSequence subSequence) {
 		return pattern.equals(subSequence);
 	}
 	
 	@Override
-	public int matchCount(Sequence sequence) {
+	public int matchCount(DnaSequence sequence) {
 		return matchStartIndexes(sequence).size();
 	}
 	

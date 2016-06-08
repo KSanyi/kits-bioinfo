@@ -6,33 +6,33 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class KmerCompositionerTest {
 
 	@Test
 	public void compositionGeneration() {
-		List<Sequence> composition = KmerCompositioner.generateCompositions(new Sequence("CAATCCAAC"), 5);
+		List<DnaSequence> composition = KmerCompositioner.generateCompositions(new DnaSequence("CAATCCAAC"), 5);
 		Assert.assertEquals(Arrays.asList(
-				new Sequence("CAATC"),
-				new Sequence("AATCC"),
-				new Sequence("ATCCA"),
-				new Sequence("TCCAA"),
-				new Sequence("CCAAC")), composition);
+				new DnaSequence("CAATC"),
+				new DnaSequence("AATCC"),
+				new DnaSequence("ATCCA"),
+				new DnaSequence("TCCAA"),
+				new DnaSequence("CCAAC")), composition);
 	}
 	
 	@Test
 	public void compositionRead() {
 		
-		List<Sequence> composition = Arrays.asList(
-				new Sequence("CAATC"),
-				new Sequence("AATCC"),
-				new Sequence("ATCCA"),
-				new Sequence("TCCAA"),
-				new Sequence("CCAAC"));
+		List<DnaSequence> composition = Arrays.asList(
+				new DnaSequence("CAATC"),
+				new DnaSequence("AATCC"),
+				new DnaSequence("ATCCA"),
+				new DnaSequence("TCCAA"),
+				new DnaSequence("CCAAC"));
 		
-		Sequence sequence = KmerCompositioner.readSequenceFromComposition(composition);
-		Assert.assertEquals(new Sequence("CAATCCAAC"), sequence);
+		DnaSequence sequence = KmerCompositioner.readSequenceFromComposition(composition);
+		Assert.assertEquals(new DnaSequence("CAATCCAAC"), sequence);
 	}
 	
 }

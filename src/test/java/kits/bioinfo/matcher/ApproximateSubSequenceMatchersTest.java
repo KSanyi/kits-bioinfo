@@ -2,7 +2,7 @@ package kits.bioinfo.matcher;
 
 import java.util.Random;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.util.RandomSequenceGenerator;
 
 import org.junit.Assert;
@@ -22,8 +22,8 @@ public class ApproximateSubSequenceMatchersTest {
 			int d = random.nextInt(5) + 1;
 			int k = random.nextInt(5) + 2;
 			int patternLength = k * (d + 1);
-			Sequence pattern = generator.generateRandomSequence(patternLength);
-			Sequence text = generator.generateRandomSequence(1000);
+			DnaSequence pattern = generator.generateRandomSequence(patternLength);
+			DnaSequence text = generator.generateRandomSequence(1000);
 			Assert.assertEquals(new ApproximateSubSequenceMatcher(pattern, d).matchStartIndexes(text),
 					            new IndexBasedApproximateSubSequenceMatcher(text, k, d).matchStartIndexes(pattern));
 		}

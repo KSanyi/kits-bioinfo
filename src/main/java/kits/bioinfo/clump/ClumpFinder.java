@@ -2,10 +2,10 @@ package kits.bioinfo.clump;
 
 import java.util.Set;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public interface ClumpFinder {
 
-	Set<Sequence> findKmersFormingClumps(Sequence sequence, int L, int k, int t);
+	Set<DnaSequence> findKmersFormingClumps(DnaSequence sequence, int L, int k, int t);
 	
 }

@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class GreedyMotifFinder {
 
-	public List<Sequence> findMotifs(List<Sequence> sequences, int k) {
+	public List<DnaSequence> findMotifs(List<DnaSequence> sequences, int k) {
 		
 		if(sequences.isEmpty()) {
 			throw new IllegalArgumentException("Can not run without sequences");
 		}
 		
-		List<Sequence> bestMotifs = Collections.emptyList();
+		List<DnaSequence> bestMotifs = Collections.emptyList();
 		int bestScore = Integer.MAX_VALUE;
 		
-		Sequence firstSequence = sequences.iterator().next();
+		DnaSequence firstSequence = sequences.iterator().next();
 		for(int index=0;index<firstSequence.length()-k+1;index++) {
-			List<Sequence> motifs = new ArrayList<>();
+			List<DnaSequence> motifs = new ArrayList<>();
 			motifs.add(firstSequence.subSequence(index, k));
 			ProfileMatrix profileMatrix = ProfileMatrix.buildWithPseudoCounts(motifs);
 			for(int i=1;i<sequences.size();i++) {

@@ -1,22 +1,22 @@
 package kits.bioinfo.matcher;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class ApproximateSubSequenceMatcher extends SubSequenceMatcher {
 
 	private final int distance;
 	
-	public ApproximateSubSequenceMatcher(Sequence pattern, int distance) {
+	public ApproximateSubSequenceMatcher(DnaSequence pattern, int distance) {
 		super(pattern);
 		this.distance = distance;
 	}
 	
 	public ApproximateSubSequenceMatcher(String patternString, int distance) {
-		this(new Sequence(patternString), distance);
+		this(new DnaSequence(patternString), distance);
 	}
 
 	@Override
-	protected boolean matchesSubSequence(Sequence subSequence) {
+	protected boolean matchesSubSequence(DnaSequence subSequence) {
 		return pattern.distance(subSequence) <= distance;
 	}
 

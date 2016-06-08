@@ -8,21 +8,21 @@ import static java.util.Arrays.*;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class MotifFinderTest {
 
 	@Test
 	public void test1() {
-		Set<Sequence> sequences = new HashSet<>(Arrays.asList(
-				new Sequence("ATTTGGC"),
-				new Sequence("TGCCTTA"), 
-				new Sequence("CGGTATC"), 
-				new Sequence("GAAAATT")));
+		Set<DnaSequence> sequences = new HashSet<>(Arrays.asList(
+				new DnaSequence("ATTTGGC"),
+				new DnaSequence("TGCCTTA"), 
+				new DnaSequence("CGGTATC"), 
+				new DnaSequence("GAAAATT")));
 		
-		Set<Sequence> motifs = new MotifFinder().findMotifs(sequences, 3, 1);
+		Set<DnaSequence> motifs = new MotifFinder().findMotifs(sequences, 3, 1);
 		
-		assertEquals(new HashSet<>(asList(new Sequence("ATA"), new Sequence("ATT"), new Sequence("GTT"), new Sequence("TTT"))), motifs);
+		assertEquals(new HashSet<>(asList(new DnaSequence("ATA"), new DnaSequence("ATT"), new DnaSequence("GTT"), new DnaSequence("TTT"))), motifs);
 	}
 	
 }

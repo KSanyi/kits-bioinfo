@@ -1,15 +1,15 @@
 package kits.bioinfo.assembly;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class ReadPair {
 
-	public final Sequence read1;
-	public final Sequence read2;
+	public final DnaSequence read1;
+	public final DnaSequence read2;
 	
 	public final int distance;
 
-	public ReadPair(Sequence read1, Sequence read2, int distance) {
+	public ReadPair(DnaSequence read1, DnaSequence read2, int distance) {
 		this.read1 = read1;
 		this.read2 = read2;
 		this.distance = distance;

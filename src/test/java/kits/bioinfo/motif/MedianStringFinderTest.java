@@ -9,7 +9,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class MedianStringFinderTest {
 
@@ -17,30 +17,30 @@ public class MedianStringFinderTest {
 	
 	@Test
 	public void basic() {
-		assertThat(medianStringFinder.findMedianStrings(new HashSet<>(asList(new Sequence("AA"))), 2), contains(new Sequence("AA")));
-		assertThat(medianStringFinder.findMedianStrings(new HashSet<>(asList(new Sequence("AAC"),new Sequence("AAG"))), 2), contains(new Sequence("AA")));
+		assertThat(medianStringFinder.findMedianStrings(new HashSet<>(asList(new DnaSequence("AA"))), 2), contains(new DnaSequence("AA")));
+		assertThat(medianStringFinder.findMedianStrings(new HashSet<>(asList(new DnaSequence("AAC"),new DnaSequence("AAG"))), 2), contains(new DnaSequence("AA")));
 	}
 	
 	@Test
 	public void test1() {
-		Set<Sequence> sequences = new HashSet<>(asList(
-				new Sequence("AAATTGACGCAT"),
-				new Sequence("GACGACCACGTT"),
-				new Sequence("CGTCAGCGCCTG"),
-				new Sequence("GCTGAGCACCGG"),
-				new Sequence("AGTTCGGGACAG")));
-		Set<Sequence> medianStrings = new MedianStringFinder().findMedianStrings(sequences, 3);
-		assertThat(medianStrings, contains(new Sequence("GAC")));
+		Set<DnaSequence> sequences = new HashSet<>(asList(
+				new DnaSequence("AAATTGACGCAT"),
+				new DnaSequence("GACGACCACGTT"),
+				new DnaSequence("CGTCAGCGCCTG"),
+				new DnaSequence("GCTGAGCACCGG"),
+				new DnaSequence("AGTTCGGGACAG")));
+		Set<DnaSequence> medianStrings = new MedianStringFinder().findMedianStrings(sequences, 3);
+		assertThat(medianStrings, contains(new DnaSequence("GAC")));
 	}
 	
 	@Test
 	public void test2() {
-		Set<Sequence> sequences = new HashSet<>(asList(
-				new Sequence("CTCGATGAGTAGGAAAGTAGTTTCACTGGGCGAACCACCCCGGCGCTAATCCTAGTGCCC"),
-				new Sequence("GCAATCCTACCCGAGGCCACATATCAGTAGGAACTAGAACCACCACGGGTGGCTAGTTTC"),
-				new Sequence("GGTGTTGAACCACGGGGTTAGTTTCATCTATTGTAGGAATCGGCTTCAAATCCTACACAG")));
-		Set<Sequence> medianStrings = new MedianStringFinder().findMedianStrings(sequences, 7);
-		assertThat(medianStrings, containsInAnyOrder(new Sequence("GTAGGAA"), new Sequence("AATCCTA"), new Sequence("TAGTTTC"), new Sequence("GAACCAC")));
+		Set<DnaSequence> sequences = new HashSet<>(asList(
+				new DnaSequence("CTCGATGAGTAGGAAAGTAGTTTCACTGGGCGAACCACCCCGGCGCTAATCCTAGTGCCC"),
+				new DnaSequence("GCAATCCTACCCGAGGCCACATATCAGTAGGAACTAGAACCACCACGGGTGGCTAGTTTC"),
+				new DnaSequence("GGTGTTGAACCACGGGGTTAGTTTCATCTATTGTAGGAATCGGCTTCAAATCCTACACAG")));
+		Set<DnaSequence> medianStrings = new MedianStringFinder().findMedianStrings(sequences, 7);
+		assertThat(medianStrings, containsInAnyOrder(new DnaSequence("GTAGGAA"), new DnaSequence("AATCCTA"), new DnaSequence("TAGTTTC"), new DnaSequence("GAACCAC")));
 	}
 	
 }

@@ -2,14 +2,14 @@ package kits.bioinfo.matcher;
 
 import java.util.List;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public interface Matcher {
 
-	boolean matches(Sequence sequence);
+	boolean matches(DnaSequence sequence);
 	
-	List<Integer> matchStartIndexes(Sequence sequence);
+	List<Integer> matchStartIndexes(DnaSequence sequence);
 	
-	int matchCount(Sequence sequence);
+	int matchCount(DnaSequence sequence);
 	
 }

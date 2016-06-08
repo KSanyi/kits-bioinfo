@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import kits.bioinfo.assembly.KmerCompositioner;
 import kits.bioinfo.assembly.KmerGraph;
 import kits.bioinfo.assembly.graph.MaxNonBranchingPathFinder;
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 
 public class Challenge11 {
@@ -21,10 +21,10 @@ public class Challenge11 {
      * Output: All contigs in DeBruijn(Patterns).
 	 */
 	public static void main(String[] args) throws IOException {
-		List<Sequence> edges = SequenceReader.readPerLine("input/dataset_205_5.txt");
+		List<DnaSequence> edges = SequenceReader.readPerLine("input/dataset_205_5.txt");
 		KmerGraph graph = KmerGraph.buildDeBrujinGraph(edges);
-		List<List<Sequence>> maxNonBranchingPaths = MaxNonBranchingPathFinder.findMaxNonBranchingPaths(graph);
-		List<Sequence> contigs = maxNonBranchingPaths.stream().map(path -> KmerCompositioner.readSequenceFromComposition(path)).collect(Collectors.toList());
+		List<List<DnaSequence>> maxNonBranchingPaths = MaxNonBranchingPathFinder.findMaxNonBranchingPaths(graph);
+		List<DnaSequence> contigs = maxNonBranchingPaths.stream().map(path -> KmerCompositioner.readSequenceFromComposition(path)).collect(Collectors.toList());
 		Files.write(Paths.get("./output/output_205_5.txt"), contigs.stream().map(contig -> contig.toString()).collect(Collectors.toList()));
 	}
 

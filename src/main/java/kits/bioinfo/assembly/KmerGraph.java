@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import kits.bioinfo.assembly.graph.Graph;
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
-public class KmerGraph extends Graph<Sequence> {
+public class KmerGraph extends Graph<DnaSequence> {
 
-	public static KmerGraph buildFromKmerNodesList(List<Sequence> nodes) {
+	public static KmerGraph buildFromKmerNodesList(List<DnaSequence> nodes) {
 		return new KmerGraph(nodes.stream()
 				.flatMap(node -> nodes.stream()
 						.filter(otherNode -> node.suffix().equals(otherNode.prefix()))
@@ -16,7 +16,7 @@ public class KmerGraph extends Graph<Sequence> {
 				.collect(Collectors.toList()));
 	}
 	
-	public static KmerGraph buildDeBrujinGraph(List<Sequence> edgeSequences) {
+	public static KmerGraph buildDeBrujinGraph(List<DnaSequence> edgeSequences) {
 		return new KmerGraph(edgeSequences.stream()
 				.map(edgeSequence -> new Edge<>(edgeSequence.prefix(), edgeSequence.suffix()))
 				.collect(Collectors.toList()));
@@ -28,7 +28,7 @@ public class KmerGraph extends Graph<Sequence> {
 				.collect(Collectors.toList()));
 	}
 	
-	public KmerGraph(List<Edge<Sequence>> edges) {
+	public KmerGraph(List<Edge<DnaSequence>> edges) {
 		super(edges);
 	}
 	

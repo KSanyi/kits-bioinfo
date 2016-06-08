@@ -5,18 +5,18 @@ import java.util.List;
 
 import org.junit.Test;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class GreedyMotifFinderTest {
 
 	@Test
 	public void test() {
-		List<Sequence> sequences = Arrays.asList(
-				new Sequence("GGCGTTCAGGCA"),
-				new Sequence("AAGAATCAGTCA"), 
-				new Sequence("CAAGGAGTTCGC"), 
-				new Sequence("CACGTCAATCAC"),
-				new Sequence("CAATAATATTCG"));
+		List<DnaSequence> sequences = Arrays.asList(
+				new DnaSequence("GGCGTTCAGGCA"),
+				new DnaSequence("AAGAATCAGTCA"), 
+				new DnaSequence("CAAGGAGTTCGC"), 
+				new DnaSequence("CACGTCAATCAC"),
+				new DnaSequence("CAATAATATTCG"));
 		
 		System.out.println(new GreedyMotifFinder().findMotifs(sequences, 3));
 	}

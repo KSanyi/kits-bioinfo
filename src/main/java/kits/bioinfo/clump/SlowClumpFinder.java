@@ -3,15 +3,15 @@ package kits.bioinfo.clump;
 import java.util.HashSet;
 import java.util.Set;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class SlowClumpFinder implements ClumpFinder {
 
-	public Set<Sequence> findKmersFormingClumps(Sequence sequence, int L, int k, int t) {
+	public Set<DnaSequence> findKmersFormingClumps(DnaSequence sequence, int L, int k, int t) {
 		
 		boolean printProgress = sequence.length() > 1_000_000;
 		
-		Set<Sequence> kMersFormingClumps = new HashSet<>();
+		Set<DnaSequence> kMersFormingClumps = new HashSet<>();
 		int processed = 0;	int lastProcessed = 0;
 		for(int index=0;index<sequence.length()-L+1;index++) {
 			KmerFrequencyMap frequencyMap = createFrequencyMap(sequence.subSequence(index, L), k);
@@ -25,11 +25,11 @@ public class SlowClumpFinder implements ClumpFinder {
 		return kMersFormingClumps;
 	}
 	
-	private KmerFrequencyMap createFrequencyMap(Sequence sequence, int k) {
+	private KmerFrequencyMap createFrequencyMap(DnaSequence sequence, int k) {
 		KmerFrequencyMap frequencyMap = new KmerFrequencyMap();
 		
 		for(int index=0;index<sequence.length()-k+1;index++) {
-			Sequence kmer = sequence.subSequence(index, k);
+			DnaSequence kmer = sequence.subSequence(index, k);
 			frequencyMap.put(kmer);
 		}
 		return frequencyMap;

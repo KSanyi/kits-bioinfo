@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import kits.bioinfo.assembly.KmerGraph;
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 
 public class Challenge5 {
@@ -19,7 +19,7 @@ public class Challenge5 {
      * CODE CHALLENGE: Solve the de Bruijn Graph from k-mers Problem.
 	 */
 	public static void main(String[] args) throws IOException {
-		List<Sequence> edges = SequenceReader.readPerLine("input/dataset_200_7.txt");
+		List<DnaSequence> edges = SequenceReader.readPerLine("input/dataset_200_7.txt");
 		KmerGraph graph = KmerGraph.buildDeBrujinGraph(edges);
 		Files.write(Paths.get("./output/output_200_7.txt"), Collections.singletonList(graph.toString()));
 	}

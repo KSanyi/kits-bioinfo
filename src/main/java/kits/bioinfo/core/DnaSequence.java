@@ -7,19 +7,19 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Sequence implements Comparable<Sequence>{
+public class DnaSequence implements Comparable<DnaSequence>{
 	
-	private final List<Nucleotid> text;
+	private final List<DnaBase> text;
 
-	public Sequence(List<Nucleotid> text) {
+	public DnaSequence(List<DnaBase> text) {
 		this.text = Collections.unmodifiableList(text);
 	}
 	
-	public Sequence(String text) {
-		this(text.chars().mapToObj(c -> Nucleotid.of((char)c)).collect(Collectors.toList())); 
+	public DnaSequence(String text) {
+		this(text.chars().mapToObj(c -> DnaBase.of((char)c)).collect(Collectors.toList())); 
 	}
 
-	public Nucleotid position(int index) {
+	public DnaBase position(int index) {
 		return text.get(index);
 	}
 	
@@ -27,27 +27,27 @@ public class Sequence implements Comparable<Sequence>{
 		return text.size();
 	}
 	
-	public Sequence subSequence(int start, int k) {
+	public DnaSequence subSequence(int start, int k) {
 		if(start < 0 || start + k > text.size()) throw new IllegalArgumentException("Wrong sub sequence index: " + start  + " : " + (start+k));
-		return new Sequence(text.subList(start, start+k));
+		return new DnaSequence(text.subList(start, start+k));
 	}
 	
-	public Sequence prefix(int k){
+	public DnaSequence prefix(int k){
 		if(length() < k) throw new IllegalArgumentException("Can not form suffix with length " + k + " from sequence with length " + length());
 		return subSequence(0, k);
 	}
 	
-	public Sequence prefix(){
+	public DnaSequence prefix(){
 		if(isEmpty()) throw new IllegalStateException("Can not call prefix on empty sequence");
 		return prefix(length()-1);
 	}
 	
-	public Sequence suffix(int k){
+	public DnaSequence suffix(int k){
 		if(length() < k) throw new IllegalArgumentException("Can not form suffix with length " + k + " from sequence with length " + length());
 		return subSequence(length()-k, k);
 	}
 	
-	public Sequence suffix(){
+	public DnaSequence suffix(){
 		if(isEmpty()) throw new IllegalStateException("Can not call suffix on empty sequence");
 		return suffix(length()-1);
 	}
@@ -56,42 +56,40 @@ public class Sequence implements Comparable<Sequence>{
 		return length() == 0;
 	}
 	
-	public List<Sequence> allSubSequences(int k) {
-		List<Sequence> subSequences = new ArrayList<>();
+	public List<DnaSequence> allSubSequences(int k) {
+		List<DnaSequence> subSequences = new ArrayList<>();
 		for(int i=0;i<length()-k+1;i++) {
 			subSequences.add(subSequence(i, k));
 		}
 		return subSequences;
 	}
 	
-	public Sequence append(Nucleotid nucleotid) {
-		List<Nucleotid> newText = new ArrayList<>(text);
+	public DnaSequence append(DnaBase nucleotid) {
+		List<DnaBase> newText = new ArrayList<>(text);
 		newText.add(nucleotid);
-		return new Sequence(newText);
+		return new DnaSequence(newText);
 	}
 	
-	public Sequence append(Sequence other) {
-		List<Nucleotid> newText = new ArrayList<>(text);
+	public DnaSequence append(DnaSequence other) {
+		List<DnaBase> newText = new ArrayList<>(text);
 		newText.addAll(other.text);
-		return new Sequence(newText);
+		return new DnaSequence(newText);
 	}
 	
-	public Sequence prepend(Nucleotid nucleotid) {
-		List<Nucleotid> newText = new ArrayList<>();
+	public DnaSequence prepend(DnaBase nucleotid) {
+		List<DnaBase> newText = new ArrayList<>();
 		newText.add(nucleotid);
 		newText.addAll(text);
-		return new Sequence(newText);
+		return new DnaSequence(newText);
 	}
 	
-	
-	
-	public Sequence reverseComplement() {
-		List<Nucleotid> complementText = text.stream().map(n -> n.complement()).collect(Collectors.toList());
+	public DnaSequence reverseComplement() {
+		List<DnaBase> complementText = text.stream().map(n -> n.complement()).collect(Collectors.toList());
 		Collections.reverse(complementText);
-		return new Sequence(complementText);
+		return new DnaSequence(complementText);
 	}
 	
-	public int distance(Sequence other) {
+	public int distance(DnaSequence other) {
 		if(other.length() != length()) throw new IllegalArgumentException("Different length sequences");
 		int sum = 0;
 		for(int i=0;i<length();i++) {
@@ -100,30 +98,30 @@ public class Sequence implements Comparable<Sequence>{
 		return sum;
 	}
 	
-	private Set<Sequence> neighbours() {
-		Set<Sequence> neighbours = new HashSet<>();
+	private Set<DnaSequence> neighbours() {
+		Set<DnaSequence> neighbours = new HashSet<>();
 		neighbours.add(this);
 		for(int index=0;index<length();index++) {
-			Nucleotid base = text.get(index);
-			for(Nucleotid other : Nucleotid.others(base)) {
-				List<Nucleotid> newText = new ArrayList<>(text);
+			DnaBase base = text.get(index);
+			for(DnaBase other : DnaBase.others(base)) {
+				List<DnaBase> newText = new ArrayList<>(text);
 				newText.set(index, other);
-				neighbours.add(new Sequence(newText));
+				neighbours.add(new DnaSequence(newText));
 			}
 		}
 		return neighbours;
 	}
 	
-	public Set<Sequence> neighbours(int k) {
+	public Set<DnaSequence> neighbours(int k) {
 		return neighboursOf(Collections.singleton(this), k);
 	}
 	
-	private Set<Sequence> neighboursOf(Set<Sequence> sequences, int k) {
+	private Set<DnaSequence> neighboursOf(Set<DnaSequence> sequences, int k) {
 		if(k == 0) {
 			return sequences;
 		} else {
-			Set<Sequence> neighbours = new HashSet<>();
-			for(Sequence sequence : sequences) {
+			Set<DnaSequence> neighbours = new HashSet<>();
+			for(DnaSequence sequence : sequences) {
 				neighbours.addAll(sequence.neighbours());
 			}
 			return neighboursOf(neighbours, k-1);
@@ -132,7 +130,7 @@ public class Sequence implements Comparable<Sequence>{
 	
 	@Override
 	public boolean equals(Object other) {
-		return other instanceof Sequence ? text.equals(((Sequence)other).text) : false;
+		return other instanceof DnaSequence ? text.equals(((DnaSequence)other).text) : false;
 	}
 	
 	@Override
@@ -146,7 +144,7 @@ public class Sequence implements Comparable<Sequence>{
 	}
 
 	@Override
-	public int compareTo(Sequence o) {
+	public int compareTo(DnaSequence o) {
 		return this.toString().compareTo(o.toString());
 	}
 

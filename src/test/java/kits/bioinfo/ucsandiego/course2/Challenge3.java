@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import kits.bioinfo.assembly.KmerGraph;
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 
 public class Challenge3 {
@@ -18,7 +18,7 @@ public class Challenge3 {
      * Output: The overlap graph Overlap(Patterns), in the form of an adjacency list. (You may return the edges in any order.)
 	 */
 	public static void main(String[] args) throws IOException {
-		List<Sequence> kmers = SequenceReader.readPerLine("input/dataset_198_9.txt");
+		List<DnaSequence> kmers = SequenceReader.readPerLine("input/dataset_198_9.txt");
 		KmerGraph graph = KmerGraph.buildFromKmerNodesList(kmers);
 		Files.write(Paths.get("./output/output_198_9.txt"), Collections.singletonList(graph.printEdges()));
 	}

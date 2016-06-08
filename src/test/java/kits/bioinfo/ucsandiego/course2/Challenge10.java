@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import kits.bioinfo.assembly.ReadPair;
 import kits.bioinfo.assembly.ReadPairAssembler;
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class Challenge10 {
 
@@ -22,8 +22,8 @@ public class Challenge10 {
 		int d = 200;
 		List<String> lines = Files.readAllLines(Paths.get("input/dataset_204_14.txt"));
 		List<ReadPair> readPairs = lines.subList(1, lines.size()).stream()
-			.map(line -> new ReadPair(new Sequence(line.split("\\|")[0]), new Sequence(line.split("\\|")[1]), d)).collect(Collectors.toList());
-		Sequence sequence = ReadPairAssembler.assembleSequence(readPairs).get();
+			.map(line -> new ReadPair(new DnaSequence(line.split("\\|")[0]), new DnaSequence(line.split("\\|")[1]), d)).collect(Collectors.toList());
+		DnaSequence sequence = ReadPairAssembler.assembleSequence(readPairs).get();
 		Files.write(Paths.get("./output/output_204_14.txt"), Collections.singletonList(sequence.toString()));
 	}
 

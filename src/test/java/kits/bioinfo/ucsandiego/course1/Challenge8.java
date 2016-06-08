@@ -3,7 +3,7 @@ package kits.bioinfo.ucsandiego.course1;
 import java.io.IOException;
 import java.util.List;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 import kits.bioinfo.motif.GreedyMotifFinder;
 
@@ -17,8 +17,8 @@ public class Challenge8 {
      use the one occurring first.
 	 */
 	public static void main(String[] args) throws IOException {
-		List<Sequence> sequences = SequenceReader.readPerLine("input/dataset_160_9.txt");
-		List<Sequence> motifs = new GreedyMotifFinder().findMotifs(sequences, 12);
+		List<DnaSequence> sequences = SequenceReader.readPerLine("input/dataset_160_9.txt");
+		List<DnaSequence> motifs = new GreedyMotifFinder().findMotifs(sequences, 12);
 		System.out.println(motifs);
 	}
 	

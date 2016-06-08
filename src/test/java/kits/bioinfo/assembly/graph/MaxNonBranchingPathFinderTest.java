@@ -11,7 +11,7 @@ import kits.bioinfo.TestUtil;
 import kits.bioinfo.assembly.GraphParser;
 import kits.bioinfo.assembly.KmerCompositioner;
 import kits.bioinfo.assembly.KmerGraph;
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class MaxNonBranchingPathFinderTest {
 
@@ -38,16 +38,16 @@ public class MaxNonBranchingPathFinderTest {
 	
 	@Test
 	public void test2() {
-		List<Sequence> edgeSequences = Arrays.asList(
+		List<DnaSequence> edgeSequences = Arrays.asList(
 				"ATG", "ATG", "TGT", "TGG",
-				"CAT", "GGA", "GAT", "AGA").stream().map(s -> new Sequence(s)).collect(Collectors.toList());
+				"CAT", "GGA", "GAT", "AGA").stream().map(s -> new DnaSequence(s)).collect(Collectors.toList());
 		
 		KmerGraph graph = KmerGraph.buildDeBrujinGraph(edgeSequences);
-		List<List<Sequence>> maxNonBranchingPaths = MaxNonBranchingPathFinder.findMaxNonBranchingPaths(graph);
-		List<Sequence> contigs = maxNonBranchingPaths.stream().map(contig -> KmerCompositioner.readSequenceFromComposition(contig)).collect(Collectors.toList());
-		List<Sequence> expectedContigs = Arrays.asList(
+		List<List<DnaSequence>> maxNonBranchingPaths = MaxNonBranchingPathFinder.findMaxNonBranchingPaths(graph);
+		List<DnaSequence> contigs = maxNonBranchingPaths.stream().map(contig -> KmerCompositioner.readSequenceFromComposition(contig)).collect(Collectors.toList());
+		List<DnaSequence> expectedContigs = Arrays.asList(
 				"AGA", "ATG", "ATG", "CAT",
-				"GAT", "TGGA", "TGT").stream().map(s -> new Sequence(s)).collect(Collectors.toList());
+				"GAT", "TGGA", "TGT").stream().map(s -> new DnaSequence(s)).collect(Collectors.toList());
 		
 		Assert.assertTrue(TestUtil.equalsInAnyOrder(contigs, expectedContigs));
 	}

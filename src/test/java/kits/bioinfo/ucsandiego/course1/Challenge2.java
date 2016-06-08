@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Set;
 
 import kits.bioinfo.clump.FastClumpFinder;
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 
 public class Challenge2 {
@@ -14,8 +14,8 @@ public class Challenge2 {
 	 * 
 	 */
 	public static void main(String[] args) throws IOException {
-		Sequence sequence = SequenceReader.readFromFile("input/E-coli.txt");
-		Set<Sequence> kmersFormingClump = new FastClumpFinder().findKmersFormingClumps(sequence, 500, 9, 3);
+		DnaSequence sequence = SequenceReader.readFromFile("input/E-coli.txt");
+		Set<DnaSequence> kmersFormingClump = new FastClumpFinder().findKmersFormingClumps(sequence, 500, 9, 3);
 		//Expected size: 1904
 		System.out.println(kmersFormingClump);
 	}

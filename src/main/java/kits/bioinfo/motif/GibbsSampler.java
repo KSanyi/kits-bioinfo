@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaSequence;
 
 public class GibbsSampler {
 
@@ -19,11 +19,11 @@ public class GibbsSampler {
 		this.runs = runs;
 	}
 	
-	public List<Sequence> findMotifs(List<Sequence> sequences, int k, int n) {
-		List<Sequence> bestMotifs = Collections.emptyList();
+	public List<DnaSequence> findMotifs(List<DnaSequence> sequences, int k, int n) {
+		List<DnaSequence> bestMotifs = Collections.emptyList();
 		int bestScore = Integer.MAX_VALUE;
 		for(int i=0;i<runs;i++) {
-			List<Sequence> motifs = runFindMotifsOnce(sequences, k, n);
+			List<DnaSequence> motifs = runFindMotifsOnce(sequences, k, n);
 			int score = Motifs.score(motifs);
 			System.out.println("Score: " + score);
 			if(score < bestScore) {
@@ -34,25 +34,25 @@ public class GibbsSampler {
 		return bestMotifs;
 	}
 	
-	private List<Sequence> runFindMotifsOnce(List<Sequence> sequences, int k, int n) {
+	private List<DnaSequence> runFindMotifsOnce(List<DnaSequence> sequences, int k, int n) {
 		
 		if(sequences.isEmpty()) {
 			throw new IllegalArgumentException("Can not run without sequences");
 		}
 		
-		List<Sequence> bestMotifs = randomKmers(sequences, k);
+		List<DnaSequence> bestMotifs = randomKmers(sequences, k);
 		int bestScore = Motifs.score(bestMotifs);
 		
 		for(int i=0;i<n;i++) {
 			int indexToLeftOut = random.nextInt(sequences.size());
-			Sequence motifToLeftOut = bestMotifs.get(indexToLeftOut);
-			Sequence sequenceToLeftOut = sequences.get(indexToLeftOut);
+			DnaSequence motifToLeftOut = bestMotifs.get(indexToLeftOut);
+			DnaSequence sequenceToLeftOut = sequences.get(indexToLeftOut);
 			
-			List<Sequence> motifs = new ArrayList<>();
+			List<DnaSequence> motifs = new ArrayList<>();
 			motifs.addAll(bestMotifs);
 			motifs.remove(motifToLeftOut);
 			ProfileMatrix profileMatrix = ProfileMatrix.buildWithPseudoCounts(motifs);
-			Sequence newMotif = profileRandomKmer(profileMatrix, sequenceToLeftOut, k);
+			DnaSequence newMotif = profileRandomKmer(profileMatrix, sequenceToLeftOut, k);
 			motifs.add(indexToLeftOut, newMotif);
 			
 			int score = Motifs.score(motifs);
@@ -65,15 +65,15 @@ public class GibbsSampler {
 		return bestMotifs;
 	}
 	
-	private List<Sequence> randomKmers(List<Sequence> sequences, int k) {
+	private List<DnaSequence> randomKmers(List<DnaSequence> sequences, int k) {
 		return sequences.stream().map(sequence -> randomKmer(sequence, k)).collect(Collectors.toList());
 	}
 	
-	private Sequence randomKmer(Sequence sequence, int k) {
+	private DnaSequence randomKmer(DnaSequence sequence, int k) {
 		return sequence.subSequence(random.nextInt(sequence.length()-k+1), k);
 	}
 	
-	private Sequence profileRandomKmer(ProfileMatrix profileMatrix, Sequence sequence, int k) {
+	private DnaSequence profileRandomKmer(ProfileMatrix profileMatrix, DnaSequence sequence, int k) {
 		List<BigDecimal> probabilities = sequence.allSubSequences(k).stream().map(kmer -> profileMatrix.calculateProbability(kmer)).collect(Collectors.toList());
 		return sequence.subSequence(new ProbabilityDistribution(probabilities).randomInt(), k);
 	}

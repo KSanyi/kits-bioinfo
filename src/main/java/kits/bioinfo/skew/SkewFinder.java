@@ -3,17 +3,17 @@ package kits.bioinfo.skew;
 import java.util.LinkedList;
 import java.util.List;
 
-import kits.bioinfo.core.Nucleotid;
-import kits.bioinfo.core.Sequence;
+import kits.bioinfo.core.DnaBase;
+import kits.bioinfo.core.DnaSequence;
 
 public class SkewFinder {
 
-	public List<Integer> calculateSkew(Sequence sequence) {
+	public List<Integer> calculateSkew(DnaSequence sequence) {
 		int sumGCDiff = 0;
 		List<Integer> skew = new LinkedList<>();
 		for(int index=0;index<sequence.length();index++) {
 			skew.add(sumGCDiff);
-			Nucleotid base = sequence.position(index);
+			DnaBase base = sequence.position(index);
 			switch(base) {
 				case G:	sumGCDiff += 1;	break;
 				case C: sumGCDiff -= 1; break;
@@ -24,7 +24,7 @@ public class SkewFinder {
 		return skew;
 	}
 	
-	public List<Integer> calculateSkewMin(Sequence sequence) {
+	public List<Integer> calculateSkewMin(DnaSequence sequence) {
 		
 		List<Integer> minIndexes = new LinkedList<>();
 		List<Integer> skew = calculateSkew(sequence);
