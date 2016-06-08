@@ -1,10 +1,14 @@
-package kits.bioinfo.assembly;
+package kits.bioinfo.assembly.graph;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import kits.bioinfo.assembly.GraphParser;
+import kits.bioinfo.assembly.graph.EulerianPathFinder;
+import kits.bioinfo.assembly.graph.Graph;
 
 public class EulerianPathFinderTest {
 
@@ -21,9 +25,9 @@ public class EulerianPathFinderTest {
 				"8 -> 9",
 				"9 -> 6");
 		
-		Graph<Integer> graph = GraphBuilder.buildIntGraphFromAdjacencyStrings(adjacencyStrings);
+		Graph<Integer> graph = GraphParser.buildIntGraphFromAdjacencyStrings(adjacencyStrings);
 		
-		Assert.assertEquals(graph, GraphBuilder.buildIntGraphFromAdjacencyStrings(Arrays.asList(graph.print().split("\n"))));
+		Assert.assertEquals(graph, GraphParser.buildIntGraphFromAdjacencyStrings(Arrays.asList(graph.toString().split("\n"))));
 		
 		List<Integer> eulerianPath = EulerianPathFinder.findEulerianPath(graph);
 		

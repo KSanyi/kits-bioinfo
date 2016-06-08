@@ -28,23 +28,32 @@ public class Sequence implements Comparable<Sequence>{
 	}
 	
 	public Sequence subSequence(int start, int k) {
+		if(start < 0 || start + k > text.size()) throw new IllegalArgumentException("Wrong sub sequence index: " + start  + " : " + (start+k));
 		return new Sequence(text.subList(start, start+k));
 	}
 	
 	public Sequence prefix(int k){
+		if(length() < k) throw new IllegalArgumentException("Can not form suffix with length " + k + " from sequence with length " + length());
 		return subSequence(0, k);
 	}
 	
 	public Sequence prefix(){
+		if(isEmpty()) throw new IllegalStateException("Can not call prefix on empty sequence");
 		return prefix(length()-1);
 	}
 	
 	public Sequence suffix(int k){
+		if(length() < k) throw new IllegalArgumentException("Can not form suffix with length " + k + " from sequence with length " + length());
 		return subSequence(length()-k, k);
 	}
 	
 	public Sequence suffix(){
+		if(isEmpty()) throw new IllegalStateException("Can not call suffix on empty sequence");
 		return suffix(length()-1);
+	}
+	
+	public boolean isEmpty(){
+		return length() == 0;
 	}
 	
 	public List<Sequence> allSubSequences(int k) {
@@ -56,9 +65,14 @@ public class Sequence implements Comparable<Sequence>{
 	}
 	
 	public Sequence append(Nucleotid nucleotid) {
-		List<Nucleotid> newText = new ArrayList<>();
-		newText.addAll(text);
+		List<Nucleotid> newText = new ArrayList<>(text);
 		newText.add(nucleotid);
+		return new Sequence(newText);
+	}
+	
+	public Sequence append(Sequence other) {
+		List<Nucleotid> newText = new ArrayList<>(text);
+		newText.addAll(other.text);
 		return new Sequence(newText);
 	}
 	
@@ -68,6 +82,8 @@ public class Sequence implements Comparable<Sequence>{
 		newText.addAll(text);
 		return new Sequence(newText);
 	}
+	
+	
 	
 	public Sequence reverseComplement() {
 		List<Nucleotid> complementText = text.stream().map(n -> n.complement()).collect(Collectors.toList());

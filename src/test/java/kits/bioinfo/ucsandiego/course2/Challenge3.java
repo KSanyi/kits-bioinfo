@@ -19,7 +19,7 @@ public class Challenge3 {
 	 */
 	public static void main(String[] args) throws IOException {
 		List<Sequence> kmers = SequenceReader.readPerLine("input/dataset_198_9.txt");
-		KmerGraph graph = KmerGraph.buildFromKmerNodesList(kmers, 24);
+		KmerGraph graph = KmerGraph.buildFromKmerNodesList(kmers);
 		Files.write(Paths.get("./output/output_198_9.txt"), Collections.singletonList(graph.printEdges()));
 	}
 

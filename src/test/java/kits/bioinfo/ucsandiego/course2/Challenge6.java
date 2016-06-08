@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import kits.bioinfo.assembly.EulerianCycleFinder;
-import kits.bioinfo.assembly.Graph;
-import kits.bioinfo.assembly.Graph.Edge;
-import kits.bioinfo.assembly.GraphBuilder;
+import kits.bioinfo.assembly.GraphParser;
+import kits.bioinfo.assembly.graph.EulerianCycleFinder;
+import kits.bioinfo.assembly.graph.Graph;
+import kits.bioinfo.assembly.graph.Graph.Edge;
 
 public class Challenge6 {
 
@@ -23,7 +23,7 @@ public class Challenge6 {
      * Output: An Eulerian cycle in this graph.
 	 */
 	public static void main(String[] args) throws IOException {
-		Graph<Integer> graph = GraphBuilder.buildIntGraphFromAdjacencyStrings(Files.readAllLines(Paths.get("input/dataset_203_2.txt")));
+		Graph<Integer> graph = GraphParser.buildIntGraphFromAdjacencyStrings(Files.readAllLines(Paths.get("input/dataset_203_2.txt")));
 		List<Integer> cycle = EulerianCycleFinder.findEulerianCycle(graph);
 		String cycleString = cycle.stream().map(i -> i.toString()).collect(Collectors.joining("->"));
 		

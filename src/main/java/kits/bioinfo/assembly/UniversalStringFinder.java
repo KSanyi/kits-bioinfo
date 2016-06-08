@@ -1,12 +1,14 @@
 package kits.bioinfo.assembly;
 
-import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import kits.bioinfo.assembly.Graph.Edge;
+import kits.bioinfo.assembly.graph.EulerianCycleFinder;
+import kits.bioinfo.assembly.graph.EulerianPathFinder;
+import kits.bioinfo.assembly.graph.Graph;
+import kits.bioinfo.assembly.graph.Graph.Edge;
 
 public class UniversalStringFinder {
 
@@ -35,7 +37,7 @@ public class UniversalStringFinder {
 	}
 	
 	private static Graph<String> buildDeBrujinGraph(List<String> edgeStrings) {
-		Set<Edge<String>> edges = new HashSet<>();
+		List<Edge<String>> edges = new LinkedList<>();
 		for(String edgeString : edgeStrings) {
 			String fromNode = edgeString.substring(0, edgeString.length()-1);
 			String toNode = edgeString.substring(1, edgeString.length());

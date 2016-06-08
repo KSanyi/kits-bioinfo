@@ -23,7 +23,7 @@ public class Challenge4 {
 		int k = 12;
 		List<Sequence> kmers = KmerCompositioner.generateCompositions(sequence, k);
 		KmerGraph graph = KmerGraph.buildDeBrujinGraph(kmers);
-		Files.write(Paths.get("./output/output_199_6.txt"), Collections.singletonList(graph.print()));
+		Files.write(Paths.get("./output/output_199_6.txt"), Collections.singletonList(graph.toString()));
 	}
 
 }

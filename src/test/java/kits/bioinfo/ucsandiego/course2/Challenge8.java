@@ -6,9 +6,9 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
-import kits.bioinfo.assembly.EulerianPathFinder;
 import kits.bioinfo.assembly.KmerCompositioner;
 import kits.bioinfo.assembly.KmerGraph;
+import kits.bioinfo.assembly.graph.EulerianPathFinder;
 import kits.bioinfo.base.Sequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 

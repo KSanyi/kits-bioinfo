@@ -1,28 +1,34 @@
-package kits.bioinfo.assembly;
+package kits.bioinfo.assembly.graph;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import kits.bioinfo.assembly.Graph.Edge;
+import kits.bioinfo.assembly.graph.Graph.Edge;
 import kits.bioinfo.util.FrequencyMap;
 
 public class EulerianCycleFinder {
 
+	private static Random random = new Random();
+	
+	private static <T> T pickRandomElementFromList(List<T> list){
+		return list.get(random.nextInt(list.size()));
+	}
+	
 	public static <T> List<T> findEulerianCycle(Graph<T> graph) {
 		checkGraph(graph);
 		
 		List<T> cycle = new ArrayList<T>();
 		
-		Set<Graph.Edge<T>> edgesNotSeen = new HashSet<>(graph.edges);
+		List<Graph.Edge<T>> edgesNotSeen = new LinkedList<>(graph.edges);
 		T node = edgesNotSeen.iterator().next().startNode;
 		cycle.add(node);
 		while(!edgesNotSeen.isEmpty()) {
-			Set<T> startNodesFromEdgesNotSeen = edgesNotSeen.stream().map(edge -> edge.startNode).collect(Collectors.toSet());
-			node = intersection(startNodesFromEdgesNotSeen, new HashSet<>(cycle)).iterator().next(); // the intersection can not bee empty
+			List<T> startNodesFromEdgesNotSeen = edgesNotSeen.stream().map(edge -> edge.startNode).collect(Collectors.toList());
+			node = pickRandomElementFromList(intersection(startNodesFromEdgesNotSeen, cycle)); // the intersection can not bee empty
 			cycle = shiftCycle(cycle, node);
 			List<T> newCycle = findCycleFromNode(graph, node, edgesNotSeen);
 			cycle.addAll(newCycle);
@@ -30,11 +36,11 @@ public class EulerianCycleFinder {
 		return cycle;
 	}
 	
-	private static <T> List<T> findCycleFromNode(final Graph<T> graph, T node, Set<Graph.Edge<T>> edgesNotSeen){
+	private static <T> List<T> findCycleFromNode(final Graph<T> graph, T node, List<Graph.Edge<T>> edgesNotSeen){
 		List<T> cycle = new LinkedList<T>();
-		Set<Edge<T>> edgesFromNodeNotSeen = intersection(graph.edgesFrom(node), edgesNotSeen);
+		List<Edge<T>> edgesFromNodeNotSeen = intersection(graph.edgesFrom(node), edgesNotSeen);
 		while(!edgesFromNodeNotSeen.isEmpty()) {
-			Edge<T> edgeToGo = edgesFromNodeNotSeen.iterator().next();
+			Edge<T> edgeToGo = pickRandomElementFromList(edgesFromNodeNotSeen);
 			edgesNotSeen.remove(edgeToGo);
 			node = edgeToGo.endNode;
 			cycle.add(node);
@@ -51,9 +57,9 @@ public class EulerianCycleFinder {
 		return startPart;
 	}
 	
-	private static <E> Set<E> intersection(Set<E> setA, Set<E> setB) {
-		Set<E> interSection = new HashSet<>(setA);
-		interSection.retainAll(setB);
+	private static <E> List<E> intersection(List<E> listA, List<E> listB) {
+		List<E> interSection = new LinkedList<>(listA);
+		interSection.retainAll(listB);
 		return interSection;
 	}
 	

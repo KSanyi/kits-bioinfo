@@ -21,7 +21,7 @@ public class Challenge5 {
 	public static void main(String[] args) throws IOException {
 		List<Sequence> edges = SequenceReader.readPerLine("input/dataset_200_7.txt");
 		KmerGraph graph = KmerGraph.buildDeBrujinGraph(edges);
-		Files.write(Paths.get("./output/output_200_7.txt"), Collections.singletonList(graph.print()));
+		Files.write(Paths.get("./output/output_200_7.txt"), Collections.singletonList(graph.toString()));
 	}
 
 }

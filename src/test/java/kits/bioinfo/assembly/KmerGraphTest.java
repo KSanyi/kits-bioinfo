@@ -15,7 +15,7 @@ public class KmerGraphTest {
 				new Sequence("GCATG"),
 				new Sequence("CATGC"),
 				new Sequence("AGGCA"),
-				new Sequence("GGCAT")), 4);
+				new Sequence("GGCAT")));
 		System.out.println(graph.printEdges());
 	}
 	
@@ -23,7 +23,7 @@ public class KmerGraphTest {
 	public void buildGraphFromEdges() {
 		Sequence sequence = new Sequence("AAGATTCTCTAAGA");
 		KmerGraph graph = KmerGraph.buildDeBrujinGraph(KmerCompositioner.generateCompositions(sequence, 3));
-		System.out.println(graph.print());
+		System.out.println(graph.toString());
 	}
 	
 }

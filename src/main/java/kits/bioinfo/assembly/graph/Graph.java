@@ -1,8 +1,9 @@
-package kits.bioinfo.assembly;
+package kits.bioinfo.assembly.graph;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -13,9 +14,9 @@ public class Graph<T> {
 	private final Map<T, Set<T>> adjacencyMap;
 	
 	public final Set<T> nodes;
-	public final Set<Edge<T>> edges;
+	public final List<Edge<T>> edges;
 	
-	public Graph(Set<Edge<T>> edges) {
+	public Graph(List<Edge<T>> edges) {
 		Map<T, Set<T>> adjacencyMap = new HashMap<>();
 		Set<T> allNodes = new HashSet<>();
 		for(Edge<T> edge :  edges) {
@@ -27,30 +28,16 @@ public class Graph<T> {
 			allNodes.add(edge.endNode);
 		}
 		this.nodes = Collections.unmodifiableSet(allNodes);
-		this.edges = Collections.unmodifiableSet(edges);
+		this.edges = Collections.unmodifiableList(edges);
 		this.adjacencyMap = Collections.unmodifiableMap(adjacencyMap);
-	}
-	
-	Graph(Map<T, Set<T>> adjacencyMap) {
-		this.adjacencyMap = Collections.unmodifiableMap(adjacencyMap);
-		
-		Set<T> allNodes = new HashSet<>(adjacencyMap.keySet());
-		Set<Edge<T>> edges = new HashSet<>();
-		for(Entry<T, Set<T>> entry : adjacencyMap.entrySet()){
-			T node = entry.getKey();
-			entry.getValue().stream().forEach(adjacentNode -> edges.add(new Edge<>(node, adjacentNode)));
-			entry.getValue().stream().forEach(adjacentNode -> allNodes.add(adjacentNode));
-		}
-		this.nodes = Collections.unmodifiableSet(allNodes);
-		this.edges = Collections.unmodifiableSet(edges);
 	}
 	
 	public Set<T> adjacentNodes(T node) {
 		return new HashSet<>(adjacencyMap.getOrDefault(node, Collections.emptySet()));
 	}
 	
-	public Set<Edge<T>> edgesFrom(T node) {
-		return edges.stream().filter(edge -> edge.startNode.equals(node)).collect(Collectors.toSet());
+	public List<Edge<T>> edgesFrom(T node) {
+		return edges.stream().filter(edge -> edge.startNode.equals(node)).collect(Collectors.toList());
 	}
 	
 	public String printEdges() {
@@ -62,7 +49,8 @@ public class Graph<T> {
 		return sb.toString();
 	}
 	
-	public String print() {
+	@Override
+	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for(Entry<T, Set<T>> entry : adjacencyMap.entrySet()){
 			sb.append(entry.getKey() + " -> ");
