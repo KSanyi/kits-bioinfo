@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Sequence;
 
 public class IndexBasedSubSequenceMatcher {
 

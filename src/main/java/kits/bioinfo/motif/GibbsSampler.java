@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Sequence;
 
 public class GibbsSampler {
 

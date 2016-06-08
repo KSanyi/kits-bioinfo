@@ -4,8 +4,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import kits.bioinfo.base.Nucleotid;
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Nucleotid;
+import kits.bioinfo.core.Sequence;
 
 /**
  * Boyer-Moore algorithm

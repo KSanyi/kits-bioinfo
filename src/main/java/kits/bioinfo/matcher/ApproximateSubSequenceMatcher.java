@@ -1,6 +1,6 @@
 package kits.bioinfo.matcher;
 
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Sequence;
 
 public class ApproximateSubSequenceMatcher extends SubSequenceMatcher {
 

@@ -2,7 +2,7 @@ package kits.bioinfo.ucsandiego.course1;
 
 import java.util.List;
 
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Sequence;
 import kits.bioinfo.matcher.ApproximateSubSequenceMatcher;
 import kits.bioinfo.skew.SkewFinder;
 

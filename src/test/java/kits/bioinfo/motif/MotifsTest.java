@@ -3,10 +3,10 @@ package kits.bioinfo.motif;
 import java.util.Arrays;
 import java.util.List;
 
-import kits.bioinfo.base.Sequence;
-
 import org.junit.Assert;
 import org.junit.Test;
+
+import kits.bioinfo.core.Sequence;
 
 public class MotifsTest {
 

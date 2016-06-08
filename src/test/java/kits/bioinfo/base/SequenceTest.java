@@ -3,8 +3,8 @@ package kits.bioinfo.base;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import kits.bioinfo.base.Sequence;
-import kits.bioinfo.base.generator.RandomSequenceGenerator;
+import kits.bioinfo.core.Sequence;
+import kits.bioinfo.util.RandomSequenceGenerator;
 
 import org.junit.Assert;
 import org.junit.Test;

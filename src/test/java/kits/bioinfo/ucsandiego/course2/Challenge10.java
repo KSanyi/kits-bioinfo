@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import kits.bioinfo.assembly.ReadPair;
 import kits.bioinfo.assembly.ReadPairAssembler;
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Sequence;
 
 public class Challenge10 {
 

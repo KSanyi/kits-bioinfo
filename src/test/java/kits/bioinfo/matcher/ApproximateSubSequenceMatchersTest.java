@@ -2,8 +2,8 @@ package kits.bioinfo.matcher;
 
 import java.util.Random;
 
-import kits.bioinfo.base.Sequence;
-import kits.bioinfo.base.generator.RandomSequenceGenerator;
+import kits.bioinfo.core.Sequence;
+import kits.bioinfo.util.RandomSequenceGenerator;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -9,7 +9,7 @@ import kits.bioinfo.assembly.KmerGraph;
 import kits.bioinfo.assembly.ReadPair;
 import kits.bioinfo.assembly.ReadPairAssembler;
 import kits.bioinfo.assembly.graph.EulerianPathFinder;
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Sequence;
 
 public class Quiz2 {
 

@@ -2,10 +2,10 @@ package kits.bioinfo.johnshopkins;
 
 import java.util.Random;
 
-import kits.bioinfo.base.Sequence;
-import kits.bioinfo.base.generator.RandomSequenceGenerator;
+import kits.bioinfo.core.Sequence;
 import kits.bioinfo.matcher.BMSubSequenceMatcher;
 import kits.bioinfo.matcher.NaiveSubSequenceMatcher;
+import kits.bioinfo.util.RandomSequenceGenerator;
 
 public class Test {
 

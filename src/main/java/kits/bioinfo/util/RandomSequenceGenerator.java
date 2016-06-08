@@ -1,10 +1,11 @@
-package kits.bioinfo.base.generator;
+package kits.bioinfo.util;
+
+import static kits.bioinfo.core.Nucleotid.*;
 
 import java.util.Random;
 
-import kits.bioinfo.base.Nucleotid;
-import static kits.bioinfo.base.Nucleotid.*;
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Nucleotid;
+import kits.bioinfo.core.Sequence;
 
 public class RandomSequenceGenerator {
 

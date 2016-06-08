@@ -7,9 +7,9 @@ import static org.junit.Assert.assertThat;
 import java.util.HashSet;
 import java.util.Set;
 
-import kits.bioinfo.base.Sequence;
-
 import org.junit.Test;
+
+import kits.bioinfo.core.Sequence;
 
 public class MedianStringFinderTest {
 

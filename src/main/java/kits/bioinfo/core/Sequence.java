@@ -1,4 +1,4 @@
-package kits.bioinfo.base;
+package kits.bioinfo.core;
 
 import java.util.ArrayList;
 import java.util.Collections;

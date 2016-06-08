@@ -1,12 +1,14 @@
 package kits.bioinfo.base;
 
+import static kits.bioinfo.core.Nucleotid.*;
+
 import java.util.Arrays;
 import java.util.HashSet;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import static kits.bioinfo.base.Nucleotid.*;
+import kits.bioinfo.core.Nucleotid;
 
 public class NucleotidTest {
 

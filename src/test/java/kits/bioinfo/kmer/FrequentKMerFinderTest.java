@@ -6,7 +6,8 @@ import static java.util.Collections.singleton;
 import java.util.HashSet;
 import java.util.Set;
 
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.clump.FrequentKMerFinder;
+import kits.bioinfo.core.Sequence;
 
 import org.junit.Assert;
 import org.junit.Test;

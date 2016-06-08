@@ -1,6 +1,6 @@
 package kits.bioinfo;
 
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Sequence;
 
 public class Main {
 

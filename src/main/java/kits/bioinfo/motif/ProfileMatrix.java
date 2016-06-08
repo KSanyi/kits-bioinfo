@@ -10,9 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kits.bioinfo.core.Nucleotid;
+import kits.bioinfo.core.Sequence;
+
 import static java.util.stream.Collectors.*;
-import kits.bioinfo.base.Nucleotid;
-import kits.bioinfo.base.Sequence;
 
 public class ProfileMatrix {
 

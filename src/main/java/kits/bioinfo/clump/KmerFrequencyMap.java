@@ -1,4 +1,4 @@
-package kits.bioinfo.kmer;
+package kits.bioinfo.clump;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -6,9 +6,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Sequence;
 
-public class KmerFrequencyMap {
+class KmerFrequencyMap {
 
 	private Map<Sequence, Integer> map = new HashMap<>();
 	

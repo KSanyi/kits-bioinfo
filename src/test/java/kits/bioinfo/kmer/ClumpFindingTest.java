@@ -5,9 +5,9 @@ import static org.junit.Assert.assertThat;
 
 import java.util.Set;
 
-import kits.bioinfo.base.Sequence;
 import kits.bioinfo.clump.ClumpFinder;
 import kits.bioinfo.clump.FastClumpFinder;
+import kits.bioinfo.core.Sequence;
 
 import org.junit.Test;
 

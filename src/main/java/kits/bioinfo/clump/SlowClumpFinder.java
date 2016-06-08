@@ -3,8 +3,7 @@ package kits.bioinfo.clump;
 import java.util.HashSet;
 import java.util.Set;
 
-import kits.bioinfo.base.Sequence;
-import kits.bioinfo.kmer.KmerFrequencyMap;
+import kits.bioinfo.core.Sequence;
 
 public class SlowClumpFinder implements ClumpFinder {
 

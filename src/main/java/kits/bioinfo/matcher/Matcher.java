@@ -2,7 +2,7 @@ package kits.bioinfo.matcher;
 
 import java.util.List;
 
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Sequence;
 
 public interface Matcher {
 

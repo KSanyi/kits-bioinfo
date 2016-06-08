@@ -3,7 +3,7 @@ package kits.bioinfo.ucsandiego.course1;
 import java.io.IOException;
 import java.util.List;
 
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Sequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 import kits.bioinfo.motif.GibbsSampler;
 import kits.bioinfo.motif.Motifs;

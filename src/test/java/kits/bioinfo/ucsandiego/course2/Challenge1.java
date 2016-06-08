@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import kits.bioinfo.assembly.KmerCompositioner;
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Sequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 
 public class Challenge1 {

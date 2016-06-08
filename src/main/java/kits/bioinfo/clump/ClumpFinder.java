@@ -2,7 +2,7 @@ package kits.bioinfo.clump;
 
 import java.util.Set;
 
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Sequence;
 
 public interface ClumpFinder {
 

@@ -3,9 +3,8 @@ package kits.bioinfo.clump;
 import java.util.HashSet;
 import java.util.Set;
 
-import kits.bioinfo.base.Nucleotid;
-import kits.bioinfo.base.Sequence;
-import kits.bioinfo.kmer.KmerFrequencyMap;
+import kits.bioinfo.core.Nucleotid;
+import kits.bioinfo.core.Sequence;
 
 public class QuickClumpFinder implements ClumpFinder {
 

@@ -1,7 +1,7 @@
 package kits.bioinfo.ucsandiego.course1;
 
-import kits.bioinfo.base.Sequence;
-import kits.bioinfo.kmer.FrequentKMerFinder;
+import kits.bioinfo.clump.FrequentKMerFinder;
+import kits.bioinfo.core.Sequence;
 import kits.bioinfo.matcher.Matcher;
 import kits.bioinfo.matcher.SubSequenceMatcher;
 

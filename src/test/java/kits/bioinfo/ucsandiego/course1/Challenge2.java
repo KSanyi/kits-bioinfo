@@ -3,8 +3,8 @@ package kits.bioinfo.ucsandiego.course1;
 import java.io.IOException;
 import java.util.Set;
 
-import kits.bioinfo.base.Sequence;
 import kits.bioinfo.clump.FastClumpFinder;
+import kits.bioinfo.core.Sequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 
 public class Challenge2 {

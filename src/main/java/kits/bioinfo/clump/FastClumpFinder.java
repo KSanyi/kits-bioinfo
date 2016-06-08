@@ -5,10 +5,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import kits.bioinfo.core.Sequence;
+
 import java.util.Set;
 import java.util.TreeSet;
-
-import kits.bioinfo.base.Sequence;
 
 public class FastClumpFinder implements ClumpFinder {
 

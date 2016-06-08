@@ -1,20 +1,20 @@
-package kits.bioinfo.base.generator;
+package kits.bioinfo.util;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singleton;
 import static java.util.stream.Collectors.toSet;
-import static kits.bioinfo.base.Nucleotid.A;
-import static kits.bioinfo.base.Nucleotid.C;
-import static kits.bioinfo.base.Nucleotid.G;
-import static kits.bioinfo.base.Nucleotid.T;
+import static kits.bioinfo.core.Nucleotid.A;
+import static kits.bioinfo.core.Nucleotid.C;
+import static kits.bioinfo.core.Nucleotid.G;
+import static kits.bioinfo.core.Nucleotid.T;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import kits.bioinfo.base.Nucleotid;
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Nucleotid;
+import kits.bioinfo.core.Sequence;
 
 public class AllPossibleSequenceGenerator {
 

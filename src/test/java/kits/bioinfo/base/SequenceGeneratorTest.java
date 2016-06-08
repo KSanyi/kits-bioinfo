@@ -6,7 +6,8 @@ import java.util.HashSet;
 import org.junit.Assert;
 import org.junit.Test;
 
-import kits.bioinfo.base.generator.AllPossibleSequenceGenerator;
+import kits.bioinfo.core.Sequence;
+import kits.bioinfo.util.AllPossibleSequenceGenerator;
 
 public class SequenceGeneratorTest {
 

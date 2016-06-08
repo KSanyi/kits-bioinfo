@@ -11,7 +11,7 @@ import kits.bioinfo.TestUtil;
 import kits.bioinfo.assembly.GraphParser;
 import kits.bioinfo.assembly.KmerCompositioner;
 import kits.bioinfo.assembly.KmerGraph;
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Sequence;
 
 public class MaxNonBranchingPathFinderTest {
 

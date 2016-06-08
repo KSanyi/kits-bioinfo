@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import kits.bioinfo.assembly.graph.EulerianPathFinder;
 import kits.bioinfo.assembly.graph.Graph;
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Sequence;
 
 public class ReadPairAssembler {
 

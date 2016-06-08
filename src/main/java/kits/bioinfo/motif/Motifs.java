@@ -2,8 +2,8 @@ package kits.bioinfo.motif;
 
 import java.util.Collection;
 
-import kits.bioinfo.base.Nucleotid;
-import kits.bioinfo.base.Sequence;
+import kits.bioinfo.core.Nucleotid;
+import kits.bioinfo.core.Sequence;
 import kits.bioinfo.util.FrequencyMap;
 
 public class Motifs {

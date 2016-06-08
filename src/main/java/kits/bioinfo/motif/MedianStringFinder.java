@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import kits.bioinfo.base.Sequence;
-import kits.bioinfo.base.generator.AllPossibleSequenceGenerator;
+import kits.bioinfo.core.Sequence;
+import kits.bioinfo.util.AllPossibleSequenceGenerator;
 
 public class MedianStringFinder {
 
