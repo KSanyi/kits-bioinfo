@@ -16,7 +16,7 @@ public class Main {
 	}
 	
 	private static void patternInCholeraeGenome() throws IOException {
-		DnaSequence choleraeGenome = SequenceReader.readFromFile("input/Vibrio_cholerae.txt");
+		DnaSequence choleraeGenome = SequenceReader.readDnaSequenceFromFile("input/Vibrio_cholerae.txt");
 		DnaSequence oriCSequence = new DnaSequence("ATGATCAAG");
 		
 		System.out.println(new SubSequenceMatcher(oriCSequence).matchStartIndexes(choleraeGenome));
@@ -24,7 +24,7 @@ public class Main {
 	}
 	
 	private static void clupmsInGenome(String path) throws IOException {
-		DnaSequence genome = SequenceReader.readFromFile(path);
+		DnaSequence genome = SequenceReader.readDnaSequenceFromFile(path);
 		long start = System.currentTimeMillis();
 		Set<DnaSequence> kmersFormingClump = new FastClumpFinder().findKmersFormingClumps(genome, 500, 9, 5);
 		long end = System.currentTimeMillis();

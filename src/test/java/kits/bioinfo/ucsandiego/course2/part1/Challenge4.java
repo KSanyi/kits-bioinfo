@@ -1,4 +1,4 @@
-package kits.bioinfo.ucsandiego.course2;
+package kits.bioinfo.ucsandiego.course2.part1;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,7 +19,7 @@ public class Challenge4 {
      * Output: The overlap graph Overlap(Patterns), in the form of an adjacency list. (You may return the edges in any order.)
 	 */
 	public static void main(String[] args) throws IOException {
-		DnaSequence sequence = SequenceReader.readFromFile("input/dataset_199_6.txt");
+		DnaSequence sequence = SequenceReader.readDnaSequenceFromFile("input/dataset_199_6.txt");
 		int k = 12;
 		List<DnaSequence> kmers = KmerCompositioner.generateCompositions(sequence, k);
 		KmerGraph graph = KmerGraph.buildDeBrujinGraph(kmers);

@@ -21,9 +21,9 @@ public class Codon extends RnaSequence {
 	
 	public static Optional<AminoAcid> aminoAcid(Codon codon) {
 		switch(codon.toString()) {
-			case"AAA": return Optional.of(AminoAcid.Asparagine);
+			case"AAA": return Optional.of(AminoAcid.Lysine);
 			case"AAC": return Optional.of(AminoAcid.Asparagine);
-			case"AAG": return Optional.of(AminoAcid.Asparagine);
+			case"AAG": return Optional.of(AminoAcid.Lysine);
 			case"AAU": return Optional.of(AminoAcid.Asparagine);
 			case"ACA": return Optional.of(AminoAcid.Threonine);
 			case"ACC": return Optional.of(AminoAcid.Threonine);

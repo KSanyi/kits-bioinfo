@@ -1,4 +1,4 @@
-package kits.bioinfo.ucsandiego.course2;
+package kits.bioinfo.ucsandiego.course2.part1;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,7 +21,7 @@ public class Challenge11 {
      * Output: All contigs in DeBruijn(Patterns).
 	 */
 	public static void main(String[] args) throws IOException {
-		List<DnaSequence> edges = SequenceReader.readPerLine("input/dataset_205_5.txt");
+		List<DnaSequence> edges = SequenceReader.readDnaSequencesPerLine("input/dataset_205_5.txt");
 		KmerGraph graph = KmerGraph.buildDeBrujinGraph(edges);
 		List<List<DnaSequence>> maxNonBranchingPaths = MaxNonBranchingPathFinder.findMaxNonBranchingPaths(graph);
 		List<DnaSequence> contigs = maxNonBranchingPaths.stream().map(path -> KmerCompositioner.readSequenceFromComposition(path)).collect(Collectors.toList());

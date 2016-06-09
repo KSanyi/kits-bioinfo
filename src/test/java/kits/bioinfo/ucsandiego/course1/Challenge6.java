@@ -18,7 +18,7 @@ public class Challenge6 {
 	 * 
 	 */
 	public static void main(String[] args) throws IOException {
-		Set<DnaSequence> sequences = new HashSet<>(SequenceReader.readPerLine("input/dataset_158_9.txt"));
+		Set<DnaSequence> sequences = new HashSet<>(SequenceReader.readDnaSequencesPerLine("input/dataset_158_9.txt"));
 		Set<DnaSequence> medianStrings = new MedianStringFinder().findMedianStrings(sequences, 6);
 		System.out.println(medianStrings);
 	}

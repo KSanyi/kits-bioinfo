@@ -17,7 +17,7 @@ public class Challenge9 {
      times. Remember to use pseudocounts!
 	 */
 	public static void main(String[] args) throws IOException {
-		List<DnaSequence> sequences = SequenceReader.readPerLine("input/dataset_163_4.txt");
+		List<DnaSequence> sequences = SequenceReader.readDnaSequencesPerLine("input/dataset_163_4.txt");
 		
 		List<DnaSequence> motifs = new RandomizedMotifFinder(20).findMotifs(sequences, 15);
 		System.out.println("Score: " + Motifs.score(motifs));

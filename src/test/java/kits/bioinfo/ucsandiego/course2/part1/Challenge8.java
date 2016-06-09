@@ -1,4 +1,4 @@
-package kits.bioinfo.ucsandiego.course2;
+package kits.bioinfo.ucsandiego.course2.part1;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,7 +21,7 @@ public class Challenge8 {
      * return any one.)
 	 */
 	public static void main(String[] args) throws IOException {
-		KmerGraph graph = KmerGraph.buildDeBrujinGraph(SequenceReader.readPerLine("input/dataset_203_6.txt"));
+		KmerGraph graph = KmerGraph.buildDeBrujinGraph(SequenceReader.readDnaSequencesPerLine("input/dataset_203_6.txt"));
 		List<DnaSequence> path = EulerianPathFinder.findEulerianPath(graph);
 		DnaSequence sequence = KmerCompositioner.readSequenceFromComposition(path);
 		Files.write(Paths.get("./output/output_203_6.txt"), Collections.singletonList(sequence.toString()));

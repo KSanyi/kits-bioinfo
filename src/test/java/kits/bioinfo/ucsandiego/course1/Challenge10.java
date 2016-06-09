@@ -18,7 +18,7 @@ public class Challenge10 {
 	 */
 	public static void main(String[] args) throws IOException {
 		long start = System.currentTimeMillis();
-		List<DnaSequence> sequences = SequenceReader.readPerLine("input/dataset_163_4.txt");
+		List<DnaSequence> sequences = SequenceReader.readDnaSequencesPerLine("input/dataset_163_4.txt");
 		
 		List<DnaSequence> motifs = new GibbsSampler(50).findMotifs(sequences, 15, 2000);
 		

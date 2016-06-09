@@ -1,4 +1,4 @@
-package kits.bioinfo.ucsandiego.course2;
+package kits.bioinfo.ucsandiego.course2.part1;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,7 +19,7 @@ public class Challenge1 {
 	 * 
 	 */
 	public static void main(String[] args) throws IOException {
-		DnaSequence sequence = SequenceReader.readFromFile("input/dataset_197_3.txt");
+		DnaSequence sequence = SequenceReader.readDnaSequenceFromFile("input/dataset_197_3.txt");
 		List<DnaSequence> composition = KmerCompositioner.generateCompositions(sequence, 100);
 		Files.write(Paths.get("./output/output_197_3.txt"), composition.stream().map(s -> s.toString()).collect(Collectors.toList()));
 	}

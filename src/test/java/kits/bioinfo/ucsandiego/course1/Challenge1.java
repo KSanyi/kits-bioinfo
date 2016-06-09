@@ -19,7 +19,7 @@ public class Challenge1 {
 	 * 
 	 */
 	public static void main(String[] args) throws IOException {
-		DnaSequence sequence = SequenceReader.readFromFile("input/dataset_4_5.txt");
+		DnaSequence sequence = SequenceReader.readDnaSequenceFromFile("input/dataset_4_5.txt");
 		Set<DnaSequence> kmersFormingClump = new FastClumpFinder().findKmersFormingClumps(sequence, 557, 10, 20);
 		//Expected: ACTATGACTT, AGCCCGACAC, CAAAGATCGG, CACAAAATTC, CAGATATCCA, CTCGGCCTTT, GTACTGCGAA, TACAAACGCC, TTCATCTGAA, TTGGCAAACC
 		System.out.println(kmersFormingClump);

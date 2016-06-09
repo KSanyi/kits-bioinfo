@@ -8,10 +8,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import kits.bioinfo.core.DnaSequence;
+import kits.bioinfo.core.RnaSequence;
 
 public class SequenceReader {
 
-	public static DnaSequence readFromFile(String path) throws IOException{
+	public static DnaSequence readDnaSequenceFromFile(String path) throws IOException{
 		List<String> lines = Files.readAllLines(Paths.get(path));
 		try {
 			return new DnaSequence(lines.get(0));
@@ -21,7 +22,17 @@ public class SequenceReader {
 		}
 	}
 	
-	public static List<DnaSequence> readPerLine(String path) throws IOException{
+	public static RnaSequence readRnaSequenceFromFile(String path) throws IOException{
+		List<String> lines = Files.readAllLines(Paths.get(path));
+		try {
+			return new RnaSequence(lines.get(0));
+		} catch(IllegalArgumentException e) {
+			// the first line contained some meta info
+			return new RnaSequence(lines.get(1));
+		}
+	}
+	
+	public static List<DnaSequence> readDnaSequencesPerLine(String path) throws IOException{
 		List<String> lines = Files.readAllLines(Paths.get(path));
 		try {
 			return lines.stream().map(line -> new DnaSequence(line)).collect(Collectors.toList());

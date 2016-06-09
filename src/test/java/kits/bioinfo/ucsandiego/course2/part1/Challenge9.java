@@ -1,4 +1,4 @@
-package kits.bioinfo.ucsandiego.course2;
+package kits.bioinfo.ucsandiego.course2.part1;
 
 import java.io.IOException;
 
