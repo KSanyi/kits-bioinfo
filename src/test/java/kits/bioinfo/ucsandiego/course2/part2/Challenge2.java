@@ -23,7 +23,7 @@ public class Challenge2 {
 		List<String> lines = Files.readAllLines(Paths.get("input/dataset_96_8.txt"));
 		DnaSequence dnaSequence = new DnaSequence(lines.get(0));
 		Peptid goalPeptid = new Peptid(lines.get(1));
-		List<DnaSequence> candidates = KmerCompositioner.generateCompositions(dnaSequence, goalPeptid.size() * 3);
+		List<DnaSequence> candidates = KmerCompositioner.generateCompositions(dnaSequence, goalPeptid.length() * 3);
 		
 		PeptidCreator peptidCreator = new PeptidCreator();
 		

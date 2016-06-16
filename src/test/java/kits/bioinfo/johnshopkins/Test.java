@@ -13,8 +13,8 @@ public class Test {
 		Random random = new Random();
 		RandomSequenceGenerator generator = new RandomSequenceGenerator();
 		int patternLength = random.nextInt(50)+1;
-		DnaSequence pattern = generator.generateRandomSequence(patternLength);
-		DnaSequence text = generator.generateRandomSequence(1000);
+		DnaSequence pattern = generator.generateRandomDnaSequence(patternLength);
+		DnaSequence text = generator.generateRandomDnaSequence(1000);
 		System.out.println("Pattern: " + pattern);
 		System.out.println("Test: " + text);
 		new NaiveSubSequenceMatcher(pattern).matchStartIndexes(text);

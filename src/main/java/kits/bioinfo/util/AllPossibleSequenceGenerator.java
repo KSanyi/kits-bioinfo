@@ -18,9 +18,9 @@ import kits.bioinfo.core.DnaSequence;
 
 public class AllPossibleSequenceGenerator {
 
-	private List<DnaBase> bases = Arrays.asList(A, C, T, G);
+	private static final List<DnaBase> bases = Arrays.asList(A, C, T, G);
 	
-	public Set<DnaSequence> generateAllPossibleSequences(int length) {
+	public static Set<DnaSequence> generateAllPossibleSequences(int length) {
 		if(length == 0) {
 			return singleton(new DnaSequence(emptyList()));
 		} else {

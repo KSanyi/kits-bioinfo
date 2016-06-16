@@ -11,8 +11,8 @@ public class MatcherPerformaceTest {
 		Random random = new Random();
 		int patternLength = random.nextInt(50) + 5;
 		RandomSequenceGenerator generator = new RandomSequenceGenerator();
-		DnaSequence pattern = generator.generateRandomSequence(patternLength);
-		DnaSequence text = generator.generateRandomSequence(1000000);
+		DnaSequence pattern = generator.generateRandomDnaSequence(patternLength);
+		DnaSequence text = generator.generateRandomDnaSequence(1000000);
 		
 		System.out.println("Pattern: " + pattern);
 		

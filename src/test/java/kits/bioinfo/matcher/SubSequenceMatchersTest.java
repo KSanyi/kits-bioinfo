@@ -20,8 +20,8 @@ public class SubSequenceMatchersTest {
 		
 		for(int i=0;i<TEST_RUNS;i++){
 			int patternLength = random.nextInt(50) + 1;
-			DnaSequence pattern = generator.generateRandomSequence(patternLength);
-			DnaSequence text = generator.generateRandomSequence(1000);
+			DnaSequence pattern = generator.generateRandomDnaSequence(patternLength);
+			DnaSequence text = generator.generateRandomDnaSequence(1000);
 			
 			Assert.assertEquals(new SubSequenceMatcher(pattern).matchStartIndexes(text),
 					            new BMSubSequenceMatcher(pattern).matchStartIndexes(text));
@@ -34,8 +34,8 @@ public class SubSequenceMatchersTest {
 		
 		for(int i=0;i<TEST_RUNS;i++){
 			int patternLength = random.nextInt(50) + 1;
-			DnaSequence pattern = generator.generateRandomSequence(patternLength);
-			DnaSequence text = generator.generateRandomSequence(1000);
+			DnaSequence pattern = generator.generateRandomDnaSequence(patternLength);
+			DnaSequence text = generator.generateRandomDnaSequence(1000);
 			int k = patternLength / 2;
 			Assert.assertEquals(new SubSequenceMatcher(pattern).matchStartIndexes(text),
 					            new IndexBasedSubSequenceMatcher(text, k).matchStartIndexes(pattern));

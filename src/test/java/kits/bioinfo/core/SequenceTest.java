@@ -31,7 +31,7 @@ public class SequenceTest {
 		
 		RandomSequenceGenerator generator = new RandomSequenceGenerator();
 		for(int i=0;i<NR_OF_TESTS;i++) {
-			DnaSequence sequence = generator.generateRandomSequence(SEQUENCE_LENGTH);
+			DnaSequence sequence = generator.generateRandomDnaSequence(SEQUENCE_LENGTH);
 			Assert.assertEquals(sequence, sequence.reverseComplement().reverseComplement());
 		}
 	}
