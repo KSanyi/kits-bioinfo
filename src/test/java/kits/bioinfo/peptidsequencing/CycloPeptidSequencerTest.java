@@ -17,7 +17,7 @@ public class CycloPeptidSequencerTest {
 
 	@Test
 	public void test(){
-		Set<Peptid> peptids = CycloPeptidSequencer.sequencePeptids(Arrays.asList(0, 113, 128, 186, 241, 299, 314, 427));
+		Set<Peptid> peptids = new SimpleCycloPeptidSequencer().sequencePeptids(Arrays.asList(0, 113, 128, 186, 241, 299, 314, 427));
 		
 		Set<String> massSequences = peptids.stream()
 			.map(peptid -> peptid.aminoAcids.stream()
@@ -39,18 +39,9 @@ public class CycloPeptidSequencerTest {
 			Peptid peptid = randomSequenceGenerator.generateRandomPeptid((random.nextInt(10) + 3));
 			List<Integer> spectrum = massSpectrometer.generateMassSpectrumForCyclidPeptid(peptid);
 			
-			Set<Peptid> peptids = CycloPeptidSequencer.sequencePeptids(spectrum);
-			System.out.println(peptid);
+			Set<Peptid> peptids = new SimpleCycloPeptidSequencer().sequencePeptids(spectrum);
 			Assert.assertTrue("Failed for " + peptid, peptids.contains(peptid));	
 		}
-	}
-	
-	@Test
-	public void testScoring(){
-		Peptid peptid = new Peptid("NQEL");
-		List<Integer> experimentalSpectrum = Arrays.asList(0, 99, 113, 114, 128, 227, 257, 299, 355, 356, 370, 371, 484);
-		int score = CycloPeptidSequencer.score(peptid, experimentalSpectrum);
-		Assert.assertEquals(11, score);
 	}
 	
 	@Test
@@ -82,8 +73,24 @@ public class CycloPeptidSequencerTest {
 				2068, 2068, 2073, 2075, 2078, 2080, 2084, 2086, 2089, 2090, 2096, 2102, 2112, 2116, 2117,
 				2128, 2128, 2146, 2160, 2167, 2167, 2172, 2183, 2188, 2188, 2193, 2199, 2201, 2202, 2215,
 				2215, 2215, 2217, 2227, 2227, 2231, 2231, 2231, 2243, 2259, 2259, 2259, 2259, 2330);
-		Set<Peptid> peptids = CycloPeptidSequencer.sequencePeptids(experimentalSpectrum, 366);
+		Set<Peptid> peptids = new CycloPeptidSequencer(366, 20).sequencePeptids(experimentalSpectrum);
+		System.out.println(peptids);
 		Assert.assertTrue(TestUtil.equalsInAnyOrder(Arrays.asList(new Peptid("FVCMASYDCHDVYVAAAIDEGA"), new Peptid("FVCMASYDCHDVYVAAALDEGA")), peptids));
+	}
+	
+	@Test
+	public void testWithImperfectData2(){
+		List<Integer> experimentalSpectrum = Arrays.asList(114, 965, 617, 245, 103, 921, 850, 1091, 692,
+				965, 807, 401, 646, 718, 57, 564, 128, 978, 216, 548, 692, 229, 579, 373, 846, 674, 1093,
+				144, 630, 227, 793, 502, 286, 1081, 344, 749, 1093, 1066, 350, 342, 190, 216, 206, 445,
+				406, 852, 1137, 476, 908, 901, 951, 949, 401, 319, 761, 158, 692, 1036, 793, 678, 1080,
+				330, 101, 103, 1079, 172, 591, 229, 967, 694, 451, 603, 500, 273, 158, 821, 706, 243,
+				1137, 589, 113, 0, 247, 115, 635, 488, 749, 788, 844, 520, 115, 57, 293, 1079, 978, 605,
+				502, 399, 692, 1022, 988, 388, 1091, 731, 445, 795, 577, 850, 908, 516, 273, 1050, 387,
+				87, 502, 743, 433, 1036, 806, 286, 1107, 463, 1004, 344, 615, 502, 101, 348, 921, 864,
+				1194, 947, 559, 875);
+		Set<Peptid> peptids = new CycloPeptidSequencer(357, 19).sequencePeptids(experimentalSpectrum);
+		Assert.assertTrue(TestUtil.equalsInAnyOrder(Arrays.asList(new Peptid("DTGDNLCCSGTAG"), new Peptid("DTGDNICCSGTAG")), peptids));
 	}
 	
 }

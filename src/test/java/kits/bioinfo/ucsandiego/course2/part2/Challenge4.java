@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import kits.bioinfo.core.Peptid;
-import kits.bioinfo.peptidsequencing.CycloPeptidSequencer;
+import kits.bioinfo.peptidsequencing.SimpleCycloPeptidSequencer;
 
 public class Challenge4 {
 
@@ -21,7 +21,7 @@ public class Challenge4 {
 		List<Integer> massSpectrum = Arrays.asList(lines.get(0).split(" ")).stream()
 				.map(mass -> Integer.parseInt(mass))
 				.collect(Collectors.toList());
-		Set<Peptid> peptids = CycloPeptidSequencer.sequencePeptids(massSpectrum);
+		Set<Peptid> peptids = new SimpleCycloPeptidSequencer().sequencePeptids(massSpectrum);
 		
 		Set<String> massSequences = peptids.stream()
 			.map(peptid -> peptid.aminoAcids.stream()

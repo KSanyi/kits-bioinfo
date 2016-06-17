@@ -25,7 +25,7 @@ public class Challenge6 {
 				.map(mass -> Integer.parseInt(mass))
 				.collect(Collectors.toList());
 		
-		Set<Peptid> peptids = CycloPeptidSequencer.sequencePeptids(experimentalSpectrum, cutRank);
+		Set<Peptid> peptids = new CycloPeptidSequencer(cutRank, 20).sequencePeptids(experimentalSpectrum);
 		
 		Set<String> massSequences = peptids.stream()
 				.map(peptid -> peptid.aminoAcids.stream()

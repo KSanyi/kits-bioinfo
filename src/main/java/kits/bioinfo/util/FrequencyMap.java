@@ -1,10 +1,12 @@
 package kits.bioinfo.util;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FrequencyMap<T> {
@@ -20,8 +22,10 @@ public class FrequencyMap<T> {
 		return map.keySet().stream().filter(elem -> map.get(elem) == max).findFirst().get();
 	}
 	
-	public Set<Entry<T, Integer>> entrySet() {
-		return map.entrySet();
+	public List<Entry<T, Integer>> sortedEntries() {
+		List<Entry<T, Integer>> list = new LinkedList<>(map.entrySet());
+		Collections.sort(list, (e1, e2) -> e2.getValue() - e1.getValue());
+		return Collections.unmodifiableList(list);
 	}
 	
 	public Integer frequency(T elem) {
