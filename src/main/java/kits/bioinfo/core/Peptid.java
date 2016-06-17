@@ -49,4 +49,9 @@ public class Peptid {
 		return aminoAcids.equals(((Peptid)other).aminoAcids);
 	}
 	
+	@Override
+	public int hashCode(){
+		return aminoAcids.hashCode();
+	}
+	
 }
