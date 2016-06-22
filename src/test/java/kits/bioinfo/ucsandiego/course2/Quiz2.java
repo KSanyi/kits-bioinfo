@@ -8,8 +8,8 @@ import kits.bioinfo.assembly.KmerCompositioner;
 import kits.bioinfo.assembly.KmerGraph;
 import kits.bioinfo.assembly.ReadPair;
 import kits.bioinfo.assembly.ReadPairAssembler;
-import kits.bioinfo.assembly.graph.EulerianPathFinder;
 import kits.bioinfo.core.DnaSequence;
+import kits.bioinfo.math.graph.EulerianPathFinder;
 
 public class Quiz2 {
 

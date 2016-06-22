@@ -1,10 +1,10 @@
-package kits.bioinfo.assembly.graph;
+package kits.bioinfo.math.graph;
 
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import kits.bioinfo.assembly.graph.Graph.Edge;
+import kits.bioinfo.math.graph.Graph.Edge;
 import kits.bioinfo.util.FrequencyMap;
 
 public class MaxNonBranchingPathFinder {

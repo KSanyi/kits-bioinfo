@@ -3,8 +3,8 @@ package kits.bioinfo.assembly;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import kits.bioinfo.assembly.graph.Graph;
 import kits.bioinfo.core.DnaSequence;
+import kits.bioinfo.math.graph.Graph;
 
 public class KmerGraph extends Graph<DnaSequence> {
 

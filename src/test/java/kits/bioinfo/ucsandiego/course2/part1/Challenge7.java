@@ -7,9 +7,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import kits.bioinfo.assembly.GraphParser;
-import kits.bioinfo.assembly.graph.EulerianPathFinder;
-import kits.bioinfo.assembly.graph.Graph;
+import kits.bioinfo.math.graph.EulerianPathFinder;
+import kits.bioinfo.math.graph.Graph;
+import kits.bioinfo.math.graph.GraphParser;
 
 public class Challenge7 {
 

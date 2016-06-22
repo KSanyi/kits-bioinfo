@@ -2,7 +2,7 @@ package kits.bioinfo.ucsandiego.course2.part1;
 
 import java.io.IOException;
 
-import kits.bioinfo.assembly.UniversalStringFinder;
+import kits.bioinfo.math.UniversalStringFinder;
 
 public class Challenge9 {
 

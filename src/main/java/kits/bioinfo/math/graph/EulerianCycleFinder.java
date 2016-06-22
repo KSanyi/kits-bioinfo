@@ -1,4 +1,4 @@
-package kits.bioinfo.assembly.graph;
+package kits.bioinfo.math.graph;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -7,7 +7,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import kits.bioinfo.assembly.graph.Graph.Edge;
+import kits.bioinfo.math.graph.Graph.Edge;
 import kits.bioinfo.util.FrequencyMap;
 
 public class EulerianCycleFinder {

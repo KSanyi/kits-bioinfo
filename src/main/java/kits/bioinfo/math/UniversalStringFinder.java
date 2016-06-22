@@ -1,14 +1,14 @@
-package kits.bioinfo.assembly;
+package kits.bioinfo.math;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import kits.bioinfo.assembly.graph.EulerianCycleFinder;
-import kits.bioinfo.assembly.graph.EulerianPathFinder;
-import kits.bioinfo.assembly.graph.Graph;
-import kits.bioinfo.assembly.graph.Graph.Edge;
+import kits.bioinfo.math.graph.EulerianCycleFinder;
+import kits.bioinfo.math.graph.EulerianPathFinder;
+import kits.bioinfo.math.graph.Graph;
+import kits.bioinfo.math.graph.Graph.Edge;
 
 public class UniversalStringFinder {
 

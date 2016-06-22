@@ -8,9 +8,9 @@ import java.util.List;
 
 import kits.bioinfo.assembly.KmerCompositioner;
 import kits.bioinfo.assembly.KmerGraph;
-import kits.bioinfo.assembly.graph.EulerianPathFinder;
 import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
+import kits.bioinfo.math.graph.EulerianPathFinder;
 
 public class Challenge8 {
 

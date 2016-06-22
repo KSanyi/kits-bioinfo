@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import kits.bioinfo.assembly.GraphParser;
-import kits.bioinfo.assembly.graph.EulerianCycleFinder;
-import kits.bioinfo.assembly.graph.Graph;
-import kits.bioinfo.assembly.graph.Graph.Edge;
+import kits.bioinfo.math.graph.EulerianCycleFinder;
+import kits.bioinfo.math.graph.Graph;
+import kits.bioinfo.math.graph.GraphParser;
+import kits.bioinfo.math.graph.Graph.Edge;
 
 public class Challenge6 {
 

@@ -1,4 +1,4 @@
-package kits.bioinfo.assembly.graph;
+package kits.bioinfo.math.graph;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,9 +6,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import kits.bioinfo.assembly.GraphParser;
-import kits.bioinfo.assembly.graph.EulerianPathFinder;
-import kits.bioinfo.assembly.graph.Graph;
+import kits.bioinfo.math.graph.EulerianPathFinder;
+import kits.bioinfo.math.graph.Graph;
 
 public class EulerianPathFinderTest {
 

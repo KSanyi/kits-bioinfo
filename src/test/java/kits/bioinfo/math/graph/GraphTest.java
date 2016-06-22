@@ -1,4 +1,4 @@
-package kits.bioinfo.assembly.graph;
+package kits.bioinfo.math.graph;
 
 public class GraphTest {
 

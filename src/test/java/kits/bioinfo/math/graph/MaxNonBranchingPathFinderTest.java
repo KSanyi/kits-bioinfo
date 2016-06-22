@@ -1,4 +1,4 @@
-package kits.bioinfo.assembly.graph;
+package kits.bioinfo.math.graph;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,10 +8,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import kits.bioinfo.TestUtil;
-import kits.bioinfo.assembly.GraphParser;
 import kits.bioinfo.assembly.KmerCompositioner;
 import kits.bioinfo.assembly.KmerGraph;
 import kits.bioinfo.core.DnaSequence;
+import kits.bioinfo.math.graph.Graph;
+import kits.bioinfo.math.graph.MaxNonBranchingPathFinder;
 
 public class MaxNonBranchingPathFinderTest {
 

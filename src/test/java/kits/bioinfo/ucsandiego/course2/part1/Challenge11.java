@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 
 import kits.bioinfo.assembly.KmerCompositioner;
 import kits.bioinfo.assembly.KmerGraph;
-import kits.bioinfo.assembly.graph.MaxNonBranchingPathFinder;
 import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
+import kits.bioinfo.math.graph.MaxNonBranchingPathFinder;
 
 public class Challenge11 {
 
