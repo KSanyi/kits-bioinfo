@@ -19,6 +19,8 @@ public class Quiz2 {
 	}
 	
 	private static void question1() {
+		System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName() + ": ");
+		
 		List<DnaSequence> sequences = Arrays.asList(
 				"AAAT", "AATG", "ACCC", "ACGC", "ATAC", "ATCA", "ATGC",
 				"CAAA", "CACC", "CATA", "CATC", "CCAG", "CCCA", "CGCT",
@@ -30,6 +32,8 @@ public class Quiz2 {
 	}
 	
 	private static void question2() {
+		System.out.println("\n" + Thread.currentThread().getStackTrace()[1].getMethodName() + ": ");
+		
 		List<ReadPair> readPairs = Arrays.asList(
 				"ACC|ATA", "ACT|ATT", "ATA|TGA", "ATT|TGA", "CAC|GAT", "CCG|TAC", "CGA|ACT",
 				"CTG|AGC", "CTG|TTC", "GAA|CTT", "GAT|CTG", "GAT|CTG", "TAC|GAT", "TCT|AAG",

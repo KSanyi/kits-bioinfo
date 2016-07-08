@@ -13,7 +13,7 @@ public class Challenge1 {
 	
 	private static final Map<Integer, Integer> cache = new HashMap<>();
 	
-	private static int change(int value, List<Integer> coins){
+	private static Integer change(int value, List<Integer> coins){
 		if(value == 0){
 			return 0;
 		}
@@ -22,16 +22,19 @@ public class Challenge1 {
 			return cache.get(value);
 		}
 		
-		int minChange = Integer.MAX_VALUE;
+		Integer minChange = null;
 		for(int coin : coins){
 			if(value >= coin){
-				int change = change(value - coin, coins) + 1;
-				if(change < minChange){
-					minChange = change;
+				Integer change = change(value - coin, coins);
+				if(change != null){
+					change = change + 1;
+					if(minChange == null || change < minChange){
+						minChange = change;
+					}
 				}
 			}
 		}
-		cache.put(value, value);
+		cache.put(value, minChange);
 		return minChange;
 	}
 	

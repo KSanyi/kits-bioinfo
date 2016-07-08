@@ -20,8 +20,7 @@ public class Challenge3 {
 		List<String> lines = Files.readAllLines(Paths.get("input/dataset_98_4.txt"));
 		Peptid peptid = new Peptid(lines.get(0));
 		List<Integer> massSpectrum = new MassSpectrometer().generateMassSpectrumForCyclidPeptid(peptid);
-		System.out.println(massSpectrum);
-		Files.write(Paths.get("./output/output_98_4.txt"), massSpectrum.stream().map(mass -> mass.toString()).collect(Collectors.joining(", ")).getBytes());
+		System.out.println(massSpectrum.stream().map(mass -> mass.toString()).collect(Collectors.joining(" ")));
 	}
 
 }

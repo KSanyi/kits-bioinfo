@@ -40,6 +40,10 @@ public class Graph<T> {
 		return edges.stream().filter(edge -> edge.startNode.equals(node)).collect(Collectors.toList());
 	}
 	
+	public List<Edge<T>> edgesTo(T node) {
+		return edges.stream().filter(edge -> edge.endNode.equals(node)).collect(Collectors.toList());
+	}
+	
 	public String printEdges() {
 		StringBuilder sb = new StringBuilder();
 		for(Entry<T, Set<T>> entry : adjacencyMap.entrySet()){
@@ -69,14 +73,23 @@ public class Graph<T> {
 	public static class Edge<T> {
 		public final T startNode;
 		public final T endNode;
-		public Edge(T startNode, T endNode){
+		public final Integer weight;
+		
+		public Edge(T startNode, T endNode, Integer weight){
 			this.startNode = startNode;
 			this.endNode = endNode;
+			this.weight = weight;
 		}
+		
+		public Edge(T startNode, T endNode){
+			this(startNode, endNode, null);
+		}
+		
 		@Override
 		public String toString(){
-			return startNode + " -> " + endNode;
+			return startNode + " -> " + endNode + weight != null ? "(" + weight + ")" : "";
 		}
+		
 		@Override
 		public boolean equals(Object other) {
 			if(other == null) return false;
@@ -84,6 +97,7 @@ public class Graph<T> {
 			Edge<?> otherEdge = (Edge<?>)other;
 			return otherEdge.startNode.equals(startNode) && otherEdge.endNode.equals(endNode);
 		}
+		
 		@Override
 		public int hashCode() {
 			return startNode.hashCode() * 37 + endNode.hashCode();
