@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import kits.bioinfo.math.graph.EulerianPathFinder;
 import kits.bioinfo.math.graph.Graph;
+import kits.bioinfo.math.graph.Graph.Node;
 import kits.bioinfo.math.graph.GraphParser;
 
 public class Challenge7 {
@@ -20,8 +21,8 @@ public class Challenge7 {
 	 */
 	public static void main(String[] args) throws IOException {
 		Graph<Integer> graph = GraphParser.buildIntGraphFromAdjacencyStrings(Files.readAllLines(Paths.get("input/dataset_203_5.txt")));
-		List<Integer> path = EulerianPathFinder.findEulerianPath(graph);
-		String pathString = path.stream().map(i -> i.toString()).collect(Collectors.joining("->"));
+		List<Node<Integer>> path = EulerianPathFinder.findEulerianPath(graph);
+		String pathString = path.stream().map(n -> n.toString()).collect(Collectors.joining("->"));
 		Files.write(Paths.get("./output/output_203_5.txt"), Collections.singletonList(pathString));
 	}
 

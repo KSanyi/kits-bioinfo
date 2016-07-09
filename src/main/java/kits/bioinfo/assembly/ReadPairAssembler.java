@@ -11,14 +11,14 @@ import kits.bioinfo.math.graph.Graph;
 public class ReadPairAssembler {
 
 	public static Optional<DnaSequence> assembleSequence(List<ReadPair> readPairs) {
-		
 		checkReadPairs(readPairs);
+		
 		int distance = readPairs.get(0).distance;
 		int k = readPairs.get(0).read1.length();
 		
 		Graph<ReadPair> graph = KmerGraph.buildReadPairDeBrujinGraph(readPairs);
 		for(int i=0;i<10000;i++){
-			List<ReadPair> path = EulerianPathFinder.findEulerianPath(graph);
+			List<ReadPair> path = EulerianPathFinder.findEulerianPath(graph).stream().map(node -> node.value).collect(Collectors.toList());
 			DnaSequence sequence1 = KmerCompositioner.readSequenceFromComposition(path.stream().map(readPair -> readPair.read1).collect(Collectors.toList()));
 			DnaSequence sequence2 = KmerCompositioner.readSequenceFromComposition(path.stream().map(readPair -> readPair.read2).collect(Collectors.toList()));
 			if(areValidReadPairSequences(sequence1, sequence2, distance, k-1)){

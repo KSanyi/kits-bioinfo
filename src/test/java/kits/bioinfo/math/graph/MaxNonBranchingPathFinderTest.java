@@ -28,7 +28,7 @@ public class MaxNonBranchingPathFinderTest {
 		
 		Graph<Integer> graph = GraphParser.buildIntGraphFromAdjacencyStrings(adjacencyStrings);
 		
-		List<List<Integer>> paths = MaxNonBranchingPathFinder.findMaxNonBranchingPaths(graph);
+		List<List<Integer>> paths = MaxNonBranchingPathFinder.findMaxNonBranchingPathValues(graph);
 		List<List<Integer>> expectedPaths = Arrays.asList(
 				Arrays.asList(0,1),
 				Arrays.asList(1,2,4,5),
@@ -44,7 +44,7 @@ public class MaxNonBranchingPathFinderTest {
 				"CAT", "GGA", "GAT", "AGA").stream().map(s -> new DnaSequence(s)).collect(Collectors.toList());
 		
 		KmerGraph graph = KmerGraph.buildDeBrujinGraph(edgeSequences);
-		List<List<DnaSequence>> maxNonBranchingPaths = MaxNonBranchingPathFinder.findMaxNonBranchingPaths(graph);
+		List<List<DnaSequence>> maxNonBranchingPaths = MaxNonBranchingPathFinder.findMaxNonBranchingPathValues(graph);
 		List<DnaSequence> contigs = maxNonBranchingPaths.stream().map(contig -> KmerCompositioner.readSequenceFromComposition(contig)).collect(Collectors.toList());
 		List<DnaSequence> expectedContigs = Arrays.asList(
 				"AGA", "ATG", "ATG", "CAT",

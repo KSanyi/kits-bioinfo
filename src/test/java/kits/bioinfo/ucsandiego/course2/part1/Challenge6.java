@@ -14,6 +14,7 @@ import kits.bioinfo.math.graph.EulerianCycleFinder;
 import kits.bioinfo.math.graph.Graph;
 import kits.bioinfo.math.graph.GraphParser;
 import kits.bioinfo.math.graph.Graph.Edge;
+import kits.bioinfo.math.graph.Graph.Node;
 
 public class Challenge6 {
 
@@ -24,8 +25,8 @@ public class Challenge6 {
 	 */
 	public static void main(String[] args) throws IOException {
 		Graph<Integer> graph = GraphParser.buildIntGraphFromAdjacencyStrings(Files.readAllLines(Paths.get("input/dataset_203_2.txt")));
-		List<Integer> cycle = EulerianCycleFinder.findEulerianCycle(graph);
-		String cycleString = cycle.stream().map(i -> i.toString()).collect(Collectors.joining("->"));
+		List<Node<Integer>> cycle = EulerianCycleFinder.findEulerianCycle(graph);
+		String cycleString = cycle.stream().map(n -> n.toString()).collect(Collectors.joining("->"));
 		
 		// check
 		List<Integer> nodes = Arrays.asList(cycleString.split("->")).stream().map(s -> Integer.valueOf(s)).collect(Collectors.toList());

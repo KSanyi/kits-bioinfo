@@ -6,22 +6,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Graph<T> {
 
-	private final Map<T, Set<T>> adjacencyMap;
+	private final Map<Node<T>, Set<Node<T>>> adjacencyMap;
 	
-	public final Set<T> nodes;
+	public final Set<Node<T>> nodes;
 	public final List<Edge<T>> edges;
 	
 	public Graph(List<Edge<T>> edges) {
-		Map<T, Set<T>> adjacencyMap = new HashMap<>();
-		Set<T> allNodes = new HashSet<>();
+		Map<Node<T>, Set<Node<T>>> adjacencyMap = new HashMap<>();
+		Set<Node<T>> allNodes = new HashSet<>();
 		for(Edge<T> edge :  edges) {
 			adjacencyMap.get(edge.startNode);
-			Set<T> adjecentNodes = adjacencyMap.getOrDefault(edge.startNode, new HashSet<>());
+			Set<Node<T>> adjecentNodes = adjacencyMap.getOrDefault(edge.startNode, new HashSet<>());
 			adjecentNodes.add(edge.endNode);
 			adjacencyMap.put(edge.startNode, adjecentNodes);
 			allNodes.add(edge.startNode);
@@ -32,31 +33,47 @@ public class Graph<T> {
 		this.adjacencyMap = Collections.unmodifiableMap(adjacencyMap);
 	}
 	
-	public Set<T> adjacentNodes(T node) {
+	public Set<Node<T>> adjacentNodes(Node<T> node) {
 		return new HashSet<>(adjacencyMap.getOrDefault(node, Collections.emptySet()));
 	}
 	
-	public List<Edge<T>> edgesFrom(T node) {
+	public List<Edge<T>> edgesFrom(Node<T> node) {
 		return edges.stream().filter(edge -> edge.startNode.equals(node)).collect(Collectors.toList());
 	}
 	
-	public List<Edge<T>> edgesTo(T node) {
+	public List<Edge<T>> edgesTo(Node<T> node) {
 		return edges.stream().filter(edge -> edge.endNode.equals(node)).collect(Collectors.toList());
+	}
+	
+	public Optional<Node<T>> nodeWithValue(T value){
+		return nodes.stream().filter(node -> node.value.equals(value)).findFirst();
+	}
+	
+	public int inDegree(Node<T> node){
+		return edgesTo(node).size();
+	}
+	
+	public int outDegree(Node<T> node){
+		return edgesFrom(node).size();
 	}
 	
 	public String printEdges() {
 		StringBuilder sb = new StringBuilder();
-		for(Entry<T, Set<T>> entry : adjacencyMap.entrySet()){
-			T node = entry.getKey();
+		for(Entry<Node<T>, Set<Node<T>>> entry : adjacencyMap.entrySet()){
+			Node<T> node = entry.getKey();
 			entry.getValue().stream().forEach(adjacentNode -> sb.append(node + " -> " + adjacentNode + "\n"));
 		}
 		return sb.toString();
 	}
 	
+	public boolean isEmpty(){
+		return nodes.isEmpty();
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		for(Entry<T, Set<T>> entry : adjacencyMap.entrySet()){
+		for(Entry<Node<T>, Set<Node<T>>> entry : adjacencyMap.entrySet()){
 			sb.append(entry.getKey() + " -> ");
 			sb.append(entry.getValue().stream().map(n -> n.toString()).collect(Collectors.joining(", ")) + "\n");
 		}
@@ -70,15 +87,58 @@ public class Graph<T> {
 		return adjacencyMap.equals(((Graph<?>)other).adjacencyMap);
 	}
 	
+	public static class Node<T> {
+		public final T value;
+		private Object markup;
+		
+		public Node(T value){
+			this.value = value;
+		}
+		
+		public void setMarkup(Object markup) {
+			this.markup = markup;
+		}
+		
+		public Object getMarkup() {
+			return markup;
+		}
+		
+		@Override
+		public String toString(){
+			return value.toString() + (markup != null ? "(" + markup + ")" : "");
+		}
+		
+		@Override
+		public boolean equals(Object other) {
+			if(other == null) return false;
+			if(!(other instanceof Node<?>)) return false;
+			Node<?> otherNode = (Node<?>)other;
+			return otherNode.value.equals(value);
+		}
+		
+		@Override
+		public int hashCode() {
+			return value.hashCode();
+		}
+	}
+	
 	public static class Edge<T> {
-		public final T startNode;
-		public final T endNode;
+		public final Node<T> startNode;
+		public final Node<T> endNode;
 		public final Integer weight;
 		
-		public Edge(T startNode, T endNode, Integer weight){
+		public Edge(Node<T> startNode, Node<T> endNode, Integer weight){
 			this.startNode = startNode;
 			this.endNode = endNode;
 			this.weight = weight;
+		}
+		
+		public Edge(Node<T> startNode, Node<T> endNode){
+			this(startNode, endNode, null);
+		}
+		
+		public Edge(T startNodeValue, T endNodeValue, Integer weight){
+			this(new Node<>(startNodeValue), new Node<>(endNodeValue), weight);
 		}
 		
 		public Edge(T startNode, T endNode){
@@ -87,7 +147,7 @@ public class Graph<T> {
 		
 		@Override
 		public String toString(){
-			return startNode + " -> " + endNode + weight != null ? "(" + weight + ")" : "";
+			return startNode +  " --" + (weight != null ? "(" + weight + ")" : "") + "--> " + endNode;
 		}
 		
 		@Override
