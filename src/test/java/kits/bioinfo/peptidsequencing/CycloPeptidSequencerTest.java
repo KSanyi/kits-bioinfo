@@ -20,7 +20,7 @@ public class CycloPeptidSequencerTest {
 		Set<Peptid> peptids = new SimpleCycloPeptidSequencer().sequencePeptids(Arrays.asList(0, 113, 128, 186, 241, 299, 314, 427));
 		
 		Set<String> massSequences = peptids.stream()
-			.map(peptid -> peptid.aminoAcids.stream()
+			.map(peptid -> peptid.stream()
 					.map(aminoAcid -> String.valueOf(aminoAcid.mass)).collect(Collectors.joining("-")))
 					.collect(Collectors.toSet());
 		

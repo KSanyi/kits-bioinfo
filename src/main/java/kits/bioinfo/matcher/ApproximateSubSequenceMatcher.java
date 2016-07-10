@@ -17,7 +17,7 @@ public class ApproximateSubSequenceMatcher extends SubSequenceMatcher {
 
 	@Override
 	protected boolean matchesSubSequence(DnaSequence subSequence) {
-		return pattern.distance(subSequence) <= distance;
+		return pattern.hammingDistance(subSequence) <= distance;
 	}
 
 }

@@ -28,7 +28,7 @@ public class Challenge6 {
 		Set<Peptid> peptids = new CycloPeptidSequencer(cutRank, 20).sequencePeptids(experimentalSpectrum);
 		
 		Set<String> massSequences = peptids.stream()
-				.map(peptid -> peptid.aminoAcids.stream()
+				.map(peptid -> peptid.stream()
 						.map(aminoAcid -> String.valueOf(aminoAcid.mass)).collect(Collectors.joining("-")))
 						.collect(Collectors.toSet());
 		System.out.println(massSequences);

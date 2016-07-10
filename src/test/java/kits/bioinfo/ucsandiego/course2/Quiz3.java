@@ -32,7 +32,7 @@ public class Quiz3 {
 		Peptid peptid = new Peptid("MASS");
 		
 		int res=1;
-		for(AminoAcid aminoAcid : peptid.aminoAcids){
+		for(AminoAcid aminoAcid : peptid){
 			res *= Codon.codonTable.values().stream().filter(codedAminoAcid -> codedAminoAcid.equals(aminoAcid)).count();
 		}
 		System.out.println(res);

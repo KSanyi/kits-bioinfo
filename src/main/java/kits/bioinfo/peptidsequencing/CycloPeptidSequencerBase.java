@@ -15,7 +15,7 @@ public abstract class CycloPeptidSequencerBase {
 		Set<Peptid> extendedPeptids = new HashSet<>();
 		for(Peptid peptid : peptids){
 			for(AminoAcid aminoAcid : aminoAcids){
-				extendedPeptids.add(peptid.extendedPeptid(aminoAcid));
+				extendedPeptids.add(peptid.append((aminoAcid)));
 			}
 		}
 		return extendedPeptids;

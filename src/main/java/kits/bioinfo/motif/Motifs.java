@@ -46,7 +46,7 @@ public class Motifs {
 		
 		int distance = kmer.length();
 		for(int i=0;i<sequence.length()-k+1;i++) {
-			int d = sequence.subSequence(i, k).distance(kmer);
+			int d = sequence.subSequence(i, k).hammingDistance(kmer);
 			if(d < distance){
 				distance = d;
 			}

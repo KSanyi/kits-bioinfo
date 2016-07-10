@@ -45,10 +45,14 @@ public class MassSpectrometer {
 	private List<Peptid> generateCyclicCompositions(Peptid cyclidPeptid, int k) {
 		if(cyclidPeptid.length() < k) throw new IllegalArgumentException("Sequence length must be >= k");
 		
-		List<AminoAcid> linearizedCycle = new ArrayList<>(cyclidPeptid.aminoAcids);
-		linearizedCycle.addAll(cyclidPeptid.aminoAcids.subList(0, cyclidPeptid.aminoAcids.size()-1));
-		Peptid linearizedPeptid = new Peptid(linearizedCycle);
-		
+		Peptid linearizedPeptidBuilder = new Peptid("");
+		for(AminoAcid aminoAcid : cyclidPeptid){
+			linearizedPeptidBuilder = linearizedPeptidBuilder.append(aminoAcid);
+		}
+		for(AminoAcid aminoAcid : cyclidPeptid.prefix()){
+			linearizedPeptidBuilder = linearizedPeptidBuilder.append(aminoAcid);
+		}
+		Peptid linearizedPeptid = linearizedPeptidBuilder;
 		return range(0, cyclidPeptid.length()).mapToObj(i -> linearizedPeptid.subPeptid(i, k)).collect(toList());
 	}
 

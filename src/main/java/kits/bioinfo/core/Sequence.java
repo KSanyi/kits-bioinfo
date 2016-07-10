@@ -2,11 +2,12 @@ package kits.bioinfo.core;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Sequence<T> implements Comparable<Sequence<T>>{
+public class Sequence<T> implements Comparable<Sequence<T>>, Iterable<T>{
 	
 	protected final List<T> text;
 
@@ -51,14 +52,6 @@ public class Sequence<T> implements Comparable<Sequence<T>>{
 		return length() == 0;
 	}
 	
-	public List<Sequence<T>> allSubSequences(int k) {
-		List<Sequence<T>> subSequences = new ArrayList<>();
-		for(int i=0;i<length()-k+1;i++) {
-			subSequences.add(subSequence(i, k));
-		}
-		return subSequences;
-	}
-	
 	public Sequence<T> append(T elem) {
 		List<T> newText = new ArrayList<>(text);
 		newText.add(elem);
@@ -74,6 +67,12 @@ public class Sequence<T> implements Comparable<Sequence<T>>{
 	public Sequence<T> prepend(T elem) {
 		List<T> newText = new ArrayList<>();
 		newText.add(elem);
+		newText.addAll(text);
+		return new Sequence<>(newText);
+	}
+	
+	public Sequence<T> prepend(Sequence<T> other) {
+		List<T> newText = new ArrayList<>(other.text);
 		newText.addAll(text);
 		return new Sequence<>(newText);
 	}
@@ -105,10 +104,19 @@ public class Sequence<T> implements Comparable<Sequence<T>>{
 	public String toString() {
 		return text.stream().map(n -> n != null ? n.toString() : "-").collect(Collectors.joining());
 	}
+	
+	public Sequence<T> toSequence(){
+		return new Sequence<>(text);
+	}
 
 	@Override
 	public int compareTo(Sequence<T> other) {
 		return this.toString().compareTo(other.toString());
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return text.iterator();
 	}
 
 }

@@ -60,10 +60,10 @@ public class SequenceTest {
 	
 	@Test
 	public void distance() {
-		Assert.assertEquals(0, new DnaSequence("A").distance(new DnaSequence("A")));
-		Assert.assertEquals(0, new DnaSequence("ACTG").distance(new DnaSequence("ACTG")));
-		Assert.assertEquals(1, new DnaSequence("A").distance(new DnaSequence("C")));
-		Assert.assertEquals(1, new DnaSequence("ACTG").distance(new DnaSequence("ACTT")));
+		Assert.assertEquals(0, new DnaSequence("A").hammingDistance(new DnaSequence("A")));
+		Assert.assertEquals(0, new DnaSequence("ACTG").hammingDistance(new DnaSequence("ACTG")));
+		Assert.assertEquals(1, new DnaSequence("A").hammingDistance(new DnaSequence("C")));
+		Assert.assertEquals(1, new DnaSequence("ACTG").hammingDistance(new DnaSequence("ACTT")));
 	}
 	
 	@Test

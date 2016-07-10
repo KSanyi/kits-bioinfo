@@ -17,7 +17,7 @@ public class Homework2 {
 	
 	private static void question1() {
 		int distance = new DnaSequence("TGACCCGTTATGCTCGAGTTCGGTCAGAGCGTCATTGCGAGTAGTCGTTTGCTTTCTCAAACTCC")
-		     .distance(new DnaSequence("GAGCGATTAAGCGTGACAGCCCCAGGGAACCCACAAAACGTGATCGCAGTCCATCCGATCATACA"));
+		     .hammingDistance(new DnaSequence("GAGCGATTAAGCGTGACAGCCCCAGGGAACCCACAAAACGTGATCGCAGTCCATCCGATCATACA"));
 		System.out.println("Distance: " + distance);
 	}
 	

@@ -24,7 +24,7 @@ public class Challenge4 {
 		Set<Peptid> peptids = new SimpleCycloPeptidSequencer().sequencePeptids(massSpectrum);
 		
 		Set<String> massSequences = peptids.stream()
-			.map(peptid -> peptid.aminoAcids.stream()
+			.map(peptid -> peptid.stream()
 					.map(aminoAcid -> String.valueOf(aminoAcid.mass)).collect(Collectors.joining("-")))
 					.collect(Collectors.toSet());
 		Files.write(Paths.get("./output/output_100_5.txt"), String.join(" ", massSequences).getBytes());
