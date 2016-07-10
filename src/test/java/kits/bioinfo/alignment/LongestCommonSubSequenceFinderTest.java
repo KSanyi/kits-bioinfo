@@ -35,7 +35,7 @@ public class LongestCommonSubSequenceFinderTest {
 	}
 
 	@Test
-	public void test3() {
+	public void test1() {
 		DnaSequence sequence1 = new DnaSequence("AACCTTGG");
 		DnaSequence sequence2 = new DnaSequence("ACACTGTGA");
 		Collection<DnaSequence> sequences = LongestCommonSubSequenceFinder.findAllSequences(sequence1, sequence2);
@@ -45,7 +45,7 @@ public class LongestCommonSubSequenceFinderTest {
 	}
 
 	@Test
-	public void test4() {
+	public void test2() {
 		DnaSequence sequence1 = new DnaSequence("GCGATC");
 		DnaSequence sequence2 = new DnaSequence("CTGACG");
 		Collection<DnaSequence> sequences = LongestCommonSubSequenceFinder.findAllSequences(sequence1, sequence2);

@@ -41,6 +41,10 @@ public class Peptid {
 		return aminoAcids.stream().map(a -> a.code1.toString()).collect(Collectors.joining());
 	}
 	
+	public Sequence<AminoAcid> toSequence(){
+		return new Sequence<>(aminoAcids);
+	}
+	
 	@Override
 	public boolean equals(Object other) {
 		if(other == this) return true;

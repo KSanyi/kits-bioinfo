@@ -138,6 +138,10 @@ public class DnaSequence implements Comparable<DnaSequence>{
 		return text.hashCode();
 	}
 	
+	public Sequence<DnaBase> toSequence(){
+		return new Sequence<>(text);
+	}
+	
 	@Override
 	public String toString() {
 		return text.stream().map(n -> n.toString()).collect(Collectors.joining());
