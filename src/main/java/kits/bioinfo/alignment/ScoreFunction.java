@@ -9,16 +9,20 @@ public interface ScoreFunction<T> {
 
 	int score(Optional<T> a, Optional<T> b);
 	
-	static <T> ScoreFunction<T> simpleScoreFunction(){
+	static <T> ScoreFunction<T> simple(){
 		return new SimpleScoreFunction<>();
 	}
 	
-	static <T> ScoreFunction<T> basicScoreFunction(int mismatchPenalty, int indelPenalty){
+	static <T> ScoreFunction<T> basic(int mismatchPenalty, int indelPenalty){
 		return new BasicScoreFunction<>(mismatchPenalty, indelPenalty);
 	}
 	
-	static ScoreFunction<AminoAcid> blosum62ScoreFunction(int indelPenalty){
+	static ScoreFunction<AminoAcid> blosum62(int indelPenalty){
 		return new Blosum62ScoreFunction(indelPenalty);
+	}
+	
+	static ScoreFunction<AminoAcid> pam250(int indelPenalty){
+		return new PAM250coreFunction(indelPenalty);
 	}
 	
 }

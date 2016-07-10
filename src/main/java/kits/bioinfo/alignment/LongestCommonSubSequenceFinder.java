@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import kits.bioinfo.core.DnaSequence;
 
+// TODO remove this class and use SequenceAligner
 public class LongestCommonSubSequenceFinder {
 
 	public static DnaSequence findOneSequence(DnaSequence sequence1, DnaSequence sequence2) {

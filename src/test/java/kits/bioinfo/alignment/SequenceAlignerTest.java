@@ -17,7 +17,7 @@ public class SequenceAlignerTest {
 	public void test1() {
 		Sequence<Character> sequence1 = new Sequence<>(Arrays.asList('G', 'C', 'G', 'A', 'T', 'C'));
 		Sequence<Character> sequence2 = new Sequence<>(Arrays.asList('C', 'T', 'G', 'A', 'C', 'G'));
-		SequenceAligner<Character> aligner = new SequenceAligner<>(ScoreFunction.simpleScoreFunction());
+		SequenceAligner<Character> aligner = new SequenceAligner<>(ScoreFunction.simple());
 		Collection<AlignmentResult<Character>> results = aligner.findAllAlignments(sequence1, sequence2);
 		Assert.assertTrue(results.size() == 1);
 		
@@ -32,7 +32,7 @@ public class SequenceAlignerTest {
 	public void test2() {
 		Sequence<AminoAcid> sequence1 = new Sequence<>("PLEASANTLY".chars().mapToObj(c -> AminoAcid.of((char)c)).collect(Collectors.toList()));
 		Sequence<AminoAcid> sequence2 = new Sequence<>("MEANLY".chars().mapToObj(c -> AminoAcid.of((char)c)).collect(Collectors.toList()));
-		SequenceAligner<AminoAcid> aligner = new SequenceAligner<AminoAcid>(ScoreFunction.blosum62ScoreFunction(5));
+		SequenceAligner<AminoAcid> aligner = new SequenceAligner<AminoAcid>(ScoreFunction.blosum62(5));
 		Collection<AlignmentResult<AminoAcid>> results = aligner.findAllAlignments(sequence1, sequence2);
 
 		Assert.assertEquals(8, results.iterator().next().score);

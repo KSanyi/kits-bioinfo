@@ -1,7 +1,6 @@
 package kits.bioinfo.johnshopkins.assignments;
 
 import java.io.IOException;
-import java.util.List;
 
 import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
@@ -19,8 +18,6 @@ public class Assignment2 {
 		question3(humanAluSequence);
 		question4(humanAluSequence);
 		question5(humanAluSequence);
-		//question6(lambdaGenome);
-		//question7();
 	}
 	
 	private static void question1And2(DnaSequence humanAluSequence) {
@@ -51,12 +48,6 @@ public class Assignment2 {
 		DnaSequence pattern = new DnaSequence("GGCGCGGTGGCTCACGCCTGTAAT");
 		int count = new IndexBasedApproximateSubSequenceMatcher(humanAluSequence, 8, 2).matchCount(pattern);
 		System.out.println("5: " + count);
-	}
-	
-	private static void question6(DnaSequence humanAluSequence) {
-		DnaSequence pattern = new DnaSequence("GGCGCGGTGGCTCACGCCTGTAAT");
-		List<Integer> indexes = new ApproximateSubSequenceMatcher(pattern, 2).matchStartIndexes(humanAluSequence);
-		System.out.println("5: " + indexes.stream().mapToInt(i -> i).min());
 	}
 	
 }

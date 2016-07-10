@@ -7,12 +7,10 @@ import java.util.stream.Collectors;
 import org.junit.Assert;
 import org.junit.Test;
 
-import kits.bioinfo.TestUtil;
+import kits.bioinfo.TestUtil.EqualsInAnyOrder;
 import kits.bioinfo.assembly.KmerCompositioner;
 import kits.bioinfo.assembly.KmerGraph;
 import kits.bioinfo.core.DnaSequence;
-import kits.bioinfo.math.graph.Graph;
-import kits.bioinfo.math.graph.MaxNonBranchingPathFinder;
 
 public class MaxNonBranchingPathFinderTest {
 
@@ -34,7 +32,8 @@ public class MaxNonBranchingPathFinderTest {
 				Arrays.asList(1,2,4,5),
 				Arrays.asList(1,3,5),
 				Arrays.asList(5,6));
-		Assert.assertTrue(TestUtil.equalsInAnyOrder(expectedPaths, paths));
+		
+		Assert.assertThat(paths, new EqualsInAnyOrder<>(expectedPaths));
 	}
 	
 	@Test
@@ -50,7 +49,7 @@ public class MaxNonBranchingPathFinderTest {
 				"AGA", "ATG", "ATG", "CAT",
 				"GAT", "TGGA", "TGT").stream().map(s -> new DnaSequence(s)).collect(Collectors.toList());
 		
-		Assert.assertTrue(TestUtil.equalsInAnyOrder(contigs, expectedContigs));
+		Assert.assertThat(contigs, new EqualsInAnyOrder<>(expectedContigs));
 	}
 	
 }

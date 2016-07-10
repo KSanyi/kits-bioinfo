@@ -8,12 +8,6 @@ import org.hamcrest.Description;
 
 public class TestUtil {
 
-	public static <T> boolean equalsInAnyOrder(Collection<T> list1, Collection<T> list2) {
-		return  list1.size() == list2.size() &&
-				list1.containsAll(list2) &&
-				list2.containsAll(list1);
-	}
-	
 	public static class EqualsInAnyOrder<T> extends BaseMatcher<Collection<T>> {
 
 		private final Collection<T> collection;

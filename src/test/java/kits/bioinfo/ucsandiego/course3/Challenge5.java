@@ -25,7 +25,7 @@ public class Challenge5 {
 		Peptid peptid1 = new Peptid(lines.get(0));
 		Peptid peptid2 = new Peptid(lines.get(1));
 		
-		SequenceAligner<AminoAcid> aligner = new SequenceAligner<AminoAcid>(ScoreFunction.blosum62ScoreFunction(5));
+		SequenceAligner<AminoAcid> aligner = new SequenceAligner<AminoAcid>(ScoreFunction.blosum62(5));
 		AlignmentResult<AminoAcid> alignment = aligner.findOneAlignment(peptid1.toSequence(), peptid2.toSequence());
 		
 		System.out.println(alignment.score);
