@@ -11,4 +11,16 @@ public class Pair<T> {
 		this.second = second;
 	}
 	
+	@Override
+	public String toString(){
+		return first + ", " + second;
+	}
+	
+	@Override
+	public boolean equals(Object other){
+		@SuppressWarnings("unchecked")
+		Pair<T> otherPair = (Pair<T>) other;
+		return otherPair.first.equals(first) && otherPair.second.equals(second); 
+	}
+	
 }

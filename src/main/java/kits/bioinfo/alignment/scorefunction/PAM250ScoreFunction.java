@@ -1,4 +1,4 @@
-package kits.bioinfo.alignment;
+package kits.bioinfo.alignment.scorefunction;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,7 +7,7 @@ import java.util.List;
 
 import kits.bioinfo.core.AminoAcid;
 
-public class PAM250coreFunction extends MatrixBasedScoreFunction<AminoAcid> {
+public class PAM250ScoreFunction extends MatrixBasedScoreFunction<AminoAcid> {
 
 	private static final List<AminoAcid> ELEM_LIST;
 	
@@ -41,7 +41,7 @@ public class PAM250coreFunction extends MatrixBasedScoreFunction<AminoAcid> {
 		{-3,  0, -4, -4,  7, -5,  0, -1, -4, -1, -2, -2, -5, -4, -4, -3, -3, -2,  0, 10}	
 	};
 	
-	public PAM250coreFunction(int indelPenalty) {
+	public PAM250ScoreFunction(int indelPenalty) {
 		super(ELEM_LIST, SCORE_MATRIX, indelPenalty);
 	}
 

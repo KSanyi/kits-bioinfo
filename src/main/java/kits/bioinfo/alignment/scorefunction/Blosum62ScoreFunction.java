@@ -1,4 +1,4 @@
-package kits.bioinfo.alignment;
+package kits.bioinfo.alignment.scorefunction;
 
 import java.util.Arrays;
 import java.util.Collections;

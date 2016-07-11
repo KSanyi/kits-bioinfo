@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import kits.bioinfo.TestUtil.EqualsInAnyOrder;
+import kits.bioinfo.alignment.scorefunction.ScoreFunction;
+import kits.bioinfo.core.DnaBase;
 import kits.bioinfo.core.DnaSequence;
 
 public class LongestCommonSubSequenceFinderTest {

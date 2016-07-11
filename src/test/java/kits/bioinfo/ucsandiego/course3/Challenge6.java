@@ -12,21 +12,21 @@ import kits.bioinfo.core.AminoAcid;
 import kits.bioinfo.core.Peptid;
 import kits.bioinfo.core.Sequence;
 
-public class Challenge5 {
+public class Challenge6 {
 
 	/**
-	 * Code Challenge: Solve the Global Alignment Problem.
+	 * Code Challenge: Solve the Local Alignment Problem.
      * Input: Two protein strings written in the single-letter amino acid alphabet.
-     * Output: The maximum alignment score of these strings followed by an alignment achieving this
-     * maximum score. Use the BLOSUM62 scoring matrix and indel penalty σ = 5.
+     * Output: The maximum score of a local alignment of the strings, followed by a local alignment of these
+     * strings achieving the maximum score. Use the PAM250 scoring matrix and indel penalty σ = 5.
 	 */
 	public static void main(String[] args) throws Exception {
-		List<String> lines = Files.readAllLines(Paths.get("input/dataset_247_3.txt"));
+		List<String> lines = Files.readAllLines(Paths.get("input/dataset_247_9.txt"));
 		Peptid peptid1 = new Peptid(lines.get(0));
 		Peptid peptid2 = new Peptid(lines.get(1));
 		
-		SequenceAligner<AminoAcid> aligner = new SequenceAligner<AminoAcid>(ScoreFunction.blosum62(5));
-		AlignmentResult<AminoAcid> alignment = aligner.findOneGlobalAlignment(peptid1.toSequence(), peptid2.toSequence());
+		SequenceAligner<AminoAcid> aligner = new SequenceAligner<AminoAcid>(ScoreFunction.pam250(5));
+		AlignmentResult<AminoAcid> alignment = aligner.findOneLocalAlignment(peptid1.toSequence(), peptid2.toSequence());
 		
 		System.out.println(alignment.score);
 		System.out.println(printAlignment(alignment));

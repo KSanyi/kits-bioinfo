@@ -9,6 +9,10 @@ import java.util.stream.Stream;
 
 public class Sequence<T> implements Comparable<Sequence<T>>, Iterable<T>{
 	
+	public static Sequence<Character> of(String text){
+		return new Sequence<Character>(text.chars().mapToObj(c -> Character.valueOf((char)c)).collect(Collectors.toList()));
+	}
+	
 	protected final List<T> text;
 
 	public Sequence(List<T> text) {

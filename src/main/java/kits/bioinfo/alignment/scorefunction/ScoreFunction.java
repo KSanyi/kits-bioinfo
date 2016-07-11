@@ -1,4 +1,4 @@
-package kits.bioinfo.alignment;
+package kits.bioinfo.alignment.scorefunction;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,8 +13,12 @@ public interface ScoreFunction<T> {
 		return new SimpleScoreFunction<>();
 	}
 	
-	static <T> ScoreFunction<T> basic(int mismatchPenalty, int indelPenalty){
-		return new BasicScoreFunction<>(mismatchPenalty, indelPenalty);
+	static <T> ScoreFunction<T> basic(int matchScore, int mismatchPenalty, int indelPenalty){
+		return new BasicScoreFunction<>(matchScore, mismatchPenalty, indelPenalty);
+	}
+	
+	static <T> ScoreFunction<T> editDistance(){
+		return new EditDistanceScoreFunction<>();
 	}
 	
 	static ScoreFunction<AminoAcid> blosum62(int indelPenalty){
@@ -22,7 +26,7 @@ public interface ScoreFunction<T> {
 	}
 	
 	static ScoreFunction<AminoAcid> pam250(int indelPenalty){
-		return new PAM250coreFunction(indelPenalty);
+		return new PAM250ScoreFunction(indelPenalty);
 	}
 	
 }
@@ -38,10 +42,12 @@ class SimpleScoreFunction<T> implements ScoreFunction<T>{
 
 class BasicScoreFunction<T> implements ScoreFunction<T>{
 
+	private final int matchScore;
 	private final int mismatchPenalty;
 	private final int indelPenalty;
 	
-	public BasicScoreFunction(int mismatchPenalty, int indelPenalty) {
+	public BasicScoreFunction(int matchScore, int mismatchPenalty, int indelPenalty) {
+		this.matchScore = matchScore;
 		this.mismatchPenalty = mismatchPenalty;
 		this.indelPenalty = indelPenalty;
 	}
@@ -50,9 +56,14 @@ class BasicScoreFunction<T> implements ScoreFunction<T>{
 		if(!a.isPresent() && !b.isPresent()) throw new IllegalArgumentException("Score function called with two empty parameters");
 		if(a.isPresent() && !b.isPresent() || !a.isPresent() && b.isPresent()) return -indelPenalty;
 		if(!a.get().equals(b.get())) return -mismatchPenalty;
-		return 1;
+		return matchScore;
 	}
-	
+}
+
+class EditDistanceScoreFunction<T> extends BasicScoreFunction<T>{
+	public EditDistanceScoreFunction(){
+		super(0, 1, 1);
+	}
 }
 
 class MatrixBasedScoreFunction<T> implements ScoreFunction<T>{
