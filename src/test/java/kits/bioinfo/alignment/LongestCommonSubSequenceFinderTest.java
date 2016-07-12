@@ -6,9 +6,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import kits.bioinfo.TestUtil.EqualsInAnyOrder;
-import kits.bioinfo.alignment.scorefunction.ScoreFunction;
 import kits.bioinfo.core.DnaBase;
 import kits.bioinfo.core.DnaSequence;
+import kits.bioinfo.core.Sequence;
 
 public class LongestCommonSubSequenceFinderTest {
 
@@ -19,40 +19,41 @@ public class LongestCommonSubSequenceFinderTest {
 		DnaSequence sequence2 = new DnaSequence("AC");
 		DnaSequence sequence3 = new DnaSequence("CA");
 		
-		Collection<DnaSequence> sequences = LongestCommonSubSequenceFinder.findAllSequences(sequence0, sequence1);
+		Collection<Sequence<DnaBase>> sequences = LongestCommonSubSequenceFinder.findAllSequences(sequence0, sequence1);
 		Assert.assertTrue(sequences.size() == 1);
 		Assert.assertTrue(sequences.iterator().next().isEmpty());
 		
 		sequences = LongestCommonSubSequenceFinder.findAllSequences(sequence1, sequence1);
 		Assert.assertTrue(sequences.size() == 1);
-		Assert.assertEquals(new DnaSequence("A"), sequences.iterator().next());
+		Assert.assertEquals(new DnaSequence("A").toSequence(), sequences.iterator().next());
 
 		sequences = LongestCommonSubSequenceFinder.findAllSequences(sequence1, sequence2);
 		Assert.assertTrue(sequences.size() == 1);
-		Assert.assertEquals(new DnaSequence("A"), sequences.iterator().next());
+		Assert.assertEquals(new DnaSequence("A").toSequence(), sequences.iterator().next());
 
 		sequences = LongestCommonSubSequenceFinder.findAllSequences(sequence2, sequence3);
 		Assert.assertTrue(sequences.size() == 2);
-		Assert.assertThat(sequences, new EqualsInAnyOrder<>(new DnaSequence("A"), new DnaSequence("C")));
+		Assert.assertThat(sequences, new EqualsInAnyOrder<>(new DnaSequence("A").toSequence(), new DnaSequence("C").toSequence()));
 	}
 
 	@Test
 	public void test1() {
 		DnaSequence sequence1 = new DnaSequence("AACCTTGG");
 		DnaSequence sequence2 = new DnaSequence("ACACTGTGA");
-		Collection<DnaSequence> sequences = LongestCommonSubSequenceFinder.findAllSequences(sequence1, sequence2);
+		Collection<Sequence<DnaBase>> sequences = LongestCommonSubSequenceFinder.findAllSequences(sequence1, sequence2);
 
 		Assert.assertThat(sequences,
-				new EqualsInAnyOrder<>(new DnaSequence("AACTTG"), new DnaSequence("AACTGG"), new DnaSequence("ACCTTG"), new DnaSequence("ACCTGG")));
+				new EqualsInAnyOrder<>(new DnaSequence("AACTTG").toSequence(), new DnaSequence("AACTGG").toSequence(),
+						new DnaSequence("ACCTTG").toSequence(), new DnaSequence("ACCTGG").toSequence()));
 	}
 
 	@Test
 	public void test2() {
 		DnaSequence sequence1 = new DnaSequence("GCGATC");
 		DnaSequence sequence2 = new DnaSequence("CTGACG");
-		Collection<DnaSequence> sequences = LongestCommonSubSequenceFinder.findAllSequences(sequence1, sequence2);
+		Collection<Sequence<DnaBase>> sequences = LongestCommonSubSequenceFinder.findAllSequences(sequence1, sequence2);
 		Assert.assertTrue(sequences.size() == 1);
-		Assert.assertEquals(new DnaSequence("CGAC"), sequences.iterator().next());
+		Assert.assertEquals(new DnaSequence("CGAC").toSequence(), sequences.iterator().next());
 	}
 
 }

@@ -19,6 +19,12 @@ public class SequenceAligner<T> {
 		this.scoreFunction = scoreFunction;
 	}
 
+	public AlignmentResult<T> findOneFittingAlignment(Sequence<T> longSequence, Sequence<T> sequence) {
+		Table<T> table = new Table<>(longSequence, sequence, scoreFunction);
+		table.fillFittingScoresMatrix();
+		return table.findOneAlignment();
+	}
+	
 	public AlignmentResult<T> findOneGlobalAlignment(Sequence<T> sequence1, Sequence<T> sequence2) {
 		Table<T> table = new Table<>(sequence1, sequence2, scoreFunction);
 		table.fillGlobalScoresMatrix();
@@ -32,7 +38,7 @@ public class SequenceAligner<T> {
 	}
 
 	// TODO runs very slow, need to modify the recursion using dynamic algorithm
-	public Set<AlignmentResult<T>> findAllAlignments(Sequence<T> sequence1, Sequence<T> sequence2) {
+	public Set<AlignmentResult<T>> findAllGlobalAlignments(Sequence<T> sequence1, Sequence<T> sequence2) {
 		Table<T> table = new Table<>(sequence1, sequence2, scoreFunction);
 		table.fillGlobalScoresMatrix();
 		return table.findAllAlignments();
@@ -106,7 +112,6 @@ public class SequenceAligner<T> {
 			}
 			
 			Cell bottomCell = scoresMatrix[sequence1.length()][sequence2.length()];
-			scoresMatrix[sequence1.length()][sequence2.length()] = new Cell(Integer.MIN_VALUE, Collections.emptySet());
 			int max = Integer.MIN_VALUE;
 			for (int i = 1; i <= sequence1.length(); i++) {
 				for (int j = 1; j <= sequence2.length(); j++) {
@@ -116,9 +121,6 @@ public class SequenceAligner<T> {
 				}
 			}
 			Set<Pair<Integer>> parents = new HashSet<>();
-			if(max == bottomCell.score){
-				parents.addAll(bottomCell.parents);
-			}
 			if(max >= bottomCell.score){
 				for (int i = 1; i <= sequence1.length(); i++) {
 					for (int j = 1; j <= sequence2.length(); j++) {
@@ -127,10 +129,73 @@ public class SequenceAligner<T> {
 						}
 					}
 				}
+				if(max == bottomCell.score){
+					parents.addAll(bottomCell.parents);
+				}
+				scoresMatrix[sequence1.length()][sequence2.length()] = new Cell(max, parents);
 			}
 			
-			scoresMatrix[sequence1.length()][sequence2.length()] = new Cell(max, parents);
 			//System.out.println(this);
+			return scoresMatrix;
+		}
+		
+		Cell[][] fillFittingScoresMatrix() {
+			scoresMatrix = new Cell[sequence1.length() + 1][sequence2.length() + 1];
+			scoresMatrix[0][0] = new Cell(0, Collections.emptySet());
+			
+			for (int i = 1; i <= sequence1.length(); i++) {
+				int score1 = scoresMatrix[i-1][0].score + scoreFunction.score(Optional.of(sequence1.position(i-1)), Optional.empty());
+				int score = max(0, score1);
+				Set<Pair<Integer>> parents = new HashSet<>();
+				if(score == 0) parents.add(new Pair<>(0, 0));
+				if(score == score1) parents.add(new Pair<>(i-1, 0));
+				scoresMatrix[i][0] = new Cell(score, parents);
+			}
+			
+			for (int j = 1; j <= sequence2.length(); j++) {
+				int score = scoresMatrix[0][j-1].score + scoreFunction.score(Optional.empty(), Optional.of(sequence2.position(j-1)));
+				scoresMatrix[0][j] = new Cell(score, Collections.singleton(new Pair<>(0, j-1)));
+			}
+
+			for (int i = 1; i <= sequence1.length(); i++) {
+				for (int j = 1; j <= sequence2.length(); j++) {
+					
+					int score1 = scoresMatrix[i - 1][j].score + scoreFunction.score(Optional.of(sequence1.position(i - 1)), Optional.empty());
+					int score2 = scoresMatrix[i][j - 1].score + scoreFunction.score(Optional.empty(), Optional.of(sequence2.position(j - 1)));
+					int score3 = scoresMatrix[i - 1][j - 1].score + scoreFunction.score(Optional.of(sequence1.position(i - 1)), Optional.of(sequence2.position(j - 1)));
+					
+					int score = max(score1, score2, score3);
+					Set<Pair<Integer>> parents = new HashSet<>();
+					if(score == score1) parents.add(new Pair<>(i-1, j));
+					if(score == score2) parents.add(new Pair<>(i, j-1));
+					if(score == score3) parents.add(new Pair<>(i-1, j-1));
+					
+					scoresMatrix[i][j] = new Cell(score, parents);
+				}
+			}
+			
+			Cell bottomCell = scoresMatrix[sequence1.length()][sequence2.length()];
+			int max = Integer.MIN_VALUE;
+			for (int i = 1; i <= sequence1.length(); i++) {
+				if(scoresMatrix[i][sequence2.length()-1].score > max){
+					max = scoresMatrix[i][sequence2.length()-1].score;
+				}
+			}
+			Set<Pair<Integer>> parents = new HashSet<>();
+			if(max >= bottomCell.score){
+				for (int i = 1; i <= sequence1.length(); i++) {
+					if(scoresMatrix[i][sequence2.length()-1].score == max){
+						parents.add(new Pair<>(i, sequence2.length()-1));
+					}
+				}
+				if(max == bottomCell.score){
+					parents.addAll(bottomCell.parents);
+				}
+				scoresMatrix[sequence1.length()][sequence2.length()] = new Cell(max, parents);
+			}
+
+			System.out.println(this);
+			
 			return scoresMatrix;
 		}
 

@@ -3,7 +3,9 @@ package kits.bioinfo.ucsandiego.course3;
 import java.util.List;
 
 import kits.bioinfo.alignment.LongestCommonSubSequenceFinder;
+import kits.bioinfo.core.DnaBase;
 import kits.bioinfo.core.DnaSequence;
+import kits.bioinfo.core.Sequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 
 public class Challenge3 {
@@ -16,7 +18,7 @@ public class Challenge3 {
 	 */
 	public static void main(String[] args) throws Exception {
 		List<DnaSequence> sequences = SequenceReader.readDnaSequencesPerLine("input/dataset_245_5.txt");
-		DnaSequence result = LongestCommonSubSequenceFinder.findOneSequence(sequences.get(0), sequences.get(1));
+		Sequence<DnaBase> result = LongestCommonSubSequenceFinder.findOneSequence(sequences.get(0), sequences.get(1));
 
 		System.out.println(result);
 	}

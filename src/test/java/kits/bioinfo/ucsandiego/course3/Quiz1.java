@@ -3,7 +3,9 @@ package kits.bioinfo.ucsandiego.course3;
 import java.util.Collection;
 
 import kits.bioinfo.alignment.LongestCommonSubSequenceFinder;
+import kits.bioinfo.core.DnaBase;
 import kits.bioinfo.core.DnaSequence;
+import kits.bioinfo.core.Sequence;
 
 public class Quiz1 {
 
@@ -17,7 +19,7 @@ public class Quiz1 {
 		
 		DnaSequence sequence1 = new DnaSequence("GCGATC");
 		DnaSequence sequence2 = new DnaSequence("CTGACG");
-		Collection<DnaSequence> sequences = LongestCommonSubSequenceFinder.findAllSequences(sequence1, sequence2);
+		Collection<Sequence<DnaBase>> sequences = LongestCommonSubSequenceFinder.findAllSequences(sequence1, sequence2);
 		System.out.println(sequences);
 	}
 	

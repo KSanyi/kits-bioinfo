@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,6 +16,10 @@ public class Sequence<T> implements Comparable<Sequence<T>>, Iterable<T>{
 	
 	protected final List<T> text;
 
+	public Sequence() {
+		this(Collections.emptyList());
+	}
+	
 	public Sequence(List<T> text) {
 		this.text = Collections.unmodifiableList(text);
 	}
@@ -92,6 +97,10 @@ public class Sequence<T> implements Comparable<Sequence<T>>, Iterable<T>{
 	
 	public Stream<T> stream(){
 		return text.stream();
+	}
+	
+	public Sequence<T> filter(Predicate<? super T> predicate) {
+		return new Sequence<>(text.stream().filter(predicate).collect(Collectors.toList()));
 	}
 	
 	@Override
