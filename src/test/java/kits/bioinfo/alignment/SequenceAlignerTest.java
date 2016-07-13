@@ -6,7 +6,8 @@ import java.util.stream.Collectors;
 import org.junit.Assert;
 import org.junit.Test;
 
-import kits.bioinfo.alignment.SequenceAligner.AlignmentResult;
+import kits.bioinfo.alignment.aligner.SequenceAligner;
+import kits.bioinfo.alignment.aligner.SequenceAligner.AlignmentResult;
 import kits.bioinfo.alignment.scorefunction.ScoreFunction;
 import kits.bioinfo.core.AminoAcid;
 import kits.bioinfo.core.Peptid;
@@ -63,6 +64,26 @@ public class SequenceAlignerTest {
 		Sequence<AminoAcid> sequence2 = new Peptid("TAGATA").toSequence();
 		SequenceAligner<AminoAcid> aligner = new SequenceAligner<AminoAcid>(ScoreFunction.basic(1, 1, 1));
 		AlignmentResult<AminoAcid> result = aligner.findOneFittingAlignment(sequence1, sequence2);
+		System.out.println(result.score);
+		System.out.println(printAlignment(result));
+	}
+
+	@Test
+	public void test5() {
+		Sequence<AminoAcid> sequence1 = new Peptid("ALMAPC").toSequence();
+		Sequence<AminoAcid> sequence2 = new Peptid("MAP").toSequence();
+		SequenceAligner<AminoAcid> aligner = new SequenceAligner<AminoAcid>(ScoreFunction.basic(1, 1, 1));
+		AlignmentResult<AminoAcid> result = aligner.findOneFittingAlignment(sequence1, sequence2);
+		System.out.println(result.score);
+		System.out.println(printAlignment(result));
+	}
+	
+	@Test
+	public void test6() {
+		Sequence<AminoAcid> sequence1 = new Peptid("APAPAPAWHEAE").toSequence();
+		Sequence<AminoAcid> sequence2 = new Peptid("HEAGAWGHEE").toSequence();
+		SequenceAligner<AminoAcid> aligner = new SequenceAligner<AminoAcid>(ScoreFunction.basic(1, 2, 2));
+		AlignmentResult<AminoAcid> result = aligner.findOneOverlappingAlignment(sequence1, sequence2);
 		System.out.println(result.score);
 		System.out.println(printAlignment(result));
 	}

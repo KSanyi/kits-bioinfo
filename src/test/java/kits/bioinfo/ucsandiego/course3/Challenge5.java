@@ -5,8 +5,8 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import kits.bioinfo.alignment.SequenceAligner;
-import kits.bioinfo.alignment.SequenceAligner.AlignmentResult;
+import kits.bioinfo.alignment.aligner.SequenceAligner;
+import kits.bioinfo.alignment.aligner.SequenceAligner.AlignmentResult;
 import kits.bioinfo.alignment.scorefunction.ScoreFunction;
 import kits.bioinfo.core.AminoAcid;
 import kits.bioinfo.core.Peptid;

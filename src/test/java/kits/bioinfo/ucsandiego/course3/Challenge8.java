@@ -2,8 +2,10 @@ package kits.bioinfo.ucsandiego.course3;
 
 import java.util.List;
 
-import kits.bioinfo.alignment.SequenceAligner;
-import kits.bioinfo.alignment.SequenceAligner.AlignmentResult;
+import org.junit.Assert;
+
+import kits.bioinfo.alignment.aligner.SequenceAligner;
+import kits.bioinfo.alignment.aligner.SequenceAligner.AlignmentResult;
 import kits.bioinfo.alignment.scorefunction.ScoreFunction;
 import kits.bioinfo.core.DnaBase;
 import kits.bioinfo.core.DnaSequence;
@@ -25,6 +27,12 @@ public class Challenge8 {
 		
 		System.out.println(alignment.score);
 		System.out.println(alignment);
+		
+		Assert.assertEquals(18, alignment.score);
+		Assert.assertEquals("CC-CTA-G-TCAC---GTCTTGAGCAAAA-TAAT--CCCAAGGGTATGT-A-AAC-AA-AC-CCACA-AGTCA-A-CGAAT-GCAT-CTCTGCTAA--TGT--T",
+				alignment.sequence1.toString());
+		Assert.assertEquals("CCTCTACGTTCGCCAAG-CTT-ACCAATACTTATGACCCAAGATT-TGTTATAACGAATACTTGGCATA-TCATATCGAAAAGGAGAC-C-GTTAGGGTGTCAT",
+				alignment.sequence2.toString());
 	}
 
 }

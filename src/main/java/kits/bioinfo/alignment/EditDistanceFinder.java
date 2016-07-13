@@ -1,6 +1,7 @@
 package kits.bioinfo.alignment;
 
-import kits.bioinfo.alignment.SequenceAligner.AlignmentResult;
+import kits.bioinfo.alignment.aligner.SequenceAligner;
+import kits.bioinfo.alignment.aligner.SequenceAligner.AlignmentResult;
 import kits.bioinfo.alignment.scorefunction.ScoreFunction;
 import kits.bioinfo.core.Sequence;
 

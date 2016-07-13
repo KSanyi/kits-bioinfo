@@ -4,7 +4,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import kits.bioinfo.alignment.SequenceAligner.AlignmentResult;
+import kits.bioinfo.alignment.aligner.SequenceAligner;
+import kits.bioinfo.alignment.aligner.SequenceAligner.AlignmentResult;
 import kits.bioinfo.alignment.scorefunction.ScoreFunction;
 import kits.bioinfo.core.Sequence;
 

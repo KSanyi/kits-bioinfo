@@ -4,6 +4,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+import org.junit.Assert;
+
 import kits.bioinfo.alignment.EditDistanceFinder;
 import kits.bioinfo.core.Sequence;
 
@@ -21,6 +23,8 @@ public class Challenge7 {
 		int editDistance = EditDistanceFinder.findEditDistance(Sequence.of(lines.get(0)), Sequence.of(lines.get(1)));
 		
 		System.out.println(editDistance);
+		
+		Assert.assertEquals(335, editDistance);
 	}
 
 }

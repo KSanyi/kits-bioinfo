@@ -1,4 +1,4 @@
-package kits.bioinfo.alignment;
+package kits.bioinfo.alignment.aligner;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,6 +11,7 @@ import kits.bioinfo.alignment.scorefunction.ScoreFunction;
 import kits.bioinfo.core.Sequence;
 import kits.bioinfo.util.Pair;
 
+// TODO redesign this class
 public class SequenceAligner<T> {
 
 	private final ScoreFunction<T> scoreFunction;
@@ -19,12 +20,6 @@ public class SequenceAligner<T> {
 		this.scoreFunction = scoreFunction;
 	}
 
-	public AlignmentResult<T> findOneFittingAlignment(Sequence<T> longSequence, Sequence<T> sequence) {
-		Table<T> table = new Table<>(longSequence, sequence, scoreFunction);
-		table.fillFittingScoresMatrix();
-		return table.findOneAlignment();
-	}
-	
 	public AlignmentResult<T> findOneGlobalAlignment(Sequence<T> sequence1, Sequence<T> sequence2) {
 		Table<T> table = new Table<>(sequence1, sequence2, scoreFunction);
 		table.fillGlobalScoresMatrix();
@@ -34,6 +29,18 @@ public class SequenceAligner<T> {
 	public AlignmentResult<T> findOneLocalAlignment(Sequence<T> sequence1, Sequence<T> sequence2) {
 		Table<T> table = new Table<>(sequence1, sequence2, scoreFunction);
 		table.fillLocalScoresMatrix();
+		return table.findOneAlignment();
+	}
+	
+	public AlignmentResult<T> findOneFittingAlignment(Sequence<T> longSequence, Sequence<T> sequence) {
+		Table<T> table = new Table<>(longSequence, sequence, scoreFunction);
+		table.fillFittingScoresMatrix();
+		return table.findOneAlignment();
+	}
+	
+	public AlignmentResult<T> findOneOverlappingAlignment(Sequence<T> longSequence, Sequence<T> sequence) {
+		Table<T> table = new Table<>(longSequence, sequence, scoreFunction);
+		table.fillOverlappingScoresMatrix();
 		return table.findOneAlignment();
 	}
 
@@ -177,15 +184,15 @@ public class SequenceAligner<T> {
 			Cell bottomCell = scoresMatrix[sequence1.length()][sequence2.length()];
 			int max = Integer.MIN_VALUE;
 			for (int i = 1; i <= sequence1.length(); i++) {
-				if(scoresMatrix[i][sequence2.length()-1].score > max){
-					max = scoresMatrix[i][sequence2.length()-1].score;
+				if(scoresMatrix[i][sequence2.length()].score > max){
+					max = scoresMatrix[i][sequence2.length()].score;
 				}
 			}
 			Set<Pair<Integer>> parents = new HashSet<>();
 			if(max >= bottomCell.score){
 				for (int i = 1; i <= sequence1.length(); i++) {
-					if(scoresMatrix[i][sequence2.length()-1].score == max){
-						parents.add(new Pair<>(i, sequence2.length()-1));
+					if(scoresMatrix[i][sequence2.length()].score == max){
+						parents.add(new Pair<>(i, sequence2.length()));
 					}
 				}
 				if(max == bottomCell.score){
@@ -194,7 +201,67 @@ public class SequenceAligner<T> {
 				scoresMatrix[sequence1.length()][sequence2.length()] = new Cell(max, parents);
 			}
 
-			System.out.println(this);
+			//System.out.println(this);
+			
+			return scoresMatrix;
+		}
+		
+		Cell[][] fillOverlappingScoresMatrix() {
+			scoresMatrix = new Cell[sequence1.length() + 1][sequence2.length() + 1];
+			scoresMatrix[0][0] = new Cell(0, Collections.emptySet());
+			
+			for (int i = 1; i <= sequence1.length(); i++) {
+				int score1 = scoresMatrix[i-1][0].score + scoreFunction.score(Optional.of(sequence1.position(i-1)), Optional.empty());
+				int score = max(0, score1);
+				Set<Pair<Integer>> parents = new HashSet<>();
+				if(score == 0) parents.add(new Pair<>(0, 0));
+				if(score == score1) parents.add(new Pair<>(i-1, 0));
+				scoresMatrix[i][0] = new Cell(score, parents);
+			}
+			
+			for (int j = 1; j <= sequence2.length(); j++) {
+				int score = scoresMatrix[0][j-1].score + scoreFunction.score(Optional.empty(), Optional.of(sequence2.position(j-1)));
+				scoresMatrix[0][j] = new Cell(score, Collections.singleton(new Pair<>(0, j-1)));
+			}
+
+			for (int i = 1; i <= sequence1.length(); i++) {
+				for (int j = 1; j <= sequence2.length(); j++) {
+					
+					int score1 = scoresMatrix[i - 1][j].score + scoreFunction.score(Optional.of(sequence1.position(i - 1)), Optional.empty());
+					int score2 = scoresMatrix[i][j - 1].score + scoreFunction.score(Optional.empty(), Optional.of(sequence2.position(j - 1)));
+					int score3 = scoresMatrix[i - 1][j - 1].score + scoreFunction.score(Optional.of(sequence1.position(i - 1)), Optional.of(sequence2.position(j - 1)));
+					
+					int score = max(score1, score2, score3);
+					Set<Pair<Integer>> parents = new HashSet<>();
+					if(score == score1) parents.add(new Pair<>(i-1, j));
+					if(score == score2) parents.add(new Pair<>(i, j-1));
+					if(score == score3) parents.add(new Pair<>(i-1, j-1));
+					
+					scoresMatrix[i][j] = new Cell(score, parents);
+				}
+			}
+			
+			Cell bottomCell = scoresMatrix[sequence1.length()][sequence2.length()];
+			int max = Integer.MIN_VALUE;
+			for (int j = 1; j <= sequence2.length(); j++) {
+				if(scoresMatrix[sequence1.length()][j].score > max){
+					max = scoresMatrix[sequence1.length()][j].score;
+				}
+			}
+			Set<Pair<Integer>> parents = new HashSet<>();
+			if(max >= bottomCell.score){
+				for (int j = 1; j <= sequence2.length(); j++) {
+					if(scoresMatrix[sequence1.length()][j].score == max){
+						parents.add(new Pair<>(sequence1.length(), j));
+					}
+				}
+				if(max == bottomCell.score){
+					parents.addAll(bottomCell.parents);
+				}
+				scoresMatrix[sequence1.length()][sequence2.length()] = new Cell(max, parents);
+			}
+
+			//System.out.println(this);
 			
 			return scoresMatrix;
 		}
@@ -273,11 +340,11 @@ public class SequenceAligner<T> {
 				if(parent.equals(new Pair<>(0, 0))){
 					return sequencePair;	
 				} 
-				T newElem1 = parent.first == i-1 ? sequence1.position(i-1) : null;
-				T newElem2 = parent.second == j-1 ? sequence2.position(j-1) : null;
-				if(parent.first < i-1 || parent.second < j-1){
+				if(i == sequence1.length() && j == sequence2.length() && scoresMatrix[i][j].score == scoresMatrix[parent.first][parent.second].score){
 					return findOneAlignment(parent.first, parent.second, sequencePair);
 				}
+				T newElem1 = parent.first == i-1 ? sequence1.position(i-1) : null;
+				T newElem2 = parent.second == j-1 ? sequence2.position(j-1) : null;
 				return findOneAlignment(parent.first, parent.second, 
 						new Pair<>(sequencePair.first.prepend(newElem1), sequencePair.second.prepend(newElem2)));
 			}
