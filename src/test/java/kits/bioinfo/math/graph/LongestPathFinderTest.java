@@ -6,18 +6,16 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import kits.bioinfo.math.graph.Graph.Node;
-
 public class LongestPathFinderTest {
 
 	@Test
 	public void test1(){
 		List<String> adjacencyStrings = Arrays.asList("0->1:7", "0->2:4", "2->3:2", "1->4:1", "3->4:3");
 		Graph<Integer> graph = GraphParser.buildWeightedIntGraphFromAdjacencyStrings(adjacencyStrings);
-		Node<Integer> sourceNode = graph.nodeWithValue(0).get();
-		Node<Integer> sinkNode = graph.nodeWithValue(4).get();
-		List<Integer> longestPath = LongestPathFinder.findLongestPathValues(graph, sourceNode, sinkNode);
-		Assert.assertEquals(9, sinkNode.getMarkup());
+		Integer sourceNode = 0;
+		Integer sinkNode = 4;
+		List<Integer> longestPath = LongestPathFinder.findLongestPath(graph, sourceNode, sinkNode);
+		Assert.assertEquals(9, graph.markupNumber(sinkNode).intValue());
 		Assert.assertEquals(Arrays.asList(0, 2, 3, 4), longestPath);
 	}
 	
@@ -117,10 +115,10 @@ public class LongestPathFinderTest {
 				"17->18:11",
 				"14->15:29");
 		Graph<Integer> graph = GraphParser.buildWeightedIntGraphFromAdjacencyStrings(adjacencyStrings);
-		Node<Integer> sourceNode = graph.nodeWithValue(5).get();
-		Node<Integer> sinkNode = graph.nodeWithValue(20).get();
-		List<Integer> longestPath = LongestPathFinder.findLongestPathValues(graph, sourceNode, sinkNode);
-		Assert.assertEquals(229, sinkNode.getMarkup());
+		Integer sourceNode = 5;
+		Integer sinkNode = 20;
+		List<Integer> longestPath = LongestPathFinder.findLongestPath(graph, sourceNode, sinkNode);
+		Assert.assertEquals(229, graph.markupNumber(sinkNode).intValue());
 		Assert.assertEquals(Arrays.asList(5, 6, 7, 8, 10, 11, 17, 18, 20), longestPath);
 	}
 	

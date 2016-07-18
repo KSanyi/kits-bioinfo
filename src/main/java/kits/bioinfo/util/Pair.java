@@ -13,7 +13,7 @@ public class Pair<T> {
 	
 	@Override
 	public String toString(){
-		return first + ", " + second;
+		return "<" + first + ", " + second + ">";
 	}
 	
 	@Override
@@ -21,6 +21,11 @@ public class Pair<T> {
 		@SuppressWarnings("unchecked")
 		Pair<T> otherPair = (Pair<T>) other;
 		return otherPair.first.equals(first) && otherPair.second.equals(second); 
+	}
+	
+	@Override
+	public int hashCode(){
+		return first.hashCode() * 37 + second.hashCode();
 	}
 	
 }

@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import kits.bioinfo.math.graph.Graph.Edge;
-import kits.bioinfo.math.graph.Graph.Node;
 import kits.bioinfo.util.FrequencyMap;
 
 public class EulerianCycleFinder {
@@ -19,30 +18,26 @@ public class EulerianCycleFinder {
 		return list.get(random.nextInt(list.size()));
 	}
 	
-	public static <T> List<T> findEulerianCycleValues(Graph<T> graph) {
-		return findEulerianCycle(graph).stream().map(node -> node.value).collect(Collectors.toList());
-	}
-	
-	public static <T> List<Node<T>> findEulerianCycle(Graph<T> graph) {
+	public static <T> List<T> findEulerianCycle(Graph<T> graph) {
 		checkGraph(graph);
 		
-		List<Node<T>> cycle = new ArrayList<>();
+		List<T> cycle = new ArrayList<>();
 		
-		List<Edge<T>> edgesNotSeen = new LinkedList<>(graph.edges);
-		Node<T> node = edgesNotSeen.iterator().next().startNode;
+		List<Edge<T>> edgesNotSeen = new LinkedList<>(graph.edges());
+		T node = edgesNotSeen.iterator().next().startNode;
 		cycle.add(node);
 		while(!edgesNotSeen.isEmpty()) {
-			List<Node<T>> startNodesFromEdgesNotSeen = edgesNotSeen.stream().map(edge -> edge.startNode).collect(Collectors.toList());
+			List<T> startNodesFromEdgesNotSeen = edgesNotSeen.stream().map(edge -> edge.startNode).collect(Collectors.toList());
 			node = pickRandomElementFromList(intersection(startNodesFromEdgesNotSeen, cycle)); // the intersection can not bee empty
 			cycle = shiftCycle(cycle, node);
-			List<Node<T>> newCycle = findCycleFromNode(graph, node, edgesNotSeen);
+			List<T> newCycle = findCycleFromNode(graph, node, edgesNotSeen);
 			cycle.addAll(newCycle);
 		}
 		return cycle;
 	}
 	
-	private static <T> List<Node<T>> findCycleFromNode(final Graph<T> graph, Node<T> node, List<Graph.Edge<T>> edgesNotSeen){
-		List<Node<T>> cycle = new LinkedList<>();
+	private static <T> List<T> findCycleFromNode(final Graph<T> graph, T node, List<Graph.Edge<T>> edgesNotSeen){
+		List<T> cycle = new LinkedList<>();
 		List<Edge<T>> edgesFromNodeNotSeen = intersection(graph.edgesFrom(node), edgesNotSeen);
 		while(!edgesFromNodeNotSeen.isEmpty()) {
 			Edge<T> edgeToGo = pickRandomElementFromList(edgesFromNodeNotSeen);
@@ -69,15 +64,15 @@ public class EulerianCycleFinder {
 	}
 	
 	private static <T> void checkGraph(Graph<T> graph){
-		if(graph.edges.isEmpty()) throw new IllegalArgumentException("Can not find an Eulerian cycle in a graph without edges");
+		if(graph.edges().isEmpty()) throw new IllegalArgumentException("Can not find an Eulerian cycle in a graph without edges");
 		
-		FrequencyMap<Node<T>> inDegreeMap = new FrequencyMap<>();
-		FrequencyMap<Node<T>> outDegreeMap = new FrequencyMap<>();
-		for(Edge<T> edge : graph.edges) {
+		FrequencyMap<T> inDegreeMap = new FrequencyMap<>();
+		FrequencyMap<T> outDegreeMap = new FrequencyMap<>();
+		for(Edge<T> edge : graph.edges()) {
 			outDegreeMap.put(edge.startNode);
 			inDegreeMap.put(edge.endNode);
 		}
-		Set<Node<T>> illegalNodes = graph.nodes.stream().filter(node -> inDegreeMap.frequency(node) != outDegreeMap.frequency(node)).collect(Collectors.toSet());
+		Set<T> illegalNodes = graph.nodes().stream().filter(node -> inDegreeMap.frequency(node) != outDegreeMap.frequency(node)).collect(Collectors.toSet());
 		if(!illegalNodes.isEmpty()){
 			throw new IllegalArgumentException("Can not find an Eulerian cycle in a graph where there is a node with indegree <> outdegree as node: " + illegalNodes);
 		}

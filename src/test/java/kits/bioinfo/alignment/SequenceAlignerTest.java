@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import org.junit.Assert;
 import org.junit.Test;
 
+import kits.bioinfo.alignment.aligner.FittingSequenceAligner;
+import kits.bioinfo.alignment.aligner.LocalSequenceAligner;
 import kits.bioinfo.alignment.aligner.SequenceAligner;
 import kits.bioinfo.alignment.aligner.SequenceAligner.AlignmentResult;
 import kits.bioinfo.alignment.scorefunction.ScoreFunction;
@@ -33,7 +35,7 @@ public class SequenceAlignerTest {
 	public void test2() {
 		Sequence<AminoAcid> sequence1 = new Peptid("PLEASANTLY").toSequence();
 		Sequence<AminoAcid> sequence2 = new Peptid("MEANLY").toSequence();
-		SequenceAligner<AminoAcid> aligner = new SequenceAligner<AminoAcid>(ScoreFunction.blosum62(5));
+		SequenceAligner<AminoAcid> aligner = new SequenceAligner<>(ScoreFunction.blosum62(5));
 		Collection<AlignmentResult<AminoAcid>> results = aligner.findAllGlobalAlignments(sequence1, sequence2);
 
 		Assert.assertEquals(8, results.iterator().next().score);
@@ -53,26 +55,39 @@ public class SequenceAlignerTest {
 	public void test3() {
 		Sequence<AminoAcid> sequence1 = new Peptid("PENALTY").toSequence();
 		Sequence<AminoAcid> sequence2 = new Peptid("NAL").toSequence();
-		SequenceAligner<AminoAcid> aligner = new SequenceAligner<AminoAcid>(ScoreFunction.basic(10, 2, 5));
+		SequenceAligner<AminoAcid> aligner = new SequenceAligner<>(ScoreFunction.basic(10, 2, 5));
 		AlignmentResult<AminoAcid> result = aligner.findOneLocalAlignment(sequence1, sequence2);
 		Assert.assertEquals("NAL\nNAL", printAlignment(result));
+		
+		LocalSequenceAligner<AminoAcid> localAligner = new LocalSequenceAligner<>(ScoreFunction.basic(10, 2, 5));
+		AlignmentResult<AminoAcid> result2 = localAligner.findOneAlignment(sequence1, sequence2);
+		Assert.assertEquals("NAL\nNAL", printAlignment(result2));
 	}
 	
 	@Test
 	public void test4() {
 		Sequence<AminoAcid> sequence1 = new Peptid("GTAGGCTTAAGGTTAC").toSequence();
 		Sequence<AminoAcid> sequence2 = new Peptid("TAGATA").toSequence();
+		
 		SequenceAligner<AminoAcid> aligner = new SequenceAligner<AminoAcid>(ScoreFunction.basic(1, 1, 1));
 		AlignmentResult<AminoAcid> result = aligner.findOneFittingAlignment(sequence1, sequence2);
+		Assert.assertEquals(2, result.score);
+		Assert.assertEquals("TAAGGTTA\nT-AGA-TA", printAlignment(result));
 		System.out.println(result.score);
-		System.out.println(printAlignment(result));
+		
+		FittingSequenceAligner<AminoAcid> fittingAligner = new FittingSequenceAligner<AminoAcid>(ScoreFunction.basic(1, 1, 1));
+		AlignmentResult<AminoAcid> result2 = fittingAligner.findOneAlignment(sequence1, sequence2);
+		Assert.assertEquals(2, result2.score);
+		System.out.println(printAlignment(result2));
+		Assert.assertEquals("TAAGGTTA\nT-AGA-TA", printAlignment(result2));
+		
 	}
 
 	@Test
 	public void test5() {
 		Sequence<AminoAcid> sequence1 = new Peptid("ALMAPC").toSequence();
 		Sequence<AminoAcid> sequence2 = new Peptid("MAP").toSequence();
-		SequenceAligner<AminoAcid> aligner = new SequenceAligner<AminoAcid>(ScoreFunction.basic(1, 1, 1));
+		SequenceAligner<AminoAcid> aligner = new SequenceAligner<>(ScoreFunction.basic(1, 1, 1));
 		AlignmentResult<AminoAcid> result = aligner.findOneFittingAlignment(sequence1, sequence2);
 		System.out.println(result.score);
 		System.out.println(printAlignment(result));
@@ -82,7 +97,7 @@ public class SequenceAlignerTest {
 	public void test6() {
 		Sequence<AminoAcid> sequence1 = new Peptid("APAPAPAWHEAE").toSequence();
 		Sequence<AminoAcid> sequence2 = new Peptid("HEAGAWGHEE").toSequence();
-		SequenceAligner<AminoAcid> aligner = new SequenceAligner<AminoAcid>(ScoreFunction.basic(1, 2, 2));
+		SequenceAligner<AminoAcid> aligner = new SequenceAligner<>(ScoreFunction.basic(1, 2, 2));
 		AlignmentResult<AminoAcid> result = aligner.findOneOverlappingAlignment(sequence1, sequence2);
 		System.out.println(result.score);
 		System.out.println(printAlignment(result));

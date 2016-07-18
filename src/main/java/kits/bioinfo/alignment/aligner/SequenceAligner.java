@@ -372,6 +372,7 @@ public class SequenceAligner<T> {
 
 			return sb.toString();
 		}
+		
 	}
 
 	public static class AlignmentResult<T> {

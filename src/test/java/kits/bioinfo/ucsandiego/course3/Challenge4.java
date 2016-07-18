@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import kits.bioinfo.math.graph.Graph;
-import kits.bioinfo.math.graph.Graph.Node;
 import kits.bioinfo.math.graph.GraphParser;
 import kits.bioinfo.math.graph.LongestPathFinder;
 
@@ -22,14 +21,12 @@ public class Challenge4 {
 	 */
 	public static void main(String[] args) throws Exception {
 		List<String> lines = Files.readAllLines(Paths.get("input/dataset_245_7.txt"));
-		int sourceNodeValue = Integer.parseInt(lines.get(0));
-		int sinkNodeValue = Integer.parseInt(lines.get(1));
+		int sourceNode = Integer.parseInt(lines.get(0));
+		int sinkNode = Integer.parseInt(lines.get(1));
 		Graph<Integer> graph = GraphParser.buildWeightedIntGraphFromAdjacencyStrings(lines.subList(2, lines.size()));
 		
-		Node<Integer> sourceNode = graph.nodeWithValue(sourceNodeValue).get();
-		Node<Integer> sinkNode = graph.nodeWithValue(sinkNodeValue).get();
-		List<Integer> longestPath = LongestPathFinder.findLongestPathValues(graph, sourceNode, sinkNode);
-		System.out.println((int)sinkNode.getMarkup() - (int)sourceNode.getMarkup());
+		List<Integer> longestPath = LongestPathFinder.findLongestPath(graph, sourceNode, sinkNode);
+		System.out.println(graph.markupNumber(sourceNode) - graph.markupNumber(sinkNode));
 		System.out.println(longestPath.stream().map(v -> v.toString()).collect(Collectors.joining("->")));
 	}
 

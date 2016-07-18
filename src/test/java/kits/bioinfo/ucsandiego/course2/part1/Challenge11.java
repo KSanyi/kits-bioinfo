@@ -23,7 +23,7 @@ public class Challenge11 {
 	public static void main(String[] args) throws IOException {
 		List<DnaSequence> edges = SequenceReader.readDnaSequencesPerLine("input/dataset_205_5.txt");
 		KmerGraph graph = KmerGraph.buildDeBrujinGraph(edges);
-		List<List<DnaSequence>> maxNonBranchingPaths = MaxNonBranchingPathFinder.findMaxNonBranchingPathValues(graph);
+		List<List<DnaSequence>> maxNonBranchingPaths = MaxNonBranchingPathFinder.findMaxNonBranchingPaths(graph);
 		List<DnaSequence> contigs = maxNonBranchingPaths.stream().map(path -> KmerCompositioner.readSequenceFromComposition(path)).collect(Collectors.toList());
 		Files.write(Paths.get("./output/output_205_5.txt"), contigs.stream().map(contig -> contig.toString()).collect(Collectors.toList()));
 	}

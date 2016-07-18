@@ -1,5 +1,6 @@
 package kits.bioinfo.alignment;
 
+import kits.bioinfo.alignment.aligner.GlobalSequenceAligner;
 import kits.bioinfo.alignment.aligner.SequenceAligner;
 import kits.bioinfo.alignment.aligner.SequenceAligner.AlignmentResult;
 import kits.bioinfo.alignment.scorefunction.ScoreFunction;
@@ -10,6 +11,13 @@ public class EditDistanceFinder {
 	public static <T> int findEditDistance(Sequence<T> sequence1, Sequence<T> sequence2){
 		SequenceAligner<T> aligner = new SequenceAligner<>(ScoreFunction.editDistance());
 		AlignmentResult<T> alignment = aligner.findOneGlobalAlignment(sequence1, sequence2);
+		
+		return -alignment.score;
+	}
+	
+	public static <T> int findEditDistance2(Sequence<T> sequence1, Sequence<T> sequence2){
+		GlobalSequenceAligner<T> aligner = new GlobalSequenceAligner<>(ScoreFunction.editDistance());
+		AlignmentResult<T> alignment = aligner.findOneAlignment(sequence1, sequence2);
 		
 		return -alignment.score;
 	}

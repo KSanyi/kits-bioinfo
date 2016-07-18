@@ -12,9 +12,8 @@ import java.util.stream.Collectors;
 
 import kits.bioinfo.math.graph.EulerianCycleFinder;
 import kits.bioinfo.math.graph.Graph;
-import kits.bioinfo.math.graph.GraphParser;
 import kits.bioinfo.math.graph.Graph.Edge;
-import kits.bioinfo.math.graph.Graph.Node;
+import kits.bioinfo.math.graph.GraphParser;
 
 public class Challenge6 {
 
@@ -25,7 +24,7 @@ public class Challenge6 {
 	 */
 	public static void main(String[] args) throws IOException {
 		Graph<Integer> graph = GraphParser.buildIntGraphFromAdjacencyStrings(Files.readAllLines(Paths.get("input/dataset_203_2.txt")));
-		List<Node<Integer>> cycle = EulerianCycleFinder.findEulerianCycle(graph);
+		List<Integer> cycle = EulerianCycleFinder.findEulerianCycle(graph);
 		String cycleString = cycle.stream().map(n -> n.toString()).collect(Collectors.joining("->"));
 		
 		// check
@@ -34,7 +33,7 @@ public class Challenge6 {
 		
 		for(int i=0;i<nodes.size()-1;i++) {
 			Graph.Edge<Integer> edge = new Graph.Edge<>(nodes.get(i),nodes.get(i+1));
-			if(!graph.edges.contains(edge)) {
+			if(!graph.edges().contains(edge)) {
 				System.out.println(edge);
 			};
 			if(set.contains(edge)){

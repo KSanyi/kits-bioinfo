@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import kits.bioinfo.assembly.KmerCompositioner;
 import kits.bioinfo.assembly.KmerGraph;
@@ -23,7 +22,7 @@ public class Challenge8 {
 	 */
 	public static void main(String[] args) throws IOException {
 		KmerGraph graph = KmerGraph.buildDeBrujinGraph(SequenceReader.readDnaSequencesPerLine("input/dataset_203_6.txt"));
-		List<DnaSequence> path = EulerianPathFinder.findEulerianPath(graph).stream().map(node -> node.value).collect(Collectors.toList());
+		List<DnaSequence> path = EulerianPathFinder.findEulerianPath(graph);
 		DnaSequence sequence = KmerCompositioner.readSequenceFromComposition(path);
 		Files.write(Paths.get("./output/output_203_6.txt"), Collections.singletonList(sequence.toString()));
 	}

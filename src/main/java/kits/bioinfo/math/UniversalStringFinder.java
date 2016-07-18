@@ -21,7 +21,7 @@ public class UniversalStringFinder {
 
 		Graph<String> deBrujinGraph = buildDeBrujinGraph(strings);
 
-		List<String> path = EulerianPathFinder.findEulerianPath(deBrujinGraph).stream().map(node -> node.value).collect(Collectors.toList());
+		List<String> path = EulerianPathFinder.findEulerianPath(deBrujinGraph);
 		return readString(path, k);
 	}
 
@@ -34,7 +34,7 @@ public class UniversalStringFinder {
 
 		Graph<String> deBrujinGraph = buildDeBrujinGraph(strings);
 
-		List<String> cycle = EulerianCycleFinder.findEulerianCycle(deBrujinGraph).stream().map(node -> node.value).collect(Collectors.toList());
+		List<String> cycle = EulerianCycleFinder.findEulerianCycle(deBrujinGraph);
 		return readCycle(cycle, k);
 	}
 

@@ -18,7 +18,7 @@ public class ReadPairAssembler {
 		
 		Graph<ReadPair> graph = KmerGraph.buildReadPairDeBrujinGraph(readPairs);
 		for(int i=0;i<10000;i++){
-			List<ReadPair> path = EulerianPathFinder.findEulerianPath(graph).stream().map(node -> node.value).collect(Collectors.toList());
+			List<ReadPair> path = EulerianPathFinder.findEulerianPath(graph).stream().map(node -> node).collect(Collectors.toList());
 			DnaSequence sequence1 = KmerCompositioner.readSequenceFromComposition(path.stream().map(readPair -> readPair.read1).collect(Collectors.toList()));
 			DnaSequence sequence2 = KmerCompositioner.readSequenceFromComposition(path.stream().map(readPair -> readPair.read2).collect(Collectors.toList()));
 			if(areValidReadPairSequences(sequence1, sequence2, distance, k-1)){

@@ -31,7 +31,7 @@ public class EulerianCycleFinderTest {
 		
 		Assert.assertEquals(graph, GraphParser.buildIntGraphFromAdjacencyStrings(Arrays.asList(graph.toString().split("\n"))));
 		
-		List<Integer> eulerianCycle = EulerianCycleFinder.findEulerianCycleValues(graph);
+		List<Integer> eulerianCycle = EulerianCycleFinder.findEulerianCycle(graph);
 		
 		List<Integer> expectedCycle = Arrays.asList(1, 0, 3, 2, 6, 8, 7, 9, 6, 5, 4, 2, 1);
 		

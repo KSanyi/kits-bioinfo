@@ -27,7 +27,7 @@ public class Quiz2 {
 				"CTCA", "GCAT", "GCTC", "TACG", "TCAC", "TCAT", "TGCA").stream()
 				.map(s -> new DnaSequence(s)).collect(Collectors.toList());
 		KmerGraph graph = KmerGraph.buildDeBrujinGraph(sequences);
-		List<DnaSequence> path = EulerianPathFinder.findEulerianPath(graph).stream().map(node -> node.value).collect(Collectors.toList());
+		List<DnaSequence> path = EulerianPathFinder.findEulerianPath(graph).stream().map(node -> node).collect(Collectors.toList());
 		System.out.println(KmerCompositioner.readSequenceFromComposition(path));
 	}
 	
