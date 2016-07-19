@@ -11,34 +11,34 @@ import kits.bioinfo.matcher.Matcher;
 public class MotifFinder {
 
 	public Set<DnaSequence> findMotifs(Collection<DnaSequence> sequences, int k, int d) {
-		
-		if(sequences.isEmpty()) {
+
+		if (sequences.isEmpty()) {
 			throw new IllegalArgumentException("Empty sequence list");
 		}
-		
+
 		DnaSequence firstSequence = sequences.iterator().next();
 		Set<DnaSequence> candidateMotifs = generateCandidateMotifs(firstSequence, k);
-		
+
 		Set<DnaSequence> motifs = new HashSet<>();
-		for(DnaSequence motif : candidateMotifs) {
+		for (DnaSequence motif : candidateMotifs) {
 			Matcher matcher = new ApproximateSubSequenceMatcher(motif, d);
-			if(sequences.stream().allMatch(s -> matcher.matches(s))) {
+			if (sequences.stream().allMatch(s -> matcher.matches(s))) {
 				motifs.add(motif);
 			}
 		}
-		
+
 		return motifs;
 	}
-	
+
 	private Set<DnaSequence> generateCandidateMotifs(DnaSequence firstSequence, int k) {
 		Set<DnaSequence> candidateMotifs = new HashSet<>();
-		
-		for(int index=0;index<firstSequence.length()-k+1;index++) {
+
+		for (int index = 0; index < firstSequence.length() - k + 1; index++) {
 			DnaSequence kmer = firstSequence.subSequence(index, k);
 			candidateMotifs.addAll(kmer.neighbours(k));
 		}
-		
+
 		return candidateMotifs;
 	}
-	
+
 }

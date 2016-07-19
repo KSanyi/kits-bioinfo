@@ -11,14 +11,10 @@ public class GreedyMotifFinderTest {
 
 	@Test
 	public void test() {
-		List<DnaSequence> sequences = Arrays.asList(
-				new DnaSequence("GGCGTTCAGGCA"),
-				new DnaSequence("AAGAATCAGTCA"), 
-				new DnaSequence("CAAGGAGTTCGC"), 
-				new DnaSequence("CACGTCAATCAC"),
-				new DnaSequence("CAATAATATTCG"));
-		
+		List<DnaSequence> sequences = Arrays.asList(new DnaSequence("GGCGTTCAGGCA"), new DnaSequence("AAGAATCAGTCA"), new DnaSequence("CAAGGAGTTCGC"),
+				new DnaSequence("CACGTCAATCAC"), new DnaSequence("CAATAATATTCG"));
+
 		System.out.println(new GreedyMotifFinder().findMotifs(sequences, 3));
 	}
-	
+
 }

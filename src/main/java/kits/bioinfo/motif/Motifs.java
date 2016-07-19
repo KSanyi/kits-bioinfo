@@ -29,25 +29,25 @@ public class Motifs {
 
 		return consensus;
 	}
-	
+
 	public static int score(Collection<DnaSequence> motifs) {
 		return distance(motifs, consensusString(motifs));
 	}
-	
+
 	public static int distance(Collection<DnaSequence> sequences, DnaSequence motif) {
 		return sequences.stream().map(sequence -> distance(sequence, motif)).mapToInt(Integer::intValue).sum();
 	}
-	
+
 	public static int distance(DnaSequence sequence, DnaSequence kmer) {
 		int k = kmer.length();
-		if(sequence.length() < k) {
+		if (sequence.length() < k) {
 			throw new IllegalArgumentException("Sequence can not be shorter than the kmer");
 		}
-		
+
 		int distance = kmer.length();
-		for(int i=0;i<sequence.length()-k+1;i++) {
+		for (int i = 0; i < sequence.length() - k + 1; i++) {
 			int d = sequence.subSequence(i, k).hammingDistance(kmer);
-			if(d < distance){
+			if (d < distance) {
 				distance = d;
 			}
 		}

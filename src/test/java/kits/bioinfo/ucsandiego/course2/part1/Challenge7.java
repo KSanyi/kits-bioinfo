@@ -14,9 +14,9 @@ import kits.bioinfo.math.graph.GraphParser;
 public class Challenge7 {
 
 	/**
-	 * CODE CHALLENGE: Solve the Eulerian Path Problem.
-     * Input: The adjacency list of a directed graph that has an Eulerian path.
-     * Output: An Eulerian path in this graph.
+	 * CODE CHALLENGE: Solve the Eulerian Path Problem. Input: The adjacency
+	 * list of a directed graph that has an Eulerian path. Output: An Eulerian
+	 * path in this graph.
 	 */
 	public static void main(String[] args) throws IOException {
 		Graph<Integer> graph = GraphParser.buildIntGraphFromAdjacencyStrings(Files.readAllLines(Paths.get("input/dataset_203_5.txt")));

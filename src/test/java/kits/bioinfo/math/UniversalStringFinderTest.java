@@ -11,5 +11,5 @@ public class UniversalStringFinderTest {
 		String universalString = UniversalStringFinder.findUniversalString(3);
 		System.out.println(universalString);
 	}
-	
+
 }

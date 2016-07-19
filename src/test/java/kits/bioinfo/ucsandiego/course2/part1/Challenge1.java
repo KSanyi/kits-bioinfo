@@ -13,9 +13,9 @@ import kits.bioinfo.infrastructure.SequenceReader;
 public class Challenge1 {
 
 	/**
-	 * CODE CHALLENGE: Solve the String Composition Problem.
-     *	Input: An integer k and a string Text.
-     *	Output: Compositionk(Text) (the k-mers can be provided in any order).
+	 * CODE CHALLENGE: Solve the String Composition Problem. Input: An integer k
+	 * and a string Text. Output: Compositionk(Text) (the k-mers can be provided
+	 * in any order).
 	 * 
 	 */
 	public static void main(String[] args) throws IOException {

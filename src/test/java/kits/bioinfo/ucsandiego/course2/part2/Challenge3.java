@@ -13,8 +13,8 @@ public class Challenge3 {
 
 	/**
 	 * CODE CHALLENGE: Solve the Generating Theoretical Spectrum Problem.
-	 * Generating Theoretical Spectrum Problem: Generate the theoretical spectrum of a cyclic peptide.
-     * Input: An amino acid string Peptide.
+	 * Generating Theoretical Spectrum Problem: Generate the theoretical
+	 * spectrum of a cyclic peptide. Input: An amino acid string Peptide.
 	 */
 	public static void main(String[] args) throws IOException {
 		List<String> lines = Files.readAllLines(Paths.get("input/dataset_98_4.txt"));

@@ -13,17 +13,17 @@ public class MedianStringFinder {
 		Set<DnaSequence> candidateKmers = AllPossibleSequenceGenerator.generateAllPossibleSequences(k);
 		int minDistance = Integer.MAX_VALUE;
 		final Set<DnaSequence> medianStrings = new HashSet<>();
-		for(DnaSequence candidate : candidateKmers) {
+		for (DnaSequence candidate : candidateKmers) {
 			int distance = Motifs.distance(sequences, candidate);
-			if(distance < minDistance) {
+			if (distance < minDistance) {
 				minDistance = distance;
 				medianStrings.clear();
 				medianStrings.add(candidate);
-			} else if(distance == minDistance) {
+			} else if (distance == minDistance) {
 				medianStrings.add(candidate);
 			}
 		}
 		return medianStrings;
 	}
-	
+
 }

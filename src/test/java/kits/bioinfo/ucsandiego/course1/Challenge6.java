@@ -11,10 +11,10 @@ import kits.bioinfo.motif.MedianStringFinder;
 public class Challenge6 {
 
 	/**
-	 * Implement MEDIANSTRING.
-     Input: An integer k, followed by a collection of strings Dna.
-     Output: A k-mer Pattern that minimizes d(Pattern, Dna) among all k-mers Pattern. (If there are
-     multiple such strings Pattern, then you may return any one.)
+	 * Implement MEDIANSTRING. Input: An integer k, followed by a collection of
+	 * strings Dna. Output: A k-mer Pattern that minimizes d(Pattern, Dna) among
+	 * all k-mers Pattern. (If there are multiple such strings Pattern, then you
+	 * may return any one.)
 	 * 
 	 */
 	public static void main(String[] args) throws IOException {

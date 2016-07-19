@@ -18,30 +18,31 @@ import kits.bioinfo.math.graph.GraphParser;
 public class Challenge6 {
 
 	/**
-	 * CODE CHALLENGE: Solve the Eulerian Cycle Problem.
-     * Input: The adjacency list of an Eulerian directed graph.
-     * Output: An Eulerian cycle in this graph.
+	 * CODE CHALLENGE: Solve the Eulerian Cycle Problem. Input: The adjacency
+	 * list of an Eulerian directed graph. Output: An Eulerian cycle in this
+	 * graph.
 	 */
 	public static void main(String[] args) throws IOException {
 		Graph<Integer> graph = GraphParser.buildIntGraphFromAdjacencyStrings(Files.readAllLines(Paths.get("input/dataset_203_2.txt")));
 		List<Integer> cycle = EulerianCycleFinder.findEulerianCycle(graph);
 		String cycleString = cycle.stream().map(n -> n.toString()).collect(Collectors.joining("->"));
-		
+
 		// check
 		List<Integer> nodes = Arrays.asList(cycleString.split("->")).stream().map(s -> Integer.valueOf(s)).collect(Collectors.toList());
 		Set<Edge<Integer>> set = new HashSet<>();
-		
-		for(int i=0;i<nodes.size()-1;i++) {
-			Graph.Edge<Integer> edge = new Graph.Edge<>(nodes.get(i),nodes.get(i+1));
-			if(!graph.edges().contains(edge)) {
+
+		for (int i = 0; i < nodes.size() - 1; i++) {
+			Graph.Edge<Integer> edge = new Graph.Edge<>(nodes.get(i), nodes.get(i + 1));
+			if (!graph.edges().contains(edge)) {
 				System.out.println(edge);
-			};
-			if(set.contains(edge)){
+			}
+			;
+			if (set.contains(edge)) {
 				System.out.println(edge);
 			}
 			set.add(edge);
 		}
-		
+
 		Files.write(Paths.get("./output/output_203_2.txt"), Collections.singletonList(cycleString));
 	}
 

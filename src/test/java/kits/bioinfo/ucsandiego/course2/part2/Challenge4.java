@@ -14,19 +14,16 @@ import kits.bioinfo.peptidsequencing.SimpleCycloPeptidSequencer;
 public class Challenge4 {
 
 	/**
-	 * CODE CHALLENGE: Implement CYCLOPEPTIDESEQUENCING 
+	 * CODE CHALLENGE: Implement CYCLOPEPTIDESEQUENCING
 	 */
 	public static void main(String[] args) throws IOException {
 		List<String> lines = Files.readAllLines(Paths.get("input/dataset_100_5.txt"));
-		List<Integer> massSpectrum = Arrays.asList(lines.get(0).split(" ")).stream()
-				.map(mass -> Integer.parseInt(mass))
-				.collect(Collectors.toList());
+		List<Integer> massSpectrum = Arrays.asList(lines.get(0).split(" ")).stream().map(mass -> Integer.parseInt(mass)).collect(Collectors.toList());
 		Set<Peptid> peptids = new SimpleCycloPeptidSequencer().sequencePeptids(massSpectrum);
-		
+
 		Set<String> massSequences = peptids.stream()
-			.map(peptid -> peptid.stream()
-					.map(aminoAcid -> String.valueOf(aminoAcid.mass)).collect(Collectors.joining("-")))
-					.collect(Collectors.toSet());
+				.map(peptid -> peptid.stream().map(aminoAcid -> String.valueOf(aminoAcid.mass)).collect(Collectors.joining("-")))
+				.collect(Collectors.toSet());
 		Files.write(Paths.get("./output/output_100_5.txt"), String.join(" ", massSequences).getBytes());
 	}
 

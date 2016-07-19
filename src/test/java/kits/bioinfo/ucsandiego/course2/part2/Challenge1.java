@@ -13,10 +13,10 @@ import kits.bioinfo.infrastructure.SequenceReader;
 public class Challenge1 {
 
 	/**
-	 * CODE CHALLENGE: Solve the Protein Translation Problem.
-	 * Protein Translation Problem: Translate an RNA string into an amino acid string.
-     * Input: An RNA string Pattern and the array GeneticCode.
-     * Output: The translation of Pattern into an amino acid string Peptide.
+	 * CODE CHALLENGE: Solve the Protein Translation Problem. Protein
+	 * Translation Problem: Translate an RNA string into an amino acid string.
+	 * Input: An RNA string Pattern and the array GeneticCode. Output: The
+	 * translation of Pattern into an amino acid string Peptide.
 	 */
 	public static void main(String[] args) throws IOException {
 		RnaSequence rnaSequence = SequenceReader.readRnaSequenceFromFile("input/dataset_96_5.txt");

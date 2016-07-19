@@ -13,9 +13,10 @@ public class SequenceGeneratorTest {
 
 	@Test
 	public void generateAllPossibleSequences() {
-		Assert.assertEquals(new HashSet<>(Arrays.asList(new DnaSequence("A"),new DnaSequence("C"), new DnaSequence("T"), new DnaSequence("G"))), AllPossibleSequenceGenerator.generateAllPossibleSequences(1));
+		Assert.assertEquals(new HashSet<>(Arrays.asList(new DnaSequence("A"), new DnaSequence("C"), new DnaSequence("T"), new DnaSequence("G"))),
+				AllPossibleSequenceGenerator.generateAllPossibleSequences(1));
 		Assert.assertEquals(16, AllPossibleSequenceGenerator.generateAllPossibleSequences(2).size());
 		Assert.assertEquals(64, AllPossibleSequenceGenerator.generateAllPossibleSequences(3).size());
 	}
-	
+
 }

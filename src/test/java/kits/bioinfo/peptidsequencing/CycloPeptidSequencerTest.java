@@ -62,7 +62,7 @@ public class CycloPeptidSequencerTest {
 				2073, 2075, 2078, 2080, 2084, 2086, 2089, 2090, 2096, 2102, 2112, 2116, 2117, 2128, 2128, 2146, 2160, 2167, 2167, 2172, 2183, 2188,
 				2188, 2193, 2199, 2201, 2202, 2215, 2215, 2215, 2217, 2227, 2227, 2231, 2231, 2231, 2243, 2259, 2259, 2259, 2259, 2330);
 		Set<Peptid> peptids = new CycloPeptidSequencer(366, 20).sequencePeptids(experimentalSpectrum);
-		
+
 		Assert.assertThat(peptids, new EqualsInAnyOrder<>(new Peptid("FVCMASYDCHDVYVAAAIDEGA"), new Peptid("FVCMASYDCHDVYVAAALDEGA")));
 	}
 
@@ -75,7 +75,7 @@ public class CycloPeptidSequencerTest {
 				399, 692, 1022, 988, 388, 1091, 731, 445, 795, 577, 850, 908, 516, 273, 1050, 387, 87, 502, 743, 433, 1036, 806, 286, 1107, 463, 1004,
 				344, 615, 502, 101, 348, 921, 864, 1194, 947, 559, 875);
 		Set<Peptid> peptids = new CycloPeptidSequencer(357, 19).sequencePeptids(experimentalSpectrum);
-		
+
 		Assert.assertThat(peptids, new EqualsInAnyOrder<>(new Peptid("DTGDNLCCSGTAG"), new Peptid("DTGDNICCSGTAG")));
 	}
 

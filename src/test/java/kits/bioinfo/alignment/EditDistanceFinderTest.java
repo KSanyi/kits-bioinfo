@@ -11,8 +11,8 @@ public class EditDistanceFinderTest {
 	public void test() {
 		int editDistance = EditDistanceFinder.findEditDistance(Sequence.of("PLEASANTLY"), Sequence.of("MEANLY"));
 		System.out.println(editDistance);
-		
+
 		Assert.assertEquals(5, editDistance);
 	}
-	
+
 }

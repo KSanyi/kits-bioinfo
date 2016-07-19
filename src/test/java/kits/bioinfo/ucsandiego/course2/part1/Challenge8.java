@@ -15,10 +15,10 @@ import kits.bioinfo.math.graph.EulerianPathFinder;
 public class Challenge8 {
 
 	/**
-	 * CODE CHALLENGE: Solve the String Reconstruction Problem.
-     * Input: An integer k followed by a list of k-mers Patterns.
-     * Output: A string Text with k-mer composition equal to Patterns. (If multiple answers exist, you may
-     * return any one.)
+	 * CODE CHALLENGE: Solve the String Reconstruction Problem. Input: An
+	 * integer k followed by a list of k-mers Patterns. Output: A string Text
+	 * with k-mer composition equal to Patterns. (If multiple answers exist, you
+	 * may return any one.)
 	 */
 	public static void main(String[] args) throws IOException {
 		KmerGraph graph = KmerGraph.buildDeBrujinGraph(SequenceReader.readDnaSequencesPerLine("input/dataset_203_6.txt"));

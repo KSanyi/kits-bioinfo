@@ -12,7 +12,7 @@ public class Test {
 	public static void main(String[] args) {
 		Random random = new Random();
 		RandomSequenceGenerator generator = new RandomSequenceGenerator();
-		int patternLength = random.nextInt(50)+1;
+		int patternLength = random.nextInt(50) + 1;
 		DnaSequence pattern = generator.generateRandomDnaSequence(patternLength);
 		DnaSequence text = generator.generateRandomDnaSequence(1000);
 		System.out.println("Pattern: " + pattern);
@@ -20,5 +20,5 @@ public class Test {
 		new NaiveSubSequenceMatcher(pattern).matchStartIndexes(text);
 		new BMSubSequenceMatcher(pattern).matchStartIndexes(text);
 	}
-	
+
 }

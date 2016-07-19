@@ -34,8 +34,7 @@ public class MaxNonBranchingPathFinder {
 		return paths;
 	}
 
-	private static <T> List<T> finishPath(Graph<T> graph, FrequencyMap<T> inDegreeMap, FrequencyMap<T> outDegreeMap,
-			List<T> path) {
+	private static <T> List<T> finishPath(Graph<T> graph, FrequencyMap<T> inDegreeMap, FrequencyMap<T> outDegreeMap, List<T> path) {
 		T node = path.get(path.size() - 1);
 		while (inDegreeMap.frequency(node) == 1 && outDegreeMap.frequency(node) == 1) {
 			node = graph.adjacentNodes(node).iterator().next();

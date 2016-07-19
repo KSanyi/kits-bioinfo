@@ -19,18 +19,18 @@ import kits.bioinfo.core.DnaSequence;
 public class AllPossibleSequenceGenerator {
 
 	private static final List<DnaBase> bases = Arrays.asList(A, C, T, G);
-	
+
 	public static Set<DnaSequence> generateAllPossibleSequences(int length) {
-		if(length == 0) {
+		if (length == 0) {
 			return singleton(new DnaSequence(emptyList()));
 		} else {
-			Set<DnaSequence> sequences = generateAllPossibleSequences(length-1);
+			Set<DnaSequence> sequences = generateAllPossibleSequences(length - 1);
 			Set<DnaSequence> appendedSequences = new HashSet<>();
-			for(DnaBase base : bases) {
+			for (DnaBase base : bases) {
 				appendedSequences.addAll(sequences.stream().map(sequence -> sequence.append(base)).collect(toSet()));
 			}
 			return appendedSequences;
 		}
 	}
-	
+
 }
