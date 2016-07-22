@@ -34,7 +34,7 @@ public class FrequencyMap<T> {
 
 	@Override
 	public String toString() {
-		return map.keySet().stream().map(elem -> elem + " " + map.get(elem)).collect(Collectors.joining(", "));
+		return map.keySet().stream().map(elem -> elem + " " + map.get(elem)).collect(Collectors.joining("\n"));
 	}
 
 }
