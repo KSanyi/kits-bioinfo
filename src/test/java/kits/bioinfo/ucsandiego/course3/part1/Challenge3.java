@@ -1,4 +1,4 @@
-package kits.bioinfo.ucsandiego.course3;
+package kits.bioinfo.ucsandiego.course3.part1;
 
 import java.util.List;
 

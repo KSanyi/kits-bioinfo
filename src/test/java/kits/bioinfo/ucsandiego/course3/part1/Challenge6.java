@@ -1,4 +1,4 @@
-package kits.bioinfo.ucsandiego.course3;
+package kits.bioinfo.ucsandiego.course3.part1;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -23,7 +23,7 @@ public class Challenge6 {
 	 * strings written in the single-letter amino acid alphabet. Output: The
 	 * maximum score of a local alignment of the strings, followed by a local
 	 * alignment of these strings achieving the maximum score. Use the PAM250
-	 * scoring matrix and indel penalty σ = 5.
+	 * scoring matrix and indel penalty = 5.
 	 */
 	@Test
 	public void test() throws Exception {

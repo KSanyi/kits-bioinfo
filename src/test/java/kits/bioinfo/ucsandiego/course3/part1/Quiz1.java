@@ -1,4 +1,4 @@
-package kits.bioinfo.ucsandiego.course3;
+package kits.bioinfo.ucsandiego.course3.part1;
 
 import kits.bioinfo.alignment.LongestCommonSubSequenceFinder;
 import kits.bioinfo.core.DnaBase;

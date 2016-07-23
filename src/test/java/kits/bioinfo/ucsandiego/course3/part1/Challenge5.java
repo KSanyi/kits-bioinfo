@@ -1,4 +1,4 @@
-package kits.bioinfo.ucsandiego.course3;
+package kits.bioinfo.ucsandiego.course3.part1;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -23,7 +23,7 @@ public class Challenge5 {
 	 * strings written in the single-letter amino acid alphabet. Output: The
 	 * maximum alignment score of these strings followed by an alignment
 	 * achieving this maximum score. Use the BLOSUM62 scoring matrix and indel
-	 * penalty σ = 5.
+	 * penalty = 5.
 	 */
 	@Test
 	public void test() throws Exception {
