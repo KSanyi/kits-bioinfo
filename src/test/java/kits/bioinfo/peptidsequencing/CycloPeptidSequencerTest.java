@@ -24,7 +24,7 @@ public class CycloPeptidSequencerTest {
 				.collect(Collectors.toSet());
 
 		Assert.assertThat(massSequences,
-				new EqualsInAnyOrder<>("128-113-186", "186-113-128", "128-186-113", "113-186-128", "113-128-186", "186-128-113"));
+				new EqualsInAnyOrder<String>("128-113-186", "186-113-128", "128-186-113", "113-186-128", "113-128-186", "186-128-113"));
 	}
 
 	@Test
@@ -63,7 +63,7 @@ public class CycloPeptidSequencerTest {
 				2188, 2193, 2199, 2201, 2202, 2215, 2215, 2215, 2217, 2227, 2227, 2231, 2231, 2231, 2243, 2259, 2259, 2259, 2259, 2330);
 		Set<Peptid> peptids = new CycloPeptidSequencer(366, 20).sequencePeptids(experimentalSpectrum);
 
-		Assert.assertThat(peptids, new EqualsInAnyOrder<>(new Peptid("FVCMASYDCHDVYVAAAIDEGA"), new Peptid("FVCMASYDCHDVYVAAALDEGA")));
+		Assert.assertThat(peptids, new EqualsInAnyOrder<Peptid>(new Peptid("FVCMASYDCHDVYVAAAIDEGA"), new Peptid("FVCMASYDCHDVYVAAALDEGA")));
 	}
 
 	@Test
@@ -76,7 +76,7 @@ public class CycloPeptidSequencerTest {
 				344, 615, 502, 101, 348, 921, 864, 1194, 947, 559, 875);
 		Set<Peptid> peptids = new CycloPeptidSequencer(357, 19).sequencePeptids(experimentalSpectrum);
 
-		Assert.assertThat(peptids, new EqualsInAnyOrder<>(new Peptid("DTGDNLCCSGTAG"), new Peptid("DTGDNICCSGTAG")));
+		Assert.assertThat(peptids, new EqualsInAnyOrder<Peptid>(new Peptid("DTGDNLCCSGTAG"), new Peptid("DTGDNICCSGTAG")));
 	}
 
 }
