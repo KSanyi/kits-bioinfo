@@ -28,6 +28,19 @@ public class Permutation {
 	public int size() {
 		return values.size();
 	}
+	
+	public int numberOfBreakPoints(){
+		int nrOfBreakPoints = 0;
+		if(values.get(0) != 1) nrOfBreakPoints++;
+		for(int i=1;i<size();i++){
+			if(values.get(i) != values.get(i-1) + 1){
+				nrOfBreakPoints++;
+			}
+		}
+		if(values.get(size()-1) != size()) nrOfBreakPoints++;
+		
+		return nrOfBreakPoints;
+	}
 
 	@Override
 	public String toString() {
