@@ -8,12 +8,12 @@ import kits.bioinfo.core.Sequence;
 
 public class EditDistanceFinderTest {
 
-	@Test
-	public void test() {
-		int editDistance = EditDistanceFinder.findEditDistance(Sequence.of("PLEASANTLY"), Sequence.of("MEANLY"));
-		System.out.println(editDistance);
+    @Test
+    public void test() {
+        int editDistance = EditDistanceFinder.findEditDistance(Sequence.of("PLEASANTLY"), Sequence.of("MEANLY"));
+        System.out.println(editDistance);
 
-		assertEquals(5, editDistance);
-	}
+        assertEquals(5, editDistance);
+    }
 
 }

@@ -13,49 +13,49 @@ import kits.bioinfo.core.Peptid;
 
 public class MassSpectrometer {
 
-	public List<Integer> generateMassSpectrumForPeptid(Peptid peptid) {
-		return generateMassSpectrum(peptid, false);
-	}
+    public List<Integer> generateMassSpectrumForPeptid(Peptid peptid) {
+        return generateMassSpectrum(peptid, false);
+    }
 
-	public List<Integer> generateMassSpectrumForCyclidPeptid(Peptid cyclidPeptid) {
-		return generateMassSpectrum(cyclidPeptid, true);
-	}
+    public List<Integer> generateMassSpectrumForCyclidPeptid(Peptid cyclidPeptid) {
+        return generateMassSpectrum(cyclidPeptid, true);
+    }
 
-	private List<Integer> generateMassSpectrum(Peptid peptid, boolean cylic) {
+    private List<Integer> generateMassSpectrum(Peptid peptid, boolean cylic) {
 
-		List<Peptid> allSubPeptids = new ArrayList<>();
-		for (int k = 1; k < peptid.length(); k++) {
-			allSubPeptids.addAll(cylic ? generateCyclicCompositions(peptid, k) : generateCompositions(peptid, k));
-		}
+        List<Peptid> allSubPeptids = new ArrayList<>();
+        for (int k = 1; k < peptid.length(); k++) {
+            allSubPeptids.addAll(cylic ? generateCyclicCompositions(peptid, k) : generateCompositions(peptid, k));
+        }
 
-		List<Integer> masses = allSubPeptids.stream().map(p -> p.mass()).collect(Collectors.toList());
-		masses.add(0);
-		masses.add(peptid.mass());
+        List<Integer> masses = allSubPeptids.stream().map(p -> p.mass()).collect(Collectors.toList());
+        masses.add(0);
+        masses.add(peptid.mass());
 
-		Collections.sort(masses);
-		return Collections.unmodifiableList(masses);
-	}
+        Collections.sort(masses);
+        return Collections.unmodifiableList(masses);
+    }
 
-	private List<Peptid> generateCompositions(Peptid peptid, int k) {
-		if (peptid.length() < k)
-			throw new IllegalArgumentException("Sequence length must be >= k");
+    private List<Peptid> generateCompositions(Peptid peptid, int k) {
+        if (peptid.length() < k)
+            throw new IllegalArgumentException("Sequence length must be >= k");
 
-		return range(0, peptid.length() - k + 1).mapToObj(i -> peptid.subPeptid(i, k)).collect(toList());
-	}
+        return range(0, peptid.length() - k + 1).mapToObj(i -> peptid.subPeptid(i, k)).collect(toList());
+    }
 
-	private List<Peptid> generateCyclicCompositions(Peptid cyclidPeptid, int k) {
-		if (cyclidPeptid.length() < k)
-			throw new IllegalArgumentException("Sequence length must be >= k");
+    private List<Peptid> generateCyclicCompositions(Peptid cyclidPeptid, int k) {
+        if (cyclidPeptid.length() < k)
+            throw new IllegalArgumentException("Sequence length must be >= k");
 
-		Peptid linearizedPeptidBuilder = new Peptid("");
-		for (AminoAcid aminoAcid : cyclidPeptid) {
-			linearizedPeptidBuilder = linearizedPeptidBuilder.append(aminoAcid);
-		}
-		for (AminoAcid aminoAcid : cyclidPeptid.prefix()) {
-			linearizedPeptidBuilder = linearizedPeptidBuilder.append(aminoAcid);
-		}
-		Peptid linearizedPeptid = linearizedPeptidBuilder;
-		return range(0, cyclidPeptid.length()).mapToObj(i -> linearizedPeptid.subPeptid(i, k)).collect(toList());
-	}
+        Peptid linearizedPeptidBuilder = new Peptid("");
+        for (AminoAcid aminoAcid : cyclidPeptid) {
+            linearizedPeptidBuilder = linearizedPeptidBuilder.append(aminoAcid);
+        }
+        for (AminoAcid aminoAcid : cyclidPeptid.prefix()) {
+            linearizedPeptidBuilder = linearizedPeptidBuilder.append(aminoAcid);
+        }
+        Peptid linearizedPeptid = linearizedPeptidBuilder;
+        return range(0, cyclidPeptid.length()).mapToObj(i -> linearizedPeptid.subPeptid(i, k)).collect(toList());
+    }
 
 }

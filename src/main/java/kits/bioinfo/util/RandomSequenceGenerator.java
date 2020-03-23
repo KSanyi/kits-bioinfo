@@ -11,30 +11,30 @@ import kits.bioinfo.core.Peptid;
 
 public class RandomSequenceGenerator {
 
-	private final Random random;
+    private final Random random;
 
-	public RandomSequenceGenerator(long seed) {
-		random = new Random(seed);
-	}
+    public RandomSequenceGenerator(long seed) {
+        random = new Random(seed);
+    }
 
-	public RandomSequenceGenerator() {
-		random = new Random();
-	}
+    public RandomSequenceGenerator() {
+        random = new Random();
+    }
 
-	public DnaSequence generateRandomDnaSequence(int length) {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < length; i++) {
-			sb.append(DnaBase.bases()[random.nextInt(DnaBase.bases().length)]);
-		}
-		return new DnaSequence(sb.toString());
-	}
+    public DnaSequence generateRandomDnaSequence(int length) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            sb.append(DnaBase.bases()[random.nextInt(DnaBase.bases().length)]);
+        }
+        return new DnaSequence(sb.toString());
+    }
 
-	public Peptid generateRandomPeptid(int length) {
-		List<AminoAcid> aminoAcids = new LinkedList<>();
-		for (int i = 0; i < length; i++) {
-			aminoAcids.add(AminoAcid.values()[random.nextInt(AminoAcid.values().length)]);
-		}
-		return new Peptid(aminoAcids);
-	}
+    public Peptid generateRandomPeptid(int length) {
+        List<AminoAcid> aminoAcids = new LinkedList<>();
+        for (int i = 0; i < length; i++) {
+            aminoAcids.add(AminoAcid.values()[random.nextInt(AminoAcid.values().length)]);
+        }
+        return new Peptid(aminoAcids);
+    }
 
 }

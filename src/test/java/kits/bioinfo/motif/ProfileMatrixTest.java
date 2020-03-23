@@ -13,22 +13,22 @@ import kits.bioinfo.core.DnaSequence;
 
 public class ProfileMatrixTest {
 
-	@Test
-	public void probability() {
-		Set<DnaSequence> kmers = new HashSet<>(Arrays.asList(new DnaSequence("ATTT"), new DnaSequence("CGTA")));
+    @Test
+    public void probability() {
+        Set<DnaSequence> kmers = new HashSet<>(Arrays.asList(new DnaSequence("ATTT"), new DnaSequence("CGTA")));
 
-		ProfileMatrix profileMatrix = ProfileMatrix.build(kmers);
+        ProfileMatrix profileMatrix = ProfileMatrix.build(kmers);
 
-		assertEquals(new BigDecimal("0.125"), profileMatrix.calculateProbability(new DnaSequence("ATTA")));
-	}
+        assertEquals(new BigDecimal("0.125"), profileMatrix.calculateProbability(new DnaSequence("ATTA")));
+    }
 
-	@Test
-	public void mostProbableSequenceFound() {
-		Set<DnaSequence> kmers = new HashSet<>(Arrays.asList(new DnaSequence("ATTT"), new DnaSequence("CGTA")));
+    @Test
+    public void mostProbableSequenceFound() {
+        Set<DnaSequence> kmers = new HashSet<>(Arrays.asList(new DnaSequence("ATTT"), new DnaSequence("CGTA")));
 
-		ProfileMatrix profileMatrix = ProfileMatrix.build(kmers);
+        ProfileMatrix profileMatrix = ProfileMatrix.build(kmers);
 
-		assertEquals(new DnaSequence("ATTA"), profileMatrix.findMostProbableKmer(new DnaSequence("GCATTACCCG")));
-	}
+        assertEquals(new DnaSequence("ATTA"), profileMatrix.findMostProbableKmer(new DnaSequence("GCATTACCCG")));
+    }
 
 }

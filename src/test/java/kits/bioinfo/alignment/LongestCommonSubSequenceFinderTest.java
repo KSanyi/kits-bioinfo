@@ -10,12 +10,12 @@ import kits.bioinfo.core.Sequence;
 
 public class LongestCommonSubSequenceFinderTest {
 
-	@Test
-	public void test() {
-		DnaSequence sequence1 = new DnaSequence("GCGATC");
-		DnaSequence sequence2 = new DnaSequence("CTGACG");
-		Sequence<DnaBase> sequence = LongestCommonSubSequenceFinder.findOneSequence(sequence1, sequence2);
-		assertEquals(new DnaSequence("CGAC").toSequence(), sequence);
-	}
+    @Test
+    public void test() {
+        DnaSequence sequence1 = new DnaSequence("GCGATC");
+        DnaSequence sequence2 = new DnaSequence("CTGACG");
+        Sequence<DnaBase> sequence = LongestCommonSubSequenceFinder.findOneSequence(sequence1, sequence2);
+        assertEquals(new DnaSequence("CGAC").toSequence(), sequence);
+    }
 
 }

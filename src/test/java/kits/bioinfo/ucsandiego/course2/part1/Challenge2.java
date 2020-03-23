@@ -12,13 +12,13 @@ import kits.bioinfo.infrastructure.SequenceReader;
 
 public class Challenge2 {
 
-	/**
-	 * CODE CHALLENGE: Solve the String Spelled by a Genome Path Problem.
-	 */
-	public static void main(String[] args) throws IOException {
-		List<DnaSequence> composition = SequenceReader.readDnaSequencesPerLine("input/dataset_198_3.txt");
-		DnaSequence sequence = KmerCompositioner.readSequenceFromComposition(composition);
-		Files.write(Paths.get("./output/output_198_3.txt"), Collections.singletonList(sequence.toString()));
-	}
+    /**
+     * CODE CHALLENGE: Solve the String Spelled by a Genome Path Problem.
+     */
+    public static void main(String[] args) throws IOException {
+        List<DnaSequence> composition = SequenceReader.readDnaSequencesPerLine("input/dataset_198_3.txt");
+        DnaSequence sequence = KmerCompositioner.readSequenceFromComposition(composition);
+        Files.write(Paths.get("./output/output_198_3.txt"), Collections.singletonList(sequence.toString()));
+    }
 
 }

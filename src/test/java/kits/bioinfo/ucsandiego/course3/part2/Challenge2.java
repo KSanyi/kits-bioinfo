@@ -20,14 +20,14 @@ import kits.bioinfo.genomerearrangement.Permutation;
  */
 public class Challenge2 {
 
-	@Test
-	public void test() throws IOException {
-		List<String> lines = Files.readAllLines(Paths.get("input/dataset_287_6.txt"));
-		
-		Permutation permutation = Permutation.parse(lines.get(0));
-		
-		assertEquals(180, permutation.numberOfBreakPoints());
-	}
+    @Test
+    public void test() throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get("input/dataset_287_6.txt"));
+        
+        Permutation permutation = Permutation.parse(lines.get(0));
+        
+        assertEquals(180, permutation.numberOfBreakPoints());
+    }
 
 }
 

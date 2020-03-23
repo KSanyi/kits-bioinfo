@@ -13,16 +13,16 @@ import kits.bioinfo.math.graph.GraphParser;
 
 public class Challenge7 {
 
-	/**
-	 * CODE CHALLENGE: Solve the Eulerian Path Problem. Input: The adjacency
-	 * list of a directed graph that has an Eulerian path. Output: An Eulerian
-	 * path in this graph.
-	 */
-	public static void main(String[] args) throws IOException {
-		Graph<Integer> graph = GraphParser.buildIntGraphFromAdjacencyStrings(Files.readAllLines(Paths.get("input/dataset_203_5.txt")));
-		List<Integer> path = EulerianPathFinder.findEulerianPath(graph);
-		String pathString = path.stream().map(n -> n.toString()).collect(Collectors.joining("->"));
-		Files.write(Paths.get("./output/output_203_5.txt"), Collections.singletonList(pathString));
-	}
+    /**
+     * CODE CHALLENGE: Solve the Eulerian Path Problem. Input: The adjacency
+     * list of a directed graph that has an Eulerian path. Output: An Eulerian
+     * path in this graph.
+     */
+    public static void main(String[] args) throws IOException {
+        Graph<Integer> graph = GraphParser.buildIntGraphFromAdjacencyStrings(Files.readAllLines(Paths.get("input/dataset_203_5.txt")));
+        List<Integer> path = EulerianPathFinder.findEulerianPath(graph);
+        String pathString = path.stream().map(n -> n.toString()).collect(Collectors.joining("->"));
+        Files.write(Paths.get("./output/output_203_5.txt"), Collections.singletonList(pathString));
+    }
 
 }

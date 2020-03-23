@@ -12,16 +12,16 @@ import kits.bioinfo.infrastructure.SequenceReader;
 
 public class Challenge5 {
 
-	/**
-	 * DeBruijn Graph from k-mers Problem: Construct the de Bruijn graph from a
-	 * set of k-mers. Input: A collection of k-mers Patterns. Output: The
-	 * adjacency list of the de Bruijn graph DeBruijn(Patterns). CODE CHALLENGE:
-	 * Solve the de Bruijn Graph from k-mers Problem.
-	 */
-	public static void main(String[] args) throws IOException {
-		List<DnaSequence> edges = SequenceReader.readDnaSequencesPerLine("input/dataset_200_7.txt");
-		KmerGraph graph = KmerGraph.buildDeBrujinGraph(edges);
-		Files.write(Paths.get("./output/output_200_7.txt"), Collections.singletonList(graph.toString()));
-	}
+    /**
+     * DeBruijn Graph from k-mers Problem: Construct the de Bruijn graph from a
+     * set of k-mers. Input: A collection of k-mers Patterns. Output: The
+     * adjacency list of the de Bruijn graph DeBruijn(Patterns). CODE CHALLENGE:
+     * Solve the de Bruijn Graph from k-mers Problem.
+     */
+    public static void main(String[] args) throws IOException {
+        List<DnaSequence> edges = SequenceReader.readDnaSequencesPerLine("input/dataset_200_7.txt");
+        KmerGraph graph = KmerGraph.buildDeBrujinGraph(edges);
+        Files.write(Paths.get("./output/output_200_7.txt"), Collections.singletonList(graph.toString()));
+    }
 
 }

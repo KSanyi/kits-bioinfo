@@ -14,19 +14,19 @@ import kits.bioinfo.math.graph.MaxNonBranchingPathFinder;
 
 public class Challenge11 {
 
-	/**
-	 * CODE CHALLENGE: Solve the Contig Generation Problem. Contig Generation
-	 * Problem: Generate the contigs from a collection of reads (with imperfect
-	 * coverage). Input: A collection of k-mers Patterns. Output: All contigs in
-	 * DeBruijn(Patterns).
-	 */
-	public static void main(String[] args) throws IOException {
-		List<DnaSequence> edges = SequenceReader.readDnaSequencesPerLine("input/dataset_205_5.txt");
-		KmerGraph graph = KmerGraph.buildDeBrujinGraph(edges);
-		List<List<DnaSequence>> maxNonBranchingPaths = MaxNonBranchingPathFinder.findMaxNonBranchingPaths(graph);
-		List<DnaSequence> contigs = maxNonBranchingPaths.stream().map(path -> KmerCompositioner.readSequenceFromComposition(path))
-				.collect(Collectors.toList());
-		Files.write(Paths.get("./output/output_205_5.txt"), contigs.stream().map(contig -> contig.toString()).collect(Collectors.toList()));
-	}
+    /**
+     * CODE CHALLENGE: Solve the Contig Generation Problem. Contig Generation
+     * Problem: Generate the contigs from a collection of reads (with imperfect
+     * coverage). Input: A collection of k-mers Patterns. Output: All contigs in
+     * DeBruijn(Patterns).
+     */
+    public static void main(String[] args) throws IOException {
+        List<DnaSequence> edges = SequenceReader.readDnaSequencesPerLine("input/dataset_205_5.txt");
+        KmerGraph graph = KmerGraph.buildDeBrujinGraph(edges);
+        List<List<DnaSequence>> maxNonBranchingPaths = MaxNonBranchingPathFinder.findMaxNonBranchingPaths(graph);
+        List<DnaSequence> contigs = maxNonBranchingPaths.stream().map(path -> KmerCompositioner.readSequenceFromComposition(path))
+                .collect(Collectors.toList());
+        Files.write(Paths.get("./output/output_205_5.txt"), contigs.stream().map(contig -> contig.toString()).collect(Collectors.toList()));
+    }
 
 }
