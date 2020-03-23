@@ -1,13 +1,14 @@
 package kits.bioinfo.math.graph;
 
+import static java.util.stream.Collectors.toList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import kits.bioinfo.TestUtil.EqualsInAnyOrder;
 import kits.bioinfo.assembly.KmerCompositioner;
 import kits.bioinfo.assembly.KmerGraph;
 import kits.bioinfo.core.DnaSequence;
@@ -24,22 +25,22 @@ public class MaxNonBranchingPathFinderTest {
 		List<List<Integer>> expectedPaths = Arrays.asList(Arrays.asList(0, 1), Arrays.asList(1, 2, 4, 5), Arrays.asList(1, 3, 5),
 				Arrays.asList(5, 6));
 
-		Assert.assertThat(paths, new EqualsInAnyOrder<>(expectedPaths));
+		assertEquals(Set.copyOf(paths), Set.copyOf(expectedPaths));
 	}
 
 	@Test
 	public void test2() {
 		List<DnaSequence> edgeSequences = Arrays.asList("ATG", "ATG", "TGT", "TGG", "CAT", "GGA", "GAT", "AGA").stream().map(s -> new DnaSequence(s))
-				.collect(Collectors.toList());
+				.collect(toList());
 
 		KmerGraph graph = KmerGraph.buildDeBrujinGraph(edgeSequences);
 		List<List<DnaSequence>> maxNonBranchingPaths = MaxNonBranchingPathFinder.findMaxNonBranchingPaths(graph);
 		List<DnaSequence> contigs = maxNonBranchingPaths.stream().map(contig -> KmerCompositioner.readSequenceFromComposition(contig))
-				.collect(Collectors.toList());
+				.collect(toList());
 		List<DnaSequence> expectedContigs = Arrays.asList("AGA", "ATG", "ATG", "CAT", "GAT", "TGGA", "TGT").stream().map(s -> new DnaSequence(s))
-				.collect(Collectors.toList());
+				.collect(toList());
 
-		Assert.assertThat(contigs, new EqualsInAnyOrder<>(expectedContigs));
+		assertEquals(Set.copyOf(contigs), Set.copyOf(expectedContigs));
 	}
 
 }

@@ -1,16 +1,17 @@
 package kits.bioinfo.ucsandiego.course3.part1;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
+import kits.bioinfo.alignment.aligner.AlignmentResult;
 import kits.bioinfo.alignment.aligner.AlignmentUtil;
 import kits.bioinfo.alignment.aligner.LocalSequenceAligner;
-import kits.bioinfo.alignment.aligner.AlignmentResult;
 import kits.bioinfo.alignment.scorefunction.ScoreFunction;
 import kits.bioinfo.core.AminoAcid;
 import kits.bioinfo.core.Peptid;
@@ -41,9 +42,9 @@ public class Challenge6 {
 		AlignmentUtil.checkAlignment(alignment, ScoreFunction.pam250(5));
 
 		List<String> resultLines = Files.readAllLines(Paths.get("output/output_247_9.txt"));
-		Assert.assertEquals(resultLines.get(0), String.valueOf(alignment.score));
-		Assert.assertEquals(resultLines.get(1), printSequence(alignment.sequence1));
-		Assert.assertEquals(resultLines.get(2), printSequence(alignment.sequence2));
+		assertEquals(resultLines.get(0), String.valueOf(alignment.score));
+		assertEquals(resultLines.get(1), printSequence(alignment.sequence1));
+		assertEquals(resultLines.get(2), printSequence(alignment.sequence2));
 	}
 
 	private static String printSequence(Sequence<AminoAcid> sequence) {

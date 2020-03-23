@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Test;
 import kits.bioinfo.math.graph.EulerianCycleFinder;
 import kits.bioinfo.math.graph.Graph;
 
@@ -20,13 +20,13 @@ public class EulerianCycleFinderTest {
 
 		Graph<Integer> graph = GraphParser.buildIntGraphFromAdjacencyStrings(adjacencyStrings);
 
-		Assert.assertEquals(graph, GraphParser.buildIntGraphFromAdjacencyStrings(Arrays.asList(graph.toString().split("\n"))));
+		assertEquals(graph, GraphParser.buildIntGraphFromAdjacencyStrings(Arrays.asList(graph.toString().split("\n"))));
 
 		List<Integer> eulerianCycle = EulerianCycleFinder.findEulerianCycle(graph);
 
 		List<Integer> expectedCycle = Arrays.asList(1, 0, 3, 2, 6, 8, 7, 9, 6, 5, 4, 2, 1);
 
-		Assert.assertTrue(cyclesEqual(expectedCycle, eulerianCycle));
+		assertTrue(cyclesEqual(expectedCycle, eulerianCycle));
 	}
 
 	private static boolean cyclesEqual(List<Integer> cycle1, List<Integer> cycle2) {

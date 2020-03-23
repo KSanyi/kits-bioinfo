@@ -1,11 +1,12 @@
 package kits.bioinfo.ucsandiego.course3.part1;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import kits.bioinfo.alignment.EditDistanceFinder;
 import kits.bioinfo.core.Sequence;
@@ -25,7 +26,7 @@ public class Challenge7 {
 
 		System.out.println(editDistance);
 
-		Assert.assertEquals(335, editDistance);
+		assertEquals(335, editDistance);
 	}
 
 }

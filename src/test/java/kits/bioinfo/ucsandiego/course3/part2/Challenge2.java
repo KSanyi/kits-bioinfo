@@ -1,12 +1,13 @@
 package kits.bioinfo.ucsandiego.course3.part2;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import kits.bioinfo.genomerearrangement.Permutation;
 
@@ -25,7 +26,7 @@ public class Challenge2 {
 		
 		Permutation permutation = Permutation.parse(lines.get(0));
 		
-		Assert.assertEquals(180, permutation.numberOfBreakPoints());
+		assertEquals(180, permutation.numberOfBreakPoints());
 	}
 
 }

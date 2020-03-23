@@ -5,8 +5,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static java.util.Arrays.*;
-import static org.junit.Assert.*;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 import kits.bioinfo.core.DnaSequence;
 

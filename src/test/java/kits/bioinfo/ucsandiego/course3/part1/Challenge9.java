@@ -1,16 +1,17 @@
 package kits.bioinfo.ucsandiego.course3.part1;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
+import kits.bioinfo.alignment.aligner.AlignmentResult;
 import kits.bioinfo.alignment.aligner.AlignmentUtil;
 import kits.bioinfo.alignment.aligner.OverlappingSequenceAligner;
-import kits.bioinfo.alignment.aligner.AlignmentResult;
 import kits.bioinfo.alignment.scorefunction.ScoreFunction;
 import kits.bioinfo.core.Sequence;
 
@@ -38,9 +39,9 @@ public class Challenge9 {
 		AlignmentUtil.checkAlignment(alignment, ScoreFunction.basic(1, 2, 2));
 
 		List<String> resultLines = Files.readAllLines(Paths.get("output/output_248_7.txt"));
-		Assert.assertEquals(resultLines.get(0), String.valueOf(alignment.score));
-		Assert.assertEquals(resultLines.get(1), printSequence(alignment.sequence1));
-		Assert.assertEquals(resultLines.get(2), printSequence(alignment.sequence2));
+		assertEquals(resultLines.get(0), String.valueOf(alignment.score));
+		assertEquals(resultLines.get(1), printSequence(alignment.sequence1));
+		assertEquals(resultLines.get(2), printSequence(alignment.sequence2));
 	}
 
 	private static String printSequence(Sequence<Character> sequence) {

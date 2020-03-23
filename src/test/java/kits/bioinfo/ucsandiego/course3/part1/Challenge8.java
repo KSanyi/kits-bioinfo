@@ -1,14 +1,15 @@
 package kits.bioinfo.ucsandiego.course3.part1;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
+import kits.bioinfo.alignment.aligner.AlignmentResult;
 import kits.bioinfo.alignment.aligner.AlignmentUtil;
 import kits.bioinfo.alignment.aligner.FittingSequenceAligner;
-import kits.bioinfo.alignment.aligner.AlignmentResult;
 import kits.bioinfo.alignment.scorefunction.ScoreFunction;
 import kits.bioinfo.core.DnaBase;
 import kits.bioinfo.core.DnaSequence;
@@ -37,10 +38,10 @@ public class Challenge8 {
 
 		AlignmentUtil.checkAlignment(alignment, ScoreFunction.basic(1, 1, 1));
 
-		Assert.assertEquals(18, alignment.score);
-		Assert.assertEquals("AGCTCGGAGGGAGATTG-AAC--ATTGAGTA-GCC-CGCGC-AGC-GGAT--C-ATAGTCTGTAATACTGCGGCGGTAAGCAAG-A-AGGGTTACAGC",
+		assertEquals(18, alignment.score);
+		assertEquals("AGCTCGGAGGGAGATTG-AAC--ATTGAGTA-GCC-CGCGC-AGC-GGAT--C-ATAGTCTGTAATACTGCGGCGGTAAGCAAG-A-AGGGTTACAGC",
 				printSequence(alignment.sequence1));
-		Assert.assertEquals("CGCGCGGAAGG-GCTCGCCCCGAATTGA-TATGCCTCG-GCAAACTGGATAGCTATA-AAAG-AAGA-T-CCGC-G-CA-CTAGTACA-TGTT-CAGC",
+		assertEquals("CGCGCGGAAGG-GCTCGCCCCGAATTGA-TATGCCTCG-GCAAACTGGATAGCTATA-AAAG-AAGA-T-CCGC-G-CA-CTAGTACA-TGTT-CAGC",
 				printSequence(alignment.sequence2));
 	}
 

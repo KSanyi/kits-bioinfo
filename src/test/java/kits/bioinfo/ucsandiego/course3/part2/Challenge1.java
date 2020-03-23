@@ -1,13 +1,14 @@
 package kits.bioinfo.ucsandiego.course3.part2;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import kits.bioinfo.genomerearrangement.GreedySorter;
 import kits.bioinfo.genomerearrangement.Permutation;
@@ -32,7 +33,7 @@ public class Challenge1 {
 		List<Permutation> expectedPermutations = Files.readAllLines(Paths.get("output/output_286_3.txt")).stream()
 				.map(permutationString -> Permutation.parse(permutationString)).collect(Collectors.toList());
 		
-		Assert.assertEquals(expectedPermutations, permutations);
+		assertEquals(expectedPermutations, permutations);
 	}
 
 }

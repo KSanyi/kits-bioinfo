@@ -1,15 +1,16 @@
 package kits.bioinfo.peptidsequencing;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import kits.bioinfo.TestUtil.EqualsInAnyOrder;
 import kits.bioinfo.core.Peptid;
 import kits.bioinfo.util.RandomSequenceGenerator;
 
@@ -23,8 +24,8 @@ public class CycloPeptidSequencerTest {
 				.map(peptid -> peptid.stream().map(aminoAcid -> String.valueOf(aminoAcid.mass)).collect(Collectors.joining("-")))
 				.collect(Collectors.toSet());
 
-		Assert.assertThat(massSequences,
-				new EqualsInAnyOrder<String>("128-113-186", "186-113-128", "128-186-113", "113-186-128", "113-128-186", "186-128-113"));
+		assertEquals(massSequences,
+				Set.of("128-113-186", "186-113-128", "128-186-113", "113-186-128", "113-128-186", "186-128-113"));
 	}
 
 	@Test
@@ -37,7 +38,7 @@ public class CycloPeptidSequencerTest {
 			List<Integer> spectrum = massSpectrometer.generateMassSpectrumForCyclidPeptid(peptid);
 
 			Set<Peptid> peptids = new SimpleCycloPeptidSequencer().sequencePeptids(spectrum);
-			Assert.assertTrue("Failed for " + peptid, peptids.contains(peptid));
+			Assertions.assertTrue(peptids.contains(peptid), "Failed for " + peptid);
 		}
 	}
 
@@ -63,7 +64,7 @@ public class CycloPeptidSequencerTest {
 				2188, 2193, 2199, 2201, 2202, 2215, 2215, 2215, 2217, 2227, 2227, 2231, 2231, 2231, 2243, 2259, 2259, 2259, 2259, 2330);
 		Set<Peptid> peptids = new CycloPeptidSequencer(366, 20).sequencePeptids(experimentalSpectrum);
 
-		Assert.assertThat(peptids, new EqualsInAnyOrder<Peptid>(new Peptid("FVCMASYDCHDVYVAAAIDEGA"), new Peptid("FVCMASYDCHDVYVAAALDEGA")));
+		assertEquals(peptids, Set.of(new Peptid("FVCMASYDCHDVYVAAAIDEGA"), new Peptid("FVCMASYDCHDVYVAAALDEGA")));
 	}
 
 	@Test
@@ -76,7 +77,7 @@ public class CycloPeptidSequencerTest {
 				344, 615, 502, 101, 348, 921, 864, 1194, 947, 559, 875);
 		Set<Peptid> peptids = new CycloPeptidSequencer(357, 19).sequencePeptids(experimentalSpectrum);
 
-		Assert.assertThat(peptids, new EqualsInAnyOrder<Peptid>(new Peptid("DTGDNLCCSGTAG"), new Peptid("DTGDNICCSGTAG")));
+		assertEquals(peptids, Set.of(new Peptid("DTGDNLCCSGTAG"), new Peptid("DTGDNICCSGTAG")));
 	}
 
 }

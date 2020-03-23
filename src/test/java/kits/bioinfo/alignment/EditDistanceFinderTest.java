@@ -1,7 +1,8 @@
 package kits.bioinfo.alignment;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 import kits.bioinfo.core.Sequence;
 
@@ -12,7 +13,7 @@ public class EditDistanceFinderTest {
 		int editDistance = EditDistanceFinder.findEditDistance(Sequence.of("PLEASANTLY"), Sequence.of("MEANLY"));
 		System.out.println(editDistance);
 
-		Assert.assertEquals(5, editDistance);
+		assertEquals(5, editDistance);
 	}
 
 }

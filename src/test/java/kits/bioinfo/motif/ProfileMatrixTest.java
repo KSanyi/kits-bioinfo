@@ -5,8 +5,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 import kits.bioinfo.core.DnaSequence;
 
@@ -18,7 +19,7 @@ public class ProfileMatrixTest {
 
 		ProfileMatrix profileMatrix = ProfileMatrix.build(kmers);
 
-		Assert.assertEquals(new BigDecimal("0.125"), profileMatrix.calculateProbability(new DnaSequence("ATTA")));
+		assertEquals(new BigDecimal("0.125"), profileMatrix.calculateProbability(new DnaSequence("ATTA")));
 	}
 
 	@Test
@@ -27,7 +28,7 @@ public class ProfileMatrixTest {
 
 		ProfileMatrix profileMatrix = ProfileMatrix.build(kmers);
 
-		Assert.assertEquals(new DnaSequence("ATTA"), profileMatrix.findMostProbableKmer(new DnaSequence("GCATTACCCG")));
+		assertEquals(new DnaSequence("ATTA"), profileMatrix.findMostProbableKmer(new DnaSequence("GCATTACCCG")));
 	}
 
 }

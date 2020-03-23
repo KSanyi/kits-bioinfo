@@ -3,8 +3,9 @@ package kits.bioinfo.genomerearrangement;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 public class GreedySorterTest {
 
@@ -22,7 +23,7 @@ public class GreedySorterTest {
 				new Permutation(+1, +2, +3, +4, -5),
 				new Permutation(+1, +2, +3, +4, +5));
 		
-		Assert.assertEquals(expectedPermutations, permutations);
+		assertEquals(expectedPermutations, permutations);
 	}
 	
 	@Test
@@ -30,7 +31,7 @@ public class GreedySorterTest {
 		Permutation permutation = Permutation.parse("(+20 +7 +10 +9 +11 +13 +18 -8 -6 -14 +2 -4 -16 +15 +1 +17 +12 -5 +3 -19)");
 		List<Permutation> permutations =  GreedySorter.sort(permutation);
 		
-		Assert.assertEquals(24, permutations.size());
+		assertEquals(24, permutations.size());
 	}
 	
 }

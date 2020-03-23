@@ -3,8 +3,9 @@ package kits.bioinfo.math.graph;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 public class LongestPathFinderTest {
 
@@ -15,8 +16,8 @@ public class LongestPathFinderTest {
 		Integer sourceNode = 0;
 		Integer sinkNode = 4;
 		List<Integer> longestPath = LongestPathFinder.findLongestPath(graph, sourceNode, sinkNode);
-		Assert.assertEquals(9, graph.markupNumber(sinkNode).intValue());
-		Assert.assertEquals(Arrays.asList(0, 2, 3, 4), longestPath);
+		assertEquals(9, graph.markupNumber(sinkNode).intValue());
+		assertEquals(Arrays.asList(0, 2, 3, 4), longestPath);
 	}
 
 	@Test
@@ -34,8 +35,8 @@ public class LongestPathFinderTest {
 		Integer sourceNode = 5;
 		Integer sinkNode = 20;
 		List<Integer> longestPath = LongestPathFinder.findLongestPath(graph, sourceNode, sinkNode);
-		Assert.assertEquals(229, graph.markupNumber(sinkNode).intValue());
-		Assert.assertEquals(Arrays.asList(5, 6, 7, 8, 10, 11, 17, 18, 20), longestPath);
+		assertEquals(229, graph.markupNumber(sinkNode).intValue());
+		assertEquals(Arrays.asList(5, 6, 7, 8, 10, 11, 17, 18, 20), longestPath);
 	}
 
 }

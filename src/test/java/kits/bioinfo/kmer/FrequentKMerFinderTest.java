@@ -9,8 +9,9 @@ import java.util.Set;
 import kits.bioinfo.clump.FrequentKMerFinder;
 import kits.bioinfo.core.DnaSequence;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 public class FrequentKMerFinderTest {
 
@@ -21,10 +22,10 @@ public class FrequentKMerFinderTest {
 		DnaSequence sequence = new DnaSequence("ACTGCGTCGACTGCGACTG");
 
 		Set<DnaSequence> result = frequentKMerFinder.findMostFrequentKmers(sequence, 4);
-		Assert.assertEquals(singleton(new DnaSequence("ACTG")), result);
+		assertEquals(singleton(new DnaSequence("ACTG")), result);
 
 		result = frequentKMerFinder.findMostFrequentKmers(sequence, 3);
-		Assert.assertEquals(new HashSet<DnaSequence>(asList(new DnaSequence("ACT"), new DnaSequence("CTG"))), result);
+		assertEquals(new HashSet<DnaSequence>(asList(new DnaSequence("ACT"), new DnaSequence("CTG"))), result);
 	}
 
 	@Test
@@ -32,7 +33,7 @@ public class FrequentKMerFinderTest {
 		DnaSequence sequence = new DnaSequence("ACGTTGCATGTCGCATGATGCATGAGAGCT");
 
 		Set<DnaSequence> result = frequentKMerFinder.findMostFrequentKmersWithDistance(sequence, 4, 1);
-		Assert.assertEquals(new HashSet<>(asList(new DnaSequence("GATG"), new DnaSequence("ATGC"), new DnaSequence("ATGT"))), result);
+		assertEquals(new HashSet<>(asList(new DnaSequence("GATG"), new DnaSequence("ATGC"), new DnaSequence("ATGT"))), result);
 	}
 
 }

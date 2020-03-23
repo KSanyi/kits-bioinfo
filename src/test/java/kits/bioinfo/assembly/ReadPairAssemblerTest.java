@@ -1,12 +1,14 @@
 package kits.bioinfo.assembly;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import kits.bioinfo.core.DnaSequence;
 
@@ -22,10 +24,10 @@ public class ReadPairAssemblerTest {
 
 		Optional<DnaSequence> sequence = ReadPairAssembler.assembleSequence(readPairs);
 
-		Assert.assertTrue(sequence.isPresent());
+		assertTrue(sequence.isPresent());
 
 		DnaSequence expectedSequence = new DnaSequence("CACCGATACTGATTCTGAAGCTT");
-		Assert.assertEquals(expectedSequence, sequence.get());
+		assertEquals(expectedSequence, sequence.get());
 	}
 
 }

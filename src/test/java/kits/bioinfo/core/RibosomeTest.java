@@ -1,7 +1,8 @@
 package kits.bioinfo.core;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 public class RibosomeTest {
 
@@ -11,7 +12,7 @@ public class RibosomeTest {
 
 		Peptid peptid = new Ribosome().translateToAminoAcidSequence(rnaSequence);
 
-		Assert.assertEquals("MAMAPRTEINSTRING", peptid.toString());
+		assertEquals("MAMAPRTEINSTRING", peptid.toString());
 	}
 
 	@Test
@@ -21,7 +22,7 @@ public class RibosomeTest {
 
 		Peptid peptid = new Ribosome().translateToAminoAcidSequence(rnaSequence);
 
-		Assert.assertEquals("MRGPGTTCSRISRGDVNPSGNHLVLVRLAATRPWVVRRAYDPRSDKVEQAHKRPGAVQIRVSKVSANHFPLPCMEVLLVVASSLRKAGILLHRWSMSGSFFIPSDTYPQITCR",
+		assertEquals("MRGPGTTCSRISRGDVNPSGNHLVLVRLAATRPWVVRRAYDPRSDKVEQAHKRPGAVQIRVSKVSANHFPLPCMEVLLVVASSLRKAGILLHRWSMSGSFFIPSDTYPQITCR",
 				peptid.toString());
 	}
 

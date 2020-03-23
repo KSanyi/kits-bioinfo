@@ -5,8 +5,9 @@ import java.util.Random;
 import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.util.RandomSequenceGenerator;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 public class ApproximateSubSequenceMatchersTest {
 
@@ -24,7 +25,7 @@ public class ApproximateSubSequenceMatchersTest {
 			int patternLength = k * (d + 1);
 			DnaSequence pattern = generator.generateRandomDnaSequence(patternLength);
 			DnaSequence text = generator.generateRandomDnaSequence(1000);
-			Assert.assertEquals(new ApproximateSubSequenceMatcher(pattern, d).matchStartIndexes(text),
+			assertEquals(new ApproximateSubSequenceMatcher(pattern, d).matchStartIndexes(text),
 					new IndexBasedApproximateSubSequenceMatcher(text, k, d).matchStartIndexes(pattern));
 		}
 	}

@@ -1,8 +1,6 @@
 package kits.bioinfo.math;
 
-import org.junit.Test;
-
-import kits.bioinfo.math.UniversalStringFinder;
+import org.junit.jupiter.api.Test;
 
 public class UniversalStringFinderTest {
 
