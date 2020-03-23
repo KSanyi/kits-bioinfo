@@ -8,7 +8,7 @@ import kits.bioinfo.matcher.ApproximateSubSequenceMatcher;
 
 public class FrequentKMerFinder {
 
-    public Set<DnaSequence> findMostFrequentKmers(DnaSequence sequence, int k) {
+    public static Set<DnaSequence> findMostFrequentKmers(DnaSequence sequence, int k) {
 
         KmerFrequencyMap frequencyMap = new KmerFrequencyMap();
 
@@ -20,7 +20,7 @@ public class FrequentKMerFinder {
         return frequencyMap.mostFrequentKmers();
     }
 
-    public Set<DnaSequence> findMostFrequentKmersWithDistance(DnaSequence sequence, int k, int d) {
+    public static Set<DnaSequence> findMostFrequentKmersWithDistance(DnaSequence sequence, int k, int d) {
 
         Set<DnaSequence> candidateKmers = new HashSet<>();
 

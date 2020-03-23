@@ -33,13 +33,13 @@ public class SimpleCycloPeptidSequencer extends CycloPeptidSequencerBase {
         return result;
     }
 
-    private boolean consistentWithSpectrum(Peptid peptid, List<Integer> experimentalSpectrum) {
-        List<Integer> theoreticalSpectrum = new MassSpectrometer().generateMassSpectrumForPeptid(peptid);
+    private static boolean consistentWithSpectrum(Peptid peptid, List<Integer> experimentalSpectrum) {
+        List<Integer> theoreticalSpectrum = MassSpectrometer.generateMassSpectrumForPeptid(peptid);
         return experimentalSpectrum.containsAll(theoreticalSpectrum);
     }
 
-    private boolean matchesWithSpectrum(Peptid peptid, List<Integer> experimentalSpectrum) {
-        List<Integer> theoreticalSpectrum = new MassSpectrometer().generateMassSpectrumForCyclidPeptid(peptid);
+    private static boolean matchesWithSpectrum(Peptid peptid, List<Integer> experimentalSpectrum) {
+        List<Integer> theoreticalSpectrum = MassSpectrometer.generateMassSpectrumForCyclidPeptid(peptid);
         return experimentalSpectrum.equals(theoreticalSpectrum);
     }
 

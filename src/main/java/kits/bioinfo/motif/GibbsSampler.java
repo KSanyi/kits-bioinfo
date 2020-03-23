@@ -73,7 +73,7 @@ public class GibbsSampler {
         return sequence.subSequence(random.nextInt(sequence.length() - k + 1), k);
     }
 
-    private DnaSequence profileRandomKmer(ProfileMatrix profileMatrix, DnaSequence sequence, int k) {
+    private static DnaSequence profileRandomKmer(ProfileMatrix profileMatrix, DnaSequence sequence, int k) {
         List<BigDecimal> probabilities = sequence.allSubSequences(k).stream().map(kmer -> profileMatrix.calculateProbability(kmer))
                 .collect(Collectors.toList());
         return sequence.subSequence(new ProbabilityDistribution(probabilities).randomInt(), k);

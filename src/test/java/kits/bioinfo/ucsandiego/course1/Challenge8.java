@@ -18,7 +18,7 @@ public class Challenge8 {
      */
     public static void main(String[] args) throws IOException {
         List<DnaSequence> sequences = SequenceReader.readDnaSequencesPerLine("input/dataset_160_9.txt");
-        List<DnaSequence> motifs = new GreedyMotifFinder().findMotifs(sequences, 12);
+        List<DnaSequence> motifs = GreedyMotifFinder.findMotifs(sequences, 12);
         System.out.println(motifs);
     }
 

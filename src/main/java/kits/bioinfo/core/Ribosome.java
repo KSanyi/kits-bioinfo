@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Ribosome {
 
-    public Peptid translateToAminoAcidSequence(RnaSequence rnaSequence) {
+    public static Peptid translateToAminoAcidSequence(RnaSequence rnaSequence) {
 
         List<Codon> codons = getCodonsFromRnaSequence(rnaSequence);
 

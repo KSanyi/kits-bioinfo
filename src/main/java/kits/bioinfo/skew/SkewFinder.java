@@ -8,7 +8,7 @@ import kits.bioinfo.core.DnaSequence;
 
 public class SkewFinder {
 
-    public List<Integer> calculateSkew(DnaSequence sequence) {
+    public static List<Integer> calculateSkew(DnaSequence sequence) {
         int sumGCDiff = 0;
         List<Integer> skew = new LinkedList<>();
         for (int index = 0; index < sequence.length(); index++) {
@@ -28,7 +28,7 @@ public class SkewFinder {
         return skew;
     }
 
-    public List<Integer> calculateSkewMin(DnaSequence sequence) {
+    public static List<Integer> calculateSkewMin(DnaSequence sequence) {
 
         List<Integer> minIndexes = new LinkedList<>();
         List<Integer> skew = calculateSkew(sequence);

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class RnaPolymerase {
 
-    public RnaSequence transcribeDnaSequence(DnaSequence dnaSequence) {
+    public static RnaSequence transcribeDnaSequence(DnaSequence dnaSequence) {
         List<RnaBase> rnaBases = new LinkedList<>();
         for (int i = 0; i < dnaSequence.length(); i++) {
             DnaBase dnaBase = dnaSequence.position(i);
@@ -15,7 +15,7 @@ public class RnaPolymerase {
         return new RnaSequence(rnaBases);
     }
 
-    private RnaBase transcribeBase(DnaBase dnaBase) {
+    private static RnaBase transcribeBase(DnaBase dnaBase) {
         switch (dnaBase) {
         case A:
             return RnaBase.A;

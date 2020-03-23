@@ -30,12 +30,11 @@ public class CycloPeptidSequencerTest {
 
     @Test
     public void test2() {
-        MassSpectrometer massSpectrometer = new MassSpectrometer();
         RandomSequenceGenerator randomSequenceGenerator = new RandomSequenceGenerator();
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
             Peptid peptid = randomSequenceGenerator.generateRandomPeptid((random.nextInt(10) + 3));
-            List<Integer> spectrum = massSpectrometer.generateMassSpectrumForCyclidPeptid(peptid);
+            List<Integer> spectrum = MassSpectrometer.generateMassSpectrumForCyclidPeptid(peptid);
 
             Set<Peptid> peptids = new SimpleCycloPeptidSequencer().sequencePeptids(spectrum);
             Assertions.assertTrue(peptids.contains(peptid), "Failed for " + peptid);

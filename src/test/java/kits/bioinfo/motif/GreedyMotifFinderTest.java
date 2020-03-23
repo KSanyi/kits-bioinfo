@@ -14,7 +14,7 @@ public class GreedyMotifFinderTest {
         List<DnaSequence> sequences = Arrays.asList(new DnaSequence("GGCGTTCAGGCA"), new DnaSequence("AAGAATCAGTCA"), new DnaSequence("CAAGGAGTTCGC"),
                 new DnaSequence("CACGTCAATCAC"), new DnaSequence("CAATAATATTCG"));
 
-        System.out.println(new GreedyMotifFinder().findMotifs(sequences, 3));
+        System.out.println(GreedyMotifFinder.findMotifs(sequences, 3));
     }
 
 }

@@ -27,7 +27,7 @@ public class SlowClumpFinder implements ClumpFinder {
         return kMersFormingClumps;
     }
 
-    private KmerFrequencyMap createFrequencyMap(DnaSequence sequence, int k) {
+    private static KmerFrequencyMap createFrequencyMap(DnaSequence sequence, int k) {
         KmerFrequencyMap frequencyMap = new KmerFrequencyMap();
 
         for (int index = 0; index < sequence.length() - k + 1; index++) {

@@ -19,13 +19,13 @@ public class ProbabilityDistribution {
         cumulativeValues = calculateCumulativeValues(normalize(values));
     }
 
-    private List<BigDecimal> normalize(List<BigDecimal> values) {
+    private static List<BigDecimal> normalize(List<BigDecimal> values) {
         MathContext MC = new MathContext(6, RoundingMode.HALF_UP);
         BigDecimal sum = values.stream().reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
         return values.stream().map(p -> p.divide(sum, MC)).collect(Collectors.toList());
     }
 
-    private List<BigDecimal> calculateCumulativeValues(List<BigDecimal> values) {
+    private static List<BigDecimal> calculateCumulativeValues(List<BigDecimal> values) {
         List<BigDecimal> cumulative = new LinkedList<>();
         BigDecimal sum = BigDecimal.ZERO;
         for (BigDecimal value : values) {

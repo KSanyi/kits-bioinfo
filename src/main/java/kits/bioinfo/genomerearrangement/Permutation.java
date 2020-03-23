@@ -59,7 +59,7 @@ public class Permutation {
         return new Permutation(newValues);
     }
 
-    private List<Integer> reverse(List<Integer> values) {
+    private static List<Integer> reverse(List<Integer> values) {
         List<Integer> reversedList = new ArrayList<>(values.size());
         for (int i = values.size() - 1; i >= 0; i--) {
             reversedList.add(-values.get(i));

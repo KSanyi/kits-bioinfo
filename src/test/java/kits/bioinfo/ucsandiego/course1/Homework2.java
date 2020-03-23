@@ -22,7 +22,7 @@ public class Homework2 {
     }
 
     private static void question2() {
-        List<Integer> skewMinIndexes = new SkewFinder().calculateSkewMin(new DnaSequence("CATTCCAGTACTTCGATGATGGCGTGAAGA"));
+        List<Integer> skewMinIndexes = SkewFinder.calculateSkewMin(new DnaSequence("CATTCCAGTACTTCGATGATGGCGTGAAGA"));
         System.out.println("Skew min indexes: " + skewMinIndexes);
     }
 

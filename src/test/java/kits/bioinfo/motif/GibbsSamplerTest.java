@@ -17,7 +17,7 @@ public class GibbsSamplerTest {
                 new DnaSequence("GGGCGAGGTATGTGTAAGTGCCAAGGTGCCAG"), new DnaSequence("TAGTACCGAGACCGAAAGAAGTATACAGGCGT"),
                 new DnaSequence("TAGATCAAGTTTCAGGTGCACGTCGGTGAACC"), new DnaSequence("AATCCACCAGCTCCACGTGCAATGTTGGCCTA"));
 
-        Set<DnaSequence> medianStrings = new MedianStringFinder().findMedianStrings(sequences, 8);
+        Set<DnaSequence> medianStrings = MedianStringFinder.findMedianStrings(sequences, 8);
 
         System.out.println("Median strings: " + medianStrings);
 

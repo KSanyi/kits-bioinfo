@@ -17,7 +17,7 @@ public class Challenge3 {
      */
     public static void main(String[] args) throws IOException {
         DnaSequence sequence = SequenceReader.readDnaSequenceFromFile("input/dataset_7_6.txt");
-        List<Integer> minSkewIndexes = new SkewFinder().calculateSkewMin(sequence);
+        List<Integer> minSkewIndexes = SkewFinder.calculateSkewMin(sequence);
         // Expected: 69486, 69487, 69489, 69490
         System.out.println(minSkewIndexes);
     }

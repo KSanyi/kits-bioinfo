@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
 import kits.bioinfo.core.DnaSequence;
@@ -19,7 +17,7 @@ public class RandomizedMotifFinderTest {
                 new DnaSequence("GGGCGAGGTATGTGTAAGTGCCAAGGTGCCAG"), new DnaSequence("TAGTACCGAGACCGAAAGAAGTATACAGGCGT"),
                 new DnaSequence("TAGATCAAGTTTCAGGTGCACGTCGGTGAACC"), new DnaSequence("AATCCACCAGCTCCACGTGCAATGTTGGCCTA"));
 
-        Set<DnaSequence> medianStrings = new MedianStringFinder().findMedianStrings(sequences, 8);
+        Set<DnaSequence> medianStrings = MedianStringFinder.findMedianStrings(sequences, 8);
 
         System.out.println("Median strings: " + medianStrings);
 

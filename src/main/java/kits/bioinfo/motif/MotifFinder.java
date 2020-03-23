@@ -10,7 +10,7 @@ import kits.bioinfo.matcher.Matcher;
 
 public class MotifFinder {
 
-    public Set<DnaSequence> findMotifs(Collection<DnaSequence> sequences, int k, int d) {
+    public static Set<DnaSequence> findMotifs(Collection<DnaSequence> sequences, int k, int d) {
 
         if (sequences.isEmpty()) {
             throw new IllegalArgumentException("Empty sequence list");
@@ -30,7 +30,7 @@ public class MotifFinder {
         return motifs;
     }
 
-    private Set<DnaSequence> generateCandidateMotifs(DnaSequence firstSequence, int k) {
+    private static Set<DnaSequence> generateCandidateMotifs(DnaSequence firstSequence, int k) {
         Set<DnaSequence> candidateMotifs = new HashSet<>();
 
         for (int index = 0; index < firstSequence.length() - k + 1; index++) {

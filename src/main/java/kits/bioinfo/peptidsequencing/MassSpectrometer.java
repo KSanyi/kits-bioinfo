@@ -13,15 +13,15 @@ import kits.bioinfo.core.Peptid;
 
 public class MassSpectrometer {
 
-    public List<Integer> generateMassSpectrumForPeptid(Peptid peptid) {
+    public static List<Integer> generateMassSpectrumForPeptid(Peptid peptid) {
         return generateMassSpectrum(peptid, false);
     }
 
-    public List<Integer> generateMassSpectrumForCyclidPeptid(Peptid cyclidPeptid) {
+    public static List<Integer> generateMassSpectrumForCyclidPeptid(Peptid cyclidPeptid) {
         return generateMassSpectrum(cyclidPeptid, true);
     }
 
-    private List<Integer> generateMassSpectrum(Peptid peptid, boolean cylic) {
+    private static List<Integer> generateMassSpectrum(Peptid peptid, boolean cylic) {
 
         List<Peptid> allSubPeptids = new ArrayList<>();
         for (int k = 1; k < peptid.length(); k++) {
@@ -36,14 +36,14 @@ public class MassSpectrometer {
         return Collections.unmodifiableList(masses);
     }
 
-    private List<Peptid> generateCompositions(Peptid peptid, int k) {
+    private static List<Peptid> generateCompositions(Peptid peptid, int k) {
         if (peptid.length() < k)
             throw new IllegalArgumentException("Sequence length must be >= k");
 
         return range(0, peptid.length() - k + 1).mapToObj(i -> peptid.subPeptid(i, k)).collect(toList());
     }
 
-    private List<Peptid> generateCyclicCompositions(Peptid cyclidPeptid, int k) {
+    private static List<Peptid> generateCyclicCompositions(Peptid cyclidPeptid, int k) {
         if (cyclidPeptid.length() < k)
             throw new IllegalArgumentException("Sequence length must be >= k");
 

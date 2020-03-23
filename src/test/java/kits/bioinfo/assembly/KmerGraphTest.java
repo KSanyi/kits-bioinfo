@@ -2,8 +2,6 @@ package kits.bioinfo.assembly;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
 
 import kits.bioinfo.core.DnaSequence;

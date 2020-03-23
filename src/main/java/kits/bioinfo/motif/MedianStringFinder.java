@@ -9,7 +9,7 @@ import kits.bioinfo.util.AllPossibleSequenceGenerator;
 
 public class MedianStringFinder {
 
-    public Set<DnaSequence> findMedianStrings(Collection<DnaSequence> sequences, int k) {
+    public static Set<DnaSequence> findMedianStrings(Collection<DnaSequence> sequences, int k) {
         Set<DnaSequence> candidateKmers = AllPossibleSequenceGenerator.generateAllPossibleSequences(k);
         int minDistance = Integer.MAX_VALUE;
         final Set<DnaSequence> medianStrings = new HashSet<>();

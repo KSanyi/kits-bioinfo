@@ -90,7 +90,7 @@ class BadCharacterRuleTable {
         }
     }
 
-    private int calculateSkipLength(DnaSequence pattern, DnaBase base, int position) {
+    private static int calculateSkipLength(DnaSequence pattern, DnaBase base, int position) {
         int counter = 0;
         for (int i = position - 1; i >= 0; i--) {
             if (pattern.position(i) == base) {
@@ -122,7 +122,7 @@ class GoodSuffixRuleTable {
         skipAfterMatch = calculateSkipAfterMatch(pattern);
     }
 
-    private int calculateSkipAfterMatch(DnaSequence pattern) {
+    private static int calculateSkipAfterMatch(DnaSequence pattern) {
         for (int k = pattern.length() - 1; k >= 1; k--) {
             DnaSequence suffix = pattern.subSequence(pattern.length() - k, k);
             DnaSequence postfix = pattern.subSequence(0, k);
@@ -133,7 +133,7 @@ class GoodSuffixRuleTable {
         return pattern.length() - 1;
     }
 
-    private int calculateSkipLength(DnaSequence pattern, int position) {
+    private static int calculateSkipLength(DnaSequence pattern, int position) {
         int counter = 0;
         int length = pattern.length() - position - 1;
         DnaSequence suffix = pattern.subSequence(position + 1, length);

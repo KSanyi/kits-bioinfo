@@ -15,16 +15,14 @@ import org.junit.jupiter.api.Test;
 
 public class FrequentKMerFinderTest {
 
-    private FrequentKMerFinder frequentKMerFinder = new FrequentKMerFinder();
-
     @Test
     public void mostFrequent() {
         DnaSequence sequence = new DnaSequence("ACTGCGTCGACTGCGACTG");
 
-        Set<DnaSequence> result = frequentKMerFinder.findMostFrequentKmers(sequence, 4);
+        Set<DnaSequence> result = FrequentKMerFinder.findMostFrequentKmers(sequence, 4);
         assertEquals(singleton(new DnaSequence("ACTG")), result);
 
-        result = frequentKMerFinder.findMostFrequentKmers(sequence, 3);
+        result = FrequentKMerFinder.findMostFrequentKmers(sequence, 3);
         assertEquals(new HashSet<DnaSequence>(asList(new DnaSequence("ACT"), new DnaSequence("CTG"))), result);
     }
 
@@ -32,7 +30,7 @@ public class FrequentKMerFinderTest {
     public void mostFrequentWithDistance() {
         DnaSequence sequence = new DnaSequence("ACGTTGCATGTCGCATGATGCATGAGAGCT");
 
-        Set<DnaSequence> result = frequentKMerFinder.findMostFrequentKmersWithDistance(sequence, 4, 1);
+        Set<DnaSequence> result = FrequentKMerFinder.findMostFrequentKmersWithDistance(sequence, 4, 1);
         assertEquals(new HashSet<>(asList(new DnaSequence("GATG"), new DnaSequence("ATGC"), new DnaSequence("ATGT"))), result);
     }
 

@@ -68,7 +68,7 @@ public class CycloPeptidSequencer extends CycloPeptidSequencerBase {
         return aminoAcids;
     }
 
-    private List<Integer> generateConvolution(List<Integer> spectrum) {
+    private static List<Integer> generateConvolution(List<Integer> spectrum) {
         List<Integer> convolution = new LinkedList<>();
         for (int i = 0; i < spectrum.size(); i++) {
             for (int j = 0; j < i; j++) {
@@ -95,8 +95,8 @@ public class CycloPeptidSequencer extends CycloPeptidSequencerBase {
         }
     }
 
-    private int linearScore(Peptid peptid, List<Integer> experimentalSpectrum) {
-        List<Integer> theoreticalSpectrum = new LinkedList<>(new MassSpectrometer().generateMassSpectrumForPeptid(peptid));
+    private static int linearScore(Peptid peptid, List<Integer> experimentalSpectrum) {
+        List<Integer> theoreticalSpectrum = new LinkedList<>(MassSpectrometer.generateMassSpectrumForPeptid(peptid));
         int score = 0;
         for (int value : experimentalSpectrum) {
             if (theoreticalSpectrum.contains(value)) {
@@ -107,7 +107,7 @@ public class CycloPeptidSequencer extends CycloPeptidSequencerBase {
         return score;
     }
 
-    private Set<Peptid> cut(Map<Peptid, Integer> peptidScores, int n) {
+    private static Set<Peptid> cut(Map<Peptid, Integer> peptidScores, int n) {
         if (peptidScores.size() <= n) {
             return peptidScores.keySet();
         }

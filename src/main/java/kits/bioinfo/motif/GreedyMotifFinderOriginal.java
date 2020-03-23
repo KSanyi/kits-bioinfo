@@ -8,7 +8,7 @@ import kits.bioinfo.core.DnaSequence;
 
 public class GreedyMotifFinderOriginal {
 
-    public List<DnaSequence> findMotifs(List<DnaSequence> sequences, int k) {
+    public static List<DnaSequence> findMotifs(List<DnaSequence> sequences, int k) {
 
         if (sequences.isEmpty()) {
             throw new IllegalArgumentException("Can not run without sequences");

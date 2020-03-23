@@ -43,7 +43,7 @@ public class FastClumpFinder implements ClumpFinder {
         return kMersFormingClumps;
     }
 
-    private boolean doIndexesFormClump(List<Integer> indexes, int L, int k, int t) {
+    private static boolean doIndexesFormClump(List<Integer> indexes, int L, int k, int t) {
         for (int i = 0; i < indexes.size() - t + 1; i++) {
             if (indexes.get(i + t - 1) - indexes.get(i) <= L - k) {
                 return true;
