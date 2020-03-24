@@ -1,11 +1,12 @@
 package kits.bioinfo.motif;
 
+import static java.util.stream.Collectors.toList;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 import kits.bioinfo.core.DnaSequence;
 
@@ -66,7 +67,7 @@ public class GibbsSampler {
     }
 
     private List<DnaSequence> randomKmers(List<DnaSequence> sequences, int k) {
-        return sequences.stream().map(sequence -> randomKmer(sequence, k)).collect(Collectors.toList());
+        return sequences.stream().map(sequence -> randomKmer(sequence, k)).collect(toList());
     }
 
     private DnaSequence randomKmer(DnaSequence sequence, int k) {
@@ -75,7 +76,7 @@ public class GibbsSampler {
 
     private static DnaSequence profileRandomKmer(ProfileMatrix profileMatrix, DnaSequence sequence, int k) {
         List<BigDecimal> probabilities = sequence.allSubSequences(k).stream().map(kmer -> profileMatrix.calculateProbability(kmer))
-                .collect(Collectors.toList());
+                .collect(toList());
         return sequence.subSequence(new ProbabilityDistribution(probabilities).randomInt(), k);
     }
 

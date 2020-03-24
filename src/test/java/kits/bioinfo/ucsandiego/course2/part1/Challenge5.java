@@ -3,7 +3,6 @@ package kits.bioinfo.ucsandiego.course2.part1;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.List;
 
 import kits.bioinfo.assembly.KmerGraph;
@@ -21,7 +20,7 @@ public class Challenge5 {
     public static void main(String[] args) throws IOException {
         List<DnaSequence> edges = SequenceReader.readDnaSequencesPerLine("input/dataset_200_7.txt");
         KmerGraph graph = KmerGraph.buildDeBrujinGraph(edges);
-        Files.write(Paths.get("./output/output_200_7.txt"), Collections.singletonList(graph.toString()));
+        Files.write(Paths.get("./output/output_200_7.txt"), List.of(graph.toString()));
     }
 
 }

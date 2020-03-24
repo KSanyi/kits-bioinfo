@@ -1,5 +1,7 @@
 package kits.bioinfo.genomerearrangement;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,7 +14,7 @@ public class Permutation {
         String permutaionStringWithoutBrackets = permutationString.replace("(", "").replace(")", "");
         return new Permutation(
                 Arrays.asList(permutaionStringWithoutBrackets.split(" ")).stream()
-                .map(intString -> Integer.parseInt(intString)).collect(Collectors.toList()));
+                .map(intString -> Integer.parseInt(intString)).collect(toList()));
     }
 
     private final List<Integer> values;

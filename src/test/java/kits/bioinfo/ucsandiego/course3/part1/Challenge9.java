@@ -1,11 +1,11 @@
 package kits.bioinfo.ucsandiego.course3.part1;
 
+import static java.util.stream.Collectors.joining;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,20 +32,20 @@ public class Challenge9 {
         OverlappingSequenceAligner<Character> aligner = new OverlappingSequenceAligner<Character>(ScoreFunction.basic(1, 2, 2));
         AlignmentResult<Character> alignment = aligner.findOneAlignment(Sequence.of(lines.get(0)), Sequence.of(lines.get(1)));
 
-        System.out.println(alignment.score);
-        System.out.println(printSequence(alignment.sequence1));
-        System.out.println(printSequence(alignment.sequence2));
+        System.out.println(alignment.score());
+        System.out.println(printSequence(alignment.sequence1()));
+        System.out.println(printSequence(alignment.sequence2()));
 
         AlignmentUtil.checkAlignment(alignment, ScoreFunction.basic(1, 2, 2));
 
         List<String> resultLines = Files.readAllLines(Paths.get("output/output_248_7.txt"));
-        assertEquals(resultLines.get(0), String.valueOf(alignment.score));
-        assertEquals(resultLines.get(1), printSequence(alignment.sequence1));
-        assertEquals(resultLines.get(2), printSequence(alignment.sequence2));
+        assertEquals(resultLines.get(0), String.valueOf(alignment.score()));
+        assertEquals(resultLines.get(1), printSequence(alignment.sequence1()));
+        assertEquals(resultLines.get(2), printSequence(alignment.sequence2()));
     }
 
     private static String printSequence(Sequence<Character> sequence) {
-        return sequence.stream().map(n -> n != null ? n.toString() : "-").collect(Collectors.joining());
+        return sequence.stream().map(n -> n != null ? n.toString() : "-").collect(joining());
     }
 
 }

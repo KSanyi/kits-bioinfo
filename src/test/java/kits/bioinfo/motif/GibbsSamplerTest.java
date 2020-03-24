@@ -1,6 +1,5 @@
 package kits.bioinfo.motif;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,7 +12,7 @@ public class GibbsSamplerTest {
 
     @Test
     public void test() {
-        List<DnaSequence> sequences = Arrays.asList(new DnaSequence("CGCCCCTCTCGGGGGTGTTCAGTAACCGGCCA"),
+        List<DnaSequence> sequences = List.of(new DnaSequence("CGCCCCTCTCGGGGGTGTTCAGTAACCGGCCA"),
                 new DnaSequence("GGGCGAGGTATGTGTAAGTGCCAAGGTGCCAG"), new DnaSequence("TAGTACCGAGACCGAAAGAAGTATACAGGCGT"),
                 new DnaSequence("TAGATCAAGTTTCAGGTGCACGTCGGTGAACC"), new DnaSequence("AATCCACCAGCTCCACGTGCAATGTTGGCCTA"));
 

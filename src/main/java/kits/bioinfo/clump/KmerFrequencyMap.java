@@ -1,10 +1,11 @@
 package kits.bioinfo.clump;
 
-import java.util.Comparator;
+import static java.util.Comparator.naturalOrder;
+import static java.util.stream.Collectors.toSet;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import kits.bioinfo.core.DnaSequence;
 
@@ -13,7 +14,9 @@ class KmerFrequencyMap {
     private Map<DnaSequence, Integer> map = new HashMap<>();
 
     public Set<DnaSequence> kmersAppersAtLeast(int t) {
-        return map.keySet().stream().filter(sequence -> map.get(sequence) >= t).collect(Collectors.toSet());
+        return map.keySet().stream()
+                .filter(sequence -> map.get(sequence) >= t)
+                .collect(toSet());
     }
 
     public Set<DnaSequence> sequences() {
@@ -39,8 +42,10 @@ class KmerFrequencyMap {
     }
 
     public Set<DnaSequence> mostFrequentKmers() {
-        final int max = map.values().stream().max(Comparator.naturalOrder()).orElse(-1);
-        return map.keySet().stream().filter(sequence -> map.get(sequence) == max).collect(Collectors.toSet());
+        final int max = map.values().stream().max(naturalOrder()).orElse(-1);
+        return map.keySet().stream()
+                .filter(sequence -> map.get(sequence) == max)
+                .collect(toSet());
     }
 
     @Override

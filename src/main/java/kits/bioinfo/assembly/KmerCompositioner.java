@@ -1,12 +1,11 @@
 package kits.bioinfo.assembly;
 
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.range;
+
 import java.util.List;
-import java.util.stream.Collectors;
 
 import kits.bioinfo.core.DnaSequence;
-
-import static java.util.stream.Collectors.*;
-import static java.util.stream.IntStream.*;
 
 public class KmerCompositioner {
 
@@ -38,10 +37,10 @@ public class KmerCompositioner {
     }
 
     public static DnaSequence readSequenceFromReadPairComposition(List<ReadPair> composition) {
-        int distance = composition.get(0).distance;
-        int k = composition.get(0).read1.length();
-        DnaSequence sequence1 = readSequenceFromComposition(composition.stream().map(readPair -> readPair.read1).collect(Collectors.toList()));
-        DnaSequence sequence2 = readSequenceFromComposition(composition.stream().map(readPair -> readPair.read2).collect(Collectors.toList()));
+        int distance = composition.get(0).distance();
+        int k = composition.get(0).read1().length();
+        DnaSequence sequence1 = readSequenceFromComposition(composition.stream().map(readPair -> readPair.read1()).collect(toList()));
+        DnaSequence sequence2 = readSequenceFromComposition(composition.stream().map(readPair -> readPair.read2()).collect(toList()));
         return sequence1.append(sequence2.suffix(distance + k + 1));
     }
 

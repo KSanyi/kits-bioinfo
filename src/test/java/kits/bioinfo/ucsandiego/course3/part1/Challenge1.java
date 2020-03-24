@@ -1,6 +1,5 @@
 package kits.bioinfo.ucsandiego.course3.part1;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +7,7 @@ import java.util.Map;
 public class Challenge1 {
 
     public static void main(String[] args) {
-        System.out.println(change(19303, Arrays.asList(24, 14, 7, 5, 3, 1)));
+        System.out.println(change(19303, List.of(24, 14, 7, 5, 3, 1)));
     }
 
     private static final Map<Integer, Integer> cache = new HashMap<>();

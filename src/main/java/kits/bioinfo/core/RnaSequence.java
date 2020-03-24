@@ -1,8 +1,9 @@
 package kits.bioinfo.core;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class RnaSequence extends Sequence<RnaBase> {
 
@@ -11,7 +12,7 @@ public class RnaSequence extends Sequence<RnaBase> {
     }
 
     public RnaSequence(String text) {
-        this(text.chars().mapToObj(c -> RnaBase.of((char) c)).collect(Collectors.toList()));
+        this(text.chars().mapToObj(c -> RnaBase.of((char) c)).collect(toList()));
     }
 
     public RnaSequence(Sequence<RnaBase> sequence) {

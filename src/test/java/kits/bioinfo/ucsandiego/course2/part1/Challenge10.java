@@ -3,7 +3,6 @@ package kits.bioinfo.ucsandiego.course2.part1;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +25,7 @@ public class Challenge10 {
                 .map(line -> new ReadPair(new DnaSequence(line.split("\\|")[0]), new DnaSequence(line.split("\\|")[1]), d))
                 .collect(Collectors.toList());
         DnaSequence sequence = ReadPairAssembler.assembleSequence(readPairs).get();
-        Files.write(Paths.get("./output/output_204_14.txt"), Collections.singletonList(sequence.toString()));
+        Files.write(Paths.get("./output/output_204_14.txt"), List.of(sequence.toString()));
     }
 
 }

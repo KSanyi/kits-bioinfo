@@ -1,8 +1,8 @@
 package kits.bioinfo.peptidsequencing;
 
-import java.util.Arrays;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ public class MassSpectrometerTest {
     public void test2() {
         List<Integer> massSpectrum = MassSpectrometer.generateMassSpectrumForCyclidPeptid(new Peptid("LEQN"));
 
-        assertEquals(Arrays.asList(0, 113, 114, 128, 129, 227, 242, 242, 257, 355, 356, 370, 371, 484), massSpectrum);
+        assertEquals(List.of(0, 113, 114, 128, 129, 227, 242, 242, 257, 355, 356, 370, 371, 484), massSpectrum);
     }
 
 }

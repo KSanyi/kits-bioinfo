@@ -1,7 +1,6 @@
 package kits.bioinfo.core;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +16,7 @@ public enum DnaBase {
         Set<DnaBase> bases = new HashSet<>(Arrays.asList(values()));
         bases.remove(N);
         bases.remove(base);
-        return Collections.unmodifiableSet(bases);
+        return Set.copyOf(bases);
     }
 
     public DnaBase complement() {

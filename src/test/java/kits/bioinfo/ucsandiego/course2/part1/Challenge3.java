@@ -3,7 +3,6 @@ package kits.bioinfo.ucsandiego.course2.part1;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.List;
 
 import kits.bioinfo.assembly.KmerGraph;
@@ -21,7 +20,7 @@ public class Challenge3 {
     public static void main(String[] args) throws IOException {
         List<DnaSequence> kmers = SequenceReader.readDnaSequencesPerLine("input/dataset_198_9.txt");
         KmerGraph graph = KmerGraph.buildFromKmerNodesList(kmers);
-        Files.write(Paths.get("./output/output_198_9.txt"), Collections.singletonList(graph.printEdges()));
+        Files.write(Paths.get("./output/output_198_9.txt"), List.of(graph.printEdges()));
     }
 
 }

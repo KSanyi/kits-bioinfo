@@ -1,12 +1,13 @@
 package kits.bioinfo.peptidsequencing;
 
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toSet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,8 +22,8 @@ public class CycloPeptidSequencerTest {
         Set<Peptid> peptids = new SimpleCycloPeptidSequencer().sequencePeptids(Arrays.asList(0, 113, 128, 186, 241, 299, 314, 427));
 
         Set<String> massSequences = peptids.stream()
-                .map(peptid -> peptid.stream().map(aminoAcid -> String.valueOf(aminoAcid.mass)).collect(Collectors.joining("-")))
-                .collect(Collectors.toSet());
+                .map(peptid -> peptid.stream().map(aminoAcid -> String.valueOf(aminoAcid.mass)).collect(joining("-")))
+                .collect(toSet());
 
         assertEquals(massSequences,
                 Set.of("128-113-186", "186-113-128", "128-186-113", "113-186-128", "113-128-186", "186-128-113"));
@@ -43,7 +44,7 @@ public class CycloPeptidSequencerTest {
 
     @Test
     public void testWithImperfectData() {
-        List<Integer> experimentalSpectrum = Arrays.asList(0, 71, 71, 71, 71, 87, 99, 99, 99, 103, 103, 113, 115, 115, 115, 128, 129, 131, 137, 142,
+        List<Integer> experimentalSpectrum = List.of(0, 71, 71, 71, 71, 87, 99, 99, 99, 103, 103, 113, 115, 115, 115, 128, 129, 131, 137, 142,
                 142, 147, 158, 163, 163, 170, 184, 202, 202, 213, 214, 218, 228, 234, 240, 241, 244, 246, 250, 252, 255, 257, 262, 262, 275, 278, 289,
                 299, 305, 312, 321, 326, 333, 333, 349, 351, 355, 355, 357, 361, 365, 370, 372, 374, 377, 381, 392, 404, 404, 404, 425, 428, 432, 436,
                 441, 452, 454, 468, 470, 475, 476, 477, 480, 485, 491, 499, 503, 503, 514, 518, 519, 539, 540, 547, 551, 555, 556, 567, 569, 570, 574,
@@ -68,7 +69,7 @@ public class CycloPeptidSequencerTest {
 
     @Test
     public void testWithImperfectData2() {
-        List<Integer> experimentalSpectrum = Arrays.asList(114, 965, 617, 245, 103, 921, 850, 1091, 692, 965, 807, 401, 646, 718, 57, 564, 128, 978,
+        List<Integer> experimentalSpectrum = List.of(114, 965, 617, 245, 103, 921, 850, 1091, 692, 965, 807, 401, 646, 718, 57, 564, 128, 978,
                 216, 548, 692, 229, 579, 373, 846, 674, 1093, 144, 630, 227, 793, 502, 286, 1081, 344, 749, 1093, 1066, 350, 342, 190, 216, 206, 445,
                 406, 852, 1137, 476, 908, 901, 951, 949, 401, 319, 761, 158, 692, 1036, 793, 678, 1080, 330, 101, 103, 1079, 172, 591, 229, 967, 694,
                 451, 603, 500, 273, 158, 821, 706, 243, 1137, 589, 113, 0, 247, 115, 635, 488, 749, 788, 844, 520, 115, 57, 293, 1079, 978, 605, 502,

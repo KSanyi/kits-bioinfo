@@ -1,5 +1,7 @@
 package kits.bioinfo.math.graph;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,7 +21,7 @@ public class GraphParser {
                 Integer node = Integer.parseInt(parts[0].trim());
                 if (!parts[1].trim().isEmpty()) {
                     List<Edge<Integer>> edgesFromNode = Arrays.asList(parts[1].split(",")).stream()
-                            .map(s -> new Edge<>(node, Integer.parseInt(s.trim()))).collect(Collectors.toList());
+                            .map(s -> new Edge<>(node, Integer.parseInt(s.trim()))).collect(toList());
                     edges.addAll(edgesFromNode);
                 }
             }
@@ -36,7 +38,7 @@ public class GraphParser {
                 Set<Integer> nodes = edges.stream().flatMap(edge -> Stream.of(edge.startNode, edge.endNode)).collect(Collectors.toSet());
                 Integer newNode = nodes.stream().filter(node -> node.equals(nodeValue)).findFirst().orElseGet(() -> nodeValue);
                 List<Edge<Integer>> edgesFromNode = Arrays.asList(parts[1].split(",")).stream().map(s -> parseEdge(newNode, s, nodes))
-                        .collect(Collectors.toList());
+                        .collect(toList());
                 edges.addAll(edgesFromNode);
             }
         }

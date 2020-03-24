@@ -1,9 +1,9 @@
 package kits.bioinfo.ucsandiego.course3.part1;
 
+import static java.util.stream.Collectors.joining;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,21 +32,21 @@ public class Challenge8 {
         FittingSequenceAligner<DnaBase> aligner = new FittingSequenceAligner<DnaBase>(ScoreFunction.basic(1, 1, 1));
         AlignmentResult<DnaBase> alignment = aligner.findOneAlignment(sequences.get(0).toSequence(), sequences.get(1).toSequence());
 
-        System.out.println(alignment.score);
-        System.out.println(printSequence(alignment.sequence1));
-        System.out.println(printSequence(alignment.sequence2));
+        System.out.println(alignment.score());
+        System.out.println(printSequence(alignment.sequence1()));
+        System.out.println(printSequence(alignment.sequence2()));
 
         AlignmentUtil.checkAlignment(alignment, ScoreFunction.basic(1, 1, 1));
 
-        assertEquals(18, alignment.score);
+        assertEquals(18, alignment.score());
         assertEquals("AGCTCGGAGGGAGATTG-AAC--ATTGAGTA-GCC-CGCGC-AGC-GGAT--C-ATAGTCTGTAATACTGCGGCGGTAAGCAAG-A-AGGGTTACAGC",
-                printSequence(alignment.sequence1));
+                printSequence(alignment.sequence1()));
         assertEquals("CGCGCGGAAGG-GCTCGCCCCGAATTGA-TATGCCTCG-GCAAACTGGATAGCTATA-AAAG-AAGA-T-CCGC-G-CA-CTAGTACA-TGTT-CAGC",
-                printSequence(alignment.sequence2));
+                printSequence(alignment.sequence2()));
     }
 
     private static String printSequence(Sequence<DnaBase> sequence) {
-        return sequence.stream().map(n -> n != null ? n.toString() : "-").collect(Collectors.joining());
+        return sequence.stream().map(n -> n != null ? n.toString() : "-").collect(joining());
     }
 
 }

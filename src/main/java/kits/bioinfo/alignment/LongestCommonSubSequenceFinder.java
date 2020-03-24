@@ -20,8 +20,8 @@ public class LongestCommonSubSequenceFinder {
     }
 
     private static <T> Sequence<T> createCommonSequence(AlignmentResult<T> alignmentResult) {
-        final Sequence<T> sequence1 = alignmentResult.sequence1;
-        final Sequence<T> sequence2 = alignmentResult.sequence2;
+        final Sequence<T> sequence1 = alignmentResult.sequence1();
+        final Sequence<T> sequence2 = alignmentResult.sequence2();
         Sequence<T> sequence = new Sequence<>();
         for (int i = 0; i < sequence1.length(); i++) {
             if (Objects.equals(sequence1.position(i), sequence2.position(i))) {

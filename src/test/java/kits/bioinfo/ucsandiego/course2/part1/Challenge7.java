@@ -1,11 +1,11 @@
 package kits.bioinfo.ucsandiego.course2.part1;
 
+import static java.util.stream.Collectors.joining;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import kits.bioinfo.math.graph.EulerianPathFinder;
 import kits.bioinfo.math.graph.Graph;
@@ -21,8 +21,8 @@ public class Challenge7 {
     public static void main(String[] args) throws IOException {
         Graph<Integer> graph = GraphParser.buildIntGraphFromAdjacencyStrings(Files.readAllLines(Paths.get("input/dataset_203_5.txt")));
         List<Integer> path = EulerianPathFinder.findEulerianPath(graph);
-        String pathString = path.stream().map(n -> n.toString()).collect(Collectors.joining("->"));
-        Files.write(Paths.get("./output/output_203_5.txt"), Collections.singletonList(pathString));
+        String pathString = path.stream().map(n -> n.toString()).collect(joining("->"));
+        Files.write(Paths.get("./output/output_203_5.txt"), List.of(pathString));
     }
 
 }

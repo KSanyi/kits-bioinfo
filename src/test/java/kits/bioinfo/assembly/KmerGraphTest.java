@@ -1,6 +1,6 @@
 package kits.bioinfo.assembly;
 
-import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,8 +10,12 @@ public class KmerGraphTest {
 
     @Test
     public void buildGraphFromNodes() {
-        KmerGraph graph = KmerGraph.buildFromKmerNodesList(Arrays.asList(new DnaSequence("ATGCG"), new DnaSequence("GCATG"), new DnaSequence("CATGC"),
-                new DnaSequence("AGGCA"), new DnaSequence("GGCAT")));
+        KmerGraph graph = KmerGraph.buildFromKmerNodesList(List.of(
+                new DnaSequence("ATGCG"),
+                new DnaSequence("GCATG"), 
+                new DnaSequence("CATGC"),
+                new DnaSequence("AGGCA"), 
+                new DnaSequence("GGCAT")));
         System.out.println(graph.printEdges());
     }
 

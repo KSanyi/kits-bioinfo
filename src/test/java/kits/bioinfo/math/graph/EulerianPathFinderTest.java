@@ -20,7 +20,7 @@ public class EulerianPathFinderTest {
 
         List<Integer> eulerianPath = EulerianPathFinder.findEulerianPath(graph);
 
-        assertEquals(Arrays.asList(6, 7, 8, 9, 6, 3, 0, 2, 1, 3, 4), eulerianPath);
+        assertEquals(List.of(6, 7, 8, 9, 6, 3, 0, 2, 1, 3, 4), eulerianPath);
     }
 
 }

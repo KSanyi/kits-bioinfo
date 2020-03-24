@@ -3,7 +3,6 @@ package kits.bioinfo.ucsandiego.course2.part1;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.List;
 
 import kits.bioinfo.assembly.KmerCompositioner;
@@ -24,7 +23,7 @@ public class Challenge4 {
         int k = 12;
         List<DnaSequence> kmers = KmerCompositioner.generateCompositions(sequence, k);
         KmerGraph graph = KmerGraph.buildDeBrujinGraph(kmers);
-        Files.write(Paths.get("./output/output_199_6.txt"), Collections.singletonList(graph.toString()));
+        Files.write(Paths.get("./output/output_199_6.txt"), List.of(graph.toString()));
     }
 
 }

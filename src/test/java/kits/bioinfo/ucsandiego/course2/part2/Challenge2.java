@@ -1,10 +1,11 @@
 package kits.bioinfo.ucsandiego.course2.part2;
 
+import static java.util.stream.Collectors.toList;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import kits.bioinfo.assembly.KmerCompositioner;
 import kits.bioinfo.core.DnaSequence;
@@ -27,8 +28,8 @@ public class Challenge2 {
         List<DnaSequence> candidates = KmerCompositioner.generateCompositions(dnaSequence, goalPeptid.length() * 3);
 
         List<DnaSequence> codingSequences = candidates.stream().filter(candidate -> goalPeptid.equals(PeptidCreator.translateAndTranscribe(candidate))
-                || goalPeptid.equals(PeptidCreator.translateAndTranscribe(candidate.reverseComplement()))).collect(Collectors.toList());
-        Files.write(Paths.get("./output/output_96_8.txt"), codingSequences.stream().map(seq -> seq.toString()).collect(Collectors.toList()));
+                || goalPeptid.equals(PeptidCreator.translateAndTranscribe(candidate.reverseComplement()))).collect(toList());
+        Files.write(Paths.get("./output/output_96_8.txt"), codingSequences.stream().map(seq -> seq.toString()).collect(toList()));
     }
 
 }

@@ -1,12 +1,15 @@
 package kits.bioinfo.ucsandiego.course2.part2;
 
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import kits.bioinfo.core.Peptid;
 import kits.bioinfo.peptidsequencing.CycloPeptidSequencer;
@@ -26,13 +29,13 @@ public class Challenge7 {
         int aminoAcidCutRank = Integer.parseInt(lines.get(0));
         int peptidCutRank = Integer.parseInt(lines.get(1));
         List<Integer> experimentalSpectrum = Arrays.asList(lines.get(2).split(" ")).stream().map(mass -> Integer.parseInt(mass))
-                .collect(Collectors.toList());
+                .collect(toList());
 
         Set<Peptid> peptids = new CycloPeptidSequencer(peptidCutRank, aminoAcidCutRank).sequencePeptids(experimentalSpectrum);
 
         Set<String> massSequences = peptids.stream()
-                .map(peptid -> peptid.stream().map(aminoAcid -> String.valueOf(aminoAcid.mass)).collect(Collectors.joining("-")))
-                .collect(Collectors.toSet());
+                .map(peptid -> peptid.stream().map(aminoAcid -> String.valueOf(aminoAcid.mass)).collect(joining("-")))
+                .collect(toSet());
         System.out.println(massSequences);
     }
 

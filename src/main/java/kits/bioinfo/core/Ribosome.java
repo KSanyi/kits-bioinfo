@@ -1,9 +1,9 @@
 package kits.bioinfo.core;
 
-import java.util.Collections;
+import static java.util.stream.Collectors.toList;
+
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Ribosome {
 
@@ -11,8 +11,9 @@ public class Ribosome {
 
         List<Codon> codons = getCodonsFromRnaSequence(rnaSequence);
 
-        List<AminoAcid> aminoAcids = codons.stream().map(codon -> Codon.aminoAcid(codon)).filter(aminoAcid -> aminoAcid.isPresent())
-                .map(aminoAcid -> aminoAcid.get()).collect(Collectors.toList());
+        List<AminoAcid> aminoAcids = codons.stream()
+                .flatMap(codon -> Codon.aminoAcid(codon).stream())
+                .collect(toList());
 
         return new Peptid(aminoAcids);
     }
@@ -22,7 +23,7 @@ public class Ribosome {
         for (int i = 0; i + 2 < rnaSequence.length(); i += 3) {
             codons.add(new Codon(rnaSequence.subSequence(i, 3)));
         }
-        return Collections.unmodifiableList(codons);
+        return List.copyOf(codons);
     }
 
 }

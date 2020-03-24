@@ -14,8 +14,7 @@ public class EulerianCycleFinderTest {
     @Test
     public void test() {
 
-        List<String> adjacencyStrings = Arrays.asList("0 -> 3", "1 -> 0", "2 -> 1,6", "3 -> 2", "4 -> 2", "5 -> 4", "6 -> 5,8", "7 -> 9", "8 -> 7",
-                "9 -> 6");
+        List<String> adjacencyStrings = List.of("0 -> 3", "1 -> 0", "2 -> 1,6", "3 -> 2", "4 -> 2", "5 -> 4", "6 -> 5,8", "7 -> 9", "8 -> 7", "9 -> 6");
 
         Graph<Integer> graph = GraphParser.buildIntGraphFromAdjacencyStrings(adjacencyStrings);
 
@@ -23,7 +22,7 @@ public class EulerianCycleFinderTest {
 
         List<Integer> eulerianCycle = EulerianCycleFinder.findEulerianCycle(graph);
 
-        List<Integer> expectedCycle = Arrays.asList(1, 0, 3, 2, 6, 8, 7, 9, 6, 5, 4, 2, 1);
+        List<Integer> expectedCycle = List.of(1, 0, 3, 2, 6, 8, 7, 9, 6, 5, 4, 2, 1);
 
         assertTrue(cyclesEqual(expectedCycle, eulerianCycle));
     }

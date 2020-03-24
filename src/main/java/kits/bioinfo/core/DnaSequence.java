@@ -1,11 +1,13 @@
 package kits.bioinfo.core;
 
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class DnaSequence extends Sequence<DnaBase> {
 
@@ -14,7 +16,7 @@ public class DnaSequence extends Sequence<DnaBase> {
     }
 
     public DnaSequence(String text) {
-        this(text.chars().mapToObj(c -> DnaBase.of((char) c)).collect(Collectors.toList()));
+        this(text.chars().mapToObj(c -> DnaBase.of((char) c)).collect(toList()));
     }
 
     public DnaSequence(Sequence<DnaBase> sequence) {
@@ -66,7 +68,7 @@ public class DnaSequence extends Sequence<DnaBase> {
     }
 
     public DnaSequence reverseComplement() {
-        List<DnaBase> complementText = text.stream().map(n -> n.complement()).collect(Collectors.toList());
+        List<DnaBase> complementText = text.stream().map(DnaBase::complement).collect(toList());
         Collections.reverse(complementText);
         return new DnaSequence(complementText);
     }
@@ -108,7 +110,7 @@ public class DnaSequence extends Sequence<DnaBase> {
 
     @Override
     public String toString() {
-        return text.stream().map(n -> n.toString()).collect(Collectors.joining());
+        return text.stream().map(n -> n.toString()).collect(joining());
     }
 
 }

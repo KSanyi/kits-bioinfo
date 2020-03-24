@@ -1,11 +1,11 @@
 package kits.bioinfo.motif;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ public class ProfileMatrixTest {
 
     @Test
     public void probability() {
-        Set<DnaSequence> kmers = new HashSet<>(Arrays.asList(new DnaSequence("ATTT"), new DnaSequence("CGTA")));
+        Set<DnaSequence> kmers = new HashSet<>(List.of(new DnaSequence("ATTT"), new DnaSequence("CGTA")));
 
         ProfileMatrix profileMatrix = ProfileMatrix.build(kmers);
 
@@ -24,7 +24,7 @@ public class ProfileMatrixTest {
 
     @Test
     public void mostProbableSequenceFound() {
-        Set<DnaSequence> kmers = new HashSet<>(Arrays.asList(new DnaSequence("ATTT"), new DnaSequence("CGTA")));
+        Set<DnaSequence> kmers = Set.of(new DnaSequence("ATTT"), new DnaSequence("CGTA"));
 
         ProfileMatrix profileMatrix = ProfileMatrix.build(kmers);
 

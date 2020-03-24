@@ -1,11 +1,8 @@
 package kits.bioinfo.motif;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static java.util.Arrays.*;
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,12 +12,11 @@ public class MotifFinderTest {
 
     @Test
     public void test1() {
-        Set<DnaSequence> sequences = new HashSet<>(
-                Arrays.asList(new DnaSequence("ATTTGGC"), new DnaSequence("TGCCTTA"), new DnaSequence("CGGTATC"), new DnaSequence("GAAAATT")));
+        Set<DnaSequence> sequences = Set.of(new DnaSequence("ATTTGGC"), new DnaSequence("TGCCTTA"), new DnaSequence("CGGTATC"), new DnaSequence("GAAAATT"));
 
         Set<DnaSequence> motifs = MotifFinder.findMotifs(sequences, 3, 1);
 
-        assertEquals(new HashSet<>(asList(new DnaSequence("ATA"), new DnaSequence("ATT"), new DnaSequence("GTT"), new DnaSequence("TTT"))), motifs);
+        assertEquals(Set.of(new DnaSequence("ATA"), new DnaSequence("ATT"), new DnaSequence("GTT"), new DnaSequence("TTT")), motifs);
     }
 
 }

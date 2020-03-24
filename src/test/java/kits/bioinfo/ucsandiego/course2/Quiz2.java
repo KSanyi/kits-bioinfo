@@ -1,6 +1,7 @@
 package kits.bioinfo.ucsandiego.course2;
 
-import java.util.Arrays;
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,19 +22,18 @@ public class Quiz2 {
     private static void question1() {
         System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName() + ": ");
 
-        List<DnaSequence> sequences = Arrays.asList("AAAT", "AATG", "ACCC", "ACGC", "ATAC", "ATCA", "ATGC", "CAAA", "CACC", "CATA", "CATC", "CCAG",
+        List<DnaSequence> sequences = List.of("AAAT", "AATG", "ACCC", "ACGC", "ATAC", "ATCA", "ATGC", "CAAA", "CACC", "CATA", "CATC", "CCAG",
                 "CCCA", "CGCT", "CTCA", "GCAT", "GCTC", "TACG", "TCAC", "TCAT", "TGCA").stream().map(s -> new DnaSequence(s))
                 .collect(Collectors.toList());
         KmerGraph graph = KmerGraph.buildDeBrujinGraph(sequences);
-        List<DnaSequence> path = EulerianPathFinder.findEulerianPath(graph).stream().map(node -> node).collect(Collectors.toList());
+        List<DnaSequence> path = EulerianPathFinder.findEulerianPath(graph).stream().map(node -> node).collect(toList());
         System.out.println(KmerCompositioner.readSequenceFromComposition(path));
     }
 
     private static void question2() {
         System.out.println("\n" + Thread.currentThread().getStackTrace()[1].getMethodName() + ": ");
 
-        List<ReadPair> readPairs = Arrays
-                .asList("ACC|ATA", "ACT|ATT", "ATA|TGA", "ATT|TGA", "CAC|GAT", "CCG|TAC", "CGA|ACT", "CTG|AGC", "CTG|TTC", "GAA|CTT", "GAT|CTG",
+        List<ReadPair> readPairs = List.of("ACC|ATA", "ACT|ATT", "ATA|TGA", "ATT|TGA", "CAC|GAT", "CCG|TAC", "CGA|ACT", "CTG|AGC", "CTG|TTC", "GAA|CTT", "GAT|CTG",
                         "GAT|CTG", "TAC|GAT", "TCT|AAG", "TGA|GCT", "TGA|TCT", "TTC|GAA")
                 .stream().map(s -> new ReadPair(new DnaSequence(s.split("\\|")[0]), new DnaSequence(s.split("\\|")[1]), 1))
                 .collect(Collectors.toList());

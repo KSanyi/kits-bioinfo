@@ -1,9 +1,10 @@
 package kits.bioinfo.ucsandiego.course3.part1;
 
+import static java.util.stream.Collectors.joining;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import kits.bioinfo.math.graph.Graph;
 import kits.bioinfo.math.graph.GraphParser;
@@ -28,7 +29,7 @@ public class Challenge4 {
 
         List<Integer> longestPath = LongestPathFinder.findLongestPath(graph, sourceNode, sinkNode);
         System.out.println(graph.markupNumber(sourceNode) - graph.markupNumber(sinkNode));
-        System.out.println(longestPath.stream().map(v -> v.toString()).collect(Collectors.joining("->")));
+        System.out.println(longestPath.stream().map(v -> v.toString()).collect(joining("->")));
     }
 
 }

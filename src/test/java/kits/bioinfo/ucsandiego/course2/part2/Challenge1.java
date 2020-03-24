@@ -3,7 +3,7 @@ package kits.bioinfo.ucsandiego.course2.part2;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Collections;
+import java.util.List;
 
 import kits.bioinfo.core.Peptid;
 import kits.bioinfo.core.Ribosome;
@@ -21,7 +21,7 @@ public class Challenge1 {
     public static void main(String[] args) throws IOException {
         RnaSequence rnaSequence = SequenceReader.readRnaSequenceFromFile("input/dataset_96_5.txt");
         Peptid peptid = Ribosome.translateToAminoAcidSequence(rnaSequence);
-        Files.write(Paths.get("./output/output_96_5.txt"), Collections.singletonList(peptid.toString()));
+        Files.write(Paths.get("./output/output_96_5.txt"), List.of(peptid.toString()));
     }
 
 }

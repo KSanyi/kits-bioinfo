@@ -2,16 +2,12 @@ package kits.bioinfo.alignment.aligner;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 import kits.bioinfo.alignment.scorefunction.ScoreFunction;
 import kits.bioinfo.core.Sequence;
 import kits.bioinfo.util.IntPair;
-import kits.bioinfo.util.Pair;
 
 public class GlobalSequenceAligner<T> {
-
-    Logger logger = Logger.getLogger(getClass().getSimpleName());
 
     protected final ScoreFunction<T> scoreFunction;
 
@@ -30,18 +26,18 @@ public class GlobalSequenceAligner<T> {
         Sequence<T> alignment1 = new Sequence<>();
         Sequence<T> alignment2 = new Sequence<>();
         for (int i = 1; i < path.size(); i++) {
-            Pair<Integer> prevNode = path.get(i - 1);
-            Pair<Integer> node = path.get(i);
+            IntPair prevNode = path.get(i - 1);
+            IntPair node = path.get(i);
 
-            if (node.first.equals(prevNode.first)) {
+            if (node.first() == (prevNode.first())) {
                 alignment1 = alignment1.append((T) null);
             } else {
-                alignment1 = alignment1.append(sequence1.position(node.first - 1));
+                alignment1 = alignment1.append(sequence1.position(node.first() - 1));
             }
-            if (node.second.equals(prevNode.second)) {
+            if (node.second() == (prevNode.second())) {
                 alignment2 = alignment2.append((T) null);
             } else {
-                alignment2 = alignment2.append(sequence2.position(node.second - 1));
+                alignment2 = alignment2.append(sequence2.position(node.second() - 1));
             }
         }
         return new AlignmentResult<>(alignment1, alignment2, score);

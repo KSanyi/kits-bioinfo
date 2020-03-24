@@ -11,7 +11,6 @@ import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
-
 public class NucleotidTest {
 
     @Test

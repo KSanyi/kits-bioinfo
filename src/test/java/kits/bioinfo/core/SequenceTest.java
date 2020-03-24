@@ -2,8 +2,7 @@ package kits.bioinfo.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -68,8 +67,7 @@ public class SequenceTest {
 
     @Test
     public void neighbours() {
-        assertEquals(new HashSet<>(Arrays.asList(new DnaSequence("A"), new DnaSequence("C"), new DnaSequence("T"), new DnaSequence("G"))),
-                new DnaSequence("A").neighbours(1));
+        assertEquals(Set.of(new DnaSequence("A"), new DnaSequence("C"), new DnaSequence("T"), new DnaSequence("G")), new DnaSequence("A").neighbours(1));
         assertEquals(13, new DnaSequence("ACCT").neighbours(1).size());
         assertEquals(67, new DnaSequence("ACCT").neighbours(2).size());
     }

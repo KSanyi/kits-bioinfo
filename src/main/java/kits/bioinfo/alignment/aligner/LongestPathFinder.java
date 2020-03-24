@@ -35,8 +35,8 @@ class LongestPathFinder {
         } else {
             int max = Integer.MIN_VALUE;
             for (Edge edge : edgesTo) {
-                int preNodePathValue = graph.get(edge.sourceIndex);
-                int candidate = preNodePathValue + edge.weight;
+                int preNodePathValue = graph.get(edge.sourceIndex());
+                int candidate = preNodePathValue + edge.weight();
                 if (candidate > max) {
                     max = candidate;
                 }
@@ -52,9 +52,9 @@ class LongestPathFinder {
             int pathValue = graph.get(node);
             List<Edge> edgesTo = graph.edgesTo(node);
             for (Edge edge : edgesTo) {
-                int preNodePathValue = graph.get(edge.sourceIndex);
-                if (preNodePathValue + edge.weight == pathValue) {
-                    node = edge.sourceIndex;
+                int preNodePathValue = graph.get(edge.sourceIndex());
+                if (preNodePathValue + edge.weight() == pathValue) {
+                    node = edge.sourceIndex();
                     path.add(node);
                     break;
                 }

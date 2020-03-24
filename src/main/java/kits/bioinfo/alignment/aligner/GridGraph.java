@@ -35,7 +35,7 @@ class GridGraph {
     }
 
     public void set(IntPair index, int value) {
-        set(index.first, index.second, value);
+        set(index.first(), index.second(), value);
     }
 
     public void set(int i, int j, int value) {
@@ -46,7 +46,7 @@ class GridGraph {
         if (index.equals(endNode)) {
             return endValue;
         } else {
-            return get(index.first, index.second);
+            return get(index.first(), index.second());
         }
     }
 
@@ -58,16 +58,16 @@ class GridGraph {
         if (targetIndex.equals(endNode)) {
             edgesToEndNode.add(new Edge(sourceIndex, weigth));
         } else {
-            sourceEdges[targetIndex.first][targetIndex.second].add(new Edge(sourceIndex, weigth));
+            sourceEdges[targetIndex.first()][targetIndex.second()].add(new Edge(sourceIndex, weigth));
         }
     }
 
     public List<Edge> edgesTo(IntPair targetIndex) {
-        return edgesTo(targetIndex.first, targetIndex.second);
+        return edgesTo(targetIndex.first(), targetIndex.second());
     }
 
     public List<Edge> edgesTo(int i, int j) {
-        if (i == endNode.first && j == endNode.second) {
+        if (i == endNode.first() && j == endNode.second()) {
             return new LinkedList<>(edgesToEndNode);
         } else {
             return new LinkedList<>(sourceEdges[i][j]);
@@ -94,15 +94,7 @@ class GridGraph {
         return endValue;
     }
 
-    static class Edge {
-        final IntPair sourceIndex;
-        final int weight;
-
-        public Edge(IntPair sourceIndex, int weight) {
-            this.sourceIndex = sourceIndex;
-            this.weight = weight;
-        }
-
+    record Edge(IntPair sourceIndex, int weight) {
         @Override
         public String toString() {
             return sourceIndex + "--" + weight + "-->";

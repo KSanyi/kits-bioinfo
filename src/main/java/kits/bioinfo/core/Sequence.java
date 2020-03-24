@@ -1,17 +1,19 @@
 package kits.bioinfo.core;
 
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Sequence<T> implements Comparable<Sequence<T>>, Iterable<T> {
 
     public static Sequence<Character> of(String text) {
-        return new Sequence<Character>(text.chars().mapToObj(c -> Character.valueOf((char) c)).collect(Collectors.toList()));
+        return new Sequence<Character>(text.chars().mapToObj(c -> Character.valueOf((char) c)).collect(toList()));
     }
 
     protected final List<T> text;
@@ -106,7 +108,7 @@ public class Sequence<T> implements Comparable<Sequence<T>>, Iterable<T> {
     }
 
     public Sequence<T> filter(Predicate<? super T> predicate) {
-        return new Sequence<>(text.stream().filter(predicate).collect(Collectors.toList()));
+        return new Sequence<>(text.stream().filter(predicate).collect(toList()));
     }
 
     @Override
@@ -121,7 +123,7 @@ public class Sequence<T> implements Comparable<Sequence<T>>, Iterable<T> {
 
     @Override
     public String toString() {
-        return text.stream().map(n -> n != null ? n.toString() : "-").collect(Collectors.joining());
+        return text.stream().map(n -> n != null ? n.toString() : "-").collect(joining());
     }
 
     public Sequence<T> toSequence() {

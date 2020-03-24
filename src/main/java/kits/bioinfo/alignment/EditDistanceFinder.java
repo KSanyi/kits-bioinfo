@@ -11,7 +11,7 @@ public class EditDistanceFinder {
         GlobalSequenceAligner<T> aligner = new GlobalSequenceAligner<>(ScoreFunction.editDistance());
         AlignmentResult<T> alignment = aligner.findOneAlignment(sequence1, sequence2);
 
-        return -alignment.score;
+        return -alignment.score();
     }
 
 }

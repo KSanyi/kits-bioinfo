@@ -3,7 +3,6 @@ package kits.bioinfo.ucsandiego.course2.part1;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.List;
 
 import kits.bioinfo.assembly.KmerCompositioner;
@@ -18,7 +17,7 @@ public class Challenge2 {
     public static void main(String[] args) throws IOException {
         List<DnaSequence> composition = SequenceReader.readDnaSequencesPerLine("input/dataset_198_3.txt");
         DnaSequence sequence = KmerCompositioner.readSequenceFromComposition(composition);
-        Files.write(Paths.get("./output/output_198_3.txt"), Collections.singletonList(sequence.toString()));
+        Files.write(Paths.get("./output/output_198_3.txt"), List.of(sequence.toString()));
     }
 
 }

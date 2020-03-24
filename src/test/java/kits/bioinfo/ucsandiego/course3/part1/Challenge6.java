@@ -1,11 +1,11 @@
 package kits.bioinfo.ucsandiego.course3.part1;
 
+import static java.util.stream.Collectors.joining;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,20 +35,20 @@ public class Challenge6 {
         LocalSequenceAligner<AminoAcid> aligner = new LocalSequenceAligner<AminoAcid>(ScoreFunction.pam250(5));
         AlignmentResult<AminoAcid> alignment = aligner.findOneAlignment(peptid1.toSequence(), peptid2.toSequence());
 
-        System.out.println(alignment.score);
-        System.out.println(printSequence(alignment.sequence1));
-        System.out.println(printSequence(alignment.sequence2));
+        System.out.println(alignment.score());
+        System.out.println(printSequence(alignment.sequence1()));
+        System.out.println(printSequence(alignment.sequence2()));
 
         AlignmentUtil.checkAlignment(alignment, ScoreFunction.pam250(5));
 
         List<String> resultLines = Files.readAllLines(Paths.get("output/output_247_9.txt"));
-        assertEquals(resultLines.get(0), String.valueOf(alignment.score));
-        assertEquals(resultLines.get(1), printSequence(alignment.sequence1));
-        assertEquals(resultLines.get(2), printSequence(alignment.sequence2));
+        assertEquals(resultLines.get(0), String.valueOf(alignment.score()));
+        assertEquals(resultLines.get(1), printSequence(alignment.sequence1()));
+        assertEquals(resultLines.get(2), printSequence(alignment.sequence2()));
     }
 
     private static String printSequence(Sequence<AminoAcid> sequence) {
-        return sequence.stream().map(n -> n != null ? n.code1.toString() : "-").collect(Collectors.joining());
+        return sequence.stream().map(n -> n != null ? n.code1.toString() : "-").collect(joining());
     }
 
 }

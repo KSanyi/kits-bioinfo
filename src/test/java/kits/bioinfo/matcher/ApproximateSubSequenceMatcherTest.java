@@ -1,10 +1,13 @@
 package kits.bioinfo.matcher;
 
-import java.util.Arrays;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
 import kits.bioinfo.core.DnaSequence;
 
 public class ApproximateSubSequenceMatcherTest {
@@ -38,8 +41,8 @@ public class ApproximateSubSequenceMatcherTest {
     @Test
     public void matchStartIndex() {
         Matcher matcher = new ApproximateSubSequenceMatcher("ACT", 1);
-        assertEquals(Arrays.asList(0), matcher.matchStartIndexes(new DnaSequence("ACT")));
-        assertEquals(Arrays.asList(1, 7), matcher.matchStartIndexes(new DnaSequence("TACTTTCACTT")));
+        assertEquals(List.of(0), matcher.matchStartIndexes(new DnaSequence("ACT")));
+        assertEquals(List.of(1, 7), matcher.matchStartIndexes(new DnaSequence("TACTTTCACTT")));
 
         assertTrue(matcher.matchStartIndexes(new DnaSequence("AC")).isEmpty());
     }
@@ -54,7 +57,7 @@ public class ApproximateSubSequenceMatcherTest {
     public void matchStartIndex2() {
         DnaSequence sequence = new DnaSequence("CGCCCGAATCCAGAACGCATTCCCATATTTCGGGACCACTGGCCTCCACGGTACGGACGTCAATCAAAT");
         Matcher matcher = new ApproximateSubSequenceMatcher("ATTCTGGA", 3);
-        assertEquals(Arrays.asList(6, 7, 26, 27), matcher.matchStartIndexes(sequence));
+        assertEquals(List.of(6, 7, 26, 27), matcher.matchStartIndexes(sequence));
     }
 
 }

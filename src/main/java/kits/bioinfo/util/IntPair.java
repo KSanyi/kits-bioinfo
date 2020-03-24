@@ -1,9 +1,10 @@
 package kits.bioinfo.util;
 
-public class IntPair extends Pair<Integer> {
+public record IntPair(int first, int second) {
 
-    public IntPair(Integer first, Integer second) {
-        super(first, second);
+    @Override
+    public String toString() {
+        return "<" + first + ", " + second + ">";
     }
 
 }

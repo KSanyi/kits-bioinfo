@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 import kits.bioinfo.util.FrequencyMap;
-import kits.bioinfo.util.Pair;
+import kits.bioinfo.util.IntPair;
 
 public class SyntenyBlockSizesSimulation {
 
@@ -27,9 +27,9 @@ public class SyntenyBlockSizesSimulation {
     }
     
     private static void doOneRearrangement(int[] genome){
-        Pair<Integer> breakPointPair = generateRandomBreakPointPair(genome.length);
-        int breakPoint1 = breakPointPair.first;
-        int breakPoint2 = breakPointPair.second;
+        IntPair breakPointPair = generateRandomBreakPointPair(genome.length);
+        int breakPoint1 = breakPointPair.first();
+        int breakPoint2 = breakPointPair.second();
         
         int[] range = Arrays.copyOfRange(genome, breakPoint1, breakPoint2);
         for(int i=0;i<range.length;i++){
@@ -37,10 +37,10 @@ public class SyntenyBlockSizesSimulation {
         }
     }
     
-    private static Pair<Integer> generateRandomBreakPointPair(int genomeLength){
+    private static IntPair generateRandomBreakPointPair(int genomeLength){
         int breakPoint1 = random.nextInt(genomeLength);
         int breakPoint2 = random.nextInt(genomeLength);
-        return breakPoint1 < breakPoint2 ? new Pair<>(breakPoint1, breakPoint2) : new Pair<>(breakPoint2, breakPoint1);  
+        return breakPoint1 < breakPoint2 ? new IntPair(breakPoint1, breakPoint2) : new IntPair(breakPoint2, breakPoint1);  
     }
     
     private static int[] createGenome(int n){
