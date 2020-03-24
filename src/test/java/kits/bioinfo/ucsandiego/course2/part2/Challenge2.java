@@ -26,10 +26,8 @@ public class Challenge2 {
         Peptid goalPeptid = new Peptid(lines.get(1));
         List<DnaSequence> candidates = KmerCompositioner.generateCompositions(dnaSequence, goalPeptid.length() * 3);
 
-        PeptidCreator peptidCreator = new PeptidCreator();
-
-        List<DnaSequence> codingSequences = candidates.stream().filter(candidate -> goalPeptid.equals(peptidCreator.translateAndTranscribe(candidate))
-                || goalPeptid.equals(peptidCreator.translateAndTranscribe(candidate.reverseComplement()))).collect(Collectors.toList());
+        List<DnaSequence> codingSequences = candidates.stream().filter(candidate -> goalPeptid.equals(PeptidCreator.translateAndTranscribe(candidate))
+                || goalPeptid.equals(PeptidCreator.translateAndTranscribe(candidate.reverseComplement()))).collect(Collectors.toList());
         Files.write(Paths.get("./output/output_96_8.txt"), codingSequences.stream().map(seq -> seq.toString()).collect(Collectors.toList()));
     }
 

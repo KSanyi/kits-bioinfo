@@ -19,11 +19,10 @@ public class Quiz3 {
     private static void question2() {
         System.out.println("\n" + Thread.currentThread().getStackTrace()[1].getMethodName() + ": ");
 
-        Ribosome ribosome = new Ribosome();
-        System.out.println(ribosome.translateToAminoAcidSequence(new RnaSequence("CCCAGUACCGAAAUUAAC")));
-        System.out.println(ribosome.translateToAminoAcidSequence(new RnaSequence("CCCCGUACGGAGAUGAAA")));
-        System.out.println(ribosome.translateToAminoAcidSequence(new RnaSequence("CCGAGGACCGAAAUCAAC")));
-        System.out.println(ribosome.translateToAminoAcidSequence(new RnaSequence("CCCAGGACUGAGAUCAAU")));
+        System.out.println(Ribosome.translateToAminoAcidSequence(new RnaSequence("CCCAGUACCGAAAUUAAC")));
+        System.out.println(Ribosome.translateToAminoAcidSequence(new RnaSequence("CCCCGUACGGAGAUGAAA")));
+        System.out.println(Ribosome.translateToAminoAcidSequence(new RnaSequence("CCGAGGACCGAAAUCAAC")));
+        System.out.println(Ribosome.translateToAminoAcidSequence(new RnaSequence("CCCAGGACUGAGAUCAAU")));
     }
 
     private static void question3() {
@@ -41,25 +40,23 @@ public class Quiz3 {
     private static void question5() {
         System.out.println("\n" + Thread.currentThread().getStackTrace()[1].getMethodName() + ": ");
 
-        MassSpectrometer massSpectrometer = new MassSpectrometer();
-        System.out.println(massSpectrometer.generateMassSpectrumForCyclidPeptid(new Peptid("MTAI")));
-        System.out.println(massSpectrometer.generateMassSpectrumForCyclidPeptid(new Peptid("TMLA")));
-        System.out.println(massSpectrometer.generateMassSpectrumForCyclidPeptid(new Peptid("IAMT")));
-        System.out.println(massSpectrometer.generateMassSpectrumForCyclidPeptid(new Peptid("TAIM")));
-        System.out.println(massSpectrometer.generateMassSpectrumForCyclidPeptid(new Peptid("MIAT")));
-        System.out.println(massSpectrometer.generateMassSpectrumForCyclidPeptid(new Peptid("ALTM")));
+        System.out.println(MassSpectrometer.generateMassSpectrumForCyclidPeptid(new Peptid("MTAI")));
+        System.out.println(MassSpectrometer.generateMassSpectrumForCyclidPeptid(new Peptid("TMLA")));
+        System.out.println(MassSpectrometer.generateMassSpectrumForCyclidPeptid(new Peptid("IAMT")));
+        System.out.println(MassSpectrometer.generateMassSpectrumForCyclidPeptid(new Peptid("TAIM")));
+        System.out.println(MassSpectrometer.generateMassSpectrumForCyclidPeptid(new Peptid("MIAT")));
+        System.out.println(MassSpectrometer.generateMassSpectrumForCyclidPeptid(new Peptid("ALTM")));
     }
 
     private static void question6() {
         System.out.println("\n" + Thread.currentThread().getStackTrace()[1].getMethodName() + ": ");
 
-        MassSpectrometer massSpectrometer = new MassSpectrometer();
-        System.out.println(massSpectrometer.generateMassSpectrumForPeptid(new Peptid("CET")));
-        System.out.println(massSpectrometer.generateMassSpectrumForPeptid(new Peptid("AQV")));
-        System.out.println(massSpectrometer.generateMassSpectrumForPeptid(new Peptid("ETC")));
-        System.out.println(massSpectrometer.generateMassSpectrumForPeptid(new Peptid("VAQ")));
-        System.out.println(massSpectrometer.generateMassSpectrumForPeptid(new Peptid("TCE")));
-        System.out.println(massSpectrometer.generateMassSpectrumForPeptid(new Peptid("CTV")));
+        System.out.println(MassSpectrometer.generateMassSpectrumForPeptid(new Peptid("CET")));
+        System.out.println(MassSpectrometer.generateMassSpectrumForPeptid(new Peptid("AQV")));
+        System.out.println(MassSpectrometer.generateMassSpectrumForPeptid(new Peptid("ETC")));
+        System.out.println(MassSpectrometer.generateMassSpectrumForPeptid(new Peptid("VAQ")));
+        System.out.println(MassSpectrometer.generateMassSpectrumForPeptid(new Peptid("TCE")));
+        System.out.println(MassSpectrometer.generateMassSpectrumForPeptid(new Peptid("CTV")));
     }
 
 }

@@ -20,7 +20,7 @@ public class Challenge1 {
      */
     public static void main(String[] args) throws IOException {
         RnaSequence rnaSequence = SequenceReader.readRnaSequenceFromFile("input/dataset_96_5.txt");
-        Peptid peptid = new Ribosome().translateToAminoAcidSequence(rnaSequence);
+        Peptid peptid = Ribosome.translateToAminoAcidSequence(rnaSequence);
         Files.write(Paths.get("./output/output_96_5.txt"), Collections.singletonList(peptid.toString()));
     }
 

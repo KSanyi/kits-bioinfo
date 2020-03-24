@@ -148,6 +148,11 @@ public class Graph<T> {
         return adjacencyMap.equals(((Graph<?>) other).adjacencyMap);
     }
 
+    @Override
+    public int hashCode() {
+        return adjacencyMap.hashCode();
+    }
+
     public static class Edge<T> {
         public final T startNode;
         public final T endNode;

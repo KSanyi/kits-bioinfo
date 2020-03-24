@@ -1,14 +1,13 @@
 package kits.bioinfo.math.graph;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
-import kits.bioinfo.math.graph.EulerianCycleFinder;
-import kits.bioinfo.math.graph.Graph;
 
 public class EulerianCycleFinderTest {
 

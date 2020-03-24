@@ -10,7 +10,7 @@ public class RibosomeTest {
     public void test1() {
         RnaSequence rnaSequence = new RnaSequence("AUGGCCAUGGCGCCCAGAACUGAGAUCAAUAGUACCCGUAUUAACGGGUGA");
 
-        Peptid peptid = new Ribosome().translateToAminoAcidSequence(rnaSequence);
+        Peptid peptid = Ribosome.translateToAminoAcidSequence(rnaSequence);
 
         assertEquals("MAMAPRTEINSTRING", peptid.toString());
     }
@@ -20,7 +20,7 @@ public class RibosomeTest {
         RnaSequence rnaSequence = new RnaSequence(
                 "AUGAGAGGUCCCGGGACUACGUGUUCUAGAAUCAGUCGCGGGGAUGUCAAUCCAUCAGGGAAUCAUUUAGUACUGGUGCGAUUAGCAGCCACCAGGCCUUGGGUGGUUCGACGGGCUUACGACCCCCGAUCGGACAAAGUCGAGCAGGCACAUAAAAGACCAGGCGCAGUUCAGAUACGCGUGAGCAAAGUUUCGGCGAACCAUUUUCCCUUGCCUUGUAUGGAAGUGCUUCUAGUUGUAGCAUCGAGCUUACGAAAAGCGGGGAUUCUCUUGCACCGCUGGUCCAUGUCAGGGUCCUUUUUCAUUCCCUCAGAUACUUAUCCCCAAAUCACUUGCAGAG");
 
-        Peptid peptid = new Ribosome().translateToAminoAcidSequence(rnaSequence);
+        Peptid peptid = Ribosome.translateToAminoAcidSequence(rnaSequence);
 
         assertEquals("MRGPGTTCSRISRGDVNPSGNHLVLVRLAATRPWVVRRAYDPRSDKVEQAHKRPGAVQIRVSKVSANHFPLPCMEVLLVVASSLRKAGILLHRWSMSGSFFIPSDTYPQITCR",
                 peptid.toString());

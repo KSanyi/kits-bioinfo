@@ -2,7 +2,6 @@ package kits.bioinfo.alignment.aligner;
 
 import java.util.Optional;
 
-import kits.bioinfo.alignment.aligner.AlignmentResult;
 import kits.bioinfo.alignment.scorefunction.ScoreFunction;
 import kits.bioinfo.core.Sequence;
 
