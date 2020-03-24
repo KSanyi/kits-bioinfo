@@ -22,7 +22,7 @@ public class Homework1 {
 
     private static void question2() {
         DnaSequence sequence = new DnaSequence("CGGAGGACTCTAGGTAACGCTTATCAGGTCCATAGGACATTCA");
-        System.out.println("Most frequent 3-mer in " + sequence + "\n:" + FrequentKMerFinder.findMostFrequentKmers(sequence, 3));
+        System.out.println("Most frequent 3-mer in " + sequence + ": " + FrequentKMerFinder.findMostFrequentKmers(sequence, 3));
     }
 
     private static void question3() {

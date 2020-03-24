@@ -18,7 +18,7 @@ public class Challenge2 {
         DnaSequence sequence = SequenceReader.readDnaSequenceFromFile("input/E-coli.txt");
         Set<DnaSequence> kmersFormingClump = new FastClumpFinder().findKmersFormingClumps(sequence, 500, 9, 3);
         // Expected size: 1904
-        System.out.println(kmersFormingClump);
+        System.out.println(kmersFormingClump.size() + ": " + kmersFormingClump);
     }
 
 }
