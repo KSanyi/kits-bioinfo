@@ -4,7 +4,7 @@ import java.util.Random;
 
 import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.matcher.BMSubSequenceMatcher;
-import kits.bioinfo.matcher.NaiveSubSequenceMatcher;
+import kits.bioinfo.matcher.QuickSubSequenceMatcher;
 import kits.bioinfo.util.RandomSequenceGenerator;
 
 public class Test {
@@ -17,7 +17,7 @@ public class Test {
         DnaSequence text = generator.generateRandomDnaSequence(1000);
         System.out.println("Pattern: " + pattern);
         System.out.println("Test: " + text);
-        new NaiveSubSequenceMatcher(pattern).matchStartIndexes(text);
+        new QuickSubSequenceMatcher(pattern).matchStartIndexes(text);
         new BMSubSequenceMatcher(pattern).matchStartIndexes(text);
     }
 

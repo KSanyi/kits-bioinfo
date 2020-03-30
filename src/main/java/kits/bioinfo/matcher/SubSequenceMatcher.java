@@ -1,6 +1,5 @@
 package kits.bioinfo.matcher;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class SubSequenceMatcher implements Matcher {
             if (matchesSubSequence(sequence.subSequence(index, pattern.length())))
                 matchStartIndexes.add(index);
         }
-        return Collections.unmodifiableList(matchStartIndexes);
+        return List.copyOf(matchStartIndexes);
     }
 
     protected boolean matchesSubSequence(DnaSequence subSequence) {

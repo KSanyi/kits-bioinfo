@@ -30,7 +30,7 @@ public class IndexBasedSubSequenceMatcher {
             offsets.add(i);
             kmers.put(subSequence, offsets);
         }
-        return Collections.unmodifiableMap(kmers);
+        return Map.copyOf(kmers);
     }
 
     public boolean matches(DnaSequence pattern) {

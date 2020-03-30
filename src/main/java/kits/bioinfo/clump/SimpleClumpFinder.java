@@ -5,7 +5,7 @@ import java.util.Set;
 
 import kits.bioinfo.core.DnaSequence;
 
-public class SlowClumpFinder implements ClumpFinder {
+public class SimpleClumpFinder implements ClumpFinder {
 
     public Set<DnaSequence> findKmersFormingClumps(DnaSequence sequence, int L, int k, int t) {
 

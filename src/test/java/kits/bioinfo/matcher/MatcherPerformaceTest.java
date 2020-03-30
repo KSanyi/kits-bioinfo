@@ -31,7 +31,7 @@ public class MatcherPerformaceTest {
 
     private static void runNaive(DnaSequence text, DnaSequence pattern) {
         long start = System.currentTimeMillis();
-        new NaiveSubSequenceMatcher(pattern).matchCount(text);
+        new QuickSubSequenceMatcher(pattern).matchCount(text);
         long end = System.currentTimeMillis();
         System.out.println("Naive run: " + (end - start) + " millis");
     }

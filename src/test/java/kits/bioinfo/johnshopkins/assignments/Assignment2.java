@@ -7,7 +7,7 @@ import kits.bioinfo.infrastructure.SequenceReader;
 import kits.bioinfo.matcher.ApproximateSubSequenceMatcher;
 import kits.bioinfo.matcher.BMSubSequenceMatcher;
 import kits.bioinfo.matcher.IndexBasedApproximateSubSequenceMatcher;
-import kits.bioinfo.matcher.NaiveSubSequenceMatcher;
+import kits.bioinfo.matcher.QuickSubSequenceMatcher;
 
 public class Assignment2 {
 
@@ -23,7 +23,7 @@ public class Assignment2 {
     private static void question1And2(DnaSequence humanAluSequence) {
         System.out.println("1-2: ");
         DnaSequence pattern = new DnaSequence("GGCGCGGTGGCTCACGCCTGTAATCCCAGCACTTTGGGAGGCCGAGG");
-        System.out.println(new NaiveSubSequenceMatcher(pattern).matchCount(humanAluSequence));
+        System.out.println(new QuickSubSequenceMatcher(pattern).matchCount(humanAluSequence));
     }
 
     private static void question3(DnaSequence humanAluSequence) {

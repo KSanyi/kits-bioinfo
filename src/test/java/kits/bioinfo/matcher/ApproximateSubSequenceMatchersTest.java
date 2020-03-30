@@ -25,8 +25,13 @@ public class ApproximateSubSequenceMatchersTest {
             int patternLength = k * (d + 1);
             DnaSequence pattern = generator.generateRandomDnaSequence(patternLength);
             DnaSequence text = generator.generateRandomDnaSequence(1000);
-            assertEquals(new ApproximateSubSequenceMatcher(pattern, d).matchStartIndexes(text),
-                    new IndexBasedApproximateSubSequenceMatcher(text, k, d).matchStartIndexes(pattern));
+            
+            var result1 = new ApproximateSubSequenceMatcher(pattern, d).matchStartIndexes(text);
+            var result2 = new IndexBasedApproximateSubSequenceMatcher(text, k, d).matchStartIndexes(pattern);
+            var result3 = new QuickApproximateSubSequenceMatcher(pattern, d).matchStartIndexes(text);
+            
+            assertEquals(result1, result2);
+            assertEquals(result1, result3);
         }
     }
 

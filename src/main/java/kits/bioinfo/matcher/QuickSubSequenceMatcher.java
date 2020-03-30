@@ -1,21 +1,20 @@
 package kits.bioinfo.matcher;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import kits.bioinfo.core.DnaSequence;
 
-public class NaiveSubSequenceMatcher implements Matcher {
+public class QuickSubSequenceMatcher implements Matcher {
 
     protected final DnaSequence pattern;
 
-    public NaiveSubSequenceMatcher(DnaSequence pattern) {
+    public QuickSubSequenceMatcher(DnaSequence pattern) {
         this.pattern = pattern;
     }
 
-    public NaiveSubSequenceMatcher(String patternString) {
-        this.pattern = new DnaSequence(patternString);
+    public QuickSubSequenceMatcher(String patternString) {
+        this(new DnaSequence(patternString));
     }
 
     @Override
@@ -49,7 +48,7 @@ public class NaiveSubSequenceMatcher implements Matcher {
         }
         System.out.println("Alignments: " + alignments);
         System.out.println("Comparisons: " + comparisons);
-        return Collections.unmodifiableList(matchStartIndexes);
+        return List.copyOf(matchStartIndexes);
     }
 
     protected boolean matchesSubSequence(DnaSequence subSequence) {

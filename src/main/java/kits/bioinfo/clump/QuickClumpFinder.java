@@ -25,12 +25,12 @@ public class QuickClumpFinder implements ClumpFinder {
         int processed = 0;
         int lastProcessed = 0;
         for (int index = 1; index < sequence.length() - L + 1; index++) {
-            DnaBase n = sequence.position(index - 1);
-            DnaSequence sequenceLost = sequence.subSequence(index, k - 1).prepend(n);
+            DnaBase base = sequence.position(index - 1);
+            DnaSequence sequenceLost = sequence.subSequence(index, k - 1).prepend(base);
             frequencyMap.remove(sequenceLost);
 
-            DnaBase n2 = sequence.position(index + L - 1);
-            DnaSequence sequenceAdded = sequence.subSequence(index + L - k, k - 1).append(n2);
+            DnaBase base2 = sequence.position(index + L - 1);
+            DnaSequence sequenceAdded = sequence.subSequence(index + L - k, k - 1).append(base2);
             frequencyMap.put(sequenceAdded);
 
             if (frequencyMap.frequency(sequenceAdded) >= t) {

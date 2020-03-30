@@ -103,12 +103,21 @@ public class Sequence<T> implements Comparable<Sequence<T>>, Iterable<T> {
         return sum;
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return text.iterator();
+    }
+    
     public Stream<T> stream() {
         return text.stream();
     }
-
+    
     public Sequence<T> filter(Predicate<? super T> predicate) {
         return new Sequence<>(text.stream().filter(predicate).collect(toList()));
+    }
+    
+    public Sequence<T> toSequence() {
+        return new Sequence<>(text);
     }
 
     @Override
@@ -126,18 +135,9 @@ public class Sequence<T> implements Comparable<Sequence<T>>, Iterable<T> {
         return text.stream().map(n -> n != null ? n.toString() : "-").collect(joining());
     }
 
-    public Sequence<T> toSequence() {
-        return new Sequence<>(text);
-    }
-
     @Override
     public int compareTo(Sequence<T> other) {
         return this.toString().compareTo(other.toString());
-    }
-
-    @Override
-    public Iterator<T> iterator() {
-        return text.iterator();
     }
 
 }
