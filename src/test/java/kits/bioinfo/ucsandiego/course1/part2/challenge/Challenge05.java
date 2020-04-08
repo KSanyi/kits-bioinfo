@@ -7,6 +7,7 @@ import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 import kits.bioinfo.motif.Motifs;
 import kits.bioinfo.motif.RandomizedMotifFinder;
+import kits.bioinfo.util.Timer;
 
 public class Challenge05 {
 
@@ -18,10 +19,12 @@ public class Challenge05 {
      */
     public static void main(String[] args) throws IOException {
         List<DnaSequence> sequences = SequenceReader.readDnaSequencesPerLine("input/dataset_163_4.txt");
-
-        List<DnaSequence> motifs = new RandomizedMotifFinder(20).findMotifs(sequences, 15);
-        System.out.println("Score: " + Motifs.score(motifs));
-        System.out.println(motifs);
+        Timer.timed(() -> {
+            List<DnaSequence> motifs = new RandomizedMotifFinder(20).findMotifs(sequences, 15);
+            System.out.println("Score: " + Motifs.score(motifs));
+            System.out.println(motifs);
+        });
+        
     }
 
 }

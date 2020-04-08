@@ -14,7 +14,7 @@ public class MotifFinderTest {
     public void test1() {
         Set<DnaSequence> sequences = Set.of(new DnaSequence("ATTTGGC"), new DnaSequence("TGCCTTA"), new DnaSequence("CGGTATC"), new DnaSequence("GAAAATT"));
 
-        Set<DnaSequence> motifs = MotifFinder.findMotifs(sequences, 3, 1);
+        Set<DnaSequence> motifs = NaiveMotifFinder.findMotifs(sequences, 3, 1);
 
         assertEquals(Set.of(new DnaSequence("ATA"), new DnaSequence("ATT"), new DnaSequence("GTT"), new DnaSequence("TTT")), motifs);
     }

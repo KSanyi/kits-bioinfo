@@ -8,7 +8,7 @@ import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.matcher.ApproximateSubSequenceMatcher;
 import kits.bioinfo.matcher.Matcher;
 
-public class MotifFinder {
+public class NaiveMotifFinder {
 
     public static Set<DnaSequence> findMotifs(Collection<DnaSequence> sequences, int k, int d) {
 

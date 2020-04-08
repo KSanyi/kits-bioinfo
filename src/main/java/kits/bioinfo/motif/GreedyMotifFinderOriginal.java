@@ -1,7 +1,6 @@
 package kits.bioinfo.motif;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import kits.bioinfo.core.DnaSequence;
@@ -14,7 +13,7 @@ public class GreedyMotifFinderOriginal {
             throw new IllegalArgumentException("Can not run without sequences");
         }
 
-        List<DnaSequence> bestMotifs = Collections.emptyList();
+        List<DnaSequence> bestMotifs = List.of();
         int bestScore = Integer.MAX_VALUE;
 
         DnaSequence firstSequence = sequences.iterator().next();

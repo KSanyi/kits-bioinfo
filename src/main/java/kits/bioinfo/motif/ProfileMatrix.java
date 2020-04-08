@@ -1,23 +1,18 @@
 package kits.bioinfo.motif;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
+import static java.util.stream.Collectors.joining;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import kits.bioinfo.core.DnaBase;
 import kits.bioinfo.core.DnaSequence;
 
-import static java.util.stream.Collectors.*;
-
 public class ProfileMatrix {
-
-    private static MathContext MC = new MathContext(6, RoundingMode.HALF_UP);
 
     private final int k;
 
@@ -40,19 +35,20 @@ public class ProfileMatrix {
             throw new IllegalArgumentException("All kmers must have the same length");
         }
 
-        List<Map<DnaBase, BigDecimal>> values = new ArrayList<>();
+        List<Map<DnaBase, Double>> values = new ArrayList<>();
 
         for (int index = 0; index < k; index++) {
-            Map<DnaBase, BigDecimal> distribution = new HashMap<>();
+            Map<DnaBase, Double> distribution = new HashMap<>();
             for (DnaBase base : DnaBase.values()) {
-                distribution.put(base, usingPseudoCounts ? BigDecimal.ONE : BigDecimal.ZERO);
+                distribution.put(base, usingPseudoCounts ? 1.0 : 0.0);
             }
             for (DnaSequence kmer : kmers) {
                 DnaBase base = kmer.position(index);
-                distribution.put(base, distribution.get(base).add(BigDecimal.ONE));
+                distribution.put(base, distribution.get(base) + 1);
             }
+            
             for (DnaBase base : DnaBase.values()) {
-                distribution.put(base, distribution.get(base).divide(BigDecimal.valueOf(kmers.size()), MC));
+                distribution.put(base, distribution.get(base) / kmers.size());
             }
             values.add(distribution);
         }
@@ -60,17 +56,17 @@ public class ProfileMatrix {
         return new ProfileMatrix(values);
     }
 
-    private final List<Map<DnaBase, BigDecimal>> values;
+    private final List<Map<DnaBase, Double>> values;
 
-    private ProfileMatrix(List<Map<DnaBase, BigDecimal>> values) {
+    private ProfileMatrix(List<Map<DnaBase, Double>> values) {
         this.values = values;
         k = values.size();
     }
 
-    public BigDecimal calculateProbability(DnaSequence sequence) {
-        BigDecimal product = BigDecimal.ONE;
+    public double calculateProbability(DnaSequence sequence) {
+        double product = 1.0;
         for (int index = 0; index < sequence.length(); index++) {
-            product = product.multiply(values.get(index).get(sequence.position(index)));
+            product = product * values.get(index).get(sequence.position(index));
         }
         return product;
     }
@@ -80,11 +76,11 @@ public class ProfileMatrix {
             throw new IllegalArgumentException("Sequence is shorter than k");
         }
         DnaSequence mostProbable = sequence.subSequence(0, k);
-        BigDecimal probability = calculateProbability(mostProbable);
+        double probability = calculateProbability(mostProbable);
         for (int index = 1; index < sequence.length() - k + 1; index++) {
             DnaSequence candidate = sequence.subSequence(index, k);
-            BigDecimal candidateProbability = calculateProbability(candidate);
-            if (candidateProbability.compareTo(probability) > 0) {
+            double candidateProbability = calculateProbability(candidate);
+            if (candidateProbability > probability) {
                 probability = candidateProbability;
                 mostProbable = candidate;
             }
@@ -94,7 +90,8 @@ public class ProfileMatrix {
 
     @Override
     public String toString() {
-        return Arrays.asList(DnaBase.values()).stream().map(base -> values.stream().map(dist -> dist.get(base).toString()).collect(joining("    ")))
+        return Stream.of(DnaBase.values())
+                .map(base -> values.stream().map(dist -> dist.get(base).toString()).collect(joining("    ")))
                 .collect(joining("\n"));
     }
 

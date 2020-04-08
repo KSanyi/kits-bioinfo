@@ -35,7 +35,10 @@ public class Motifs {
     }
 
     public static int distance(Collection<DnaSequence> sequences, DnaSequence motif) {
-        return sequences.stream().map(sequence -> distance(sequence, motif)).mapToInt(Integer::intValue).sum();
+        return sequences.stream()
+                .map(sequence -> distance(sequence, motif))
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     public static int distance(DnaSequence sequence, DnaSequence kmer) {

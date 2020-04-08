@@ -7,6 +7,7 @@ import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 import kits.bioinfo.motif.GibbsSampler;
 import kits.bioinfo.motif.Motifs;
+import kits.bioinfo.util.Timer;
 
 public class Challenge06 {
 
@@ -17,17 +18,12 @@ public class Challenge06 {
      * pseudocounts!
      */
     public static void main(String[] args) throws IOException {
-        long start = System.currentTimeMillis();
         List<DnaSequence> sequences = SequenceReader.readDnaSequencesPerLine("input/dataset_163_4.txt");
-
-        List<DnaSequence> motifs = new GibbsSampler(50).findMotifs(sequences, 15, 2000);
-
-        long end = System.currentTimeMillis();
-
-        System.out.println("Score: " + Motifs.score(motifs));
-        System.out.println(motifs);
-        System.out.println("Calculation took " + (end - start) / 1000 + " seconds");
-
+        Timer.timed(() -> {
+            List<DnaSequence> motifs = new GibbsSampler(50).findMotifs(sequences, 15, 2000);
+            System.out.println("Score: " + Motifs.score(motifs));
+            System.out.println(motifs);
+        });
     }
 
 }

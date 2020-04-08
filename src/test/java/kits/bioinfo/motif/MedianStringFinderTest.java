@@ -12,15 +12,15 @@ public class MedianStringFinderTest {
 
     @Test
     public void basic() {
-        assertTrue(MedianStringFinder.findMedianStrings(Set.of(new DnaSequence("AA")), 2).contains(new DnaSequence("AA")));
-        assertTrue(MedianStringFinder.findMedianStrings(Set.of(new DnaSequence("AAC"), new DnaSequence("AAG")), 2).contains(new DnaSequence("AA")));
+        assertTrue(NaiveMedianStringFinder.findMedianStrings(Set.of(new DnaSequence("AA")), 2).contains(new DnaSequence("AA")));
+        assertTrue(NaiveMedianStringFinder.findMedianStrings(Set.of(new DnaSequence("AAC"), new DnaSequence("AAG")), 2).contains(new DnaSequence("AA")));
     }
 
     @Test
     public void test1() {
         Set<DnaSequence> sequences = Set.of(new DnaSequence("AAATTGACGCAT"), new DnaSequence("GACGACCACGTT"),
                 new DnaSequence("CGTCAGCGCCTG"), new DnaSequence("GCTGAGCACCGG"), new DnaSequence("AGTTCGGGACAG"));
-        Set<DnaSequence> medianStrings = MedianStringFinder.findMedianStrings(sequences, 3);
+        Set<DnaSequence> medianStrings = NaiveMedianStringFinder.findMedianStrings(sequences, 3);
         assertTrue(medianStrings.contains(new DnaSequence("GAC")));
     }
 
@@ -29,7 +29,7 @@ public class MedianStringFinderTest {
         Set<DnaSequence> sequences = Set.of(new DnaSequence("CTCGATGAGTAGGAAAGTAGTTTCACTGGGCGAACCACCCCGGCGCTAATCCTAGTGCCC"),
                 new DnaSequence("GCAATCCTACCCGAGGCCACATATCAGTAGGAACTAGAACCACCACGGGTGGCTAGTTTC"),
                 new DnaSequence("GGTGTTGAACCACGGGGTTAGTTTCATCTATTGTAGGAATCGGCTTCAAATCCTACACAG"));
-        Set<DnaSequence> medianStrings = MedianStringFinder.findMedianStrings(sequences, 7);
+        Set<DnaSequence> medianStrings = NaiveMedianStringFinder.findMedianStrings(sequences, 7);
         assertTrue(medianStrings.containsAll(Set.of(new DnaSequence("GTAGGAA"), new DnaSequence("AATCCTA"), new DnaSequence("TAGTTTC"), new DnaSequence("GAACCAC"))));
     }
 

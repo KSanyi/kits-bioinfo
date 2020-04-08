@@ -6,7 +6,7 @@ import java.util.Set;
 
 import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
-import kits.bioinfo.motif.MedianStringFinder;
+import kits.bioinfo.motif.NaiveMedianStringFinder;
 
 public class Challenge02 {
 
@@ -19,7 +19,7 @@ public class Challenge02 {
      */
     public static void main(String[] args) throws IOException {
         Set<DnaSequence> sequences = new HashSet<>(SequenceReader.readDnaSequencesPerLine("input/dataset_158_9.txt"));
-        Set<DnaSequence> medianStrings = MedianStringFinder.findMedianStrings(sequences, 6);
+        Set<DnaSequence> medianStrings = NaiveMedianStringFinder.findMedianStrings(sequences, 6);
         System.out.println(medianStrings);
     }
 

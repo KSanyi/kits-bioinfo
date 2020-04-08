@@ -6,6 +6,7 @@ import java.util.List;
 import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
 import kits.bioinfo.motif.GreedyMotifFinderOriginal;
+import kits.bioinfo.util.Timer;
 
 public class Challenge03 {
 
@@ -18,8 +19,11 @@ public class Challenge03 {
      */
     public static void main(String[] args) throws IOException {
         List<DnaSequence> sequences = SequenceReader.readDnaSequencesPerLine("input/dataset_159_5.txt");
-        List<DnaSequence> motifs = GreedyMotifFinderOriginal.findMotifs(sequences, 12);
-        System.out.println(motifs);
+        Timer.timed(() -> {
+            List<DnaSequence> motifs = GreedyMotifFinderOriginal.findMotifs(sequences, 12);
+            System.out.println(motifs);
+        });
+        
     }
 
 }
