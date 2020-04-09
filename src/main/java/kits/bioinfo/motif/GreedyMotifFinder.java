@@ -1,25 +1,25 @@
 package kits.bioinfo.motif;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import kits.bioinfo.core.DnaSequence;
 
 public class GreedyMotifFinder {
 
-    public static List<DnaSequence> findMotifs(List<DnaSequence> sequences, int k) {
+    public static Set<DnaSequence> findMotifs(List<DnaSequence> sequences, int k) {
 
         if (sequences.isEmpty()) {
             throw new IllegalArgumentException("Can not run without sequences");
         }
 
-        List<DnaSequence> bestMotifs = Collections.emptyList();
+        Set<DnaSequence> bestMotifs = Set.of();
         int bestScore = Integer.MAX_VALUE;
 
         DnaSequence firstSequence = sequences.iterator().next();
         for (int index = 0; index < firstSequence.length() - k + 1; index++) {
-            List<DnaSequence> motifs = new ArrayList<>();
+            Set<DnaSequence> motifs = new HashSet<>();
             motifs.add(firstSequence.subSequence(index, k));
             ProfileMatrix profileMatrix = ProfileMatrix.buildWithPseudoCounts(motifs);
             for (int i = 1; i < sequences.size(); i++) {

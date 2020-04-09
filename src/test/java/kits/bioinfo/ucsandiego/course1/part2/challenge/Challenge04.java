@@ -2,6 +2,7 @@ package kits.bioinfo.ucsandiego.course1.part2.challenge;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
@@ -20,7 +21,7 @@ public class Challenge04 {
     public static void main(String[] args) throws IOException {
         List<DnaSequence> sequences = SequenceReader.readDnaSequencesPerLine("input/dataset_160_9.txt");
         Timer.timed(() -> {
-            List<DnaSequence> motifs = GreedyMotifFinder.findMotifs(sequences, 12);
+            Set<DnaSequence> motifs = GreedyMotifFinder.findMotifs(sequences, 12);
             System.out.println(motifs);
         });
     }

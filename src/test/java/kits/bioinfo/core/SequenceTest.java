@@ -56,6 +56,11 @@ public class SequenceTest {
         assertEquals(new DnaSequence(""), new DnaSequence("ACTGCTGAC").suffix(0));
         assertEquals(new DnaSequence("ACTGCTGAC"), new DnaSequence("ACTGCTGAC").suffix(9));
     }
+    
+    @Test
+    public void implant() {
+        assertEquals(new DnaSequence("AAAATTTT"), new DnaSequence("AAAACCCC").implantSequence(new DnaSequence("TTTT"), 4));
+    }
 
     @Test
     public void distance() {

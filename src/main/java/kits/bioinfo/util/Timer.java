@@ -9,7 +9,7 @@ public class Timer {
             runnable.run();
         } catch(Throwable th) {
             long stop = System.currentTimeMillis();
-            System.out.println("Failed with error after " + format(start, stop));
+            System.out.println("Failed with error after " + format(start, stop) + " " + th);
         }
         long stop = System.currentTimeMillis();
         System.out.println("Calculation took " + format(start, stop));

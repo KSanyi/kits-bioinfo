@@ -23,7 +23,7 @@ public class GibbsSamplerTest {
         System.out.println("Distance from median strings: "
                 + medianStrings.stream().map(medianString -> Motifs.distance(sequences, medianString)).collect(Collectors.toList()));
 
-        List<DnaSequence> motifs = new GibbsSampler(20).findMotifs(sequences, 8, 100);
+        Set<DnaSequence> motifs = new GibbsSampler(20).findMotifs(sequences, 8, 100);
         System.out.println("Motifs found with Gibbs sampler motif finder: " + motifs);
         System.out.println("Motifs score: " + Motifs.score(motifs));
     }

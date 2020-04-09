@@ -3,9 +3,9 @@ package kits.bioinfo.motif;
 import static java.util.stream.Collectors.toList;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.math.ProbabilityDistribution;
@@ -20,22 +20,25 @@ public class GibbsSampler {
         this.runs = runs;
     }
 
-    public List<DnaSequence> findMotifs(List<DnaSequence> sequences, int k, int n) {
-        List<DnaSequence> bestMotifs = Collections.emptyList();
+    public Set<DnaSequence> findMotifs(List<DnaSequence> sequences, int k, int n) {
+        Set<DnaSequence> bestMotifs = Set.of();
         int bestScore = Integer.MAX_VALUE;
         for (int i = 0; i < runs; i++) {
-            List<DnaSequence> motifs = runFindMotifsOnce(sequences, k, n);
+            Set<DnaSequence> motifs = runFindMotifsOnce(sequences, k, n);
             int score = Motifs.score(motifs);
             System.out.println("Score: " + score);
             if (score < bestScore) {
                 bestScore = score;
                 bestMotifs = motifs;
+                if(score == 0) {
+                    return bestMotifs;
+                }
             }
         }
         return bestMotifs;
     }
 
-    private List<DnaSequence> runFindMotifsOnce(List<DnaSequence> sequences, int k, int n) {
+    private Set<DnaSequence> runFindMotifsOnce(List<DnaSequence> sequences, int k, int n) {
 
         if (sequences.isEmpty()) {
             throw new IllegalArgumentException("Can not run without sequences");
@@ -49,8 +52,7 @@ public class GibbsSampler {
             DnaSequence motifToLeftOut = bestMotifs.get(indexToLeftOut);
             DnaSequence sequenceToLeftOut = sequences.get(indexToLeftOut);
 
-            List<DnaSequence> motifs = new ArrayList<>();
-            motifs.addAll(bestMotifs);
+            List<DnaSequence> motifs = new ArrayList<>(bestMotifs);
             motifs.remove(motifToLeftOut);
             ProfileMatrix profileMatrix = ProfileMatrix.buildWithPseudoCounts(motifs);
             DnaSequence newMotif = profileRandomKmer(profileMatrix, sequenceToLeftOut, k);
@@ -63,7 +65,7 @@ public class GibbsSampler {
             }
         }
 
-        return bestMotifs;
+        return Set.copyOf(bestMotifs);
     }
 
     private List<DnaSequence> randomKmers(List<DnaSequence> sequences, int k) {
@@ -75,7 +77,8 @@ public class GibbsSampler {
     }
 
     private static DnaSequence profileRandomKmer(ProfileMatrix profileMatrix, DnaSequence sequence, int k) {
-        List<Double> probabilities = sequence.allSubSequences(k).stream().map(kmer -> profileMatrix.calculateProbability(kmer))
+        List<Double> probabilities = sequence.allSubSequences(k).stream()
+                .map(kmer -> profileMatrix.calculateProbability(kmer))
                 .collect(toList());
         return sequence.subSequence(new ProbabilityDistribution(probabilities).randomInt(), k);
     }

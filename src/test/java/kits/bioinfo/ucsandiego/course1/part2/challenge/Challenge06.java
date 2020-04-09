@@ -2,6 +2,7 @@ package kits.bioinfo.ucsandiego.course1.part2.challenge;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.infrastructure.SequenceReader;
@@ -20,7 +21,7 @@ public class Challenge06 {
     public static void main(String[] args) throws IOException {
         List<DnaSequence> sequences = SequenceReader.readDnaSequencesPerLine("input/dataset_163_4.txt");
         Timer.timed(() -> {
-            List<DnaSequence> motifs = new GibbsSampler(50).findMotifs(sequences, 15, 2000);
+            Set<DnaSequence> motifs = new GibbsSampler(50).findMotifs(sequences, 15, 2000);
             System.out.println("Score: " + Motifs.score(motifs));
             System.out.println(motifs);
         });

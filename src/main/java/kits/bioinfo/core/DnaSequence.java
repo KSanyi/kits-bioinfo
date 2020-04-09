@@ -102,6 +102,10 @@ public class DnaSequence extends Sequence<DnaBase> {
             return neighboursOf(neighbours, k - 1);
         }
     }
+    
+    public DnaSequence implantSequence(DnaSequence subSequence, int position) {
+        return new DnaSequence(super.implantSequence(subSequence, position));
+    }
 
     @Override
     public boolean equals(Object other) {
