@@ -7,6 +7,13 @@ import java.util.List;
 import kits.bioinfo.math.grid.Grid;
 import kits.bioinfo.math.grid.MaxPathFinder;
 
+/**
+ * Code Challenge: Find the length of a longest path in the Manhattan Tourist Problem.
+ * Input: Integers n and m, followed by an n × (m + 1) matrix Down and an (n + 1) × m matrix Right. 
+ *        The two matrices are separated by the "-" symbol.
+ * Output: The length of a longest path from source (0, 0) to sink (n, m) in the rectangular grid whose edges are defined by
+ *         the matrices Down and Right.
+ */
 public class Challenge2 {
 
     public static void main(String[] args) throws Exception {
@@ -20,7 +27,9 @@ public class Challenge2 {
 
         Grid grid = new Grid(m + 1, n + 1, rightsMatrixString, downsMatrixString);
 
-        MaxPathFinder.findMaxPath(grid);
+        int pathLength = MaxPathFinder.findMaxPathLength(grid);
+        
+        System.out.println(pathLength);
     }
 
 }

@@ -2,7 +2,6 @@ package kits.bioinfo.motif;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,7 +18,7 @@ public class ProfileMatrixTest {
 
         ProfileMatrix profileMatrix = ProfileMatrix.build(kmers);
 
-        assertEquals(new BigDecimal("0.125"), profileMatrix.calculateProbability(new DnaSequence("ATTA")));
+        assertEquals(0.125, profileMatrix.calculateProbability(new DnaSequence("ATTA")), 0.0001);
     }
 
     @Test

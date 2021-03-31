@@ -7,22 +7,35 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-public class LongestPathFinderTest {
+import kits.bioinfo.math.graph.Graph.Path;
+
+public class LongestPathFinder2Test {
 
     @Test
     public void test1() {
-        List<String> adjacencyStrings = Arrays.asList("0->1:7", "0->2:4", "2->3:2", "1->4:1", "3->4:3");
+        List<String> adjacencyStrings = List.of("0->1:7", "0->2:4", "2->3:2", "1->4:1", "3->4:3");
         Graph<Integer> graph = GraphParser.buildWeightedIntGraphFromAdjacencyStrings(adjacencyStrings);
         Integer sourceNode = 0;
         Integer sinkNode = 4;
-        List<Integer> longestPath = LongestPathFinder.findLongestPath(graph, sourceNode, sinkNode);
-        assertEquals(9, graph.data(sinkNode));
-        assertEquals(Arrays.asList(0, 2, 3, 4), longestPath);
+        Path<Integer> longestPath = LongestPathFinder2.findLongestPath(graph, sourceNode, sinkNode);
+        assertEquals(9, longestPath.weight());
+        assertEquals(Arrays.asList(0, 2, 3, 4), longestPath.nodes());
+    }
+    
+    @Test
+    public void test2() {
+        List<String> adjacencyStrings = List.of("0->1:7,2:4", "2->3:2", "1->4:1", "3->4:3");
+        Graph<Integer> graph = GraphParser.buildWeightedIntGraphFromAdjacencyStrings(adjacencyStrings);
+        Integer sourceNode = 0;
+        Integer sinkNode = 4;
+        Path<Integer> longestPath = LongestPathFinder2.findLongestPath(graph, sourceNode, sinkNode);
+        assertEquals(9, longestPath.weight());
+        assertEquals(Arrays.asList(0, 2, 3, 4), longestPath.nodes());
     }
 
     @Test
-    public void test2() {
-        List<String> adjacencyStrings = Arrays.asList("1->11:35", "13->20:19", "1->18:31", "1->13:38", "13->19:22", "2->18:7", "1->19:34", "6->14:30",
+    public void test3() {
+        List<String> adjacencyStrings = List.of("1->11:35", "13->20:19", "1->18:31", "1->13:38", "13->19:22", "2->18:7", "1->19:34", "6->14:30",
                 "2->15:18", "0->3:27", "5->15:24", "6->10:33", "4->7:30", "11->13:4", "7->17:39", "2->14:38", "2->16:12", "8->20:13", "5->19:7",
                 "12->20:30", "10->12:27", "1->2:9", "0->7:34", "12->16:31", "5->14:35", "3->18:22", "1->5:23", "3->13:9", "14->16:5", "10->17:38",
                 "7->8:36", "1->12:9", "18->20:39", "4->13:39", "15->18:8", "1->3:11", "8->15:2", "1->6:23", "1->7:22", "9->19:36", "6->11:3",
@@ -34,9 +47,9 @@ public class LongestPathFinderTest {
         Graph<Integer> graph = GraphParser.buildWeightedIntGraphFromAdjacencyStrings(adjacencyStrings);
         Integer sourceNode = 5;
         Integer sinkNode = 20;
-        List<Integer> longestPath = LongestPathFinder.findLongestPath(graph, sourceNode, sinkNode);
-        assertEquals(229, graph.data(sinkNode));
-        assertEquals(Arrays.asList(5, 6, 7, 8, 10, 11, 17, 18, 20), longestPath);
+        Path<Integer> longestPath = LongestPathFinder2.findLongestPath(graph, sourceNode, sinkNode);
+        assertEquals(229, longestPath.weight());
+        assertEquals(Arrays.asList(5, 6, 7, 8, 10, 11, 17, 18, 20), longestPath.nodes());
     }
 
 }

@@ -1,11 +1,12 @@
 package kits.bioinfo.infrastructure;
 
+import static java.util.stream.Collectors.toList;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import kits.bioinfo.core.DnaSequence;
 import kits.bioinfo.core.RnaSequence;
@@ -35,11 +36,11 @@ public class SequenceReader {
     public static List<DnaSequence> readDnaSequencesPerLine(String path) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(path));
         try {
-            return lines.stream().map(line -> new DnaSequence(line)).collect(Collectors.toList());
+            return lines.stream().map(DnaSequence::new).collect(toList());
         } catch (IllegalArgumentException e) {
             // the first line contained some meta info
             lines = lines.subList(1, lines.size());
-            return lines.stream().map(line -> new DnaSequence(line)).collect(Collectors.toList());
+            return lines.stream().map(DnaSequence::new).collect(toList());
         }
     }
 

@@ -1,8 +1,10 @@
 package kits.bioinfo.math.graph;
 
-import java.util.Collections;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
+
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +15,10 @@ import java.util.stream.Collectors;
 public class Graph<T> {
 
     private final Map<T, List<Edge<T>>> adjacencyMap = new HashMap<>();
-
     private final Map<T, List<Edge<T>>> preAdjacencyMap = new HashMap<>();
+    private final Map<T, Object> dataMap = new HashMap<>();
 
-    private final Map<T, Integer> markupNumberMap = new HashMap<>();
-
-    public Graph() {
-    }
+    public Graph() {}
 
     public Graph(List<Edge<T>> edges) {
         for (Edge<T> edge : edges) {
@@ -62,7 +61,7 @@ public class Graph<T> {
             List<Edge<T>> edgesToRemove = edges.stream().filter(edge -> edge.startNode.equals(node)).collect(Collectors.toList());
             edgesToRemove.forEach(edge -> edges.remove(edge));
         }
-        markupNumberMap.remove(node);
+        dataMap.remove(node);
     }
 
     public void addNode(T node) {
@@ -72,32 +71,31 @@ public class Graph<T> {
     }
 
     public Set<T> nodes() {
-        return new HashSet<>(adjacencyMap.keySet());
+        return Set.copyOf(adjacencyMap.keySet());
     }
 
     public boolean containsNode(T node) {
-        return adjacencyMap.get(node) != null;
+        return adjacencyMap.containsKey(node);
     }
 
     public List<Edge<T>> edges() {
-        List<Edge<T>> edges = new LinkedList<>();
-        for (Entry<T, List<Edge<T>>> entry : adjacencyMap.entrySet()) {
-            edges.addAll(entry.getValue());
-        }
-        return edges;
+        return adjacencyMap.values().stream().flatMap(List::stream).collect(toList());
     }
 
-    public List<T> adjacentNodes(T node) {
-        return new LinkedList<>(
-                adjacencyMap.getOrDefault(node, Collections.emptyList()).stream().map(edge -> edge.endNode).collect(Collectors.toSet()));
+    public Set<T> adjacentNodes(T node) {
+        return adjacencyMap.getOrDefault(node, List.of()).stream().map(edge -> edge.endNode).collect(toSet());
+    }
+    
+    public Set<T> preAdjacentNodes(T node) {
+        return preAdjacencyMap.getOrDefault(node, List.of()).stream().map(edge -> edge.startNode).collect(toSet());
     }
 
     public List<Edge<T>> edgesFrom(T node) {
-        return new LinkedList<>(adjacencyMap.getOrDefault(node, Collections.emptyList()));
+        return List.copyOf(adjacencyMap.getOrDefault(node, List.of()));
     }
 
     public List<Edge<T>> edgesTo(T node) {
-        return new LinkedList<>(preAdjacencyMap.getOrDefault(node, Collections.emptyList()));
+        return List.copyOf(preAdjacencyMap.getOrDefault(node, List.of()));
     }
 
     public int inDegree(T node) {
@@ -108,12 +106,12 @@ public class Graph<T> {
         return edgesFrom(node).size();
     }
 
-    public void addMarkupNumber(T node, Integer value) {
-        markupNumberMap.put(node, value);
+    public void addData(T node, Object data) {
+        dataMap.put(node, data);
     }
 
-    public Integer markupNumber(T node) {
-        return markupNumberMap.get(node);
+    public Object data(T node) {
+        return dataMap.get(node);
     }
 
     public String printEdges() {
@@ -127,6 +125,10 @@ public class Graph<T> {
 
     public boolean isEmpty() {
         return adjacencyMap.isEmpty();
+    }
+    
+    public Graph<T> clone() {
+        return new Graph<>(edges());
     }
 
     @Override
@@ -154,6 +156,7 @@ public class Graph<T> {
     }
 
     public static class Edge<T> {
+        
         public final T startNode;
         public final T endNode;
         public final Integer weight;
@@ -185,6 +188,41 @@ public class Graph<T> {
         public int hashCode() {
             return startNode.hashCode() * 37 + endNode.hashCode();
         }
+    }
+    
+    public static class Path<T> {
+        
+        private final List<Edge<T>> edges;
+        
+        public Path(List<Edge<T>> edges) {
+            this.edges = List.copyOf(edges);
+        }
+        
+        public int weight() {
+            return edges.stream().mapToInt(e -> e.weight).sum();
+        }
+        
+        public Path<T> append(Edge<T> edge) {
+            List<Edge<T>> appenededEdges = new ArrayList<>(edges);
+            appenededEdges.add(edge);
+            return new Path<>(appenededEdges);
+        }
+        
+        public List<T> nodes() {
+            List<T> nodes = edges.stream().map(e -> e.startNode).collect(toList());
+            nodes.add(edges.get(edges.size()-1).endNode);
+            return List.copyOf(nodes);
+        }
+        
+        @Override
+        public String toString() {
+            return edges.toString();
+        }
+
+        public static <T> Path<T> empty() {
+            return new Path<>(List.of());
+        }
+        
     }
 
 }

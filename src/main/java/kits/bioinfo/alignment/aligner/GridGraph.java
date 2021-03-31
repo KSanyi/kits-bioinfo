@@ -5,19 +5,34 @@ import java.util.List;
 
 import kits.bioinfo.util.IntPair;
 
+/**
+ * 
+ * This is a graph that has a grid structure (extended with and end node), it's nodes and edges form a grid:
+ * 
+ *  O -> O -> O -> O
+ *  |    |    |    |
+ *  v    v    v    v
+ *  O -> O -> O -> O
+ *  |    |    |    |
+ *  v    v    v    v
+ *  O -> O -> O -> O
+ *                  \
+ *                   O
+ *  
+ *  The nodes can be accessed via (i, j) coordinates.
+ *  It can also have further edges (eg. diagonals) or special start-to-node, or node-to-end edges
+ *  An integer value can be assigned tp each node.
+ */
 class GridGraph {
 
     public final int m;
     public final int n;
-
     final int[][] nodes;
-
-    private final List<Edge>[][] sourceEdges;
-
+    // list of edges pointing to node (i,j)
+    private final List<Edge>[][] edgesTo;
     public final IntPair startNode = new IntPair(0, 0);
     public final IntPair endNode;
     private final List<Edge> edgesToEndNode = new LinkedList<>();
-
     private int endValue;
 
     @SuppressWarnings("unchecked")
@@ -26,16 +41,12 @@ class GridGraph {
         this.n = n;
         nodes = new int[m][n];
         endNode = new IntPair(m, n);
-        sourceEdges = new LinkedList[m][n];
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                sourceEdges[i][j] = new LinkedList<Edge>();
+        edgesTo = new LinkedList[m][n];
+        for (int i=0;i<m;i++) {
+            for (int j=0;j<n;j++) {
+                edgesTo[i][j] = new LinkedList<Edge>();
             }
         }
-    }
-
-    public void set(IntPair index, int value) {
-        set(index.first(), index.second(), value);
     }
 
     public void set(int i, int j, int value) {
@@ -53,12 +64,21 @@ class GridGraph {
     public int get(int i, int j) {
         return nodes[i][j];
     }
+    
+    public void setValue(int endValue) {
+        this.endValue = endValue;
+    }
+
+    public int getValue() {
+        return endValue;
+    }
 
     public void addEdge(IntPair sourceIndex, IntPair targetIndex, int weigth) {
+        Edge edge = new Edge(sourceIndex, weigth);
         if (targetIndex.equals(endNode)) {
-            edgesToEndNode.add(new Edge(sourceIndex, weigth));
+            edgesToEndNode.add(edge);
         } else {
-            sourceEdges[targetIndex.first()][targetIndex.second()].add(new Edge(sourceIndex, weigth));
+            edgesTo[targetIndex.first()][targetIndex.second()].add(edge);
         }
     }
 
@@ -68,12 +88,12 @@ class GridGraph {
 
     public List<Edge> edgesTo(int i, int j) {
         if (i == endNode.first() && j == endNode.second()) {
-            return new LinkedList<>(edgesToEndNode);
+            return List.copyOf(edgesToEndNode);
         } else {
-            return new LinkedList<>(sourceEdges[i][j]);
+            return List.copyOf(edgesTo[i][j]);
         }
     }
-
+    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -84,14 +104,6 @@ class GridGraph {
             sb.append("\n");
         }
         return sb.toString();
-    }
-
-    public void setValue(int endValue) {
-        this.endValue = endValue;
-    }
-
-    public int getValue() {
-        return endValue;
     }
 
     record Edge(IntPair sourceIndex, int weight) {

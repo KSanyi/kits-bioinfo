@@ -2,61 +2,42 @@ package kits.bioinfo.math.graph;
 
 import static java.util.stream.Collectors.toList;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import kits.bioinfo.math.graph.Graph.Edge;
+import kits.bioinfo.math.graph.Graph.Path;
 
 /**
- * This implementation is memory efficient
- * It stores in each node the length (weight) of the longest path in the graph from source to that node
+ * This implementation is not so memory efficient
+ * It stores in each node the of the longest path in the graph from source to that node
  */
-public class LongestPathFinder {
+public class LongestPathFinder2 {
 
-    public static <T> List<T> findLongestPath(Graph<T> graph, T sourceNode, T sinkNode) {
+    @SuppressWarnings("unchecked")
+    public static <T> Path<T> findLongestPath(Graph<T> graph, T sourceNode, T sinkNode) {
         removeIrrelevantNodesFormGraph(graph, sourceNode);
-        calculateAndMarkupGraphNodesWithMaxPaths(graph);
-        return backtrackPath(graph, sourceNode, sinkNode);
+        calculateAndMarkGraphNodesWithMaxPaths(graph);
+        return (Path<T>)graph.data(sinkNode);//backtrackPath(graph, sourceNode, sinkNode);
     }
 
-    private static <T> void calculateAndMarkupGraphNodesWithMaxPaths(Graph<T> graph) {
+    private static <T> void calculateAndMarkGraphNodesWithMaxPaths(Graph<T> graph) {
         List<T> nodes = listNodesInTopologicalOrder(graph);
         for (T node : nodes) {
             if (graph.edgesTo(node).isEmpty()) {
-                graph.addData(node, 0);
+                graph.addData(node, Path.empty());
             } else {
-                int max = Integer.MIN_VALUE;
+                Path<T> longestPath = Path.empty();
                 for (Edge<T> edge : graph.edgesTo(node)) {
-                    int preNodePathValue = (Integer)graph.data(edge.startNode);
-                    int candidate = preNodePathValue + edge.weight;
-                    if (candidate > max) {
-                        max = candidate;
+                    @SuppressWarnings("unchecked")
+                    Path<T> preNodePath = (Path<T>)graph.data(edge.startNode);
+                    if (preNodePath.weight() + edge.weight > longestPath.weight()) {
+                        longestPath = preNodePath.append(edge);
                     }
                 }
-                graph.addData(node, max);
+                graph.addData(node, longestPath);
             }
         }
-    }
-
-    private static <T> List<T> backtrackPath(Graph<T> graph, T sourceNode, T sinkNode) {
-        List<T> path = new LinkedList<>();
-        T node = sinkNode;
-        path.add(node);
-        while (!node.equals(sourceNode)) {
-            int pathValue = (Integer)graph.data(node);
-            for (Edge<T> edge : graph.edgesTo(node)) {
-                T preNode = edge.startNode;
-                int preNodePathValue = (Integer)graph.data(preNode);
-                if (preNodePathValue + edge.weight == pathValue) {
-                    node = preNode;
-                    path.add(node);
-                    break;
-                }
-            }
-        }
-        Collections.reverse(path);
-        return path;
     }
 
     private static <T> List<T> listNodesInTopologicalOrder(Graph<T> graph) {

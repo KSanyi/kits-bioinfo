@@ -17,37 +17,16 @@ public class GlobalSequenceAligner<T> {
 
     public AlignmentResult<T> findOneAlignment(Sequence<T> sequence1, Sequence<T> sequence2) {
         GridGraph graph = buildGraph(sequence1, sequence2);
-        List<IntPair> path = LongestPathFinder.findLongestPath(graph);
+        List<IntPair> path = GridGraphLongestPathFinder.findLongestPath(graph);
 
         return buildResult(sequence1, sequence2, path, graph.getValue());
-    }
-
-    private AlignmentResult<T> buildResult(Sequence<T> sequence1, Sequence<T> sequence2, List<IntPair> path, int score) {
-        Sequence<T> alignment1 = new Sequence<>();
-        Sequence<T> alignment2 = new Sequence<>();
-        for (int i = 1; i < path.size(); i++) {
-            IntPair prevNode = path.get(i - 1);
-            IntPair node = path.get(i);
-
-            if (node.first() == (prevNode.first())) {
-                alignment1 = alignment1.append((T) null);
-            } else {
-                alignment1 = alignment1.append(sequence1.position(node.first() - 1));
-            }
-            if (node.second() == (prevNode.second())) {
-                alignment2 = alignment2.append((T) null);
-            } else {
-                alignment2 = alignment2.append(sequence2.position(node.second() - 1));
-            }
-        }
-        return new AlignmentResult<>(alignment1, alignment2, score);
     }
 
     protected GridGraph buildGraph(Sequence<T> sequence1, Sequence<T> sequence2) {
         GridGraph graph = new GridGraph(sequence1.length() + 1, sequence2.length() + 1);
 
-        for (int i = 0; i <= sequence1.length(); i++) {
-            for (int j = 0; j <= sequence2.length(); j++) {
+        for (int i=0;i<=sequence1.length();i++) {
+            for (int j=0;j<=sequence2.length();j++) {
                 IntPair nodeFrom = new IntPair(i, j);
 
                 if (i < sequence1.length()) {
@@ -71,6 +50,27 @@ public class GlobalSequenceAligner<T> {
         graph.addEdge(new IntPair(sequence1.length(), sequence2.length()), graph.endNode, 0);
 
         return graph;
+    }
+    
+    private AlignmentResult<T> buildResult(Sequence<T> sequence1, Sequence<T> sequence2, List<IntPair> path, int score) {
+        Sequence<T> alignment1 = new Sequence<>();
+        Sequence<T> alignment2 = new Sequence<>();
+        for (int i = 1; i < path.size(); i++) {
+            IntPair prevNode = path.get(i - 1);
+            IntPair node = path.get(i);
+
+            if (node.first() == (prevNode.first())) {
+                alignment1 = alignment1.append((T) null);
+            } else {
+                alignment1 = alignment1.append(sequence1.position(node.first() - 1));
+            }
+            if (node.second() == (prevNode.second())) {
+                alignment2 = alignment2.append((T) null);
+            } else {
+                alignment2 = alignment2.append(sequence2.position(node.second() - 1));
+            }
+        }
+        return new AlignmentResult<>(alignment1, alignment2, score);
     }
 
 }

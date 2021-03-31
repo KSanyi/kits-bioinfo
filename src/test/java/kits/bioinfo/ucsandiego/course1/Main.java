@@ -16,6 +16,7 @@ public class Main {
         clupmsInGenome("input/E-coli.txt");
     }
 
+    @SuppressWarnings("unused")
     private static void patternInCholeraeGenome() throws IOException {
         DnaSequence choleraeGenome = SequenceReader.readDnaSequenceFromFile("input/Vibrio_cholerae.txt");
         DnaSequence oriCSequence = new DnaSequence("ATGATCAAG");

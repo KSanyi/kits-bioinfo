@@ -1,5 +1,6 @@
 package kits.bioinfo.core;
 
+import static java.util.Collections.unmodifiableList;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
@@ -24,7 +25,7 @@ public class Sequence<T> implements Comparable<Sequence<T>>, Iterable<T> {
     }
 
     public Sequence(List<T> text) {
-        this.text = List.copyOf(text);
+        this.text = unmodifiableList(text); // can't use List.copyOf as the list can contain null values
     }
 
     public T position(int index) {

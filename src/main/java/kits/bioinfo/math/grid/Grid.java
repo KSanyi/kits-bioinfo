@@ -3,8 +3,8 @@ package kits.bioinfo.math.grid;
 public class Grid {
 
     private Integer[][] values;
-    private int[][] rights;
-    private int[][] downs;
+    private final int[][] rights;
+    private final int[][] downs;
 
     public final int m;
     public final int n;

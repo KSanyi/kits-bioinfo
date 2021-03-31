@@ -4,14 +4,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Challenge1 {
+/**
+ * Change Problem:
+ *   Find the minimum number of coins needed to make change.
+ *   Input: An integer money and an array COINS of d positive integers.
+ *   Output: The minimum number of coins with denominations COINS that changes money.
+ */
+public class Challenge1_1 {
 
     public static void main(String[] args) {
         System.out.println(change(19303, List.of(24, 14, 7, 5, 3, 1)));
     }
 
     private static final Map<Integer, Integer> cache = new HashMap<>();
-
+    
     private static Integer change(int value, List<Integer> coins) {
         if (value == 0) {
             return 0;

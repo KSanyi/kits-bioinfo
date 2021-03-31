@@ -7,7 +7,7 @@ import java.util.List;
 import kits.bioinfo.alignment.aligner.GridGraph.Edge;
 import kits.bioinfo.util.IntPair;
 
-class LongestPathFinder {
+class GridGraphLongestPathFinder {
 
     public static List<IntPair> findLongestPath(GridGraph graph) {
         fillGrid(graph);
@@ -17,8 +17,8 @@ class LongestPathFinder {
 
     private static void fillGrid(GridGraph graph) {
 
-        for (int i = 0; i < graph.m; i++) {
-            for (int j = 0; j < graph.n; j++) {
+        for (int i=0;i<graph.m;i++) {
+            for (int j=0;j<graph.n;j++) {
                 List<Edge> edgesTo = graph.edgesTo(i, j);
                 int value = calculateValue(graph, edgesTo);
                 graph.set(i, j, value);
