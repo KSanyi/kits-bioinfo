@@ -15,9 +15,9 @@ public class Challenge4 {
 
     /**
      * Code Challenge: Solve the Longest Path in a DAG Problem. 
-     * Input: An integer representing the source node of a graph, followed by an integer
-     *        representing the sink node of the graph, followed by a list of edges in
-     *        the graph. The edge notation "0->1:7" indicates that an edge connects node 0 to node 1 with weight 7. 
+     * Input:  An integer representing the source node of a graph, followed by an integer
+     *         representing the sink node of the graph, followed by a list of edges in
+     *         the graph. The edge notation "0->1:7" indicates that an edge connects node 0 to node 1 with weight 7. 
      * 
      * Output: The length of a longest path in the graph, followed by a longest path. 
      *         (If multiple longest paths exist, you may return any one.)

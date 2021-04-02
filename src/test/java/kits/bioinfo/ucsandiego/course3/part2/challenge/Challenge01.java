@@ -17,7 +17,7 @@ import kits.bioinfo.genomerearrangement.Permutation;
  * Code Challenge: Implement GreedySorting.
  *    Input: A permutation P.
  *    Output: The sequence of permutations corresponding to applying GreedySorting to P,
- *    ending with the identity permutation.
+ *            ending with the identity permutation.
  */
 public class Challenge01 {
 

@@ -32,15 +32,13 @@ class GridGraph {
     private final List<Edge>[][] edgesTo;
     public final IntPair startNode = new IntPair(0, 0);
     public final IntPair endNode;
-    private final List<Edge> edgesToEndNode = new LinkedList<>();
-    private int endValue;
 
     @SuppressWarnings("unchecked")
     public GridGraph(int m, int n) {
         this.m = m;
         this.n = n;
         nodes = new int[m][n];
-        endNode = new IntPair(m, n);
+        endNode = new IntPair(m-1, n-1);
         edgesTo = new LinkedList[m][n];
         for (int i=0;i<m;i++) {
             for (int j=0;j<n;j++) {
@@ -54,32 +52,27 @@ class GridGraph {
     }
 
     public int get(IntPair index) {
-        if (index.equals(endNode)) {
-            return endValue;
-        } else {
-            return get(index.first(), index.second());
-        }
+        return get(index.first(), index.second());
     }
 
     public int get(int i, int j) {
         return nodes[i][j];
     }
     
-    public void setValue(int endValue) {
-        this.endValue = endValue;
+    public int getEndValue() {
+        return get(endNode);
     }
-
-    public int getValue() {
-        return endValue;
-    }
-
+    
     public void addEdge(IntPair sourceIndex, IntPair targetIndex, int weigth) {
-        Edge edge = new Edge(sourceIndex, weigth);
-        if (targetIndex.equals(endNode)) {
-            edgesToEndNode.add(edge);
-        } else {
-            edgesTo[targetIndex.first()][targetIndex.second()].add(edge);
+        addEdge(sourceIndex, targetIndex, weigth, null);
+    }
+    
+    public void addEdge(IntPair sourceIndex, IntPair targetIndex, int weigth, Object data) {
+        if(sourceIndex.equals(targetIndex)) {
+            return;
         }
+        Edge edge = new Edge(sourceIndex, targetIndex, weigth, data);
+        edgesTo[targetIndex.first()][targetIndex.second()].add(edge);
     }
 
     public List<Edge> edgesTo(IntPair targetIndex) {
@@ -87,11 +80,7 @@ class GridGraph {
     }
 
     public List<Edge> edgesTo(int i, int j) {
-        if (i == endNode.first() && j == endNode.second()) {
-            return List.copyOf(edgesToEndNode);
-        } else {
-            return List.copyOf(edgesTo[i][j]);
-        }
+        return List.copyOf(edgesTo[i][j]);
     }
     
     @Override
@@ -106,10 +95,15 @@ class GridGraph {
         return sb.toString();
     }
 
-    record Edge(IntPair sourceIndex, int weight) {
+    record Edge(IntPair sourceIndex, IntPair targetIndex, int weight, Object data) {
+        
+        public Edge(IntPair sourceIndex, IntPair targetIndex, int weight) {
+            this(sourceIndex, targetIndex, weight, null);
+        }
+
         @Override
         public String toString() {
-            return sourceIndex + "--" + weight + "-->";
+            return sourceIndex + "--(" + weight + " " + data + ")-->";
         }
     }
 

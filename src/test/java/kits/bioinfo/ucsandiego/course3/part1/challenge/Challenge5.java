@@ -20,11 +20,10 @@ import kits.bioinfo.core.Sequence;
 public class Challenge5 {
 
     /**
-     * Code Challenge: Solve the Global Alignment Problem. Input: Two protein
-     * strings written in the single-letter amino acid alphabet. Output: The
-     * maximum alignment score of these strings followed by an alignment
-     * achieving this maximum score. Use the BLOSUM62 scoring matrix and indel
-     * penalty = 5.
+     * Code Challenge: Solve the Global Alignment Problem. 
+     * Input:  Two protein strings written in the single-letter amino acid alphabet.
+     * Output: The maximum alignment score of these strings followed by an alignment
+     *         achieving this maximum score. Use the BLOSUM62 scoring matrix and indel penalty = 5.
      */
     @Test
     public void test() throws Exception {
@@ -32,7 +31,7 @@ public class Challenge5 {
         Peptid peptid1 = new Peptid(lines.get(0));
         Peptid peptid2 = new Peptid(lines.get(1));
 
-        GlobalSequenceAligner<AminoAcid> aligner = new GlobalSequenceAligner<AminoAcid>(ScoreFunction.blosum62(5));
+        GlobalSequenceAligner<AminoAcid> aligner = new GlobalSequenceAligner<>(ScoreFunction.blosum62(5));
         AlignmentResult<AminoAcid> alignment = aligner.findOneAlignment(peptid1.toSequence(), peptid2.toSequence());
 
         System.out.println(alignment.score());

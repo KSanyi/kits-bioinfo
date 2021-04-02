@@ -14,9 +14,9 @@ import kits.bioinfo.core.Sequence;
 public class Challenge7 {
 
     /**
-     * Edit Distance Problem: Find the edit distance between two strings. Input:
-     * Two strings. Output: The edit distance between these strings. Code
-     * Challenge: Solve the Edit Distance Problem.
+     * Edit Distance Problem: Find the edit distance between two strings.
+     * Input: Two strings.
+     * Output: The edit distance between these strings.
      */
     @Test
     public void test() throws Exception {

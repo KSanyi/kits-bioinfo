@@ -20,11 +20,10 @@ import kits.bioinfo.core.Sequence;
 public class Challenge6 {
 
     /**
-     * Code Challenge: Solve the Local Alignment Problem. Input: Two protein
-     * strings written in the single-letter amino acid alphabet. Output: The
-     * maximum score of a local alignment of the strings, followed by a local
-     * alignment of these strings achieving the maximum score. Use the PAM250
-     * scoring matrix and indel penalty = 5.
+     * Code Challenge: Solve the Local Alignment Problem.
+     * Input:  Two protein strings written in the single-letter amino acid alphabet. 
+     * Output: The maximum score of a local alignment of the strings, followed by a local
+     *         alignment of these strings achieving the maximum score. Use the PAM250 scoring matrix and indel penalty = 5.
      */
     @Test
     public void test() throws Exception {
@@ -32,7 +31,7 @@ public class Challenge6 {
         Peptid peptid1 = new Peptid(lines.get(0));
         Peptid peptid2 = new Peptid(lines.get(1));
 
-        LocalSequenceAligner<AminoAcid> aligner = new LocalSequenceAligner<AminoAcid>(ScoreFunction.pam250(5));
+        LocalSequenceAligner<AminoAcid> aligner = new LocalSequenceAligner<>(ScoreFunction.pam250(5));
         AlignmentResult<AminoAcid> alignment = aligner.findOneAlignment(peptid1.toSequence(), peptid2.toSequence());
 
         System.out.println(alignment.score());

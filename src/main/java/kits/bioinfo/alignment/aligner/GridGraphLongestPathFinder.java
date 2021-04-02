@@ -9,7 +9,7 @@ import kits.bioinfo.util.IntPair;
 
 class GridGraphLongestPathFinder {
 
-    public static List<IntPair> findLongestPath(GridGraph graph) {
+    public static List<Edge> findLongestPath(GridGraph graph) {
         fillGrid(graph);
 
         return backtrackPath(graph);
@@ -25,8 +25,6 @@ class GridGraphLongestPathFinder {
             }
         }
 
-        int endValue = calculateValue(graph, graph.edgesTo(graph.endNode));
-        graph.setValue(endValue);
     }
 
     private static int calculateValue(GridGraph graph, List<Edge> edgesTo) {
@@ -45,8 +43,8 @@ class GridGraphLongestPathFinder {
         }
     }
 
-    private static List<IntPair> backtrackPath(GridGraph graph) {
-        List<IntPair> path = new LinkedList<>();
+    private static List<Edge> backtrackPath(GridGraph graph) {
+        List<Edge> path = new LinkedList<>();
         IntPair node = graph.endNode;
         while (!node.equals(graph.startNode)) {
             int pathValue = graph.get(node);
@@ -55,7 +53,7 @@ class GridGraphLongestPathFinder {
                 int preNodePathValue = graph.get(edge.sourceIndex());
                 if (preNodePathValue + edge.weight() == pathValue) {
                     node = edge.sourceIndex();
-                    path.add(node);
+                    path.add(edge);
                     break;
                 }
             }

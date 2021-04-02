@@ -15,8 +15,6 @@ import kits.bioinfo.genomerearrangement.Permutation;
  * Number of Breakpoints Problem: Find the number of breakpoints in a permutation.
  *    Input: A permutation.
  *    Output: The number of breakpoints in this permutation.
- *
- * Code Challenge: Solve the Number of Breakpoints Problem.
  */
 public class Challenge02 {
 
