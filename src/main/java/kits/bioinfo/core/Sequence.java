@@ -132,7 +132,7 @@ public class Sequence<T> implements Comparable<Sequence<T>>, Iterable<T> {
     
     @Override
     public boolean equals(Object other) {
-        return other instanceof Sequence<?> ? text.equals(((Sequence<?>) other).text) : false;
+        return other instanceof Sequence<?> otherSeq && text.equals(otherSeq.text);
     }
 
     @Override

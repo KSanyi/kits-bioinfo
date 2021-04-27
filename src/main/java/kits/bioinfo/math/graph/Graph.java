@@ -143,11 +143,7 @@ public class Graph<T> {
 
     @Override
     public boolean equals(Object other) {
-        if (other == null)
-            return false;
-        if (!(other instanceof Graph<?>))
-            return false;
-        return adjacencyMap.equals(((Graph<?>) other).adjacencyMap);
+        return other instanceof Graph<?> otherGraph && adjacencyMap.equals(otherGraph.adjacencyMap);
     }
 
     @Override

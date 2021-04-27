@@ -22,19 +22,4 @@ public record ReadPair(DnaSequence read1, DnaSequence read2, int distance) {
         return sb.toString();
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == null)
-            return false;
-        if (!(other instanceof ReadPair))
-            return false;
-        ReadPair otherReadPair = (ReadPair) other;
-        return otherReadPair.read1.equals(read1) && otherReadPair.read2.equals(read2);
-    }
-
-    @Override
-    public int hashCode() {
-        return read1.hashCode() * 37 + read2.hashCode();
-    }
-
 }
